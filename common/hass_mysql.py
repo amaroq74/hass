@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 
 # Add relative path
 import sys,os
