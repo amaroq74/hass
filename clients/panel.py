@@ -1,12 +1,12 @@
 #!/usr/bin/env python2
 
 # Add relative path
-import sys,os,datetime
-sys.path.append(os.path.dirname(__file__) + "/../common")
+import sys,datetime
+sys.path.append('/amaroq/hass/pylib')
 
 import time, pytz
-from amaroq_home import mysql
-from amaroq_home import weather_convert as convert
+import hass_mysql as mysql
+import weather_convert as convert
 
 from PyQt4.QtCore   import *
 from PyQt4.QtGui    import *
@@ -21,61 +21,65 @@ import xml.etree.ElementTree as ET
 
 from subprocess import call
 
+import json
+import yaml
+from websocket import create_connection
+
 # Display functions
-def disp_temp(res, box):
-    box.setText("%2.2F F" % ( convert.tempCelToFar(res['current']) ) )
+def disp_temp(val, box):
+    box.setText("%2.2F F" % ( float(val) )) 
 
-def disp_humid(res, box):
-    box.setText("%i %%" % (res['current'] ))
+def disp_humid(val, box):
+    box.setText("%i %%" % ( float(val) ))
 
-def disp_winddir(res, box):
-    box.setText(convert.windDegToCompass(res['current']))
+def disp_winddir(val, box):
+    box.setText(convert.windDegToCompass(float(val)))
 
-def disp_winddeg(res, box):
-    box.setText("%i Deg" % (res['current']))
+def disp_winddeg(val, box):
+    box.setText("%i Deg" % (float(val)))
 
-def disp_speed(res, box):
-    box.setText("%2.2F MPH" % ( convert.speedMpsToMph(res['current']) ))
+def disp_speed(val, box):
+    box.setText("%2.2F MPH" % ( convert.speedMpsToMph(float(val)) ))
 
-def disp_rain(res, box):
-    box.setText("%2.2F IN" % ( convert.rainMmToIn(res['current']) ))
+def disp_rain(val, box):
+    box.setText("%2.2F IN" % ( convert.rainMmToIn(float(val)) ))
 
-def disp_pressure(res, box):
-    box.setText("%2.2F INHG" % ( convert.pressureHpaToInhg(res['current']) ))
+def disp_pressure(val, box):
+    box.setText("%2.2F INHG" % ( convert.pressureHpaToInhg(float(val)) ))
 
-def disp_power(res, box):
-    box.setText("%2.2F KW" % ( res['current'] ))
+def disp_power(val, box):
+    box.setText("%2.2F KW" % ( float(val) ))
 
-def disp_door(res, box):
-    box.setText('Closed' if res['event'] == 'normal' else 'Open')
+def disp_door(val, box):
+    box.setText('Closed' if val == 'off' else 'Open')
 
 # Status List
-StatusList = [ {'label':'Out Temp',     'key':'sensor.outdoor_temp',       'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Out Humid',    'key':'sensor.outdoor_humidity',   'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Wind Dir',     'key':'sensor.wind',               'conv':disp_winddir,   'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Wind Avg',     'key':'sensor.wind_avg',           'conv':disp_speed,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Wind Gust',    'key':'sensor.wind_gust',          'conv':disp_speed,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Rain Rate',    'key':'sensor.rain_rate',          'conv':disp_rain,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Rain Today',   'key':'sensor.rain_day',           'conv':disp_rain,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Barometer',    'key':'sensor.indoor_pressure',    'conv':disp_pressure,  'last':None, 'box':None, 'tout':15.0 },
-               {'label':'House Temp',   'key':'sensor.house_temp',         'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Thermostat',   'key':'climate.house',             'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Family Temp',  'key':'sensor.indoor_temp',        'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Family Humid', 'key':'sensor.indoor_humidity',    'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Master Temp',  'key':'sensor.master_temp',        'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Master Humid', 'key':'sensor.master_humidity',    'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'BedR Temp',    'key':'sensor.bedr_temp',          'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'BedR Humid',   'key':'sensor.bedr_humidity',      'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'BedTA Temp',   'key':'sensor.bedta_temp',         'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'BedTA Humid',  'key':'sensor.bedta_humidity',     'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Power Use',    'key':'SmartMeter-current',        'conv':disp_power,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Garage Temp',  'key':'sensor.garage_temp',        'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Garage Humid', 'key':'sensor.garage_humidity',    'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Shed Temp',    'key':'sensor.shed_temp',          'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Shed Humid',   'key':'sensor.shed_humidity',      'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Camper Temp',  'key':'sensor.camper_temp',        'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Chicken Temp', 'key':'sensor.chickens_temp',      'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Pool Temp',    'key':'sensor.pool_temp',          'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 } ]
+StatusList = [ {'label':'Out Temp',     'key':'sensor.outdoor_temp',       'conv':disp_temp,      'box':None },
+               {'label':'Out Humid',    'key':'sensor.outdoor_humidity',   'conv':disp_humid,     'box':None },
+               {'label':'Wind Dir',     'key':'sensor.wind',               'conv':disp_winddir,   'box':None },
+               {'label':'Wind Avg',     'key':'sensor.wind_avg',           'conv':disp_speed,     'box':None },
+               {'label':'Wind Gust',    'key':'sensor.wind_gust',          'conv':disp_speed,     'box':None },
+               {'label':'Rain Rate',    'key':'sensor.rain_rate',          'conv':disp_rain,      'box':None },
+               {'label':'Rain Today',   'key':'sensor.rain_day',           'conv':disp_rain,      'box':None },
+               {'label':'Barometer',    'key':'sensor.indoor_pressure',    'conv':disp_pressure,  'box':None },
+               {'label':'House Temp',   'key':'sensor.house_temp',         'conv':disp_temp,      'box':None },
+               {'label':'Thermostat',   'key':'climate.house',             'conv':disp_temp,      'box':None },
+               {'label':'Family Temp',  'key':'sensor.indoor_temp',        'conv':disp_temp,      'box':None },
+               {'label':'Family Humid', 'key':'sensor.indoor_humidity',    'conv':disp_humid,     'box':None },
+               {'label':'Master Temp',  'key':'sensor.master_temp',        'conv':disp_temp,      'box':None },
+               {'label':'Master Humid', 'key':'sensor.master_humidity',    'conv':disp_humid,     'box':None },
+               {'label':'BedR Temp',    'key':'sensor.bedr_temp',          'conv':disp_temp,      'box':None },
+               {'label':'BedR Humid',   'key':'sensor.bedr_humidity',      'conv':disp_humid,     'box':None },
+               {'label':'BedTA Temp',   'key':'sensor.bedta_temp',         'conv':disp_temp,      'box':None },
+               {'label':'BedTA Humid',  'key':'sensor.bedta_humidity',     'conv':disp_humid,     'box':None },
+               {'label':'Power Use',    'key':'sensor.smartmeter_rate',    'conv':disp_power,     'box':None },
+               {'label':'Garage Temp',  'key':'sensor.garage_temp',        'conv':disp_temp,      'box':None },
+               {'label':'Garage Humid', 'key':'sensor.garage_humidity',    'conv':disp_humid,     'box':None },
+               {'label':'Shed Temp',    'key':'sensor.shed_temp',          'conv':disp_temp,      'box':None },
+               {'label':'Shed Humid',   'key':'sensor.shed_humidity',      'conv':disp_humid,     'box':None },
+               {'label':'Camper Temp',  'key':'sensor.camper_temp',        'conv':disp_temp,      'box':None },
+               {'label':'Chicken Temp', 'key':'sensor.chickens_temp',      'conv':disp_temp,      'box':None },
+               {'label':'Pool Temp',    'key':'sensor.pool_temp',          'conv':disp_temp,      'box':None } ]
 
 # Camera List
 CamList = { 'Garage'   : "http://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=4&scale=100&maxfps=2&user=home&pass=monitor",
@@ -85,15 +89,15 @@ CamList = { 'Garage'   : "http://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monito
             'Side'     : "http://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=5&scale=100&maxfps=1&user=home&pass=monitor",
             'Chickens' : "http://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=6&scale=100&maxfps=1&user=home&pass=monitor"}
 
-DoorList = [{'label':'Ped<br/>Gate',      'key':'Ped_Gate',     'last':None, 'box':None, 'tout':720.0 },
-            {'label':'Car<br/>Gate',      'key':'Car_Gate',     'last':None, 'box':None, 'tout':15.0  },
-            {'label':'Chicken<br/>Gate',  'key':'Chicken_Gate', 'last':None, 'box':None, 'tout':720.0 },
-            {'label':'Ivy<br/>Gate',      'key':'Ivy_Gate',     'last':None, 'box':None, 'tout':720.0 },
-            {'label':'Garbage<br/>Gate',  'key':'Garbage_Gate', 'last':None, 'box':None, 'tout':720.0 },
-            {'label':'Garage<br/>Door',   'key':'Garage_Door',  'last':None, 'box':None, 'tout':15.0  },
-            {'label':'Office<br/>Door',   'key':'Office_Door',  'last':None, 'box':None, 'tout':720.0 },
-            {'label':'Bath<br/>Door',     'key':'PBath_Door',   'last':None, 'box':None, 'tout':720.0 },
-            {'label':'Kitchen<br/>Door',  'key':'Kitchen_Door', 'last':None, 'box':None, 'tout':720.0 }]
+DoorList = [{'label':'Ped<br/>Gate',      'key':'binary_sensor.ped_gate',     'box':None },
+            {'label':'Car<br/>Gate',      'key':'binary_sensor.car_gate',     'box':None },
+            {'label':'Chicken<br/>Gate',  'key':'binary_sensor.chicken_gate', 'box':None },
+            {'label':'Ivy<br/>Gate',      'key':'binary_sensor.ivy_gate',     'box':None },
+            {'label':'Garbage<br/>Gate',  'key':'binary_sensor.garbage_gate', 'box':None },
+            {'label':'Garage<br/>Door',   'key':'binary_sensor.garage_door',  'box':None },
+            {'label':'Office<br/>Door',   'key':'binary_sensor.office_door',  'box':None },
+            {'label':'Bath<br/>Door',     'key':'binary_sensor.pbath_door',   'box':None },
+            {'label':'Kitchen<br/>Door',  'key':'binary_sensor.kitchen_door', 'box':None }]
 
 class WindChart(QWidget):
     def __init__(self, db, parent=None):
@@ -236,38 +240,20 @@ class DoorWindow(QWidget):
         self.last = time.time()
         self.refreshSensors()
 
-    def securityUpdate (self, res ):
+    def stateUpdate (self, key, value ):
         key = res['zone']
 
         for sen in DoorList:
             if sen['key'] == key:
-                sen['last'] = res['utime']
 
                 p = QPalette()
                 p.setColor(QPalette.Text,Qt.black)
 
-                if res['event'] == 'normal':
-                    p.setColor(QPalette.Base,Qt.green)
-                else:
+                if value == 'on':
                     p.setColor(QPalette.Base,Qt.red)
+                else:
+                    p.setColor(QPalette.Base,Qt.green)
                 sen['box'].setPalette(p)
-
-    def refreshSensors (self):
-        curr = float(time.time())
-
-        if curr - self.last > 60.0:
-            self.db.setLog("wrn", "refreshSensors", "1 second timer took over 1 mimute!")
-
-        self.last = curr
-
-        for sen in StatusList:
-            if sen['last'] == None or (curr - float(sen['last'])) > 60.0*sen['tout']:
-                p = QPalette()
-                p.setColor(QPalette.Base,Qt.red)
-                p.setColor(QPalette.Text,Qt.black)
-                sen['box'].setPalette(p)  
-
-        QTimer.singleShot(1000,self.refreshSensors) # One second
 
 class StatusWindow(QWidget):
     def __init__(self, db, parent=None):
@@ -304,39 +290,10 @@ class StatusWindow(QWidget):
         self.last = time.time()
         self.refreshSensors()
 
-    def sensorUpdate (self, res ):
-        key = res['device'] + '-' + res['type']
-
+    def stateUpdate (self, key, value ):
         for sen in StatusList:
             if sen['key'] == key:
-                sen['conv'](res,sen['box'])
-                sen['last'] = res['utime']
-
-    def securityUpdate (self, res ):
-        key = res['zone']
-
-        for sen in StatusList:
-            if sen['key'] == key:
-                sen['conv'](res,sen['box'])
-                sen['last'] = res['utime']
-
-    def refreshSensors (self):
-        curr = float(time.time())
-
-        if curr - self.last > 60.0:
-            self.db.setLog("wrn", "refreshSensors", "1 second timer took over 1 mimute!")
-
-        self.last = curr
-
-        for sen in StatusList:
-            if sen['last'] == None or (curr - float(sen['last'])) > 60.0*sen['tout']:
-                sen['box'].setText('')
-
-        d,t = self.db.getDateTime()
-
-        self.dateBox.setText(d)
-        self.timeBox.setText(t)
-        QTimer.singleShot(1000,self.refreshSensors) # One second
+                sen['conv'](value,sen['box'])
 
 class ForecastWindow(QWidget):
     def __init__(self, db, parent=None):
@@ -400,7 +357,7 @@ class ForecastWindow(QWidget):
         ures = fh.read().rstrip()
         fh.close()
 
-        try:   
+        try:
 
             root = ET.fromstring(ures)
 
@@ -412,14 +369,14 @@ class ForecastWindow(QWidget):
                 cond = day.findall('./conditions')[0].text
                 iurl = day.findall('./icon_url')[0].text
                 pop  = day.findall('./pop')[0].text
-    
+
                 imgReq = urllib.urlopen(iurl)
                 icon = imgReq.read()
                 imgReq.close()
-    
+
                 self.dayName[per].setText(dow) 
                 self.dayInfo[per].setText("%s\nH %s  L %s\nPrec %s %%" % (cond,high,low,pop))
-    
+
                 self.dayPixmap[per].loadFromData(icon) 
                 self.dayLabel[per].setPixmap(self.dayPixmap[per])
                 self.dayLabel[per].update()
@@ -535,134 +492,192 @@ class CamWindow(QWidget):
             self.label.setPixmap(pixmap)
             self.label.update()
 
-class ControlWindow(QDialog):
-    def __init__(self,db,parent=None):
-        super(ControlWindow,self).__init__(parent)
-        self.db = db
+#class ControlWindow(QDialog):
+#    def __init__(self,db,parent=None):
+#        super(ControlWindow,self).__init__(parent)
+#        self.db = db
+#
+#        vbox = QVBoxLayout()
+#        self.setLayout(vbox)
+#
+#        gl = QGridLayout()
+#        vbox.addLayout(gl)
+#
+#        # Thermostat Control
+#        col = 0
+#        self.addHeader(gl,0,col,'Thermostat')
+#        self.addVariable(gl,1,col,'House_Heat','setpoint','Set Point') 
+#
+#        # Get device list
+#        dList = self.db.getDeviceList()
+#        dListIdx = {dev['name']:dev for dev in dList}
+#
+#        # Light Control
+#        self.addHeader(gl,2,col,'Lights & Other')
+#        row = 3
+#        for dev in dList:
+#            if dev['category'] == 'Lights' or dev['category'] == 'Other' and dev['hidden'] == 0:
+#                self.addDevice(gl,row,col,dev)
+#                row += 1
+#
+#        # Pool Controls
+#        col = 7
+#        row = 0
+#        self.addHeader(gl,row,col,'Pool')
+#        self.addDevice(gl,row+1,col,dListIdx['Pool_Main'])
+#        self.addDevice(gl,row+2,col,dListIdx['Pool_Sweep'])
+#        self.addVariable(gl,row+3,col,'Pool_Heat','setpoint','Set Point')
+#
+#        # Garage and gate
+#        self.addHeader(gl,row+4,col,'Garage & Gate')
+#        self.addDevice(gl,row+5,col,dListIdx['Car_Gate'])
+#        self.addDevice(gl,row+6,col,dListIdx['Garage_Door'])
+#
+#        # Irrigation
+#        row = 7
+#        self.addHeader(gl,row,col,'Irrigation')
+#        row += 1
+#        for dev in dList:
+#            if dev['category'] == 'Irrigation' and dev['hidden'] == 0:
+#                self.addDevice(gl,row,col,dev)
+#                row += 1
+#
+#        # Variables
+#        self.addHeader(gl,row,col,'Security')
+#
+#        self.addVariable(gl,row+1,col,'Security','dcare_arm','Dcare Arm') 
+#        self.addVariable(gl,row+2,col,'Security','house_arm','House Arm') 
+#        self.addVariable(gl,row+3,col,'Security','door_arm','Door Arm') 
+#
+#        cl = QPushButton('Close')
+#        cl.clicked.connect(self.accept)
+#        vbox.addWidget(cl)
+#
+#        self.setWindowTitle("Home Control")
+#
+#    def addVariable(self, lo, row, col, group, name, title):
+#        varInfo = self.db.getVariableInfo(group,name)
+#        lo.addWidget(QLabel(title), row, col, 1, 1, Qt.AlignRight)
+#        val = QSpinBox()
+#        val.setRange(varInfo['range_min'],varInfo['range_max'])
+#        val.setValue(varInfo['value'])
+#
+#        bset = QPushButton('Set')
+#        bset.clicked.connect(lambda: self.setVariable(group,name,val))
+#
+#        lo.addWidget (val, row, col+1, 1, 1, Qt.AlignHCenter )
+#        lo.addWidget (bset, row, col+2, 1, 1, Qt.AlignHCenter )
+#
+#    def addHeader(self, lo, row, col, text):
+#        lab = QLabel("<P><b><i><FONT COLOR='#0000FF' FONT SIZE = 4>%s</i></b></P>" % (text))
+#        lab.setFrameStyle(QFrame.Panel | QFrame.Sunken)
+#        lo.addWidget (lab, row, col, 1, 3, Qt.AlignHCenter)
+#
+#    def addDevice(self,lo, row,col,dev):
+#        lo.addWidget(QLabel(dev['name'] + ':'), row, col, 1, 1, Qt.AlignRight )
+#
+#        if dev['type'] == 'OnOff':
+#            on = QPushButton('On')
+#            on.clicked.connect(lambda: self.setDevice(dev['name'],100))
+#            lo.addWidget(on, row, col+1, 1, 1, Qt.AlignHCenter )
+#
+#            off = QPushButton('Off')
+#            off.clicked.connect(lambda: self.setDevice(dev['name'],0))
+#            lo.addWidget(off, row, col+2, 1, 1, Qt.AlignHCenter )
+#
+#        elif dev['type'] == 'OpenCloseToggle':
+#            on = QPushButton('Open')
+#            on.clicked.connect(lambda: self.setDevice(dev['name'],100))
+#            lo.addWidget(on, row, col+1, 1, 1, Qt.AlignHCenter )
+#
+#            off = QPushButton('Close')
+#            off.clicked.connect(lambda: self.setDevice(dev['name'],0))
+#            lo.addWidget(off, row, col+2, 1, 1, Qt.AlignHCenter )
+#
+#            tog = QPushButton('Toggle')
+#            tog.clicked.connect(lambda: self.setDevice(dev['name'],50))
+#            lo.addWidget(tog, row, col+3, 1, 1, Qt.AlignHCenter )
+#
+#        elif dev['type'] == 'Fan':
+#            on = QPushButton('Low')
+#            on.clicked.connect(lambda: self.setDevice(dev['name'],20))
+#            lo.addWidget(on, row, col+1, 1, 1, Qt.AlignHCenter )
+#
+#            off = QPushButton('Med')
+#            off.clicked.connect(lambda: self.setDevice(dev['name'],50))
+#            lo.addWidget(off, row, col+2, 1, 1, Qt.AlignHCenter )
+#
+#            off = QPushButton('High')
+#            off.clicked.connect(lambda: self.setDevice(dev['name'],50))
+#            lo.addWidget(off, row, col+3, 1, 1, Qt.AlignHCenter )
+#
+#            off = QPushButton('Off')
+#            off.clicked.connect(lambda: self.setDevice(dev['name'],100))
+#            lo.addWidget(off, row, col+4, 1, 1, Qt.AlignHCenter )
+#
+#    def setDevice(self,name,level):
+#        self.db.setDevice(name,level)
+#
+#    def setVariable(self,group,name,sbox):
+#        self.db.setVariable(group,name,sbox.value())
 
-        vbox = QVBoxLayout()
-        self.setLayout(vbox)
+class HassListener(QThread):
 
-        gl = QGridLayout()
-        vbox.addLayout(gl)
+    def __init__(self, parent=None):
+        QThread.__init__(self,parent)
 
-        # Thermostat Control
-        col = 0
-        self.addHeader(gl,0,col,'Thermostat')
-        self.addVariable(gl,1,col,'House_Heat','setpoint','Set Point') 
+        self._runEnable = True
+        self.start()
 
-        # Get device list
-        dList = self.db.getDeviceList()
-        dListIdx = {dev['name']:dev for dev in dList}
+    def halt(self):
+        self._runEnable = False
 
-        # Light Control
-        self.addHeader(gl,2,col,'Lights & Other')
-        row = 3
-        for dev in dList:
-            if dev['category'] == 'Lights' or dev['category'] == 'Other' and dev['hidden'] == 0:
-                self.addDevice(gl,row,col,dev)
-                row += 1
+    def _newValue(self,e):
+        key = e['entity_id']
 
-        # Pool Controls
-        col = 7
-        row = 0
-        self.addHeader(gl,row,col,'Pool')
-        self.addDevice(gl,row+1,col,dListIdx['Pool_Main'])
-        self.addDevice(gl,row+2,col,dListIdx['Pool_Sweep'])
-        self.addVariable(gl,row+3,col,'Pool_Heat','setpoint','Set Point')
+        if 'climate' in key: 
+            val = e['attributes']['temperature']
+        else:
+            val = e['state']
 
-        # Garage and gate
-        self.addHeader(gl,row+4,col,'Garage & Gate')
-        self.addDevice(gl,row+5,col,dListIdx['Car_Gate'])
-        self.addDevice(gl,row+6,col,dListIdx['Garage_Door'])
+        self.emit(SIGNAL("stateUpdate"),key,val)
 
-        # Irrigation
-        row = 7
-        self.addHeader(gl,row,col,'Irrigation')
-        row += 1
-        for dev in dList:
-            if dev['category'] == 'Irrigation' and dev['hidden'] == 0:
-                self.addDevice(gl,row,col,dev)
-                row += 1
+    def _read(self,ws):
+        try:
+            message = ws.recv()
 
-        # Variables
-        self.addHeader(gl,row,col,'Security')
+            if message is None:
+                return False
+            d = yaml.load(message)
 
-        self.addVariable(gl,row+1,col,'Security','dcare_arm','Dcare Arm') 
-        self.addVariable(gl,row+2,col,'Security','house_arm','House Arm') 
-        self.addVariable(gl,row+3,col,'Security','door_arm','Door Arm') 
+            if d['type'] == 'result' and d['success']:
+                if d['result'] is not None:
+                    for e in d['result']:
+                        self._newValue(e)
 
-        cl = QPushButton('Close')
-        cl.clicked.connect(self.accept)
-        vbox.addWidget(cl)
+            elif d['type'] == 'event':
+                e = d['event']['data']['new_state'] 
+                self._newValue(e)
+        except:
+            return False
 
-        self.setWindowTitle("Home Control")
+        return True
 
-    def addVariable(self, lo, row, col, group, name, title):
-        varInfo = self.db.getVariableInfo(group,name)
-        lo.addWidget(QLabel(title), row, col, 1, 1, Qt.AlignRight)
-        val = QSpinBox()
-        val.setRange(varInfo['range_min'],varInfo['range_max'])
-        val.setValue(varInfo['value'])
+    def run(self):
+        while self._runEnable:
+            ws = create_connection('ws://localhost:8123/api/websocket',timeout=60*10)
 
-        bset = QPushButton('Set')
-        bset.clicked.connect(lambda: self.setVariable(group,name,val))
+            ws.send(json.dumps({'type': 'auth', 'api_password': 'TEST1234'}))
+            self._read(ws)
 
-        lo.addWidget (val, row, col+1, 1, 1, Qt.AlignHCenter )
-        lo.addWidget (bset, row, col+2, 1, 1, Qt.AlignHCenter )
+            ws.send(json.dumps({'id': 1, 'type': 'get_states'}))
+            self._read(ws)
 
-    def addHeader(self, lo, row, col, text):
-        lab = QLabel("<P><b><i><FONT COLOR='#0000FF' FONT SIZE = 4>%s</i></b></P>" % (text))
-        lab.setFrameStyle(QFrame.Panel | QFrame.Sunken)
-        lo.addWidget (lab, row, col, 1, 3, Qt.AlignHCenter)
+            ws.send(json.dumps({'id': 2, 'type': 'subscribe_events', 'event_type': 'state_changed'}))
 
-    def addDevice(self,lo, row,col,dev):
-        lo.addWidget(QLabel(dev['name'] + ':'), row, col, 1, 1, Qt.AlignRight )
-
-        if dev['type'] == 'OnOff':
-            on = QPushButton('On')
-            on.clicked.connect(lambda: self.setDevice(dev['name'],100))
-            lo.addWidget(on, row, col+1, 1, 1, Qt.AlignHCenter )
-
-            off = QPushButton('Off')
-            off.clicked.connect(lambda: self.setDevice(dev['name'],0))
-            lo.addWidget(off, row, col+2, 1, 1, Qt.AlignHCenter )
-
-        elif dev['type'] == 'OpenCloseToggle':
-            on = QPushButton('Open')
-            on.clicked.connect(lambda: self.setDevice(dev['name'],100))
-            lo.addWidget(on, row, col+1, 1, 1, Qt.AlignHCenter )
-
-            off = QPushButton('Close')
-            off.clicked.connect(lambda: self.setDevice(dev['name'],0))
-            lo.addWidget(off, row, col+2, 1, 1, Qt.AlignHCenter )
-
-            tog = QPushButton('Toggle')
-            tog.clicked.connect(lambda: self.setDevice(dev['name'],50))
-            lo.addWidget(tog, row, col+3, 1, 1, Qt.AlignHCenter )
-
-        elif dev['type'] == 'Fan':
-            on = QPushButton('Low')
-            on.clicked.connect(lambda: self.setDevice(dev['name'],20))
-            lo.addWidget(on, row, col+1, 1, 1, Qt.AlignHCenter )
-
-            off = QPushButton('Med')
-            off.clicked.connect(lambda: self.setDevice(dev['name'],50))
-            lo.addWidget(off, row, col+2, 1, 1, Qt.AlignHCenter )
-
-            off = QPushButton('High')
-            off.clicked.connect(lambda: self.setDevice(dev['name'],50))
-            lo.addWidget(off, row, col+3, 1, 1, Qt.AlignHCenter )
-
-            off = QPushButton('Off')
-            off.clicked.connect(lambda: self.setDevice(dev['name'],100))
-            lo.addWidget(off, row, col+4, 1, 1, Qt.AlignHCenter )
-
-    def setDevice(self,name,level):
-        self.db.setDevice(name,level)
-
-    def setVariable(self,group,name,sbox):
-        self.db.setVariable(group,name,sbox.value())
+            while self._runEnable:
+                if not self._read(ws):
+                    break
 
 class Panel(QWidget):
     def __init__(self,parent=None):
@@ -670,8 +685,6 @@ class Panel(QWidget):
 
         # Db interface
         self.db = mysql.Mysql("panel")
-        self.db.addPollCallback(self.sensorCb,"sensor_current",None)
-        self.db.addPollCallback(self.securityCb,"security_current",None)
 
         # Setup brushes
         bgBrush = QBrush(Qt.white)
@@ -744,34 +757,24 @@ class Panel(QWidget):
             self.camGen[cam] = CamListener(self.db,cam,self)
             self.connect(self.camGen[cam],SIGNAL('newFrame'),self.camWin[cam].newFrame)
 
-        self.db.pollEnable(.25)
 
-        self.connect(self,SIGNAL('sensorUpdate'),self.status.sensorUpdate)
-        self.connect(self,SIGNAL('securityUpdate'),self.status.securityUpdate)
-        self.connect(self,SIGNAL('securityUpdate'),self.door.securityUpdate)
+        self.hass = HassListener()        
+
+        self.connect(self.hass,SIGNAL('stateUpdate'),self.status.stateUpdate)
+        self.connect(self.hass,SIGNAL('stateUpdate'),self.door.stateUpdate)
 
         self.showFullScreen()
 
-    def sensorCb(self,res):
-        self.emit(SIGNAL("sensorUpdate"),res)
-
-    def securityCb(self,res):
-        self.emit(SIGNAL("securityUpdate"),res)
-
-    def mouseReleaseEvent(self, mouseEvent):
-        for cam in CamList:
-            self.camGen[cam].pause()
-
-        control = ControlWindow(self.db,self)
-        control.exec_()
-
-        for cam in CamList:
-            self.camGen[cam].resume()
+#    def mouseReleaseEvent(self, mouseEvent):
+#        for cam in CamList:
+#            self.camGen[cam].pause()
+#
+#        control = ControlWindow(self.db,self)
+#        control.exec_()
+#
+#        for cam in CamList:
+#            self.camGen[cam].resume()
  
-    def closeEvent(self, event):
-        self.db.pollDisable()
-        event.accept()
-
 app = QApplication(sys.argv)
 panel = Panel()
 panel.show()
