@@ -1,21 +1,20 @@
 
 # Add relative path
-import sys,os
-sys.path.append(os.path.dirname(__file__))
+import sys
+sys.path.append('/amaroq/hass/pylib')
 
-import secrets
+import hass_secrets as secrets
 
 import MySQLdb
 from contextlib import closing
 
 __version__ = "1.0"
 
-class Mysql(threading.Thread):
+class Mysql(object):
     """Class to handle mysql updates and queries."""
 
     def __init__(self, service):
         """ Create mysql class.  """
-        threading.Thread.__init__(self)
 
         self._service = service
         self._conn    = 0

@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
 # Add relative path
-import sys,os
-sys.path.append(os.path.dirname(__file__) + '../common')
+import sys
+sys.path.append('/amaroq/hass/pylib')
+
+import hass_mysql
 
 import appdaemon.plugins.hass.hassapi as hass
 from homeassistant.const import TEMP_FAHRENHEIT
@@ -12,8 +14,6 @@ weights = { "sensor.bedr_temp"   : 1.0,
             "sensor.master_temp" : 1.2, 
             "sensor.indoor_temp" : 0.8, 
             "sensor.bedta_temp"  : 1.0 }
-
-import hass_mysql.Mysql
 
 class HouseTemp(hass.Hass):
 
