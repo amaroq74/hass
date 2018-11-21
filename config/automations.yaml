@@ -1,0 +1,287 @@
+- id: sec_lights_off
+  alias: Security Lights Off
+  trigger:
+  - event: sunrise
+    offset: -01:00:00
+    platform: sun
+  action:
+  - data:
+      entity_id: light.patio_sec1
+    service: light.turn_off
+- id: sec_lights_on
+  alias: Security Lights On
+  trigger:
+  - at: 00:05:00
+    platform: time
+  action:
+  - data:
+      entity_id: light.patio_sec1
+    service: light.turn_on
+- id: yard_lights_on
+  alias: Yard Lights On
+  trigger:
+  - event: sunset
+    offset: +00:00:00
+    platform: sun
+  action:
+  - data:
+      entity_id:
+      - light.gate_light
+      - light.entry_light
+      - light.yard_lights1
+      - light.patio_lights
+      - light.yard_lights2
+      - light.gate_light
+      - light.xmas_lights
+      - light.pool_light
+      - light.patio_sec1
+      - light.gate_light
+    service: light.turn_on
+- id: yard_lights_off
+  alias: Yard Lights Off
+  trigger:
+  - event: sunrise
+    offset: -01:00:00
+    platform: sun
+  - at: '23:55:00'
+    platform: time
+  - at: 02:00:00
+    platform: time
+  action:
+  - data:
+      entity_id:
+      - light.gate_light
+      - light.entry_light
+      - light.yard_lights1
+      - light.patio_lights
+      - light.yard_lights2
+      - light.gate_light
+      - light.xmas_lights
+      - light.pool_light
+      - light.patio_sec1
+      - light.gate_light
+    service: light.turn_off
+- id: speak_off
+  alias: Speakers Off
+  trigger:
+  - at: '23:00:00'
+    platform: time
+  action:
+  - data:
+      entity_id: switch.speakers
+    service: switch.turn_off
+- id: pool_main_off
+  alias: Pool Main Off
+  trigger:
+  - at: 00:30:00
+    platform: time
+  - at: '16:15:00'
+    platform: time
+  action:
+  - data:
+      entity_id: switch.pool_main
+    service: switch.turn_off
+- id: pool_main_on
+  alias: Pool Main On
+  trigger:
+  - at: '12:00:00'
+    platform: time
+  action:
+  - data:
+      entity_id: switch.pool_main
+    service: switch.turn_on
+- id: pool_sweep_on
+  alias: Pool Sweep On
+  trigger:
+  - at: '12:30:00'
+    platform: time
+  action:
+  - data:
+      entity_id: switch.pool_sweep
+    service: switch.turn_on
+- id: pool_sweep_off
+  alias: Pool Sweep Off
+  trigger:
+  - at: '15:00:00'
+    platform: time
+  action:
+  - data:
+      entity_id: switch.pool_sweep
+    service: switch.turn_off
+- id: '1541799676159'
+  alias: Rear Patio Sprinklers
+  trigger:
+  - at: '11:00:00'
+    platform: time
+  - at: '13:00:00'
+    platform: time
+  - at: '15:00:00'
+    platform: time
+  - at: '17:00:00'
+    platform: time
+  condition: []
+  action:
+  - service: script.rear_patio_sprinklers
+- id: '1541800366517'
+  alias: Flower Box Sprinklers
+  trigger:
+  - at: '12:30:00'
+    platform: time
+  condition: []
+  action:
+  - service: script.flower_box_sprinklers
+- id: '1541800460669'
+  alias: Front Yard Sprinklers
+  trigger:
+  - event: sunset
+    offset: +01:00:00
+    platform: sun
+  condition: []
+  action:
+  - service: script.front_yard_sprinklers
+- id: '1541801995724'
+  alias: Heater Night
+  trigger:
+  - at: '23:45:00'
+    platform: time
+  condition: []
+  action:
+  - data:
+      entity_id: climate.house
+      temperature: 62
+    service: climate.set_temperature
+- id: '1541802268414'
+  alias: Heater Evening
+  trigger:
+  - at: '17:45:00'
+    platform: time
+  condition: []
+  action:
+  - alias: ''
+    data:
+      entity_id: climate.house
+      temperature: 68
+    service: climate.set_temperature
+- id: '1541802437123'
+  alias: Heater Weekday
+  trigger:
+  - at: 06:45:00
+    platform: time
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - data:
+      entity_id: climate.house
+      temperature: 65
+    service: climate.set_temperature
+- id: heater_midmorn
+  alias: Heater Mid Morning
+  trigger:
+  - at: '10:00:00'
+    platform: time
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - data:
+      entity_id: climate.house
+      temperature: 67
+    service: climate.set_temperature
+- id: '1541802601105'
+  alias: Heater Weekend
+  trigger:
+  - at: 07:45:00
+    platform: time
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun
+  action:
+  - data:
+      entity_id: climate.house
+      temperature: 65
+    service: climate.set_temperature
+- id: dcare_arm
+  alias: Day Care Arm
+  trigger:
+  - at: 08:00:00
+    platform: time
+  condition:
+    condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - data:
+      entity_id: switch.dcare_arm
+    service: switch.turn_on
+- id: dcare_disarm
+  alias: Day Care Disarm
+  trigger:
+  - at: '17:30:00'
+    platform: time
+  condition:
+    condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - data:
+      entity_id: switch.dcare_arm
+    service: switch.turn_off
+- id: night_arm
+  alias: Night Alarm Arm
+  trigger:
+  - at: 01:30:00
+    platform: time
+  action:
+  - data:
+      entity_id: switch.night_arm
+    service: switch.turn_on
+- id: night_disarm
+  alias: Night Alarm Disarm
+  trigger:
+  - at: 06:30:00
+    platform: time
+  action:
+  - data:
+      entity_id: switch.night_arm
+    service: switch.turn_off
+- id: auto_light_arm
+  alias: Auto Light Arm
+  trigger:
+  - event: sunset
+    offset: +01:00:00
+    platform: sun
+  action:
+  - data:
+      entity_id: switch.auto_light
+    service: switch.turn_on
+- id: auto_light_disarm
+  alias: Auto Light Disarm
+  trigger:
+  - event: sunrise
+    offset: -01:00:00
+    platform: sun
+  action:
+  - data:
+      entity_id: switch.auto_light
+    service: switch.turn_off

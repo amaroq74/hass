@@ -1,0 +1,191 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Beresford
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 20
+  # metric for Metric, imperial for Imperial
+  unit_system: Imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Los_Angeles
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+http:
+   api_password: !secret api_password
+#
+#   base_url: example.duckdns.org:8123
+
+api:
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+recorder:
+   purge_keep_days: 30
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Sensors
+sensor:
+  - platform: smarthomeSensor
+    scan_interval: 10
+  - platform: yr
+    name: Weather
+    forecast: 72
+    monitored_conditions:
+      - temperature
+
+        #  house_temp:
+        #attributes:
+        #friendly_name: 'House Temp'
+        #unit_of_measurement: '°F'
+        #restore: true
+
+# Text to speech
+#tts:
+#  - platform: google
+
+# Cloud
+cloud:
+   google_actions:
+      filter:
+         include_domains:
+            - light
+            - switch
+            - fan
+            - climate
+         exclude_entities:
+            - switch.garage_heat
+            - switch.pool_heat
+            - switch.house_heat
+            - switch.garage_heat
+            - switch.chicken_light
+            - switch.camper_heat
+
+# Example configuration.yaml entry                                                                                       
+#zoneminder:
+#  host: kapugen.maroq.net
+#  path: /zm
+#  path_zms: /cgi-bin/nph-zms
+#  ssl: True
+#  verify_ssl: False
+#  username: ryan
+#  password: Cxn1ssy
+
+              #variable:
+              #house_temp:
+              #value: 65
+              #attributes:
+              #friendly_name: 'House Temp'
+              #unit_of_measurement: '°F'
+              #restore: true
+
+binary_sensor:
+   - platform: smarthomeBinary
+     scan_interval: 10
+
+light:
+   - platform: smarthomeLights
+     scan_interval: 10
+
+fan:
+   - platform: smarthomeFans
+     scan_interval: 10
+
+switch:
+   - platform: smarthomeSwitch
+     scan_interval: 10
+
+climate:
+   - platform: generic_thermostat
+     name: House
+     heater: switch.house_heat
+     target_sensor: sensor.house_temp
+     away_temp: 60
+     ac_mode: False
+   - platform: generic_thermostat
+     name: Chicken Coop
+     heater: switch.chicken_light
+     target_sensor: sensor.chickens_temp
+     min_temp: 32
+     ac_mode: False
+   - platform: generic_thermostat
+     name: Garage
+     heater: switch.garage_heat
+     target_sensor: sensor.garage_temp
+     min_temp: 32
+     ac_mode: False
+   - platform: generic_thermostat
+     name: Camper
+     heater: switch.camper_heat
+     target_sensor: sensor.camper_temp
+     min_temp: 32
+     ac_mode: False
+   - platform: generic_thermostat
+     name: Pool
+     heater: switch.pool_heat
+     target_sensor: sensor.pool_temp
+     hot_tolerance: 1.0
+     min_temp: 32
+     max_temp: 95
+     ac_mode: False
+
+   #   - platform: smarthomeThermostat
+   #     scan_interval: 10
+
+     #logger:
+     #  default: info
+  #  logs: 
+  #  homeassistant.components.zoneminder: debug
+
+#google:
+#  client_id: 158759890700-cbp0ijdpma7oq2ielm6dierfc5luj2f2.apps.googleusercontent.com
+#  client_secrent: TByOp3RCiZbWZ_T2OWtkRgVj
+
+emulated_hue:
+  host_ip: 172.16.20.1
+  listen_port: 8300
+  expose_by_default: true
+  exposed_domains:
+    - light
+    - switch
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+

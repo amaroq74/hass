@@ -1,0 +1,106 @@
+front_yard_sprinklers:
+  alias: Front Yard Sprinklers
+  sequence:
+  - alias: West Trees On
+    data:
+      entity_id: switch.west_trees
+    service: switch.turn_on
+  - delay: 00:10:00
+  - alias: West Tress Off
+    data:
+      entity_id: switch.west_trees
+    service: switch.turn_off
+  - delay: 00:00:10
+  - alias: East Lemon On
+    data:
+      entity_id: switch.east_lemon
+    service: switch.turn_on
+  - delay: 00:05:00
+  - alias: East Lemon Off
+    data:
+      entity_id: switch.east_lemon
+    service: switch.turn_off
+  - delay: 00:00:10
+  - alias: Front Lawn 1 On
+    data:
+      entity_id: switch.front_lawn_1
+    service: switch.turn_on
+  - delay: 00:10:00
+  - alias: Front Lawn 1 Off
+    data:
+      entity_id: switch.front_lawn_1
+    service: switch.turn_off
+  - delay: 00:00:10
+  - alias: Front Lawn 2 On
+    data:
+      entity_id: switch.front_lawn_2
+    service: switch.turn_on
+  - delay: 00:05:00
+  - alias: Front Lawn 2 Off
+    data:
+      entity_id: switch.front_lawn_2
+    service: switch.turn_off
+  - delay: 00:00:10
+  - alias: Front Lawn 3 On
+    data:
+      entity_id: switch.front_lawn_4
+    service: switch.turn_on
+  - delay: 00:10:00
+  - alias: Front Lawn 3 Off
+    data:
+      entity_id: switch.front_lawn_3
+    service: switch.turn_off
+  - delay: 00:00:10
+  - alias: East Lawn 1 On
+    data:
+      entity_id: switch.east_lawn_1
+    service: switch.turn_on
+  - delay: 00:05:00
+  - alias: East Lawn 1 Off
+    data:
+      entity_id: switch.east_lawn_1
+    service: switch.turn_off
+  - delay: 00:00:10
+  - alias: East Lawn 2 On
+    data:
+      entity_id: switch.east_lawn_2
+    service: switch.turn_on
+  - delay: 00:10:00
+  - alias: East Lawn 2 Off
+    data:
+      entity_id: switch.east_lawn_2
+    service: switch.turn_off
+flower_box_sprinklers:
+  alias: Flower Box Sprinklers
+  sequence:
+  - alias: Front Flowers On
+    data:
+      entity_id: switch.front_flowers
+    service: switch.turn_on
+  - delay: 00:01:00
+  - alias: Front Flowers Off
+    data:
+      entity_id: switch.front_flowers
+    service: switch.turn_off
+  - delay: 00:00:10
+  - alias: Rear Patio 2 On
+    data:
+      entity_id: switch.rear_patio_2
+    service: switch.turn_on
+  - delay: 00:01:00
+  - alias: Rear Pation 2 Off
+    data:
+      entity_id: switch.rear_patio_2
+    service: switch.turn_off
+rear_patio_sprinklers:
+  alias: Rear Patio Sprinklers
+  sequence:
+  - alias: Rear Pation 1 On
+    data:
+      entity_id: switch.rear_patio_1
+    service: switch.turn_on
+  - delay: 00:5:00
+  - alias: Rear Pation 1 Off
+    data:
+      entity_id: switch.rear_patio_1
+    service: switch.turn_off
