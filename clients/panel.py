@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2
 
 # Add relative path
 import sys,os,datetime
@@ -50,32 +50,32 @@ def disp_door(res, box):
     box.setText('Closed' if res['event'] == 'normal' else 'Open')
 
 # Status List
-StatusList = [ {'label':'Out Temp',     'key':'Outdoor-temp',       'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Out Humid',    'key':'Outdoor-humidity',   'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Wind Dir',     'key':'Wind-direction',     'conv':disp_winddir,   'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Wind Avg',     'key':'Wind-speed_average', 'conv':disp_speed,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Wind Gust',    'key':'Wind-speed',         'conv':disp_speed,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Rain Rate',    'key':'Rain-count_rate',    'conv':disp_rain,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Rain Today',   'key':'Rain-count_day',     'conv':disp_rain,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Barometer',    'key':'Indoor-pressure',    'conv':disp_pressure,  'last':None, 'box':None, 'tout':15.0 },
-               {'label':'House Temp',   'key':'House-temp',         'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Thermostat',   'key':'House_Heat-temp',    'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Family Temp',  'key':'Indoor-temp',        'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Family Humid', 'key':'Indoor-humidity',    'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Master Temp',  'key':'Master-temp',        'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Master Humid', 'key':'Master-humidity',    'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'BedR Temp',    'key':'BedR-temp',          'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'BedR Humid',   'key':'BedR-humidity',      'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'BedTA Temp',   'key':'BedTA-temp',         'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'BedTA Humid',  'key':'BedTA-humidity',     'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Power Use',    'key':'SmartMeter-current', 'conv':disp_power,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Garage Temp',  'key':'Garage-temp',        'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Garage Humid', 'key':'Garage-humidity',    'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Shed Temp',    'key':'Shed-temp',          'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Shed Humid',   'key':'Shed-humidity',      'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Camper Temp',  'key':'Camper-temp',        'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Chicken Temp', 'key':'Chickens-temp',      'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
-               {'label':'Pool Temp',    'key':'Pool-temp',          'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 } ]
+StatusList = [ {'label':'Out Temp',     'key':'sensor.outdoor_temp',       'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Out Humid',    'key':'sensor.outdoor_humidity',   'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Wind Dir',     'key':'sensor.wind',               'conv':disp_winddir,   'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Wind Avg',     'key':'sensor.wind_avg',           'conv':disp_speed,     'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Wind Gust',    'key':'sensor.wind_gust',          'conv':disp_speed,     'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Rain Rate',    'key':'sensor.rain_rate',          'conv':disp_rain,      'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Rain Today',   'key':'sensor.rain_day',           'conv':disp_rain,      'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Barometer',    'key':'sensor.indoor_pressure',    'conv':disp_pressure,  'last':None, 'box':None, 'tout':15.0 },
+               {'label':'House Temp',   'key':'sensor.house_temp',         'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Thermostat',   'key':'climate.house',             'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Family Temp',  'key':'sensor.indoor_temp',        'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Family Humid', 'key':'sensor.indoor_humidity',    'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Master Temp',  'key':'sensor.master_temp',        'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Master Humid', 'key':'sensor.master_humidity',    'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
+               {'label':'BedR Temp',    'key':'sensor.bedr_temp',          'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
+               {'label':'BedR Humid',   'key':'sensor.bedr_humidity',      'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
+               {'label':'BedTA Temp',   'key':'sensor.bedta_temp',         'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
+               {'label':'BedTA Humid',  'key':'sensor.bedta_humidity',     'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Power Use',    'key':'SmartMeter-current',        'conv':disp_power,     'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Garage Temp',  'key':'sensor.garage_temp',        'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Garage Humid', 'key':'sensor.garage_humidity',    'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Shed Temp',    'key':'sensor.shed_temp',          'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Shed Humid',   'key':'sensor.shed_humidity',      'conv':disp_humid,     'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Camper Temp',  'key':'sensor.camper_temp',        'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Chicken Temp', 'key':'sensor.chickens_temp',      'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 },
+               {'label':'Pool Temp',    'key':'sensor.pool_temp',          'conv':disp_temp,      'last':None, 'box':None, 'tout':15.0 } ]
 
 # Camera List
 CamList = { 'Garage'   : "http://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=4&scale=100&maxfps=2&user=home&pass=monitor",

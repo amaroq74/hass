@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+# Add relative path
+import sys,os
+sys.path.append(os.path.dirname(__file__) + '../common')
+
 import appdaemon.plugins.hass.hassapi as hass
 from homeassistant.const import TEMP_FAHRENHEIT
 import time
@@ -9,11 +13,15 @@ weights = { "sensor.bedr_temp"   : 1.0,
             "sensor.indoor_temp" : 0.8, 
             "sensor.bedta_temp"  : 1.0 }
 
+import hass_mysql.Mysql
+
 class HouseTemp(hass.Hass):
 
     def initialize(self):
         self._cur  = {}
         self._last = {}
+
+        self._db = hass_mysql.Mysql("hass-app")
 
         for k,v in weights.items():
             self.listen_state(self.new_temp, k)
@@ -32,10 +40,12 @@ class HouseTemp(hass.Hass):
                 div += weights[k]
 
         if div > 0.0:
-            new = tot / div
-            self.log("New house temp = {}".format(new))
+            newF = tot / div
+            newC = (newF -32.0) * (5.0/9.0)
+            self._db.setSensor('House', 'temp', newC, 'c')
+            self.log("New house temp = {}".format(newF))
 
-            self.set_state("sensor.house_temp", state=new, attributes={'friendly_name' : 'House Temp', 'unit_of_measurement' : TEMP_FAHRENHEIT, 'device_class' : 'temperature'})
+            self.set_state("sensor.house_temp", state=newF, attributes={'friendly_name' : 'House Temp', 'unit_of_measurement' : TEMP_FAHRENHEIT, 'device_class' : 'temperature'})
 
     def new_temp(self, entity, attribute, old, new, kwargs):
         self.log("Got {} {} {} {}".format(entity,attribute,old,new))
