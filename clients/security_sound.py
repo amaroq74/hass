@@ -97,11 +97,13 @@ def soundCb(e):
 
     if ldiff > 30 and val != old and val == "on":
         if key in sounds:
+            print("Playing sound for {}".format(key))
             cmd = "aplay " + soundDir + "/" + sounds[key]
             #cmd = "aplay -D hw:0 " + soundDir + "/" + sounds[key]
             os.system(cmd)
 
         elif states['switch.dcare_arm'] == 'on' and sensor in DcSensors:
+            print("Playing daycare alarm")
             cmd = "aplay " + soundDir + "/" + DcSound
             #cmd = "aplay -D hw:0 " + soundDir + "/" + DcSound
             os.system(cmd)
@@ -131,6 +133,7 @@ t = Thread(target=testDayCare)
 t.start()
 
 while True:
+    print("Connecting to server")
     ws = create_connection('ws://aliska.amaroq.net:8123/api/websocket',timeout=60*10)
     swRead(ws)
 
@@ -143,5 +146,8 @@ while True:
     ws.send(json.dumps({'id': 2, 'type': 'subscribe_events', 'event_type': 'state_changed'}))
     while swRead(ws):
         pass
+
+    print("Error occured restarting loop")
+    time.sleep(5)
 
 t.stop()

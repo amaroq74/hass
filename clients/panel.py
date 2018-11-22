@@ -252,10 +252,10 @@ class StatusWindow(QWidget):
         idx = 0
 
         lfont = QFont()
-        lfont.setPointSize(14)
+        lfont.setPointSize(16)
         lfont.setBold(True)
         vfont = QFont()
-        vfont.setPointSize(14)
+        vfont.setPointSize(16)
         vfont.setBold(False)
 
         for sen in StatusList:
@@ -269,8 +269,8 @@ class StatusWindow(QWidget):
 
         self.dateBox = QLabel('Date')
         self.timeBox = QLabel('Time')
-        self.dateBox.setFont(vfont)
-        self.timeBox.setFont(vfont)
+        self.dateBox.setFont(lfont)
+        self.timeBox.setFont(lfont)
         gl.addWidget(self.dateBox,idx,0,1,2,Qt.AlignCenter)
         gl.addWidget(self.timeBox,idx+1,0,1,2,Qt.AlignCenter)
         self.setLayout(gl)
