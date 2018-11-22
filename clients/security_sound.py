@@ -1,13 +1,17 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 # Add relative path
-import sys
+import sys, os
 sys.path.append('/amaroq/hass/pylib')
 
 # Libraries
 import time
+import hass_mysql
+import json
+import yaml
 
 from websocket import create_connection
+from threading import Thread
 
 # Constants
 service = "sound_gen"
@@ -41,40 +45,38 @@ for key in DcSensors:
 last['switch.dcare_arm'] = 0
 states['switch.dcare_arm'] = 'off'
 
-# Mysql
-db = hass_mysql.Mysql(service)
-
 lastDc = time.time()
 
 # Daycare Alarm
 def testDayCare():
-    global db
     global lastDc
     global states
-    global last  
+    global DcSensors
 
-    now = time.time()
-    if ( (now - lastDc) > 5.0 ):
-        lastDc = now
-
-        if states['switch.dcare_arm'] == 'on':
-
-            count = 0
-            for sen in DcSensors:
-                if states[sen] == 'on':
-                    count += 1
-
-            if count != 0:
-                cmd = "aplay " + soundDir + "/" + DcSound
-                #cmd = "aplay -D hw:0 " + soundDir + "/" + DcSound
-                os.system(cmd)
+    while True:
+        time.sleep(1)
+        now = time.time()
+        if ( (now - lastDc) > 5.0 ):
+            lastDc = now
+    
+            if states['switch.dcare_arm'] == 'on':
+    
+                count = 0
+                for sen in DcSensors:
+                    if states[sen] == 'on':
+                        count += 1
+    
+                if count != 0:
+                    cmd = "aplay " + soundDir + "/" + DcSound
+                    #cmd = "aplay -D hw:0 " + soundDir + "/" + DcSound
+                    os.system(cmd)
 
 # Update
 def soundCb(e):
-    global db
     global sounds
     global states
     global last  
+    global DcSensors
 
     key = e['entity_id']
 
@@ -93,18 +95,18 @@ def soundCb(e):
     states[key] = val
     last[key]   = time.time()
 
-    if ldiff > 60 and val != old and val == "on":
+    if ldiff > 30 and val != old and val == "on":
         if key in sounds:
-            cmd = "aplay " + soundDir + "/" + sounds[sensor]
-            #cmd = "aplay -D hw:0 " + soundDir + "/" + sounds[sensor]
+            cmd = "aplay " + soundDir + "/" + sounds[key]
+            #cmd = "aplay -D hw:0 " + soundDir + "/" + sounds[key]
             os.system(cmd)
 
-        elif armDc == 1 and sensor in DcSensors:
+        elif states['switch.dcare_arm'] == 'on' and sensor in DcSensors:
             cmd = "aplay " + soundDir + "/" + DcSound
             #cmd = "aplay -D hw:0 " + soundDir + "/" + DcSound
             os.system(cmd)
 
-def swRead(self,ws):
+def swRead(ws):
     try:
         message = ws.recv()
 
@@ -120,23 +122,26 @@ def swRead(self,ws):
         elif d['type'] == 'event':
             e = d['event']['data']['new_state'] 
             soundCb(e)
-    except:
+    except Exception as e:
         return False
 
     return True
 
+t = Thread(target=testDayCare)
+t.start()
+
 while True:
-    ws = create_connection('ws://localhost:8123/api/websocket',timeout=60*10)
+    ws = create_connection('ws://aliska.amaroq.net:8123/api/websocket',timeout=60*10)
+    swRead(ws)
 
     ws.send(json.dumps({'type': 'auth', 'api_password': 'TEST1234'}))
-    swResp(ws)
+    swRead(ws)
 
     ws.send(json.dumps({'id': 1, 'type': 'get_states'}))
-    swResp(ws)
+    swRead(ws)
 
     ws.send(json.dumps({'id': 2, 'type': 'subscribe_events', 'event_type': 'state_changed'}))
-    while self._runEnable:
-        if not swResp(ws):
-            break
-        TestDayCare()
+    while swRead(ws):
+        pass
 
+t.stop()

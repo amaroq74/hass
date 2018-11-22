@@ -117,14 +117,9 @@ class WindChart(QWidget):
         vbox.addWidget(self.canvas)
 
         self.setLayout(vbox)
-        self.last = time.time()
         self.plotUpdate()
 
     def plotUpdate (self):
-
-        if time.time() - self.last > 300:
-            self.db.setLog("wrn", "windUpdate", "1 minute timer took over 5 minutes!")
-        self.last = time.time()
 
         windAvg = self.db.getSensorArrayHours('Wind','speed_average',6)
         windGust = self.db.getSensorArrayHours('Wind','speed',6)
@@ -172,14 +167,9 @@ class TempChart(QWidget):
         vbox.addWidget(self.canvas)
 
         self.setLayout(vbox)
-        self.last = time.time()
         self.plotUpdate()
 
     def plotUpdate (self):
-
-        if time.time() - self.last > 300:
-            self.db.setLog("wrn", "tempUpdate", "1 minute timer took over 5 minutes!")
-        self.last = time.time()
 
         inTemp = self.db.getSensorArrayHours('House','temp',6)
         outTemp = self.db.getSensorArrayHours('Outdoor','temp',6)
@@ -237,7 +227,6 @@ class DoorWindow(QWidget):
             idx += 1
 
         self.setLayout(gl)
-        self.last = time.time()
         self.refreshSensors()
 
     def stateUpdate (self, key, value ):
@@ -287,7 +276,6 @@ class StatusWindow(QWidget):
         gl.addWidget(self.dateBox,idx,0,1,2,Qt.AlignCenter)
         gl.addWidget(self.timeBox,idx+1,0,1,2,Qt.AlignCenter)
         self.setLayout(gl)
-        self.last = time.time()
         self.refreshSensors()
 
     def stateUpdate (self, key, value ):
@@ -342,15 +330,9 @@ class ForecastWindow(QWidget):
         gl.setContentsMargins(0,0,0,0)
 
         self.setLayout(gl)
-        self.last = time.time()
         self.refreshForecast()
 
     def refreshForecast(self):
-        self.db.setLog("inf", "refreshForecast", "Refreshing forecast!")
-
-        if time.time() - self.last > (60 * 60):
-            self.db.setLog("wrn", "refreshForecast", "10 minute timer took over 60 mimutes!")
-        self.last = time.time()
 
         # Get the forecast
         fh = urllib.urlopen("http://api.wunderground.com/api/1fa664001be84d7a/forecast10day/q/94062.xml")
@@ -419,7 +401,6 @@ class CamListener(QThread):
             except:
                 pass
             self._fh = None
-            self.db.setLog("wrn", "selfCheck", "Detected stuck camera %s!" % (self._camName))
             time.sleep(1)
 
         QTimer.singleShot(60000,self.selfCheck) # One minute
@@ -431,7 +412,6 @@ class CamListener(QThread):
             try:
 
                 if self._pause:
-                    self.db.setLog("inf", "camListen", "Pausing camera %s!" % (self._camName))
                     if self._fh != None: self._fh.close()
                     self._fh = None
 
@@ -440,7 +420,6 @@ class CamListener(QThread):
                         time.sleep(1)
 
                 if self._fh == None:
-                    self.db.setLog("inf", "camListen", "Reloading camera %s!" % (self._camName))
                     self._last = time.time()
                     self._fh = urllib.urlopen(CamList[self._camName])
 
@@ -464,7 +443,6 @@ class CamListener(QThread):
                     self._fh = None
                 except:
                     pass
-                self.db.setLog("inf", "camListen", "Got exception for %s!" % (self._camName))
 
 class CamWindow(QWidget):
     def __init__(self, height, camName, parent=None):
