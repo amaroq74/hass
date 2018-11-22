@@ -1,0 +1,13 @@
+[Unit]
+Description=Panel
+
+[Service]
+WorkingDirectory=/amaroq/hass/run/
+ExecStart=/amaroq/hass/clients/panelpy
+Restart=always
+RestartSec=3
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target
+

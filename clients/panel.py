@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 # Add relative path
 import sys,datetime
@@ -8,9 +8,10 @@ import time, pytz
 import hass_mysql as mysql
 import weather_convert as convert
 
-from PyQt4.QtCore   import *
-from PyQt4.QtGui    import *
-from PyQt4.QtWebKit import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore    import *
+from PyQt5.QtGui     import *
+from PyQt5.QtWebKit  import *
 
 import matplotlib
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
@@ -82,12 +83,12 @@ StatusList = [ {'label':'Out Temp',     'key':'sensor.outdoor_temp',       'conv
                {'label':'Pool Temp',    'key':'sensor.pool_temp',          'conv':disp_temp,      'box':None } ]
 
 # Camera List
-CamList = { 'Garage'   : "http://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=4&scale=100&maxfps=2&user=home&pass=monitor",
-            'Gate'     : "http://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=1&scale=100&maxfps=2&user=home&pass=monitor",
-            'Front'    : "http://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=2&scale=100&maxfps=2&user=home&pass=monitor",
-            'Rear'     : "http://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=3&scale=100&maxfps=1&user=home&pass=monitor",
-            'Side'     : "http://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=5&scale=100&maxfps=1&user=home&pass=monitor",
-            'Chickens' : "http://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=6&scale=100&maxfps=1&user=home&pass=monitor"}
+CamList = { 'Garage'   : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=4&scale=100&maxfps=2&user=home&pass=monitor",
+            'Gate'     : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=1&scale=100&maxfps=2&user=home&pass=monitor",
+            'Front'    : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=2&scale=100&maxfps=2&user=home&pass=monitor",
+            'Rear'     : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=3&scale=100&maxfps=1&user=home&pass=monitor",
+            'Side'     : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=5&scale=100&maxfps=1&user=home&pass=monitor",
+            'Chickens' : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=6&scale=100&maxfps=1&user=home&pass=monitor"}
 
 DoorList = [{'label':'Ped<br/>Gate',      'key':'binary_sensor.ped_gate',     'box':None },
             {'label':'Car<br/>Gate',      'key':'binary_sensor.car_gate',     'box':None },
@@ -227,11 +228,8 @@ class DoorWindow(QWidget):
             idx += 1
 
         self.setLayout(gl)
-        self.refreshSensors()
 
     def stateUpdate (self, key, value ):
-        key = res['zone']
-
         for sen in DoorList:
             if sen['key'] == key:
 
@@ -276,12 +274,15 @@ class StatusWindow(QWidget):
         gl.addWidget(self.dateBox,idx,0,1,2,Qt.AlignCenter)
         gl.addWidget(self.timeBox,idx+1,0,1,2,Qt.AlignCenter)
         self.setLayout(gl)
-        self.refreshSensors()
 
     def stateUpdate (self, key, value ):
         for sen in StatusList:
             if sen['key'] == key:
                 sen['conv'](value,sen['box'])
+
+        self.dateBox.setText(datetime.datetime.now().strftime("%m/%d/%y"))
+        self.timeBox.setText(datetime.datetime.now().strftime("%H:%M:%S"))
+
 
 class ForecastWindow(QWidget):
     def __init__(self, db, parent=None):
@@ -335,9 +336,8 @@ class ForecastWindow(QWidget):
     def refreshForecast(self):
 
         # Get the forecast
-        fh = urllib.urlopen("http://api.wunderground.com/api/1fa664001be84d7a/forecast10day/q/94062.xml")
-        ures = fh.read().rstrip()
-        fh.close()
+        with urllib.request.urlopen("http://api.wunderground.com/api/1fa664001be84d7a/forecast10day/q/94062.xml") as fh:
+            ures = fh.read().rstrip()
 
         try:
 
@@ -352,9 +352,8 @@ class ForecastWindow(QWidget):
                 iurl = day.findall('./icon_url')[0].text
                 pop  = day.findall('./pop')[0].text
 
-                imgReq = urllib.urlopen(iurl)
-                icon = imgReq.read()
-                imgReq.close()
+                with urllib.request.urlopen(iurl) as imgReq:
+                    icon = imgReq.read()
 
                 self.dayName[per].setText(dow) 
                 self.dayInfo[per].setText("%s\nH %s  L %s\nPrec %s %%" % (cond,high,low,pop))
@@ -362,12 +361,14 @@ class ForecastWindow(QWidget):
                 self.dayPixmap[per].loadFromData(icon) 
                 self.dayLabel[per].setPixmap(self.dayPixmap[per])
                 self.dayLabel[per].update()
-        except:
-            pass
+        except Exception as e:
+            print("got forecast exception: {}".format(e))
 
         QTimer.singleShot(10 * 60 * 1000,self.refreshForecast) # 15 minutes
 
 class CamListener(QThread):
+
+    newFrame = pyqtSignal(str,object)
 
     def __init__(self, db, camName, parent=None):
         QThread.__init__(self,parent)
@@ -421,23 +422,25 @@ class CamListener(QThread):
 
                 if self._fh == None:
                     self._last = time.time()
-                    self._fh = urllib.urlopen(CamList[self._camName])
+                    self._fh = urllib.request.urlopen(CamList[self._camName])
 
                 # Find marker
                 d = self._fh.readline()
-                while d.rstrip() != "--ZoneMinderFrame": d = self._fh.readline()
+                while d.decode('utf-8').rstrip() != '--ZoneMinderFrame': 
+                    d = self._fh.readline()
 
                 # Skip lines and extract length
                 self._fh.readline()
-                count = int(self._fh.readline().rstrip().split(':')[1])
+                count = int(self._fh.readline().decode('utf-8').rstrip().split(':')[1])
                 self._fh.readline()
 
                 # Read image
                 img = self._fh.read(count)
                 self._last = time.time()
-                self.emit(SIGNAL("newFrame"),self._camName,img)
+                self.newFrame.emit(self._camName,img)
 
-            except:
+            except Exception as e:
+                print("got camera exception: {}".format(e))
                 try:
                     self._fh.close()
                     self._fh = None
@@ -601,6 +604,8 @@ class CamWindow(QWidget):
 
 class HassListener(QThread):
 
+    stateUpdate = pyqtSignal(str,str)
+
     def __init__(self, parent=None):
         QThread.__init__(self,parent)
 
@@ -618,7 +623,7 @@ class HassListener(QThread):
         else:
             val = e['state']
 
-        self.emit(SIGNAL("stateUpdate"),key,val)
+        self.stateUpdate.emit(key,str(val))
 
     def _read(self,ws):
         try:
@@ -636,28 +641,34 @@ class HassListener(QThread):
             elif d['type'] == 'event':
                 e = d['event']['data']['new_state'] 
                 self._newValue(e)
-        except:
+        except Exception as e:
             return False
 
         return True
 
     def run(self):
+
         while self._runEnable:
-            ws = create_connection('ws://localhost:8123/api/websocket',timeout=60*10)
+            try:
+                ws = create_connection('ws://aliska.amaroq.net:8123/api/websocket',timeout=60*10)
 
-            ws.send(json.dumps({'type': 'auth', 'api_password': 'TEST1234'}))
-            self._read(ws)
+                ws.send(json.dumps({'type': 'auth', 'api_password': 'TEST1234'}))
+                self._read(ws)
 
-            ws.send(json.dumps({'id': 1, 'type': 'get_states'}))
-            self._read(ws)
+                ws.send(json.dumps({'id': 1, 'type': 'get_states'}))
+                self._read(ws)
 
-            ws.send(json.dumps({'id': 2, 'type': 'subscribe_events', 'event_type': 'state_changed'}))
+                ws.send(json.dumps({'id': 2, 'type': 'subscribe_events', 'event_type': 'state_changed'}))
 
-            while self._runEnable:
-                if not self._read(ws):
-                    break
+                while self._runEnable:
+                    if not self._read(ws):
+                        break
+
+            except Exception as e:
+                pass
 
 class Panel(QWidget):
+
     def __init__(self,parent=None):
         super(Panel,self).__init__(parent)
 
@@ -733,13 +744,12 @@ class Panel(QWidget):
         self.camGen = {}
         for cam in CamList:
             self.camGen[cam] = CamListener(self.db,cam,self)
-            self.connect(self.camGen[cam],SIGNAL('newFrame'),self.camWin[cam].newFrame)
+            self.camGen[cam].newFrame.connect(self.camWin[cam].newFrame)
 
+        self.hass = HassListener()
 
-        self.hass = HassListener()        
-
-        self.connect(self.hass,SIGNAL('stateUpdate'),self.status.stateUpdate)
-        self.connect(self.hass,SIGNAL('stateUpdate'),self.door.stateUpdate)
+        self.hass.stateUpdate.connect(self.status.stateUpdate)
+        self.hass.stateUpdate.connect(self.door.stateUpdate)
 
         self.showFullScreen()
 
