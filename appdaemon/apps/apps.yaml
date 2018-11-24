@@ -1,3 +1,9 @@
-house_temp:
+house_weather:
    module: house
-   class: HouseTemp
+   class: HouseWeather
+house_chrome:
+   module: house
+   class: HouseChrome
+external_weather:
+   module: weather
+   class: WeatherPost

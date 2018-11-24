@@ -77,16 +77,16 @@ class SmarthomeSensor(Entity):
             self._units = 'in'
             self._convert = convertMMtoIn
         elif self._info['type'] == 'count_day':
-            self._name += " Day"
+            self._name += " Day Raw"
             self._units = 'in'
             self._convert = convertMMtoIn
         elif self._info['type'] == 'count_hour':
-            self._name += " Hour"
+            self._name += " Hour Raw"
             self._units = 'in'
             self._convert = convertMMtoIn
         elif self._info['type'] == 'count_rate':
-            self._name += " Rate"
-            self._units = 'mm/hr'
+            self._name += " Rate Raw"
+            self._units = 'in/hr'
             self._convert = convertMMtoIn
         elif self._info['type'] == 'current' and self._info['device'] == 'SmartMeter':
             self._name += " Rate"

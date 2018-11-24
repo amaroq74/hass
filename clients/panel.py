@@ -255,8 +255,8 @@ class StatusWindow(QWidget):
         lfont.setPointSize(16)
         lfont.setBold(True)
         vfont = QFont()
-        vfont.setPointSize(16)
-        vfont.setBold(False)
+        vfont.setPointSize(14)
+        vfont.setBold(True)
 
         for sen in StatusList:
             lab = QLabel(sen['label'] + ':')
@@ -294,8 +294,8 @@ class ForecastWindow(QWidget):
         nfont.setPointSize(12)
         nfont.setBold(True)
         ifont = QFont()
-        ifont.setPointSize(12)
-        ifont.setBold(False)
+        ifont.setPointSize(10)
+        ifont.setBold(True)
 
         self.dayName   = [None for i in range(0,10)]
         self.dayLabel  = [None for i in range(0,10)]
