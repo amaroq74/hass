@@ -15,7 +15,6 @@ import time
 LogSensors = {  'sensor.rain_count'          : {'type':'count',         'device':'Rain',           'units':'mm',       'conv':weather_convert.rainInToMm},
                 'sensor.rain_day'            : {'type':'count_day',     'device':'Rain',           'units':'mm',       'conv':weather_convert.rainInToMm},
                 'sensor.rain_hour'           : {'type':'count_hour',    'device':'Rain',           'units':'mm',       'conv':weather_convert.rainInToMm},
-                'sensor.rain_hour'           : {'type':'count_rate',    'device':'Rain',           'units':'mmph',     'conv':weather_convert.rainInToMm},
                 'sensor.wind'                : {'type':'direction',     'device':'Wind',           'units':'deg',      'conv':None},
                 'sensor.wind_gust'           : {'type':'speed',         'device':'Wind',           'units':'mps',      'conv':weather_convert.speedMphToMps},
                 'sensor.wind_avg'            : {'type':'speed_average', 'device':'Wind',           'units':'mps',      'conv':weather_convert.speedMphToMps},
@@ -66,7 +65,7 @@ class SensorLog(hass.Hass):
         else:
             val = float(new)
 
-        self._db.setSensor(ent['device'] + '_new', ent['type'], new, ent['units'])
+        self._db.setSensor(ent['device'], ent['type'], val, ent['units'])
 
     def sensor_all(self, kwargs):
         self.log("Logging all sensors")
@@ -79,5 +78,5 @@ class SensorLog(hass.Hass):
                 else:
                     val = float(new)
 
-                self._db.setSensor(ent['device'] + '_new', ent['type'], val, ent['units'])
+                self._db.setSensor(ent['device'], ent['type'], val, ent['units'])
 

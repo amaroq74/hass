@@ -30,7 +30,7 @@ def convertCtoF(value):
     return ( (float(value) * 9.0/5.0) + 32.0 )
 
 def convertMMtoIn(value):
-    return ( float(value) / 25.0 )
+    return ( float(value) / 25.4 )
 
 def convertMpstoMph(value):
     return ( float(value) * 2.237)
@@ -63,30 +63,9 @@ class SmarthomeSensor(Entity):
             self._name += " Battery"
             self._units = '%'
             self._icon = 'mdi:battery'
-        elif self._info['type'] == 'cpu_load_15m':
-            self._name += " Load15m"
-            self._units = ''
-        elif self._info['type'] == 'cpu_load_5m':
-            self._name += " Load5m"
-            self._units = ''
-        elif self._info['type'] == 'cpu_load_1m':
-            self._name += " Load1m"
-            self._units = ''
         elif self._info['type'] == 'count':
             self._name += " Count"
             self._units = 'in'
-            self._convert = convertMMtoIn
-        elif self._info['type'] == 'count_day':
-            self._name += " Day Raw"
-            self._units = 'in'
-            self._convert = convertMMtoIn
-        elif self._info['type'] == 'count_hour':
-            self._name += " Hour Raw"
-            self._units = 'in'
-            self._convert = convertMMtoIn
-        elif self._info['type'] == 'count_rate':
-            self._name += " Rate Raw"
-            self._units = 'in/hr'
             self._convert = convertMMtoIn
         elif self._info['type'] == 'current' and self._info['device'] == 'SmartMeter':
             self._name += " Rate"
@@ -108,12 +87,6 @@ class SmarthomeSensor(Entity):
         elif self._info['type'] == 'power':
             self._name += " Power"
             self._units = 'w'
-        elif self._info['type'] == 'missed' and self._info['device'] == 'wunder':
-            self._name += " missed"
-            self._units = ''
-        elif self._info['type'] == 'period' and self._info['device'] == 'wunder':
-            self._name += " Period"
-            self._units = 's'
         elif self._info['type'] == 'pressure':
             self._name += " Pressure"
             self._units = 'inhg'
@@ -126,9 +99,6 @@ class SmarthomeSensor(Entity):
             self._name += " Avg"
             self._units = 'mph'
             self._convert = convertMpstoMph
-        elif self._info['type'] == 'timeout':
-            self._name += " Timeout"
-            self._units = ''
         elif self._info['type'] == 'time_left':
             self._name += " Time"
             self._units = ' minutes'

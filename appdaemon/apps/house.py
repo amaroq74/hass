@@ -77,15 +77,15 @@ class HouseWeather(hass.Hass):
     # rain calc
     def rain_calc(self, kwargs):
         count_now  = self.get_state(RainCount)
-        count_hour = weather_convert.rainMmToIn(self._db.getSensorHour('rain','count'))
-        count_day  = weather_convert.rainMmToIn(self._db.getSensorDay('rain','count'))
+        count_hour = self._db.getSensorHour('rain','count')
+        count_day  = self._db.getSensorDay('rain','count')
 
-        if count_now is not None:
-            val_hour = float(count_now) - count_hour
-            val_day  = float(count_now) - count_day
-        else:
+        if count_now is None or count_hour is None or count_day is None:
             val_hour = 0.0
             val_day  = 0.0
+        else:
+            val_hour = float(count_now) - weather_convert.rainMmToIn(count_hour)
+            val_day  = float(count_now) - weather_convert.rainMmToIn(count_day)
 
         if val_hour >= 0.0 and val_day >= 0.0:
             self.log("Rain calc. count now = {}, count hour = {}, count day = {}, val hour = {}, val day = {}".format(count_now,count_hour,count_day,val_hour,val_day))

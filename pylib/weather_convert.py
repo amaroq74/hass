@@ -21,31 +21,31 @@ def windDegToCompass ( deg ):
     return wDir
 
 def tempCelToFar ( cel ) :
-    return ((cel * 9.0/5.0) + 32.0)
+    return ((float(cel) * 9.0/5.0) + 32.0)
 
 def tempFarToCel ( far ) :
-    return((far - 32.0) * (5.0/9.0))
+    return((float(far) - 32.0) * (5.0/9.0))
 
 def speedMpsToMph ( mps ):
-    return (mps * 2.2369362920544 )
+    return (float(mps) * 2.2369362920544 )
 
 def speedMphToMps ( mph ):
-    return (mph / 2.2369362920544 )
+    return (float(mph) / 2.2369362920544 )
 
 def rainMmToIn ( mm ) :
-    return (mm / 25.4)
+    return (float(mm) / 25.4)
 
 def rainInToMm ( inc ) :
-    return (inc * 25.4)
+    return (float(inc) * 25.4)
 
 def pressureHpaToInhg ( hpa ) :
-    return ( hpa / 33.8638 )
+    return ( float(hpa) / 33.8638 )
 
 def pressureInhgToHpa ( inhg ) :
-    return ( inhg * 33.8638 )
+    return ( float(inhg) * 33.8638 )
 
 def compDewPtCel ( tempC, humidity ):
-    return(tempC - ((100.0 - float(humidity))/5.0))
+    return(float(tempC) - ((100.0 - float(humidity))/5.0))
 
 def compDewPtFar ( tempF, humidity ):
     return tempCelToFar(compDewPtCel(tempFarToCel(tempF),humidity))
