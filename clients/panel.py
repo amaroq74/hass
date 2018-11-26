@@ -220,7 +220,7 @@ class DoorWindow(QWidget):
             sen['box'].setReadOnly(True)
 
             p = QPalette()
-            p.setColor(QPalette.Base,Qt.red)
+            p.setColor(QPalette.Base,Qt.green)
             p.setColor(QPalette.Text,Qt.black)
             sen['box'].setPalette(p)  
 

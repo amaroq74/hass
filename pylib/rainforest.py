@@ -2,6 +2,7 @@
 import time 
 import serial
 import xml.etree.ElementTree as ET
+import threading
 
 DEF_BAUD=115200
 DEF_TOUT=120
@@ -33,64 +34,63 @@ DEF_TOUT=120
 #   <SuppressLeadingZero>Y</SuppressLeadingZero>
 #</CurrentSummationDelivered>
 
-class RainforestException(Exception):
-        pass
+#<Command>\n<Name>factory_reset</Name>\n</Command>")
+#<Command>\n<Name>restart</Name>\n</Command>")
 
-
-class Rainforest:
+class Rainforest(threading.Thread):
     """Class to handle rainforest data reception."""
 
+    def __init__(self, path, callback):
+        threading.Thread.__init__(self)
+        self._cb    = callback
+        self._path  = path
+        self._runEn = True
 
-    def __init__(self, path):
-        """ Create RxRainforst class.
+        self.start() 
 
-        Arguments:
-           path:      path to device
-        """
-        self._path = path
-        self._ser  = None
-        self._log  = None
+    def stop(self):
+        self._runEn = False
+        self.join()
 
-
-    def open(self):
-        self._ser = serial.Serial(self._path, DEF_BAUD, timeout=DEF_TOUT)
-        self._ser.flushInput()
-
-    def openLog(self):
-        self._log = open("power_log.txt","a")
-
-    def close(self):
-        self._ser.close()
-        self._ser = None
-
-    def factoryReset(self):
-        self._ser.write("<Command>\n<Name>factory_reset</Name>\n</Command>\n")
-
-        while(True):
-            d = self._ser.readline()
-
-    def restart(self):
-        self._ser.write("<Command>\n<Name>restart</Name>\n</Command>\n")
-
-        while(True):
-            d = self._ser.readline()
-
-    def getData(self) :
-        line  = ""
-        block = ""
+    def run(self):
+        ser   = None
         last  = time.time()
+        block = ''
 
-        while True :
+        while self._runEn:
+
+            # Serial port needs to e open
+            if ser is None:
+                try:
+                    ser = serial.Serial(self._path, DEF_BAUD, timeout=DEF_TOUT)
+                    ser.flushInput()
+                    print("Opened serial port")
+                except Exception as msg:
+                    print("Got exception: {}".format(msg))
+                    time.sleep(1)
+                    continue
+
+            # No Data
             curr = time.time()
-            if (curr - last) > 600 : raise RainforestException("Timeout waiting for data!")
+            if (curr - last) > 600 :
+                print("Timeout closing")
+                ser = None
+                time.sleep(1)
+                continue
 
+            # Attempt to read
             try:
-                line = self._ser.readline()
+                line = ser.readline().decode('utf-8')
+                print("Read line: {}".format(line))
             except Exception as msg:
-                raise RainforestException("Serial error: {}".format(msg))
+                print("Got exception: {}".format(msg))
+                ser = None
+                time.sleep(1)
+                continue
 
+            # Skip short lines
             if len(line) > 10:
-                block = block + line.decode('utf-8')
+                block = block + line
 
             # Process block
             try:
@@ -102,7 +102,8 @@ class Rainforest:
                     div   = float(int(tree.findtext("Divisor"),0))
 
                     if div > 0 : value = (value * mult) / div
-                    return "current", value, "KW"
+                    self._cb('current', value, 'KW')
+                    block = ''
 
                 elif line.find("</CurrentSummationDelivered>") == 0 :
                     tree  = ET.XML( block )
@@ -111,12 +112,26 @@ class Rainforest:
                     div   = float(int(tree.findtext("Divisor"),0))
 
                     if div > 0 : value = (value * mult) / div
-                    return "total", value, "KW_Hours"
+                    self._cb('total', value, 'KW_Hours')
+                    block = ''
 
                 elif line.find("</ConnectionStatus>") == 0 or line.find("</TimeCluster>") == 0 :
-                    block = ""
+                    block = ''
 
-            except Exception as msg: # Catch XML errors (occasionally the current cost outputs malformed XML)
-                block = ""
-                self._ser.flushInput()
+            except Exception as msg:
+                print("Got exception: {}".format(msg))
+                block = ''
+                ser.flushInput()
+
+
+# Test program
+if __name__ == "__main__":
+
+    def dump(key, value, units):
+        print("{} = {} {}".format(key,value,units))
+
+    rf = Rainforest('/dev/serial/by-id/usb-Rainforest_RFA-Z106-RA-PC_RAVEn_v2.3.21-if00-port0',dump)
+
+    while True:
+        time.sleep(1)
 
