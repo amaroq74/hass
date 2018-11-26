@@ -6,8 +6,8 @@
     platform: sun
   action:
   - data:
-      entity_id: light.patio_sec1
-    service: light.turn_off
+      entity_id: switch.patio_sec1
+    service: switch.turn_off
 - id: sec_lights_on
   alias: Security Lights On
   trigger:
@@ -15,8 +15,8 @@
     platform: time
   action:
   - data:
-      entity_id: light.patio_sec1
-    service: light.turn_on
+      entity_id: switch.patio_sec1
+    service: switch.turn_on
 - id: yard_lights_on
   alias: Yard Lights On
   trigger:
@@ -26,17 +26,17 @@
   action:
   - data:
       entity_id:
-      - light.gate_light
-      - light.entry_light
-      - light.yard_lights1
-      - light.patio_lights
-      - light.yard_lights2
-      - light.gate_light
-      - light.xmas_lights
-      - light.pool_light
-      - light.patio_sec1
-      - light.gate_light
-    service: light.turn_on
+      - switch.gate_light
+      - switch.entry_light
+      - switch.yard_lights1
+      - switch.patio_lights
+      - switch.yard_lights2
+      - switch.gate_light
+      - switch.xmas_lights
+      - switch.pool_light
+      - switch.patio_sec1
+      - switch.gate_light
+    service: switch.turn_on
 - id: yard_lights_off
   alias: Yard Lights Off
   trigger:
@@ -50,17 +50,17 @@
   action:
   - data:
       entity_id:
-      - light.gate_light
-      - light.entry_light
-      - light.yard_lights1
-      - light.patio_lights
-      - light.yard_lights2
-      - light.gate_light
-      - light.xmas_lights
-      - light.pool_light
-      - light.patio_sec1
-      - light.gate_light
-    service: light.turn_off
+      - switch.gate_light
+      - switch.entry_light
+      - switch.yard_lights1
+      - switch.patio_lights
+      - switch.yard_lights2
+      - switch.gate_light
+      - switch.xmas_lights
+      - switch.pool_light
+      - switch.patio_sec1
+      - switch.gate_light
+    service: switch.turn_off
 - id: speak_off
   alias: Speakers Off
   trigger:

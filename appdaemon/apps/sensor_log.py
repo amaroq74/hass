@@ -41,9 +41,8 @@ LogSensors = {  'sensor.rain_count'          : {'type':'count',         'device'
                 'sensor.pool_solar_out_temp' : {'type':'temp',          'device':'Pool_Solar_Out', 'units':'c',        'conv':weather_convert.tempFarToCel},
                 'sensor.smartmeter_rate'     : {'type':'current',       'device':'SmartMeter',     'units':'KW',       'conv':None},
                 'sensor.smartmeter_total'    : {'type':'total',         'device':'SmartMeter',     'units':'KW_Hours', 'conv':None},
-                'sensor.ups_volts'           : {'type':'line_voltage',  'device':'UPS',            'units':'V',        'conv':None},
-                'sensor.ups_load'            : {'type':'load',          'device':'UPS',            'units':'%',        'conv':None},
-                'sensor.ups_power'           : {'type':'power',         'device':'UPS',            'units':'W',        'conv':None} }
+                'sensor.ups_input_voltage'   : {'type':'line_voltage',  'device':'UPS',            'units':'V',        'conv':None},
+                'sensor.ups_load'            : {'type':'load',          'device':'UPS',            'units':'%',        'conv':None} }
  
 
 class SensorLog(hass.Hass):

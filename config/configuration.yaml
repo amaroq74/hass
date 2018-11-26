@@ -60,25 +60,26 @@ map:
 # Track the sun
 sun:
 
+# UPS
+apcupsd:
+
 # Sensors
 sensor:
-  - platform: smarthomeSensor
-    scan_interval: 10
   - platform: yr
     name: Weather
     forecast: 72
     monitored_conditions:
       - temperature
-
-        #  house_temp:
-        #attributes:
-        #friendly_name: 'House Temp'
-        #unit_of_measurement: '°F'
-        #restore: true
-
-# Text to speech
-#tts:
-#  - platform: google
+  - platform: apcupsd
+    resources:
+       - bcharge
+       - linev
+       - loadpct
+       - timeleft
+  - platform: smarthomeSensor
+    scan_interval: 10
+#  - platform: rfxtrx
+#    automatic_add: true
 
 # Cloud
 cloud:
@@ -86,18 +87,15 @@ cloud:
       filter:
          include_domains:
             - light
-            - switch
-            - fan
-            - climate
-         exclude_entities:
-            - switch.garage_heat
-            - switch.pool_heat
-            - switch.house_heat
-            - switch.garage_heat
-            - switch.chicken_light
-            - switch.camper_heat
+         include_entities:
+            - climate.house
+            - climate.pool
+            - switch.speakers
+            - switch.car_gate
+            - switch.garage_door
+            - switch.pool_main
+            - switch.pool_sweep
 
-# Example configuration.yaml entry                                                                                       
 #zoneminder:
 #  host: kapugen.maroq.net
 #  path: /zm
@@ -107,25 +105,131 @@ cloud:
 #  username: ryan
 #  password: Cxn1ssy
 
-              #variable:
-              #house_temp:
-              #value: 65
-              #attributes:
-              #friendly_name: 'House Temp'
-              #unit_of_measurement: '°F'
-              #restore: true
+zwave:
+   usb_path: /dev/serial/by-id/usb-0658_0200-if00
+   device_config: !include zwave_device_config.yaml
+
+   #rfxtrx:
+   #   device: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A6003Q5Y-if00-port0
+   #   debug: true
 
 binary_sensor:
    - platform: smarthomeBinary
      scan_interval: 10
+   #   - platform: rfxtrx
+   #     automatic_add: true
 
 light:
-   - platform: smarthomeLights
-     scan_interval: 10
-
-fan:
-   - platform: smarthomeFans
-     scan_interval: 10
+   - platform: template
+     lights:
+        bedr_light:
+           friendly_name: "BedR Light"
+           value_template: "{{ states('switch.bedr_light') }}"
+           turn_on:
+              service: switch.turn_on
+              entity_id: switch.bedr_light
+           turn_off:
+              service: switch.turn_off
+              entity_id: switch.bedr_light
+        bedta_light:
+           friendly_name: "BedTA Light"
+           value_template: "{{ states('switch.bedta_light') }}"
+           turn_on:
+              service: switch.turn_on
+              entity_id: switch.bedta_light
+           turn_off:
+              service: switch.turn_off
+              entity_id: switch.bedta_light
+        xmas_lights:
+           friendly_name: "Christmas Lights"
+           value_template: "{{ states('switch.xmas_lights') }}"
+           turn_on:
+              service: switch.turn_on
+              entity_id: switch.xmas_lights
+           turn_off:
+              service: switch.turn_off
+              entity_id: switch.xmas_lights
+        entry_light:
+           friendly_name: "Entry Light"
+           value_template: "{{ states('switch.entry_light') }}"
+           turn_on:
+              service: switch.turn_on
+              entity_id: switch.entry_light
+           turn_off:
+              service: switch.turn_off
+              entity_id: switch.entry_light
+        family_tree:
+           friendly_name: "Family Tree"
+           value_template: "{{ states('switch.family_tree') }}"
+           turn_on:
+              service: switch.turn_on
+              entity_id: switch.family_tree
+           turn_off:
+              service: switch.turn_off
+              entity_id: switch.family_tree
+        gate_light:
+           friendly_name: "Gate Light"
+           value_template: "{{ states('switch.gate_light') }}"
+           turn_on:
+              service: switch.turn_on
+              entity_id: switch.gate_light
+           turn_off:
+              service: switch.turn_off
+              entity_id: switch.gate_light
+        master_light:
+           friendly_name: "Master Light"
+           value_template: "{{ states('switch.master_light') }}"
+           turn_on:
+              service: switch.turn_on
+              entity_id: switch.master_light
+           turn_off:
+              service: switch.turn_off
+              entity_id: switch.master_light
+        office_light:
+           friendly_name: "Office Light"
+           value_template: "{{ states('switch.office_light') }}"
+           turn_on:
+              service: switch.turn_on
+              entity_id: switch.office_light
+           turn_off:
+              service: switch.turn_off
+              entity_id: switch.office_light
+        patio_lights:
+           friendly_name: "Patio Lights"
+           value_template: "{{ states('switch.patio_lights') }}"
+           turn_on:
+              service: switch.turn_on
+              entity_id: switch.patio_lights
+           turn_off:
+              service: switch.turn_off
+              entity_id: switch.patio_lights
+        pool_light:
+           friendly_name: "Pool Light"
+           value_template: "{{ states('switch.pool_light') }}"
+           turn_on:
+              service: switch.turn_on
+              entity_id: switch.pool_light
+           turn_off:
+              service: switch.turn_off
+              entity_id: switch.pool_light
+        yard_lights1:
+           friendly_name: "Yard Lights1"
+           value_template: "{{ states('switch.yard_lights1') }}"
+           turn_on:
+              service: switch.turn_on
+              entity_id: switch.yard_lights1
+           turn_off:
+              service: switch.turn_off
+              entity_id: switch.yard_lights1
+        yard_lights2:
+           friendly_name: "Yard Lights2"
+           value_template: "{{ states('switch.yard_lights2') }}"
+           turn_on:
+              service: switch.turn_on
+              entity_id: switch.yard_lights2
+           turn_off:
+              service: switch.turn_off
+              entity_id: switch.yard_lights2
 
 switch:
    - platform: smarthomeSwitch
@@ -140,7 +244,7 @@ climate:
      ac_mode: False
    - platform: generic_thermostat
      name: Chicken Coop
-     heater: switch.chicken_light
+     heater: switch.chicken_heat
      target_sensor: sensor.chickens_temp
      min_temp: 32
      ac_mode: False
@@ -165,25 +269,13 @@ climate:
      max_temp: 95
      ac_mode: False
 
-   #   - platform: smarthomeThermostat
-   #     scan_interval: 10
-
-     #logger:
-     #  default: info
-  #  logs: 
-  #  homeassistant.components.zoneminder: debug
-
-#google:
-#  client_id: 158759890700-cbp0ijdpma7oq2ielm6dierfc5luj2f2.apps.googleusercontent.com
-#  client_secrent: TByOp3RCiZbWZ_T2OWtkRgVj
-
-emulated_hue:
-  host_ip: 172.16.20.1
-  listen_port: 8300
-  expose_by_default: true
-  exposed_domains:
-    - light
-    - switch
+#emulated_hue:
+#  host_ip: 172.16.20.1
+#  listen_port: 8300
+#  expose_by_default: true
+#  exposed_domains:
+#    - light
+#    - switch
 
 group: !include groups.yaml
 automation: !include automations.yaml

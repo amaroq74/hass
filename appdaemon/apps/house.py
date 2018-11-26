@@ -102,7 +102,7 @@ class HouseWeather(hass.Hass):
 class HouseChrome(hass.Hass):
 
     def initialize(self):
-        self.listen_state(self.chrome_changed,'media_player.chromecastultra3804')
+        self.listen_state(self.chrome_changed,'media_player.chrome_family')
 
     def chrome_changed(self, entity, attribute, old, new, kwargs):
         if new != 'off' and new != 'unavailable' and old == 'off':

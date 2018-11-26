@@ -60,7 +60,7 @@ StatusList = [ {'label':'Out Temp',     'key':'sensor.outdoor_temp',       'conv
                {'label':'Wind Dir',     'key':'sensor.wind',               'conv':disp_winddir,   'box':None },
                {'label':'Wind Avg',     'key':'sensor.wind_avg',           'conv':disp_speed,     'box':None },
                {'label':'Wind Gust',    'key':'sensor.wind_gust',          'conv':disp_speed,     'box':None },
-               {'label':'Rain Rate',    'key':'sensor.rain_rate',          'conv':disp_rain,      'box':None },
+               {'label':'Rain Hour',    'key':'sensor.rain_hour',          'conv':disp_rain,      'box':None },
                {'label':'Rain Today',   'key':'sensor.rain_day',           'conv':disp_rain,      'box':None },
                {'label':'Barometer',    'key':'sensor.indoor_pressure',    'conv':disp_pressure,  'box':None },
                {'label':'House Temp',   'key':'sensor.house_temp',         'conv':disp_temp,      'box':None },
@@ -277,7 +277,7 @@ class StatusWindow(QWidget):
 
     def stateUpdate (self, key, value ):
         for sen in StatusList:
-            if sen['key'] == key:
+            if sen['key'] == key and value != 'unknown':
                 sen['conv'](value,sen['box'])
 
         self.dateBox.setText(datetime.datetime.now().strftime("%m/%d/%y"))

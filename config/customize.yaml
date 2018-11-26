@@ -1,9 +1,9 @@
 
-#media_player.chromefamily:
-#  hidden: true 
+media_player.master:
+  hidden: true 
 
-#media_player.chromecastultra3804:
-#  hidden: true 
+media_player.family_room:
+  hidden: true 
 
 media_player.googlehome6995:
   hidden: true 
@@ -30,5 +30,287 @@ switch.chicken_light:
   hidden: true
 
 switch.camper_heat:
+  hidden: true
+
+switch.bedr_light:
+  hidden: true
+
+switch.bedta_light:
+  hidden: true
+
+switch.xmas_lights:
+  hidden: true
+
+switch.entry_light:
+  hidden: true
+
+switch.family_tree:
+  hidden: true
+
+switch.gate_light:
+  hidden: true
+
+switch.master_light:
+  hidden: true
+
+switch.office_light:
+  hidden: true
+
+switch.patio_lights1:
+  hidden: true
+
+switch.pool_light:
+  hidden: true
+
+switch.yard_lights1:
+  hidden: true
+
+switch.yard_lights2:
+  hidden: true
+
+binary_sensor.leviton_dzpa11lw_plugin_appliance_module_sensor:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_access_control_6:
+  hidden: true
+
+sensor.aeotec_zw097_dry_contact_sensor_gen5_access_control:
+  hidden: true
+
+sensor.aeotec_zw097_dry_contact_sensor_gen5_alarm_level:
+  hidden: true
+
+sensor.aeotec_zw097_dry_contact_sensor_gen5_alarm_type:
+  hidden: true
+
+sensor.aeotec_zw097_dry_contact_sensor_gen5_sourcenodeid:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_access_control:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_access_control_4:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_access_control_5:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_access_control_6:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_level:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_level_11:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_level_2:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_level_3:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_level_4:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_level_5:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_level_6:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_level_7:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_level_8:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_level_9:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_type:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_type_11:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_type_2:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_type_3:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_type_4:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_type_5:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_type_6:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_type_7:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_type_8:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_alarm_type_9:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_burglar:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_burglar_10:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_burglar_11:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_burglar_13:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_burglar_2:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_burglar_3:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_burglar_4:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_burglar_5:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_burglar_6:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_burglar_9:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_power_management:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_power_management_4:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_power_management_5:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_power_management_6:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_sourcenodeid:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_sourcenodeid_10:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_sourcenodeid_11:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_sourcenodeid_13:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_sourcenodeid_2:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_sourcenodeid_3:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_sourcenodeid_4:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_sourcenodeid_5:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_sourcenodeid_6:
+  hidden: true
+
+sensor.ecolink_doorwindow_sensor_sourcenodeid_9:
+  hidden: true
+
+sensor.ecolink_motion_sensor_alarm_level:
+  hidden: true
+
+sensor.ecolink_motion_sensor_alarm_level_2:
+  hidden: true
+
+sensor.ecolink_motion_sensor_alarm_level_3:
+  hidden: true
+
+sensor.ecolink_motion_sensor_alarm_level_4:
+  hidden: true
+
+sensor.ecolink_motion_sensor_alarm_level_5:
+  hidden: true
+
+sensor.ecolink_motion_sensor_alarm_level_6:
+  hidden: true
+
+sensor.ecolink_motion_sensor_alarm_level_7:
+  hidden: true
+
+sensor.ecolink_motion_sensor_alarm_type:
+  hidden: true
+
+sensor.ecolink_motion_sensor_alarm_type_2:
+  hidden: true
+
+sensor.ecolink_motion_sensor_alarm_type_3:
+  hidden: true
+
+sensor.ecolink_motion_sensor_alarm_type_4:
+  hidden: true
+
+sensor.ecolink_motion_sensor_alarm_type_5:
+  hidden: true
+
+sensor.ecolink_motion_sensor_alarm_type_6:
+  hidden: true
+
+sensor.ecolink_motion_sensor_alarm_type_7:
+  hidden: true
+
+sensor.ecolink_motion_sensor_burglar:
+  hidden: true
+
+sensor.ecolink_motion_sensor_burglar_2:
+  hidden: true
+
+sensor.ecolink_motion_sensor_burglar_3:
+  hidden: true
+
+sensor.ecolink_motion_sensor_burglar_4:
+  hidden: true
+
+sensor.ecolink_motion_sensor_burglar_5:
+  hidden: true
+
+sensor.ecolink_motion_sensor_burglar_6:
+  hidden: true
+
+sensor.ecolink_motion_sensor_burglar_7:
+  hidden: true
+
+sensor.ecolink_motion_sensor_sourcenodeid:
+  hidden: true
+
+sensor.ecolink_motion_sensor_sourcenodeid_2:
+  hidden: true
+
+sensor.ecolink_motion_sensor_sourcenodeid_3:
+  hidden: true
+
+sensor.ecolink_motion_sensor_sourcenodeid_4:
+  hidden: true
+
+sensor.ecolink_motion_sensor_sourcenodeid_5:
+  hidden: true
+
+sensor.ecolink_motion_sensor_sourcenodeid_6:
+  hidden: true
+
+sensor.ecolink_motion_sensor_sourcenodeid_7:
   hidden: true
 
