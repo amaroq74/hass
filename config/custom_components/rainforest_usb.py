@@ -1,4 +1,9 @@
 
+from homeassistant.const import (ATTR_STATE, CONF_DEVICES, EVENT_HOMEASSISTANT_STOP)
+import homeassistant.helpers.config_validation as cv
+from homeassistant.helpers.entity import Entity
+from homeassistant.util import slugify
+
 import time 
 import serial
 import xml.etree.ElementTree as ET
@@ -6,6 +11,68 @@ import threading
 
 DEF_BAUD=115200
 DEF_TOUT=120
+
+DOMAIN="rainforest_usb"
+
+CONFIG_SCHEMA = vol.Schema({
+    DOMAIN: vol.Schema({
+        vol.Required(CONF_DEVICE): cv.string,
+        vol.Required(CONF_NAME):   cv.string,
+    }),
+}, extra=vol.ALLOW_EXTRA)
+
+
+async def async_setup(hass, config):
+    device = config[DOMAIN].get(CONF_DEVICE)
+    name   = config[DOMAIN].get(CONF_NAME)
+
+    hass.data[DOMAIN] = {}
+    hass.data[DOMAIN]['name']     = name
+    hass.data[DOMAIN]['channels'] = {}
+    hass.data[DOMAIN]['dev']      = Rainforest(device,rx_data)
+
+    def rx_data(channel, value):
+        if channel in hass.data[DOMAIN]['channels']:
+            hass.data[DOMAIN]['channels']['channel']._update(value)
+
+    hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, hass.data[DOMAIN]['dev'].stop)
+
+def RainforestSensor(Entity):
+    def __init__(channel, entity_id, name):
+        if 'channel' == 'rate':
+            self._units = 'KW'
+        elif 'channel' == 'total':
+            self._units = 'KWH'
+
+        self._icon  = 'mdi:flash'
+        self._value = 0.0
+        self._namee = name
+        self._id    = entity_id
+
+    @property
+    def unique_id(self):
+        return self._id
+
+    @property
+    def icon(self):
+        self._icon
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def state(self):
+        return self._value
+
+    @property
+    def unit_of_measurement(self):
+        return self._units
+
+    def _update(self,value):
+        self._value = value
+        self.async_update_ha_state()
+
 
 #########################################
 #          PULL FROM CURRENT COST       #
@@ -102,7 +169,7 @@ class Rainforest(threading.Thread):
                     div   = float(int(tree.findtext("Divisor"),0))
 
                     if div > 0 : value = (value * mult) / div
-                    self._cb('current', value, 'KW')
+                    self._cb('rate', value)
                     block = ''
 
                 elif line.find("</CurrentSummationDelivered>") == 0 :
@@ -112,7 +179,7 @@ class Rainforest(threading.Thread):
                     div   = float(int(tree.findtext("Divisor"),0))
 
                     if div > 0 : value = (value * mult) / div
-                    self._cb('total', value, 'KW_Hours')
+                    self._cb('total', value)
                     block = ''
 
                 elif line.find("</ConnectionStatus>") == 0 or line.find("</TimeCluster>") == 0 :
@@ -122,16 +189,4 @@ class Rainforest(threading.Thread):
                 print("Got exception: {}".format(msg))
                 block = ''
                 ser.flushInput()
-
-
-# Test program
-if __name__ == "__main__":
-
-    def dump(key, value, units):
-        print("{} = {} {}".format(key,value,units))
-
-    rf = Rainforest('/dev/serial/by-id/usb-Rainforest_RFA-Z106-RA-PC_RAVEn_v2.3.21-if00-port0',dump)
-
-    while True:
-        time.sleep(1)
 

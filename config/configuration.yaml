@@ -63,6 +63,10 @@ sun:
 # UPS
 apcupsd:
 
+#rainforest_usb:
+#   device: /dev/serial/by-id/usb-Rainforest_RFA-Z106-RA-PC_RAVEn_v2.3.21-if00-port0
+#   name: Smartmeter
+
 # Sensors
 sensor:
   - platform: yr
@@ -76,6 +80,10 @@ sensor:
        - linev
        - loadpct
        - timeleft
+#  - platform: rainforest_usb
+#    resources:
+#        - Rate
+#        - Total
   - platform: smarthomeSensor
     scan_interval: 10
 #  - platform: rfxtrx

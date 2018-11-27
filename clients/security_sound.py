@@ -62,11 +62,14 @@ def testDayCare():
             if states['switch.dcare_arm'] == 'on':
     
                 count = 0
+                lst = []
                 for sen in DcSensors:
                     if states[sen] == 'on':
                         count += 1
+                        lst.append(sen)
     
                 if count != 0:
+                    print("Playing daycare alarm: {}".format(lst))
                     cmd = "aplay " + soundDir + "/" + DcSound
                     #cmd = "aplay -D hw:0 " + soundDir + "/" + DcSound
                     os.system(cmd)
@@ -79,11 +82,7 @@ def soundCb(e):
     global DcSensors
 
     key = e['entity_id']
-
-    if 'climate' in key: 
-        val = e['attributes']['temperature']
-    else:
-        val = e['state']
+    val = e['state']
 
     if key in last:
         ldiff = time.time() - last[key]
@@ -102,8 +101,8 @@ def soundCb(e):
             #cmd = "aplay -D hw:0 " + soundDir + "/" + sounds[key]
             os.system(cmd)
 
-        elif states['switch.dcare_arm'] == 'on' and sensor in DcSensors:
-            print("Playing daycare alarm")
+        elif states['switch.dcare_arm'] == 'on' and key in DcSensors:
+            print("Playing daycare alarm for {}".format(key))
             cmd = "aplay " + soundDir + "/" + DcSound
             #cmd = "aplay -D hw:0 " + soundDir + "/" + DcSound
             os.system(cmd)
