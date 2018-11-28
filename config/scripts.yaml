@@ -104,11 +104,3 @@ rear_patio_sprinklers:
     data:
       entity_id: switch.rear_patio_1
     service: switch.turn_off
-play_doorbell:
-  alias: Play Doorbell
-  sequence:
-    - service: media_player.play_media
-      data:
-        entity_id: media_player.living_room
-        media_content_id: http://aliska.amaroq.net:8123/local/sounds/doorbell.wav
-        media_content_type: audio/wav

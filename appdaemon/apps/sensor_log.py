@@ -3,14 +3,12 @@
 # Add relative path
 import sys
 sys.path.append('/amaroq/hass/pylib')
-
 import hass_mysql
 
 import appdaemon.plugins.hass.hassapi as hass
 from homeassistant.const import TEMP_FAHRENHEIT
 from datetime import datetime, timedelta
 import weather_convert
-import time
 
 LogSensors = {  'sensor.rain_count'          : {'type':'count',         'device':'Rain',           'units':'mm',       'conv':weather_convert.rainInToMm},
                 'sensor.rain_day'            : {'type':'count_day',     'device':'Rain',           'units':'mm',       'conv':weather_convert.rainInToMm},

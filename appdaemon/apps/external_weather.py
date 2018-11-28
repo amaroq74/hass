@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
 
-# Add relative path
-import sys
-sys.path.append('/amaroq/hass/pylib')
-
 import appdaemon.plugins.hass.hassapi as hass
 import time
 import urllib

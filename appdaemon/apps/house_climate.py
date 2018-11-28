@@ -3,36 +3,30 @@
 # Add relative path
 import sys
 sys.path.append('/amaroq/hass/pylib')
-
 import hass_mysql
 
 import appdaemon.plugins.hass.hassapi as hass
 from homeassistant.const import TEMP_FAHRENHEIT
-import time
 import weather_convert
 from datetime import datetime, timedelta
 
-weights = { "sensor.bedr_temp"   : 1.0,
-            "sensor.master_temp" : 1.2, 
-            "sensor.indoor_temp" : 0.8, 
-            "sensor.bedta_temp"  : 1.0 }
+TempWeights = { "sensor.bedr_temp"   : 1.0,
+                "sensor.master_temp" : 1.2,
+                "sensor.indoor_temp" : 0.8,
+                "sensor.bedta_temp"  : 1.0 }
 
-DewPtTemp  = 'sensor.outdoor_temp'
-DewPtHumid = 'sensor.outdoor_humidity'
-RainCount  = 'sensor.rain_count'
-
-class HouseWeather(hass.Hass):
+class HouseClimate(hass.Hass):
 
     def initialize(self):
         self._db = hass_mysql.Mysql("hass-app")
 
         # House temp calculation
-        for k,v in weights.items():
+        for k,v in TempWeights.items():
             self.listen_state(self.comp_temp, k)
 
         # Dew point calculation
-        self.listen_state(self.comp_dewpt, DewPtTemp)
-        self.listen_state(self.comp_dewpt, DewPtHumid)
+        self.listen_state(self.comp_dewpt,'sensor.outdoor_temp')
+        self.listen_state(self.comp_dewpt,'sensor.outdoor_humid')
 
         # Rain calculation
         self.run_every(self.rain_calc, datetime.now() + timedelta(seconds=10), 60)
@@ -43,11 +37,11 @@ class HouseWeather(hass.Hass):
         tot = 0.0
         div = 0.0
 
-        for k,v in weights.items():
+        for k,v in TempWeights.items():
             val = self.get_state(k)
             if val is not None:
                 tot += (float(val) * v)
-                div += weights[k]
+                div += TempWeights[k]
 
         if div > 0.0:
             newF = tot / div
@@ -63,8 +57,8 @@ class HouseWeather(hass.Hass):
     def comp_dewpt(self, entity, attribute, old, new, kwargs):
         self.log("Got {} {} {} {}".format(entity,attribute,old,new))
 
-        temp  = self.get_state(DewPtTemp)
-        humid = self.get_state(DewPtHumid)
+        temp  = self.get_state('sensor.outdoor_temp')
+        humid = self.get_state('sensor.outdoor_humid')
 
         if temp is not None and humid is not None:
             dewPt = weather_convert.compDewPtFar(float(temp), float(humid))
@@ -76,7 +70,7 @@ class HouseWeather(hass.Hass):
 
     # rain calc
     def rain_calc(self, kwargs):
-        count_now  = self.get_state(RainCount)
+        count_now  = self.get_state('sensor.rain_count')
         count_hour = self._db.getSensorHour('rain','count')
         count_day  = self._db.getSensorDay('rain','count')
 
@@ -97,15 +91,4 @@ class HouseWeather(hass.Hass):
             self.set_state("sensor.rain_day", 
                            state=val_day,
                            attributes={'friendly_name' : 'Rain Day', 'unit_of_measurement' : 'in', 'device_class' : ''})
-
-
-class HouseChrome(hass.Hass):
-
-    def initialize(self):
-        self.listen_state(self.chrome_changed,'media_player.chrome_family')
-
-    def chrome_changed(self, entity, attribute, old, new, kwargs):
-        if new != 'off' and new != 'unavailable' and old == 'off':
-            self.log("Setting Harmony state due to chrome state new {} old {} harmony = {}".format(new,old,self.get_state('remote.harmony_hub')))
-            self.turn_on("remote.harmony_hub", activity = "Watch Chrome tv" )
 

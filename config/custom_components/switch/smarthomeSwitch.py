@@ -17,15 +17,6 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
 
     async_add_entities(SmarthomeSwitch(i) for i in nl)
 
-    lst = db.getVariableList()
-    nl = []
-    for l in lst:
-        if l['group'] == 'Security':
-            nl.append(l)
-
-    async_add_entities(SmarthomeVar(i) for i in nl)
-
-
 class SmarthomeSwitch(SwitchDevice):
 
     def __init__(self, info):
@@ -78,41 +69,4 @@ class SmarthomeSwitch(SwitchDevice):
         info = db.getDeviceInfo(self._info['name'])
         self._state = info['status'] != 0
 
-
-class SmarthomeVar(SwitchDevice):
-
-    def __init__(self, info):
-        self._info  = info
-        self._name  = info['name'].replace('_',' ').title()
-
-        self._state = (db.getVariable(self._info['group'],self._info['name']) != 0)
-
-        self._on_icon  = None
-        self._off_icon = None
-
-    @property
-    def name(self):
-        return self._name
-
-    async def async_turn_on(self, speed: str = None, **kwargs):
-        self._state = True
-        db.setVariable(self._info['group'],self._info['name'],1)
-
-    async def async_turn_off(self, **kwargs):
-        self._state = False
-        db.setVariable(self._info['group'],self._info['name'],0)
-
-    @property
-    def is_on(self):
-        return self._state
-
-    @property
-    def icon(self):
-        if self._state:
-            return self._on_icon
-        else:
-            return self._off_icon
-
-    async def async_update(self):
-        self._state = (db.getVariable(self._info['group'],self._info['name']) != 0)
 

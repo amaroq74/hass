@@ -25,6 +25,10 @@ config:
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 http:
    api_password: !secret api_password
+   base_url: aliska.amaroq.net:8123
+   #   ssl_certificate: /amaroq/hass/config/ssl/ServerCertificate.cer
+   #   ssl_key: /amaroq/hass/config/ssl/amaroq_private.key
+
 #
 #   base_url: example.duckdns.org:8123
 
@@ -67,6 +71,21 @@ apcupsd:
 #   device: /dev/serial/by-id/usb-Rainforest_RFA-Z106-RA-PC_RAVEn_v2.3.21-if00-port0
 #   name: Smartmeter
 
+# Boolean inputs
+input_boolean:
+  dcare_bell:
+    name: Daycare Bell
+  gate_bell:
+    name: Gate Bell
+  night_alarm:
+    name: Night Alarm
+  house_alarm:
+    name: House Alarm
+  door_alarm:
+    name: Door Alarm
+  auto_light:
+    name: Auto Light
+
 # Sensors
 sensor:
   - platform: yr
@@ -103,6 +122,8 @@ cloud:
             - switch.garage_door
             - switch.pool_main
             - switch.pool_sweep
+            - input_boolean.dcare_bell
+            - input_boolean.gate_bell
 
 #zoneminder:
 #  host: kapugen.maroq.net

@@ -1,15 +1,15 @@
-house_weather:
-   module: house
-   class: HouseWeather
-house_chrome:
-   module: house
-   class: HouseChrome
+house_climate:
+   module: house_climate
+   class: HouseClimate
+house_entertainment:
+   module: house_entertainment
+   class: HouseEntertainment
+house_security:
+   module: house_security
+   class: HouseSecurity
 external_weather:
-   module: weather
+   module: external_weather
    class: WeatherPost
 sensor_log:
    module: sensor_log
    class: SensorLog
-   #power_post:
-   #module: power
-   #class: PowerPost

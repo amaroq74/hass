@@ -214,9 +214,9 @@
       temperature: 65
     service: climate.set_temperature
 - id: dcare_arm
-  alias: Day Care Arm
+  alias: Day Care Bell Arm
   trigger:
-  - at: 08:00:00
+  - at: '08:00:00'
     platform: time
   condition:
     condition: time
@@ -228,10 +228,10 @@
     - fri
   action:
   - data:
-      entity_id: switch.dcare_arm
-    service: switch.turn_on
+      entity_id: input_boolean.dcare_bell
+    service: input_boolean.turn_on
 - id: dcare_disarm
-  alias: Day Care Disarm
+  alias: Day Care Bell Disarm
   trigger:
   - at: '17:30:00'
     platform: time
@@ -245,8 +245,8 @@
     - fri
   action:
   - data:
-      entity_id: switch.dcare_arm
-    service: switch.turn_off
+      entity_id: input_boolean.dcare_bell
+    service: input_boolean.turn_off
 - id: night_arm
   alias: Night Alarm Arm
   trigger:
@@ -254,8 +254,8 @@
     platform: time
   action:
   - data:
-      entity_id: switch.night_arm
-    service: switch.turn_on
+      entity_id: input_boolean.night_alarm
+    service: input_boolean.turn_on
 - id: night_disarm
   alias: Night Alarm Disarm
   trigger:
@@ -263,8 +263,8 @@
     platform: time
   action:
   - data:
-      entity_id: switch.night_arm
-    service: switch.turn_off
+      entity_id: input_boolean.night_alarm
+    service: input_boolean.turn_off
 - id: auto_light_arm
   alias: Auto Light Arm
   trigger:
@@ -273,8 +273,8 @@
     platform: sun
   action:
   - data:
-      entity_id: switch.auto_light
-    service: switch.turn_on
+      entity_id: input_boolean.auto_light
+    service: input_boolean.turn_on
 - id: auto_light_disarm
   alias: Auto Light Disarm
   trigger:
@@ -283,5 +283,27 @@
     platform: sun
   action:
   - data:
-      entity_id: switch.auto_light
-    service: switch.turn_off
+      entity_id: input_boolean.auto_light
+    service: input_boolean.turn_off
+- id: kitch_speaker_up
+  alias: Kitchen Speaker Up
+  trigger:
+  - at: '13:30:00'
+    platform: time
+  action:
+    - data:
+        entity_id: media_player.kitchen_speaker
+        volume_level: 0.05
+      service: media_player.volume_set
+- id: kitchen_speaker_down
+  alias: Kitchen Speaker Down
+  trigger:
+  - at: '08:00:00'
+    platform: time
+  - at: '16:00:00'
+    platform: time
+  action:
+    - data:
+        entity_id: media_player.kitchen_speaker
+        volume_level: 0.40
+      service: media_player.volume_set
