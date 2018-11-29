@@ -1,4 +1,4 @@
-from rfxcom.message import Message
+from hass_rfxcom.message import Message
 
 class X10Parser(object):
     bytes_to_groups = 'mnopcdabefghklij'

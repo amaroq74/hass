@@ -8,7 +8,7 @@ class Message(object):
         >>> str(Message('a', b=1))
         'topic: a, b: 1'
         """
-        return 'topic: %s, %s' % (self.topic, ', '.join('%s: %s' % m for m in self.values.iteritems()))
+        return 'topic: %s, %s' % (self.topic, ', '.join('%s: %s' % m for m in self.values.items()))
 
     def __repr__(self):
         """

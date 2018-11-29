@@ -9,7 +9,7 @@ import logging
 import sys,os
 sys.path.append(os.path.dirname(__file__) + "/..")
 
-import rfxcom.parsers
+import hass_rfxcom.parsers
 
 class RFXError(Exception):
     """Exception indicating communication with the device has gone screwy."""
@@ -34,10 +34,11 @@ class Pyserial(object):
         self.ser.flushInput()
 
     def write(self, data):
-        self.ser.write(data)
+        self.ser.write(data.encode('utf-8'))
 
     def read(self, bytes):
-        return self.ser.read(bytes)
+        ret = self.ser.read(bytes)
+        return ret
 
 class RFXCom(object):
     """Main class
@@ -58,11 +59,10 @@ class RFXCom(object):
     topic: homeeasy, device: group, source: 31F8177G, command: off, address: 31f8177
     """
 
-    parsers = [ getattr(rfxcom.parsers, x)() for x in rfxcom.parsers.__all__ ]
+    parsers = [ getattr(hass_rfxcom.parsers, x)() for x in hass_rfxcom.parsers.__all__ ]
 
-    def __init__(self, on_message, log=True, dedup=2.5, device='/dev/serial/by-id/usb-FTDI_FT232R_USB_UART_*-if00-port0', serial_type=Pyserial):
+    def __init__(self, on_message, dedup=2.5, device='/dev/serial/by-id/usb-FTDI_FT232R_USB_UART_*-if00-port0', serial_type=Pyserial):
         self.on_message = on_message
-        self.log = log
         self.dedup = dedup
         self.device = device
         self.serial_type = serial_type
@@ -78,8 +78,6 @@ class RFXCom(object):
     def setup(self):
         self.logger.info('Connecting...')
         self._connect()
-        if self.log:
-            self.fin = LoggingRFXSerial(self.fin)
 
         retries = 5
         while retries > 0:
@@ -138,7 +136,7 @@ class RFXCom(object):
             return
 
         length = ord(b) # number of bits to follow
-        bytes = ((length & 0x7F) + 7) / 8
+        bytes = int(((length & 0x7F) + 7) / 8)
         
         self.fin.timeout = .030 # 30ms
         data = self.fin.read(bytes)
@@ -189,72 +187,3 @@ class RFXCom(object):
         self.logger.warn('Unhandled data: [%s]' % (' '.join('%02x' % d for d in packet)))
         return None
 
-class FakeRFXSerial(object):
-    packets = [(32, '649b08f7'), # x11 a11 on
-               (32, '609f20df'), # x11 a1 off
-               (34, 'c7e05de000'), # homeeasy 31f8177 group off
-               (12, '1230'), # invalid
-               ]
-
-    def __init__(self, *args, **kwargs):
-        self.buffer = ''
-        self.packets = list(self.packets)
-
-    def read(self, size=1):
-        if not self.buffer:
-            if not self.packets:
-                return # stop
-            # data packets prefixed with length
-            p = self.packets.pop(0)
-            packet = struct.pack('B', p[0]) + p[1].decode('hex')
-            self.buffer += packet
-
-        ret = self.buffer[0:size]
-        self.buffer = self.buffer[size:]
-        return ret
-
-    def _respond(self, v):
-        self.buffer += v
-
-    def write(self, w):
-        if w == '\xf0\x20':
-            self._respond('\x4d\x18\x53\x30')
-        elif w == '\xf0\x2a':
-            self._respond('\x2c')
-        elif w == '\xf0\x2c':
-            self._respond('\x2c')
-        else:
-            raise ValueError('command not understood: %r' % w)
-
-    def flush(self):
-        pass
-
-class LoggingRFXSerial(object):
-    def __init__(self, base):
-        self._base = base
-        self._logger = logging.getLogger('wire')
-
-    def read(self, size=1):
-        ret = self._base.read(size)
-        if ret:
-            self._logger.debug('<-- [%s]' % (' '.join('%02x' % ord(d) for d in ret)))
-        return ret
-
-    def write(self, w):
-        self._logger.debug('--> [%s]' % (' '.join('%02x' % ord(d) for d in w)))
-        return self._base.write(w)
-
-    def flushInput(self):
-        return self._base.flushInput()
-
-    def __setattr__(self, k, v):
-        if k.startswith('_'):
-            super(LoggingRFXSerial, self).__setattr__(k, v)
-        else:
-            setattr(self.__dict__['_base'], k, v)
-
-    def __getattr__(self, k):
-        if k.startswith('_'):
-            return super(LoggingRFXSerial, self).__getattr__(k)
-        else:
-            return getattr(self.__dict__['_base'], k)

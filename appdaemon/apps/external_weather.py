@@ -7,15 +7,15 @@ import urllib.request
 from datetime import datetime, timedelta
 
 # Sensor List
-SensorList = { 'sensor.wind'             : 'windgustmph'  ,
-               'sensor.wind_avg'         : 'windspeedmph' ,
-               'sensor.wind'             : 'winddir'      ,
-               'sensor.outdoor_humidity' : 'humidity'     ,
-               'sensor.outdoor_temp'     : 'tempf'        ,
-               'sensor.indoor_pressure'  : 'baromin'      ,
-               'sensor.rain_day'         : 'dailyrainin'  ,
-               'sensor.rain_hour'        : 'rainin'       ,
-               'sensor.outdoor_dewpt'    : 'dewptf'       }
+SensorList = { 'sensor.wind_gust'           : 'windgustmph'  ,
+               'sensor.wind_averate'        : 'windspeedmph' ,
+               'sensor.wind_direction'      : 'winddir'      ,
+               'sensor.outdoor_humidity'    : 'humidity'     ,
+               'sensor.outdoor_temperature' : 'tempf'        ,
+               'sensor.indoor_pressure'     : 'baromin'      ,
+               'sensor.rain_day'            : 'dailyrainin'  ,
+               'sensor.rain_hour'           : 'rainin'       ,
+               'sensor.outdoor_dewpoint'    : 'dewptf'       }
 
 class WeatherPost(hass.Hass):
 

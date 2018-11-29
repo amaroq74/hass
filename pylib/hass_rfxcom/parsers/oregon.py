@@ -1,6 +1,8 @@
-from rfxcom.message import Message
-from rfxcom.parsers.util import hi_nibble, lo_nibble, nibble_sum, \
-    dec_byte
+from hass_rfxcom.message import Message
+from hass_rfxcom.parsers.util import hi_nibble, lo_nibble, nibble_sum, dec_byte
+
+def nochecksum(p):
+    return True
 
 def checksum1(p):
     c = hi_nibble(p[6]) + (lo_nibble(p[7])<<4)
@@ -25,7 +27,7 @@ def checksum6(p):
       
 def checksum7(p):
     return p[7] == ((nibble_sum(7, p) - 0xa) & 0xff)
-    
+
 def checksum8(p):
     c = hi_nibble(p[9]) + (lo_nibble(p[10])<<4)
     s = ( ( nibble_sum(9, p) - 0xa) & 0xff)
@@ -49,6 +51,27 @@ def simple_battery(p, message):
 def percentage_battery(p, message):
     message['battery'] = 100 - 10*lo_nibble(p[4])
 
+def barometer(p, message):
+    message['barometer'] = p[8] + 856.0
+    if (p[9] & 0xF0) == 0xc0:
+       message['trend'] = 'Normal'
+    elif (p[9] & 0xF0) == 0x60:
+       message['trend'] = 'Partly Cloudy'
+    elif (p[9] & 0xF0) == 0x20:
+       message['trend'] = 'Cloudy'
+    elif (p[9] & 0xF0) == 0x30:
+       message['trend'] = 'Wet'
+    else:
+       message['trend'] = 'Unknown'
+
+def uv_level(p, message):
+    message['UV_Level'] = ((p[5] & 0xF) * 10) + ((p[4] >> 4) & 0xF)
+
+def uvn800(part, message, p):
+    message['source'] = message['sensor'] = '%s.%02x' % (part, p[3])
+    uv_level(p, message)
+    simple_battery(p, message)
+
 def common_temp(part, message, p):
     message['source'] = message['sensor'] = '%s.%02x' % (part, p[3])
     temperature(p, message)
@@ -66,15 +89,23 @@ def alt_temphydro(part, message, p):
     humidity(p, message)
     percentage_battery(p, message)
 
+def alt_temphydrobaro(part, message, p):
+    message['source'] = message['sensor'] = '%s.%02x' % (part, p[3])
+    temperature(p, message)
+    humidity(p, message)
+    percentage_battery(p, message)
+    barometer(p,message)
+
 WIND_DIRECTIONS = [ "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NWN" ]
 def wtgr800_anemometer(part, message, p):
-    dirno = hi_nibble(p[4])
+    dirno = hi_nibble(p[4]) * 22.5
     speed = lo_nibble(p[7]) * 10 + hi_nibble(p[6]) + lo_nibble(p[6]) / 10.0
     avgspeed = hi_nibble(p[8]) * 10 + lo_nibble(p[8]) + hi_nibble(p[7]) / 10.0
-    message['source'] = message['sensor'] = part
+    message['source'] = message['sensor'] = '%s.%02x' % (part, p[3])
     message['dir'] = dirno
     message['speed'] = speed
     message['avgspeed'] = avgspeed
+    percentage_battery(p, message)
 
 def pcr800_rain(part, message, p):
     message['source'] = message['sensor'] = '%s.%02x' % (part, p[3])
@@ -91,14 +122,14 @@ def pcr800_rain(part, message, p):
     message['speed'] = rain
     message['total'] = train
     simple_battery(p, message)
-  
+
 class OregonParser(object):
     messages = {
-        (0xfa28, 80):
+        (0xfa28, 80): # Guest,outdoor,
         {
             'part': 'THGR810', 'topic': 'temp', 'checksum': checksum2, 'method': common_temphydro,
         },
-        (0xfab8, 80):
+        (0xfab8, 80): 
         {
             'part': 'WTGR800', 'topic': 'temp', 'checksum': checksum2, 'method': alt_temphydro,
         },
@@ -106,19 +137,19 @@ class OregonParser(object):
         {
             'part': 'WTGR800', 'topic': 'wind', 'checksum': checksum4, 'method': wtgr800_anemometer,
         },
-        #(0x1a89, 88):
-        #{
-        #    'part': 'WGR800', 'checksum': checksum4, 'method': wtgr800_anemometer,
-        #},
-        #(0xda78, 72):
-        #{
-        #    'part': 'UVN800', 'checksum': checksum7, 'method': uvn800,
-        #},
+        (0x1a89, 88): # RTH, 
+        {
+            'part': 'WGR800', 'topic': 'wind', 'checksum': checksum4, 'method': wtgr800_anemometer,
+        },
+        (0xda78, 72): # RTH
+        {
+            'part': 'UVN800', 'topic':'uv_level', 'checksum': checksum7, 'method': uvn800,
+        },
         #(0xea7c, 120):
         #{
         #    'part': 'UV138', 'checksum': checksum1, 'method': uv138,
         #},
-        (0xea4c, 80):
+        (0xea4c, 80): #*
         {
             'part': 'THWR288A', 'topic': 'temp', 'checksum': checksum1, 'method': common_temp,
         },
@@ -134,10 +165,10 @@ class OregonParser(object):
         #{
         #    'part': 'RTGR328N', 'checksum': checksum3, 'method': rtgr328n_datetime,
         #},
-        #(0x1a2d, 80):
-        #{
-        #    'part': 'THGR228N', 'checksum': checksum2, 'method': common_temphydro,
-        #},
+        (0x1a2d, 80): # RTH
+        {
+            'part': 'THGR228N', 'topic': 'temp', 'checksum': checksum2, 'method': common_temphydro,
+        },
         #(0x1a3d, 80):
         #{
         #    'part': 'THGR918', 'checksum': checksum2, 'method': common_temphydro,
@@ -146,10 +177,14 @@ class OregonParser(object):
         #{
         #    'part': 'BTHR918', 'checksum': checksum5, 'method': common_temphydrobaro,
         #},
-        #(0x5a6d, 96):
-        #{
-        #    'part': 'BTHR918N', 'checksum': checksum5, 'method': alt_temphydrobaro,
-        #},
+        (0x5a6d, 96): # RTH
+        {
+             'part': 'BTHR918N', 'topic':'temp', 'checksum': checksum5, 'method': alt_temphydrobaro,
+        },
+        (0xca48, 68): #* RTH
+        {
+             'part': 'THWR800', 'topic':'temp', 'checksum': checksum1, 'method': common_temp,
+        },
         #(0x3a0d, 80):
         #{
         #    'part': 'WGR918', 'checksum': checksum4, 'method': wgr918_anemometer,
@@ -162,7 +197,7 @@ class OregonParser(object):
         #{
         #    'part': 'RGR918', 'checksum': checksum6, 'method': common_rain,
         #},
-        #(0x0a4d, 80):
+        #(0x0a4d, 80): *
         #{
         #    'part': 'THR128', 'checksum': checksum2, 'method': common_temp,
         #},

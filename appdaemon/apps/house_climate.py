@@ -10,10 +10,10 @@ from homeassistant.const import TEMP_FAHRENHEIT
 import weather_convert
 from datetime import datetime, timedelta
 
-TempWeights = { "sensor.bedr_temp"   : 1.0,
-                "sensor.master_temp" : 1.2,
-                "sensor.indoor_temp" : 0.8,
-                "sensor.bedta_temp"  : 1.0 }
+TempWeights = { "sensor.bedr_temperature"   : 1.0,
+                "sensor.master_temperature" : 1.2,
+                "sensor.indoor_temperature" : 0.8,
+                "sensor.bedta_temperature"  : 1.0 }
 
 class HouseClimate(hass.Hass):
 
@@ -23,13 +23,20 @@ class HouseClimate(hass.Hass):
         # House temp calculation
         for k,v in TempWeights.items():
             self.listen_state(self.comp_temp, k)
+        self.comp_temp()
 
         # Dew point calculation
-        self.listen_state(self.comp_dewpt,'sensor.outdoor_temp')
+        self.listen_state(self.comp_dewpt,'sensor.outdoor_temperature')
         self.listen_state(self.comp_dewpt,'sensor.outdoor_humidity')
+        self.comp_dewpt()
 
         # Rain calculation
         self.run_every(self.rain_calc, datetime.now() + timedelta(seconds=10), 60)
+        self.rain_calc()
+
+        # Wind compass
+        self.listen_state(self.wind_comp,'sensor.wind_direction')
+        self.wind_comp()
 
     # Compute house temperature
     def comp_temp(self, *args, **kwargs):
@@ -38,7 +45,7 @@ class HouseClimate(hass.Hass):
 
         for k,v in TempWeights.items():
             val = self.get_state(k)
-            if val is not None:
+            if val is not None and val != 'unknown':
                 tot += (float(val) * v)
                 div += TempWeights[k]
             else:
@@ -50,16 +57,16 @@ class HouseClimate(hass.Hass):
             self._db.setSensor('House', 'temp', newC, 'c')
             self.log("New house temp = {}".format(newF))
 
-            self.set_state("sensor.house_temp", 
+            self.set_state("sensor.house_temperature", 
                            state=newF, 
-                           attributes={'friendly_name' : 'House Temp', 'unit_of_measurement' : TEMP_FAHRENHEIT, 'device_class' : 'temperature'})
+                           attributes={'friendly_name' : 'House Temperature', 'unit_of_measurement' : TEMP_FAHRENHEIT, 'device_class' : 'temperature'})
 
     # New dew point source received
     def comp_dewpt(self, *args, **kwargs):
         temp  = self.get_state('sensor.outdoor_temp')
         humid = self.get_state('sensor.outdoor_humidity')
 
-        if temp is not None and humid is not None:
+        if temp is not None and temp != 'unknown' and humid is not None and humid != 'unknown':
             dewPt = weather_convert.compDewPtFar(float(temp), float(humid))
             self.log("Comp dewpt temp = {} humid = {} dewPt = {}".format(temp,humid,dewPt))
 
@@ -73,14 +80,14 @@ class HouseClimate(hass.Hass):
 
     # rain calc
     def rain_calc(self, *args, **kwargs):
-        count_now  = self.get_state('sensor.rain_count')
+        count_now  = self.get_state('sensor.rain_total')
         count_hour = self._db.getSensorHour('rain','count')
         count_day  = self._db.getSensorDay('rain','count')
 
-        if count_now is None or count_hour is None or count_day is None:
+        if count_now == 'unknown' or count_now is None or count_hour is None or count_day is None:
             val_hour = 0.0
             val_day  = 0.0
-            self.log("Error: Unable to calculate rain now = {}, hour = {}, day = {}".format(now,count_hour,count_day))
+            self.log("Error: Unable to calculate rain now = {}, hour = {}, day = {}".format(count_now,count_hour,count_day))
         else:
             val_hour = float(count_now) - weather_convert.rainMmToIn(count_hour)
             val_day  = float(count_now) - weather_convert.rainMmToIn(count_day)
@@ -90,9 +97,20 @@ class HouseClimate(hass.Hass):
 
             self.set_state("sensor.rain_hour",
                            state=val_hour,
-                           attributes={'friendly_name' : 'Rain Hour', 'unit_of_measurement' : 'in', 'device_class' : ''})
+                           attributes={'friendly_name' : 'Rain Hour', 'unit_of_measurement' : 'IN', 'device_class' : ''})
 
             self.set_state("sensor.rain_day", 
                            state=val_day,
-                           attributes={'friendly_name' : 'Rain Day', 'unit_of_measurement' : 'in', 'device_class' : ''})
+                           attributes={'friendly_name' : 'Rain Day', 'unit_of_measurement' : 'IN', 'device_class' : ''})
+
+    # Set compass direction
+    def wind_comp(self, *args, **kwargs):
+        cur = self.get_state('sensor.wind_direction')
+
+        if cur is not None and cur != 'unknown':
+            new = weather_convert.windDegToCompass(cur)
+
+            self.set_state("sensor.wind_compass",
+                           state=new,
+                           attributes={'friendly_name' : 'Wind Compass', 'unit_of_measurement' : '', 'device_class' : ''})
 

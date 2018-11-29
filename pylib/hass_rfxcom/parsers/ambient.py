@@ -1,5 +1,5 @@
-from rfxcom.message import Message
-from rfxcom.parsers.util import *
+from hass_rfxcom.message import Message
+from hass_rfxcom.parsers.util import *
 
 # ######################################################
 # Ambient weather F007PF pool sensor
@@ -69,7 +69,7 @@ class AmbientParser(object):
         data['tempc'] = (data['temp'] -32.0) * (5.0/9.0)
         data['source'] = 'f007pf.%.2x.%.2x' % (data['tag'],data['chan'])
 
-        return Message('temp', source=data['source'], temp=data['tempc'])
+        return Message('temp', source=data['source'], sensor=data['source'], temp=data['tempc'])
 
 if __name__ == "__main__":
     import doctest

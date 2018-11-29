@@ -71,6 +71,9 @@ rainforest_usb:
    device: /dev/serial/by-id/usb-Rainforest_RFA-Z106-RA-PC_RAVEn_v2.3.21-if00-port0
    name: Smartmeter
 
+rfxcom_rx:
+   device: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A6003Q5Y-if00-port0 
+
 # Boolean inputs
 input_boolean:
   dcare_bell:
@@ -103,10 +106,93 @@ sensor:
     resources:
         - Rate
         - Total
+  - platform: rfxcom_rx
+    pressure_adjust: 6.0
+    sources:
+      thgr228n.c3:
+         topic: temp
+         name: BedTA
+         values:
+            - temp
+            - humidity
+            - battery
+      thwr288a.84:
+         topic: temp
+         name: Camper
+         values:
+            - temp
+            - battery
+      thgr228n.1f:
+         topic: temp
+         name: Garage
+         values:
+            - temp
+            - humidity
+            - battery
+      thgr810.cc:
+         topic: temp
+         name: BedR
+         values:
+            - temp
+            - humidity
+            - battery
+      bthr918n.1d:
+         topic: temp
+         name: Indoor
+         values:
+            - temp
+            - humidity
+            - battery
+            - barometer
+            - trend
+      thgr228n.75:
+         topic: temp
+         name: Master
+         values:
+            - temp
+            - humidity
+            - battery
+      thgr228n.94:
+         topic: temp
+         name: Shed
+         values:
+            - temp
+            - humidity
+            - battery
+      thgr810.02:
+         topic: temp
+         name: Outdoor
+         values:
+            - temp
+            - humidity
+            - battery
+      f007pf.06.08:
+         topic: temp
+         name: 'Pool'
+         values:
+            - temp
+      pcr800.1d:
+         topic: rain
+         name: Rain
+         values:
+            - speed
+            - total
+            - battery
+      wgr800.30:
+         topic: wind
+         name: Wind
+         values:
+            - speed
+            - dir
+            - avgspeed
+      thn132n.63:
+         topic: temp
+         name: Chickens
+         values:
+            - temp
+            - battery
   - platform: smarthomeSensor
     scan_interval: 10
-#  - platform: rfxtrx
-#    automatic_add: true
 
 # Cloud
 cloud:
@@ -268,31 +354,31 @@ climate:
    - platform: generic_thermostat
      name: House
      heater: switch.house_heat
-     target_sensor: sensor.house_temp
+     target_sensor: sensor.house_temperature
      away_temp: 60
      ac_mode: False
    - platform: generic_thermostat
      name: Chicken Coop
      heater: switch.chicken_heat
-     target_sensor: sensor.chickens_temp
+     target_sensor: sensor.chickens_temperature
      min_temp: 32
      ac_mode: False
    - platform: generic_thermostat
      name: Garage
      heater: switch.garage_heat
-     target_sensor: sensor.garage_temp
+     target_sensor: sensor.garage_temperature
      min_temp: 32
      ac_mode: False
    - platform: generic_thermostat
      name: Camper
      heater: switch.camper_heat
-     target_sensor: sensor.camper_temp
+     target_sensor: sensor.camper_temperature
      min_temp: 32
      ac_mode: False
    - platform: generic_thermostat
      name: Pool
      heater: switch.pool_heat
-     target_sensor: sensor.pool_temp
+     target_sensor: sensor.pool_temperature
      hot_tolerance: 1.0
      min_temp: 32
      max_temp: 95

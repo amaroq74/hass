@@ -1,4 +1,4 @@
-from rfxcom.message import Message
+from hass_rfxcom.message import Message
 
 class HomeEasyParser(object):
     @staticmethod

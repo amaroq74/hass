@@ -1,5 +1,5 @@
-from rfxcom.message import Message
-from rfxcom.parsers.util import *
+from hass_rfxcom.message import Message
+from hass_rfxcom.parsers.util import *
 
 class OwlParser(object):
     bytes_to_groups = 'mnopcdabefghklij'
