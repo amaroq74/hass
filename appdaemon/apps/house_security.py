@@ -4,8 +4,8 @@ import appdaemon.plugins.hass.hassapi as hass
 import time
 from datetime import datetime, timedelta
 
-BellSensors = [ 'binary_sensor.car_gate', 'binary_sensor.ped_gate' ]
-GateSensors = [ 'binary_sensor.gate_bell', 'binary_sensor.door_bell' ]
+GateSensors = [ 'binary_sensor.car_gate', 'binary_sensor.ped_gate' ]
+BellSensors = [ 'binary_sensor.gate_bell', 'binary_sensor.door_bell' ]
 
 DcSensors   = [ 'binary_sensor.car_gate', 'binary_sensor.ped_gate', 'binary_sensor.garage_door', 
                 'binary_sensor.pbath_door', 'binary_sensor.kitchen_door', 'binary_sensor.office_door',
@@ -34,7 +34,7 @@ class HouseSecurity(hass.Hass):
             self.listen_state(self.sec_sound,k)
 
     # Day care alarm, 5 second intervals
-    def day_care(self, kwargs):
+    def day_care(self, *args, **kwargs):
         if self.get_state('input_boolean.dcare_bell') == 'on':
             count = 0
             lst = []
@@ -51,7 +51,7 @@ class HouseSecurity(hass.Hass):
                                   media_content_type='music')
 
     # Security Sounds
-    def sec_sound(self, entity, attribute, old, new, kwargs):
+    def sec_sound(self, entity, attribute, old, new, *args, **kwargs):
         ldiff = time.time() - self._lastSound[entity]
 
         if ldiff > 30 and new != old and new == 'on':

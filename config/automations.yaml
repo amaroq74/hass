@@ -64,7 +64,7 @@
 - id: speak_off
   alias: Speakers Off
   trigger:
-  - at: '23:00:00'
+  - at: '23:55:00'
     platform: time
   action:
   - data:
@@ -285,8 +285,8 @@
   - data:
       entity_id: input_boolean.auto_light
     service: input_boolean.turn_off
-- id: kitch_speaker_up
-  alias: Kitchen Speaker Up
+- id: kitch_speaker_down
+  alias: Kitchen Speaker Down
   trigger:
   - at: '13:30:00'
     platform: time
@@ -295,8 +295,8 @@
         entity_id: media_player.kitchen_speaker
         volume_level: 0.05
       service: media_player.volume_set
-- id: kitchen_speaker_down
-  alias: Kitchen Speaker Down
+- id: kitchen_speaker_up
+  alias: Kitchen Speaker Up
   trigger:
   - at: '08:00:00'
     platform: time

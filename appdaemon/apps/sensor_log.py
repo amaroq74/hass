@@ -53,7 +53,7 @@ class SensorLog(hass.Hass):
 
         self.run_every(self.sensor_all, datetime.now() + timedelta(seconds=60), 60*5)
 
-    def sensor_rx(self, entity, attribute, old, new, kwargs):
+    def sensor_rx(self, entity, attribute, old, new, *args, **kwargs):
         self.log("Got new value for {} = {}".format(entity,new))
         ent = LogSensors[entity]
 
@@ -64,7 +64,7 @@ class SensorLog(hass.Hass):
 
         self._db.setSensor(ent['device'], ent['type'], val, ent['units'])
 
-    def sensor_all(self, kwargs):
+    def sensor_all(self, *args, **kwargs):
         self.log("Logging all sensors")
         for k,ent in LogSensors.items():
             new = self.get_state(k)

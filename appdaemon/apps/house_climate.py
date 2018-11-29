@@ -26,14 +26,13 @@ class HouseClimate(hass.Hass):
 
         # Dew point calculation
         self.listen_state(self.comp_dewpt,'sensor.outdoor_temp')
-        self.listen_state(self.comp_dewpt,'sensor.outdoor_humid')
+        self.listen_state(self.comp_dewpt,'sensor.outdoor_humidity')
 
         # Rain calculation
         self.run_every(self.rain_calc, datetime.now() + timedelta(seconds=10), 60)
 
     # Compute house temperature
-    def comp_temp(self, entity, attribute, old, new, kwargs):
-        self.log("Got {} {} {} {}".format(entity,attribute,old,new))
+    def comp_temp(self, *args, **kwargs):
         tot = 0.0
         div = 0.0
 
@@ -42,6 +41,8 @@ class HouseClimate(hass.Hass):
             if val is not None:
                 tot += (float(val) * v)
                 div += TempWeights[k]
+            else:
+                self.log("Error: Missing data from = {}".format(k))
 
         if div > 0.0:
             newF = tot / div
@@ -54,11 +55,9 @@ class HouseClimate(hass.Hass):
                            attributes={'friendly_name' : 'House Temp', 'unit_of_measurement' : TEMP_FAHRENHEIT, 'device_class' : 'temperature'})
 
     # New dew point source received
-    def comp_dewpt(self, entity, attribute, old, new, kwargs):
-        self.log("Got {} {} {} {}".format(entity,attribute,old,new))
-
+    def comp_dewpt(self, *args, **kwargs):
         temp  = self.get_state('sensor.outdoor_temp')
-        humid = self.get_state('sensor.outdoor_humid')
+        humid = self.get_state('sensor.outdoor_humidity')
 
         if temp is not None and humid is not None:
             dewPt = weather_convert.compDewPtFar(float(temp), float(humid))
@@ -68,8 +67,12 @@ class HouseClimate(hass.Hass):
                            state=dewPt,
                            attributes={'friendly_name' : 'Outdoor Dew Point', 'unit_of_measurement' : TEMP_FAHRENHEIT, 'device_class' : 'temperature'})
 
+
+        else:
+            self.log("Error: Unable to calculate dewPt Temp = {}, Humid = {}".format(temp,humid))
+
     # rain calc
-    def rain_calc(self, kwargs):
+    def rain_calc(self, *args, **kwargs):
         count_now  = self.get_state('sensor.rain_count')
         count_hour = self._db.getSensorHour('rain','count')
         count_day  = self._db.getSensorDay('rain','count')
@@ -77,6 +80,7 @@ class HouseClimate(hass.Hass):
         if count_now is None or count_hour is None or count_day is None:
             val_hour = 0.0
             val_day  = 0.0
+            self.log("Error: Unable to calculate rain now = {}, hour = {}, day = {}".format(now,count_hour,count_day))
         else:
             val_hour = float(count_now) - weather_convert.rainMmToIn(count_hour)
             val_day  = float(count_now) - weather_convert.rainMmToIn(count_day)

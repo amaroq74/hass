@@ -22,7 +22,7 @@ class WeatherPost(hass.Hass):
     def initialize(self):
         self.run_every(self.post_weather, datetime.now() + timedelta(seconds=10), 5)
 
-    def post_weather(self, kwargs):
+    def post_weather(self, *args, **kwargs):
 
         # Generate WUG Url
         data  = "http://rtupdate.wunderground.com/weatherstation/"

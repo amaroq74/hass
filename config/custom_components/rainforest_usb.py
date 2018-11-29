@@ -1,18 +1,20 @@
 
-from homeassistant.const import (ATTR_STATE, CONF_DEVICES, EVENT_HOMEASSISTANT_STOP)
+from homeassistant.const import (ATTR_STATE, CONF_DEVICE, CONF_NAME, EVENT_HOMEASSISTANT_STOP)
 import homeassistant.helpers.config_validation as cv
-from homeassistant.helpers.entity import Entity
-from homeassistant.util import slugify
+
+import voluptuous as vol
 
 import time 
 import serial
 import xml.etree.ElementTree as ET
 import threading
+import logging
 
 DEF_BAUD=115200
 DEF_TOUT=120
 
 DOMAIN="rainforest_usb"
+_LOGGER = logging.getLogger(__name__)
 
 CONFIG_SCHEMA = vol.Schema({
     DOMAIN: vol.Schema({
@@ -23,55 +25,20 @@ CONFIG_SCHEMA = vol.Schema({
 
 
 async def async_setup(hass, config):
-    device = config[DOMAIN].get(CONF_DEVICE)
-    name   = config[DOMAIN].get(CONF_NAME)
-
-    hass.data[DOMAIN] = {}
-    hass.data[DOMAIN]['name']     = name
-    hass.data[DOMAIN]['channels'] = {}
-    hass.data[DOMAIN]['dev']      = Rainforest(device,rx_data)
+    data = {}
 
     def rx_data(channel, value):
-        if channel in hass.data[DOMAIN]['channels']:
-            hass.data[DOMAIN]['channels']['channel']._update(value)
+        if channel in data['channels']:
+            data['channels'][channel]._update(value)
 
-    hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, hass.data[DOMAIN]['dev'].stop)
+    data['name']     = config[DOMAIN].get(CONF_NAME)
+    data['channels'] = {}
+    data['dev']      = Rainforest(config[DOMAIN].get(CONF_DEVICE),rx_data)
 
-def RainforestSensor(Entity):
-    def __init__(channel, entity_id, name):
-        if 'channel' == 'rate':
-            self._units = 'KW'
-        elif 'channel' == 'total':
-            self._units = 'KWH'
+    hass.data[DOMAIN] = data
+    hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, data['dev'].stop)
 
-        self._icon  = 'mdi:flash'
-        self._value = 0.0
-        self._namee = name
-        self._id    = entity_id
-
-    @property
-    def unique_id(self):
-        return self._id
-
-    @property
-    def icon(self):
-        self._icon
-
-    @property
-    def name(self):
-        return self._name
-
-    @property
-    def state(self):
-        return self._value
-
-    @property
-    def unit_of_measurement(self):
-        return self._units
-
-    def _update(self,value):
-        self._value = value
-        self.async_update_ha_state()
+    return True
 
 
 #########################################
@@ -131,26 +98,26 @@ class Rainforest(threading.Thread):
                 try:
                     ser = serial.Serial(self._path, DEF_BAUD, timeout=DEF_TOUT)
                     ser.flushInput()
-                    print("Opened serial port")
+                    _LOGGER.info("Opened serial port")
+                    last = time.time()
                 except Exception as msg:
-                    print("Got exception: {}".format(msg))
+                    _LOGGER.error("Got exception: {}".format(msg))
                     time.sleep(1)
                     continue
 
             # No Data
-            curr = time.time()
-            if (curr - last) > 600 :
-                print("Timeout closing")
-                ser = None
+            if (time.time() - last) > 600 :
+                _LOGGER.warning("Timeout closing")
                 time.sleep(1)
+                ser = None
                 continue
 
             # Attempt to read
             try:
                 line = ser.readline().decode('utf-8')
-                print("Read line: {}".format(line))
+                last = time.time()
             except Exception as msg:
-                print("Got exception: {}".format(msg))
+                _LOGGER.error("Got exception: {}".format(msg))
                 ser = None
                 time.sleep(1)
                 continue
@@ -186,7 +153,7 @@ class Rainforest(threading.Thread):
                     block = ''
 
             except Exception as msg:
-                print("Got exception: {}".format(msg))
+                _LOGGER.error("Got exception: {}".format(msg))
                 block = ''
                 ser.flushInput()
 
