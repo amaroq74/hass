@@ -78,3 +78,168 @@ class HouseSecurity(hass.Hass):
                                   media_content_id='http://172.16.20.1:8123/local/sounds/'+ DcSound,
                                   media_content_type='music')
 
+
+
+
+
+# Add relative path
+#import sys,os
+#sys.path.append(os.path.dirname(__file__) + "/../pylib")
+
+# Libraries
+#import time
+#from amaroq_home import zoneminder
+#from amaroq_home import mysql
+#import smtplib
+#from email.mime.multipart import MIMEMultipart
+##from email.mime.text      import MIMEText
+
+# Notifications
+#EmailAddrs = 'ryan@amaroq.com,steph@amaroq.com'
+
+# Constants
+#service = "home_security"
+
+# Mysql
+#db = mysql.Mysql(service)
+
+# Cameras
+#CamTime = 120
+#Cameras = { 'GateCam'   : zoneminder.ZmCamera("1"),
+#            'FrontCam'  : zoneminder.ZmCamera("2"),
+#            'GarageCam' : zoneminder.ZmCamera("4"),
+#            'SideCam'   : zoneminder.ZmCamera("5") }
+#
+## Alarm group levels
+#GroupLevels = {'night' : 'Alarm',
+#               'dcare' : 'Alert',
+#               'door'  : 'Alarm',
+#               'house' : 'Alarm'}
+
+# Variables
+#lastAlarm = 0
+
+# Setup sensors
+#SecSensors = { 'Car_Gate'      : {'type':'gate',   'lights':['Gate_Light'], 'cameras':['GateCam','FrontCam']   ,'groups':['night']                 },
+#               'Ped_Gate'      : {'type':'gate',   'lights':['Gate_Light'], 'cameras':['GateCam','FrontCam']   ,'groups':['night']                 },
+#               'Gate_Bell'     : {'type':'bell',   'lights':['Gate_Light'], 'cameras':['GateCam','FrontCam']   ,'groups':[]                        },
+#               'Door_Bell'     : {'type':'bell',   'lights':['Gate_Light'], 'cameras':['GateCam','FrontCam']   ,'groups':[]                        },
+#               'Garage_Door'   : {'type':'door',   'lights':[],             'cameras':['GarageCam']            ,'groups':['night','dcare','door']  },
+#               'PBath_Door'    : {'type':'door',   'lights':[],             'cameras':[]                       ,'groups':['night','dcare','door']  },
+#               'Kitchen_Door'  : {'type':'door',   'lights':[],             'cameras':[]                       ,'groups':['night','dcare','door']  },
+#               'Dining_Door'   : {'type':'door',   'lights':[],             'cameras':[]                       ,'groups':['night','door']          },
+#               'Family_Door'   : {'type':'door',   'lights':[],             'cameras':['FrontCam','GarageCam'] ,'groups':['night','door']          },
+#               'Front_Door'    : {'type':'door',   'lights':[],             'cameras':['FrontCam']             ,'groups':['night','door']          },
+#               'Garage_Door2'  : {'type':'door',   'lights':[],             'cameras':[]                       ,'groups':['night','door']          },
+#               'Office_Door'   : {'type':'door',   'lights':[],             'cameras':[]                       ,'groups':['dcare']                 },
+#               'East_Gate'     : {'type':'gate',   'lights':[],             'cameras':['GarageCam']            ,'groups':['dcare']                 },
+#               'West_Gate'     : {'type':'gate',   'lights':[],             'cameras':[]                       ,'groups':['dcare']                 },
+#               'Gar_Gate'      : {'type':'gate',   'lights':[],             'cameras':['SideCam']              ,'groups':['dcare']                 },
+#               'BedTA_Motion'  : {'type':'motion', 'lights':[],             'cameras':[]                       ,'groups':['house']                 },
+#               'BedR_Motion'   : {'type':'motion', 'lights':[],             'cameras':[]                       ,'groups':['house']                 },
+#               'Living_Motion' : {'type':'motion', 'lights':[],             'cameras':[]                       ,'groups':['house']                 },
+#               'Office_Motion' : {'type':'motion', 'lights':[],             'cameras':[]                       ,'groups':['house']                 },
+#               'Master_Motion' : {'type':'motion', 'lights':[],             'cameras':[]                       ,'groups':['house']                 },
+#               'Family_Motion' : {'type':'motion', 'lights':[],             'cameras':[]                       ,'groups':['house']                 },
+#               'Garage_Motion' : {'type':'motion', 'lights':[],             'cameras':[]                       ,'groups':['house']                 } }
+
+# Add tracking fields
+#for k,v in SecSensors.items():
+#    v['state'] = 'normal'
+#    v['lastAlarm'] = 0
+
+
+# Process results
+#def secCb(res):
+#    global db
+#    global Cameras
+#    global SecSensors
+#    global lastAlarm
+#
+#    sensor = res["zone"]
+#    state  = res["event"]
+#
+#    typ  = SecSensors[sensor]['type']
+#    old  = SecSensors[sensor]['state']
+#    SecSensors[sensor]['state'] = state
+#
+#    # No state change
+#    if old == state: return
+#
+#    # Sensor going to alert
+#    if state == 'alert':
+#
+#        # Auto light
+#        if len(SecSensors[sensor]['lights']) > 0 and db.getVariable('Security','auto_light') > 0:
+#            for light in SecSensors[sensor]['lights']:
+#                db.setDevice(light,"100")
+#            db.setLog("inf", sensor, "Turned on lights: " + str(SecSensors[sensor]['lights']))
+#
+#        # Camera Trigger
+#        for cam in SecSensors[sensor]['cameras']:
+#            try:
+#                Cameras[cam].triggerCamera(sensor,CamTime)
+#                db.setLog("inf", sensor, "Triggered camera: " + cam)
+#            except:
+#                db.setLog("wrn", sensor, "Error triggering camera: " + cam)
+#
+#        # Determine if any of the groups are armed
+#        if (time.time() - SecSensors[sensor]['lastAlarm']) > 3600:
+#            level = None
+#
+#            for grp in SecSensors[sensor]['groups']:
+#                if db.getVariable('Security',grp + '_arm') > 0:
+#                    level = GroupLevels[grp]
+#                    if level == 'Alarm':
+#                        break;
+#
+#            if level is not None:
+#                SecSensors[sensor]['lastAlarm'] = time.time()
+#
+#                # Send email
+#                msg = MIMEMultipart('alternative')
+#                msg['Subject'] = level + ": " + sensor
+#                msg['From']    = "home@amaroq.com"
+#                msg['To']      = EmailAddrs
+#
+#                text = level + " triggered by sensor " + sensor + "\n"
+#                text += "\nhttps://www.amaroq.net/home/?key=lolhak\n"
+#                text += "\nhttps://www.amaroq.net/home/cameras/\n"
+#                msg.attach(MIMEText(text, 'plain'))
+#
+#                try:
+#                   smtpObj = smtplib.SMTP('localhost')
+#                   smtpObj.sendmail('home@amaroq.com', EmailAddrs, msg.as_string())
+#                   db.setLog("inf", sensor, "Sent email to " + EmailAddrs)
+#                except smtplib.SMTPException:
+#                   db.setLog("wrn", sensor, "Error sending alarm email to " + EmailAddrs)
+#
+#    db.setLog("inf", sensor, "Processed event for state " + state)
+#
+## Callback config for sensors
+#for sensor in SecSensors:
+#    db.addPollCallback(secCb,"security_current", {"zone"  :sensor})
+#
+#print "Security Daemon Starting"
+#
+## Setup network
+#db.pollEnable(0.5)
+#db.setLog("inf", "main", "Starting!")
+#
+#while True:
+#    try:
+#        time.sleep(.1)
+#    except KeyboardInterrupt:
+#        break
+#
+#db.setLog("inf", "main", "Stopping!")
+#
+## Stop
+#for cam in Cameras:
+#    Cameras[cam].halt()
+#
+#db.pollDisable()
+#db.disconnect()
+#print "Security Daemon Stopped"
+#
+

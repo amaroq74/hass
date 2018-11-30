@@ -34,19 +34,19 @@ def disp_humid(val, box):
     box.setText("%i %%" % ( float(val) ))
 
 def disp_winddir(val, box):
-    box.setText(convert.windDegToCompass(float(val)))
+    box.setText("{}".format(val))
 
 def disp_winddeg(val, box):
     box.setText("%i Deg" % (float(val)))
 
 def disp_speed(val, box):
-    box.setText("%2.2F MPH" % ( convert.speedMpsToMph(float(val)) ))
+    box.setText("%2.2F MPH" % ( float(val) ))
 
 def disp_rain(val, box):
-    box.setText("%2.2F IN" % ( convert.rainMmToIn(float(val)) ))
+    box.setText("%2.2F IN" % ( float(val) ))
 
 def disp_pressure(val, box):
-    box.setText("%2.2F INHG" % ( convert.pressureHpaToInhg(float(val)) ))
+    box.setText("%2.2F INHG" % ( float(val) ))
 
 def disp_power(val, box):
     box.setText("%2.2F KW" % ( float(val) ))
@@ -57,8 +57,8 @@ def disp_door(val, box):
 # Status List
 StatusList = [ {'label':'Out Temp',     'key':'sensor.outdoor_temperature',  'conv':disp_temp,      'box':None },
                {'label':'Out Humid',    'key':'sensor.outdoor_humidity',     'conv':disp_humid,     'box':None },
-               {'label':'Wind Dir',     'key':'sensor.wind_direction'        'conv':disp_winddir,   'box':None },
-               {'label':'Wind Avg',     'key':'sensor.wind_average'          'conv':disp_speed,     'box':None },
+               {'label':'Wind Dir',     'key':'sensor.wind_compass',         'conv':disp_winddir,   'box':None },
+               {'label':'Wind Avg',     'key':'sensor.wind_average',         'conv':disp_speed,     'box':None },
                {'label':'Wind Gust',    'key':'sensor.wind_gust',            'conv':disp_speed,     'box':None },
                {'label':'Rain Hour',    'key':'sensor.rain_hour',            'conv':disp_rain,      'box':None },
                {'label':'Rain Today',   'key':'sensor.rain_day',             'conv':disp_rain,      'box':None },
@@ -277,7 +277,7 @@ class StatusWindow(QWidget):
 
     def stateUpdate (self, key, value ):
         for sen in StatusList:
-            if sen['key'] == key and value != 'unknown':
+            if sen['key'] == key and value != 'unknown' and value is not None:
                 sen['conv'](value,sen['box'])
 
         self.dateBox.setText(datetime.datetime.now().strftime("%m/%d/%y"))

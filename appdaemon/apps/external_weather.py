@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+import sys
+sys.path.append('/amaroq/hass/pylib')
+import hass_secrets
+
 import appdaemon.plugins.hass.hassapi as hass
 import time
 import urllib
@@ -8,7 +12,7 @@ from datetime import datetime, timedelta
 
 # Sensor List
 SensorList = { 'sensor.wind_gust'           : 'windgustmph'  ,
-               'sensor.wind_averate'        : 'windspeedmph' ,
+               'sensor.wind_average'        : 'windspeedmph' ,
                'sensor.wind_direction'      : 'winddir'      ,
                'sensor.outdoor_humidity'    : 'humidity'     ,
                'sensor.outdoor_temperature' : 'tempf'        ,
@@ -28,11 +32,11 @@ class WeatherPost(hass.Hass):
         data  = "http://rtupdate.wunderground.com/weatherstation/"
         data += "updateweatherstation.php"
         data += "?action=updateraw"
-        data += "&ID=KCAREDWO4"
-        data += "&PASSWORD=741753"
+        data += "&ID={}".format(hass_secrets.wunder_id)
+        data += "&PASSWORD={}".format(hass_secrets.wunder_pass)
         data += "&realtime=1&rtfreq=5"
         data += "&dateutc=" + urllib.parse.quote(time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()))
-        data += "&softwaretype=Custom_Linux_Python"
+        data += "&softwaretype=Home_Assistant"
 
         for k,v in SensorList.items():
             val = self.get_state(k)
@@ -53,5 +57,4 @@ class WeatherPost(hass.Hass):
             self.log("Got exception: {}".format(msg))
         except:
             self.log("Got unknown exception")
-
 

@@ -63,14 +63,14 @@ class HouseClimate(hass.Hass):
 
     # New dew point source received
     def comp_dewpt(self, *args, **kwargs):
-        temp  = self.get_state('sensor.outdoor_temp')
+        temp  = self.get_state('sensor.outdoor_temperature')
         humid = self.get_state('sensor.outdoor_humidity')
 
         if temp is not None and temp != 'unknown' and humid is not None and humid != 'unknown':
             dewPt = weather_convert.compDewPtFar(float(temp), float(humid))
             self.log("Comp dewpt temp = {} humid = {} dewPt = {}".format(temp,humid,dewPt))
 
-            self.set_state("sensor.outdoor_dewpt", 
+            self.set_state("sensor.outdoor_dewpoint", 
                            state=dewPt,
                            attributes={'friendly_name' : 'Outdoor Dew Point', 'unit_of_measurement' : TEMP_FAHRENHEIT, 'device_class' : 'temperature'})
 
