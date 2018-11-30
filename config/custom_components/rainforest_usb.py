@@ -153,7 +153,7 @@ class Rainforest(threading.Thread):
                     block = ''
 
             except Exception as msg:
-                _LOGGER.error("Got exception: {}".format(msg))
+                _LOGGER.warning("Got exception: {}".format(msg))
                 block = ''
                 ser.flushInput()
 
