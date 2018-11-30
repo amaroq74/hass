@@ -92,6 +92,12 @@ class HouseClimate(hass.Hass):
             val_hour = float(count_now) - weather_convert.rainMmToIn(count_hour)
             val_day  = float(count_now) - weather_convert.rainMmToIn(count_day)
 
+        if val_hour < 0.001:
+            val_hour = 0.0
+
+        if val_day < 0.001:
+            val_day = 0.0
+
         if val_hour >= 0.0 and val_day >= 0.0:
             self.log("Rain calc. count now = {}, count hour = {}, count day = {}, val hour = {}, val day = {}".format(count_now,count_hour,count_day,val_hour,val_day))
 
