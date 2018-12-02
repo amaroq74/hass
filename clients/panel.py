@@ -91,11 +91,11 @@ CamList = { 'Garage'   : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monit
             'Chickens' : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=6&scale=100&maxfps=1&user=home&pass=monitor"}
 
 DoorList = [{'label':'Ped<br/>Gate',      'key':'binary_sensor.ped_gate',     'box':None },
-            {'label':'Car<br/>Gate',      'key':'binary_sensor.car_gate',     'box':None },
+            {'label':'Car<br/>Gate',      'key':'swich.car_gate',             'box':None },
             {'label':'Chicken<br/>Gate',  'key':'binary_sensor.chicken_gate', 'box':None },
             {'label':'Ivy<br/>Gate',      'key':'binary_sensor.ivy_gate',     'box':None },
             {'label':'Garbage<br/>Gate',  'key':'binary_sensor.garbage_gate', 'box':None },
-            {'label':'Garage<br/>Door',   'key':'binary_sensor.garage_door',  'box':None },
+            {'label':'Garage<br/>Door',   'key':'switch.garage_door',         'box':None },
             {'label':'Office<br/>Door',   'key':'binary_sensor.office_door',  'box':None },
             {'label':'Bath<br/>Door',     'key':'binary_sensor.pbath_door',   'box':None },
             {'label':'Kitchen<br/>Door',  'key':'binary_sensor.kitchen_door', 'box':None }]
@@ -334,12 +334,11 @@ class ForecastWindow(QWidget):
         self.refreshForecast()
 
     def refreshForecast(self):
-
-        # Get the forecast
-        with urllib.request.urlopen("http://api.wunderground.com/api/1fa664001be84d7a/forecast10day/q/94062.xml") as fh:
-            ures = fh.read().rstrip()
-
         try:
+
+            # Get the forecast
+            with urllib.request.urlopen("http://api.wunderground.com/api/1fa664001be84d7a/forecast10day/q/94062.xml") as fh:
+                ures = fh.read().rstrip()
 
             root = ET.fromstring(ures)
 

@@ -4,6 +4,8 @@ import operator
 from collections import OrderedDict
 import logging
 import xbee
+import serial
+import threading
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -44,18 +46,21 @@ class ArduinoRelayInput(object):
     def locInputState(self, state):
         old = self._state
 
-        if state > 0 or self._inverted:
-            self._state = True
+        if self._inverted:
+            if state > 0:
+                self._state = False
+            else:
+                self._state = True
         else:
-            self._state = False
-        
+            if state > 0:
+                self._state = True
+            else:
+                self._state = False
+
         if self._state != old:
             return True
         else:
             return False
-
-    def getState(self):
-        return self._state
 
 
 class ArduinoRelayOutput(object):
@@ -78,9 +83,6 @@ class ArduinoRelayOutput(object):
             return 100
         else:
             return 0
-
-    def getState(self):
-        return self._state
 
     def setState(self,state):
         self._state = state
@@ -135,9 +137,6 @@ class ArduinoRelayPoolSolar(object):
 
         return False
 
-    def getState(self):
-        return self._state
-
 
 class ArduinoRelayDoorGate(object):
     """Input / Output related to a gate or garage door."""
@@ -151,10 +150,23 @@ class ArduinoRelayDoorGate(object):
         self._state    = None
 
     def locInputState(self,state):
-        if state > 0 or self._inverted:
-            self._state = True
+        old = self._state
+
+        if self._inverted:
+            if state > 0:
+                self._state = False
+            else:
+                self._state = True
         else:
-            self._state = False
+            if state > 0:
+                self._state = True
+            else:
+                self._state = False
+
+        if self._state != old:
+            return True
+        else:
+            return False
 
     def locOutputState(self):
         if self._outState:
@@ -164,12 +176,9 @@ class ArduinoRelayDoorGate(object):
             return 0
 
     def setState(self,state):
-        if state and state != self._state:
+        if state != self._state:
             self._outState = True
             self._parent.sendMessage()
-
-    def getState(self):
-        return self._state
 
 
 class ArduinoRelayBoard(object):
@@ -180,7 +189,7 @@ class ArduinoRelayBoard(object):
         self._logPeriod   = 60*5
         self._warnPeriod  = 60*60
         self._name        = name
-        self._address     = None
+        self._address     = address
         self._addrData    = None
         self._inputs      = [None for i in range(0,4)]
         self._outputs     = [None for i in range(0,6)]
@@ -190,6 +199,8 @@ class ArduinoRelayBoard(object):
         self._warnTime    = time.time()
         self._rxCount     = 0
         self._reset       = 1
+
+        _LOGGER.warning("Created board={} address={}".format(name,address))
 
     def addInput(self,idx,inp):
         self._inputs[idx] = inp
@@ -212,7 +223,7 @@ class ArduinoRelayBoard(object):
         words = None
 
         # Split message into pieces
-        if isinstance(message,basestring):
+        if isinstance(message,str):
             words = message.split()
        
         # Make sure length is correct and the marker is present
@@ -222,8 +233,8 @@ class ArduinoRelayBoard(object):
 
         # Process results
         inStateNew = [int(i,10) for i in words[1:5]]
-        tempValue  = (float(words[5],10) / 1023.0) * 500.0
-        toCount    = int(words[6],10)
+        tempValue  = (float(words[5]) / 1023.0) * 500.0
+        toCount    = int(words[6])
         newValue   = False
         
         # Rx time
@@ -241,12 +252,12 @@ class ArduinoRelayBoard(object):
             self._rxCount = 0
 
     def sendMessage(self,new=True):
-        if self._address == None:
+        if self._addrData is None:
             _LOGGER.warning("Skipping send for {}".format(self._name))
             self._sendTime = time.time()
             return
 
-        outs = [out.getLevel() if out else 0 for out in self._outputs]
+        outs = [out.locOutputState() if out else 0 for out in self._outputs]
 
         msg = "STATE"
         msg += "".join([(" %i" % v) for v in outs])
@@ -271,10 +282,11 @@ class ArduinoRelayBoard(object):
 
 class ArduinoRelayHost(object):
 
-    def __init__(self,device,xbee):
+    def __init__(self,name,device,xbeeEn):
+        self._name      = name
         self._byName    = {}
         self._byAddr    = {}
-        self._lastRx    = 0
+        self._lastRx    = time.time()
         self._runEnable = True
         self._device    = device
         self._xb        = None
@@ -282,11 +294,13 @@ class ArduinoRelayHost(object):
         # Serial device
         self._ser = serial.Serial(port = device, baudrate = 9600)
 
-        if xbee:
+        if xbeeEn:
             self._xb = xbee.ZigBee(self._ser, callback=self.message_received, escaped=True)
 
         # update thread
-        self._thread = threading.Thread(target=self.update).start()
+        self._thread = threading.Thread(target=self.update_run).start()
+
+        _LOGGER.warning("Created host={} on device={} xbee={}".format(self._name,self._device,xbeeEn))
 
     def addNode(self, node):
         self._byName[node.name] = node
@@ -294,20 +308,12 @@ class ArduinoRelayHost(object):
         if self._xb is not None:
             self._byAddr[node.address] = node
 
-    def addInput(self,entity,idx,inp):
-        if name in self._byName:
-            self._byName[name].addInput(idx,inp)
-
-    def addOutput(self,entity,idx,out):
-        if name in self._byName:
-            self._byName[name].addOutput(idx,inp)
-
     def txData(self,addr,msg):
         try:
             if self._xb:
                 self._xb.tx(dest_addr=addr['addr'],dest_addr_long=addr['addr_long'],data=msg)
             else:
-                self._ser.write(msg + "\n")
+                self._ser.write((msg + "\n").encode('utf-8'))
         except:
             _LOGGER.error("Transmit exception")
 
@@ -321,15 +327,16 @@ class ArduinoRelayHost(object):
 
             if self._xb is not None:
                 time.sleep(1)
-            elif self_ser.inWaiting() > 0:
+            elif self._ser.inWaiting() > 0:
                 lastRx = time.time()
+                d = self._ser.readline().decode('utf-8')
 
                 for k,v in self._byName.items():
-                    v.rxData("",self._ser.readline())
+                    v.rxData("",d)
             else:
                time.sleep(.1)
 
-            for k,v in self._byname.items():
+            for k,v in self._byName.items():
                 v.update()
 
             if (time.time() - self._lastRx) > 900:
@@ -338,23 +345,20 @@ class ArduinoRelayHost(object):
 
     # XBEE callback
     def message_received(self, data):
-        if not data.has_key('source_addr_long'):
+        if not 'source_addr_long' in data:
             return
 
         self._lastRx = time.time()
 
         try:
-            src64 = ".".join(["%02X" % ord(b) for b in data['source_addr_long']])
+            src64 = ".".join(["%02X" % b for b in data['source_addr_long']])
             addr = {'addr_long':data['source_addr_long'],'addr':data['source_addr']}
-            got = False
 
-            if self._byAddr.has_key(src64):
-                if data.has_key('rf_data'): 
-                    self._byAddr[src64].rxData(addr,data['rf_data'])
-                    got = True
-                elif data.has_key('samples'): 
-                    self._byAddr[src64].rxData(addr,data['samples'])
-                    got = True
+            if 'rf_data' in data and src64 in self._byAddr:
+                self._byAddr[src64].rxData(addr,data['rf_data'].decode('utf-8'))
+            else:
+                _LOGGER.warning("Dropping message from unknown source: {}".format(src64))
+
         except Exception as err:
             _LOGGER.error("Callback exception in xbee_rx: {}".format(err))
         except :

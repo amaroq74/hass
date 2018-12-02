@@ -4,10 +4,10 @@ import appdaemon.plugins.hass.hassapi as hass
 import time
 from datetime import datetime, timedelta
 
-GateSensors = [ 'binary_sensor.car_gate', 'binary_sensor.ped_gate' ]
+GateSensors = [ 'switch.car_gate', 'binary_sensor.ped_gate' ]
 BellSensors = [ 'binary_sensor.gate_bell', 'binary_sensor.door_bell' ]
 
-DcSensors   = [ 'binary_sensor.car_gate', 'binary_sensor.ped_gate', 'binary_sensor.garage_door', 
+DcSensors   = [ 'switch.car_gate', 'binary_sensor.ped_gate', 'switch.garage_door', 
                 'binary_sensor.pbath_door', 'binary_sensor.kitchen_door', 'binary_sensor.office_door',
                 'binary_sensor.chicken_gate', 'binary_sensor.ivy_gate', 'binary_sensor.garbage_gate' ]
 

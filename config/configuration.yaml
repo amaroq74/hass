@@ -74,6 +74,22 @@ rainforest_usb:
 rfxcom_rx:
    device: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A6003Q5Y-if00-port0 
 
+arduino_relay:
+   hosts:
+      serial_host:
+         device: /dev/serial/by-id/usb-FTDI_UB232R_FTDCJ7LC-if00-port0
+         xbee: false
+         boards:
+            pantry: 
+      xbee_host:
+         device: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A40084Bj-if00-port0
+         xbee: true
+         boards:
+           front_sprinklers: '00.13.A2.00.40.8B.2D.43'
+           garage_control: '00.13.A2.00.40.69.4E.CD'
+           east_sprinklers: '00.13.A2.00.40.79.C1.A8'
+           pool_control: '00.13.A2.00.40.6F.DC.78'
+
 # Boolean inputs
 input_boolean:
   dcare_bell:
@@ -191,8 +207,18 @@ sensor:
          values:
             - temp
             - battery
-  - platform: smarthomeSensor
-    scan_interval: 10
+  - platform: arduino_relay
+    sources:
+      pool_solar_in:
+        board: pool_control
+        input: 2
+        name: Pool Solar In
+        avgPeriod: 60
+      pool_solar_out:
+        board: pool_control
+        input: 3
+        name: Pool Solar Out
+        avgPeriod: 60
 
 # Cloud
 cloud:
@@ -224,15 +250,24 @@ zwave:
    usb_path: /dev/serial/by-id/usb-0658_0200-if00
    device_config: !include zwave_device_config.yaml
 
-   #rfxtrx:
-   #   device: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A6003Q5Y-if00-port0
-   #   debug: true
-
 binary_sensor:
-   - platform: smarthomeBinary
-     scan_interval: 10
-   #   - platform: rfxtrx
-   #     automatic_add: true
+   - platform: arduino_relay
+     sources:
+       gate_ball:
+         board: pantry
+         input: 0
+         name: Gate Bell
+         inverted: False
+       door_bell:
+         board: pantry
+         input: 1
+         name: Door Bell
+         inverted: False
+       car_gate_btn:
+         board: pantry
+         input: 3
+         name: Car Gate Btn
+         inverted: False
 
 light:
    - platform: template
@@ -346,9 +381,120 @@ light:
               service: switch.turn_off
               entity_id: switch.yard_lights2
 
+     #  - platform: arduino_relay
 switch:
-   - platform: smarthomeSwitch
-     scan_interval: 10
+   - platform: arduino_relay
+     outputs:
+       house_heat:
+         board: pantry
+         output: 0
+         name: House Heat
+         door: false
+         timeout: 2100
+       house_fan:
+         board: pantry
+         output: 1
+         name: House Fan
+         door: false
+         timeout: 7200
+       front_lawn_1:
+         board: front_sprinklers
+         output: 0
+         name: Front Lawn 1
+         door: false
+         timeout: 3600
+       front_lawn_2:
+         board: front_sprinklers
+         output: 1
+         name: Front Lawn 2
+         door: false
+         timeout: 3600
+       front_lawn_3:
+         board: front_sprinklers
+         output: 2
+         name: Front Lawn 3
+         door: false
+         timeout: 3600
+       west_trees:
+         board: front_sprinklers
+         output: 3
+         name: West Trees
+         door: false
+         timeout: 3600
+       car_gate:
+         board: front_sprinklers
+         output: 5
+         input: 0
+         name: Car Gate
+         door: true
+         inverted: true
+       rear_patio_1:
+         board: garage_control
+         output: 0
+         name: Rear Patio 1
+         door: false
+         timeout: 3600
+       rear_patio_2:
+         board: garage_control
+         output: 1
+         name: Rear Patio 2
+         door: false
+         timeout: 3600
+       rear_patio_3:
+         board: garage_control
+         output: 2
+         name: Rear Patio 3
+         door: false
+         timeout: 3600
+       front_flowers:
+         board: garage_control
+         output: 3
+         name: Front Flowers
+         door: false
+         timeout: 3600
+       garage_door:
+         board: garage_control
+         output: 5
+         input: 0
+         name: Garage Door
+         door: true
+         inverted: false
+       east_lawn_1:
+         board: east_sprinklers
+         output: 0
+         name: East Lawn 1
+         door: false
+         timeout: 3600
+       east_lawn_2:
+         board: east_sprinklers
+         output: 1
+         name: East Lawn 2
+         door: false
+         timeout: 3600
+       east_lemon:
+         board: east_sprinklers
+         output: 3
+         name: East Lemon
+         door: false
+         timeout: 3600
+       pool_main:
+         board: pool_control
+         output: 0
+         name: Pool Main
+         door: false
+         timeout: 3600
+       pool_sweep:
+         board: pool_control
+         output: 1
+         name: Pool Sweep
+         door: false
+         timeout: 3600
+       pool_heat:
+         board: pool_control
+         output: 2
+         name: Pool Heat
+         door: false
+         timeout: 3600
 
 climate:
    - platform: generic_thermostat
@@ -384,13 +530,13 @@ climate:
      max_temp: 95
      ac_mode: False
 
-#emulated_hue:
-#  host_ip: 172.16.20.1
-#  listen_port: 8300
-#  expose_by_default: true
-#  exposed_domains:
-#    - light
-#    - switch
+emulated_hue:
+  host_ip: 172.16.20.1
+  listen_port: 8300
+  expose_by_default: true
+  exposed_domains:
+    - light
+    - switch
 
 group: !include groups.yaml
 automation: !include automations.yaml
