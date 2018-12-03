@@ -61,6 +61,7 @@ class ArduinoBinarySensor(BinarySensorDevice,hass_arduino.ArduinoRelayInput):
         return self._class
 
     def locInputState(self,state):
-        super(ArduinoBinarySensor,self).locInputState(state)
-        self.async_update_ha_state()
+        ret = super(ArduinoBinarySensor,self).locInputState(state)
+        if ret: self.async_schedule_update_ha_state(force_refresh=True)
+        return ret
 

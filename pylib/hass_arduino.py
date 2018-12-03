@@ -134,8 +134,9 @@ class ArduinoRelayPoolSolar(object):
             self._state    = self._tempSum / self._tempCnt
             self._tempSum  = 0.0
             self._tempCnt  = 0.0
-
-        return False
+            return True
+        else:
+            return False
 
 
 class ArduinoRelayDoorGate(object):
@@ -328,7 +329,7 @@ class ArduinoRelayHost(object):
             if self._xb is not None:
                 time.sleep(1)
             elif self._ser.inWaiting() > 0:
-                lastRx = time.time()
+                self._lastRx = time.time()
                 d = self._ser.readline().decode('utf-8')
 
                 for k,v in self._byName.items():

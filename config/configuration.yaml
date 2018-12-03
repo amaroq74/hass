@@ -381,7 +381,6 @@ light:
               service: switch.turn_off
               entity_id: switch.yard_lights2
 
-     #  - platform: arduino_relay
 switch:
    - platform: arduino_relay
      outputs:

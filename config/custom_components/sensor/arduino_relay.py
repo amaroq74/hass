@@ -65,6 +65,7 @@ class ArduinoSensor(Entity,hass_arduino.ArduinoRelayPoolSolar):
         return self._units
 
     def locInputState(self,state):
-        super(ArduinoSensor,self).locInputState(state)
-        self.async_update_ha_state()
+        ret = super(ArduinoSensor,self).locInputState(state)
+        if ret: self.async_schedule_update_ha_state(force_refresh=True)
+        return ret
 

@@ -98,6 +98,7 @@ class ArduinoRelayDoorGate(SwitchDevice,hass_arduino.ArduinoRelayDoorGate):
             return self._off_icon
 
     def locInputState(self,state):
-        super(ArduinoRelayDoorGate,self).locInputState(state)
-        self.async_update_ha_state()
+        ret = super(ArduinoRelayDoorGate,self).locInputState(state)
+        if ret: self.async_schedule_update_ha_state(force_refresh=True)
+        return ret
 

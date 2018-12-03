@@ -91,7 +91,7 @@ CamList = { 'Garage'   : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monit
             'Chickens' : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=6&scale=100&maxfps=1&user=home&pass=monitor"}
 
 DoorList = [{'label':'Ped<br/>Gate',      'key':'binary_sensor.ped_gate',     'box':None },
-            {'label':'Car<br/>Gate',      'key':'swich.car_gate',             'box':None },
+            {'label':'Car<br/>Gate',      'key':'switch.car_gate',            'box':None },
             {'label':'Chicken<br/>Gate',  'key':'binary_sensor.chicken_gate', 'box':None },
             {'label':'Ivy<br/>Gate',      'key':'binary_sensor.ivy_gate',     'box':None },
             {'label':'Garbage<br/>Gate',  'key':'binary_sensor.garbage_gate', 'box':None },

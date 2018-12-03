@@ -5,15 +5,18 @@ import time
 from datetime import datetime, timedelta
 
 GateSensors = [ 'switch.car_gate', 'binary_sensor.ped_gate' ]
-BellSensors = [ 'binary_sensor.gate_bell', 'binary_sensor.door_bell' ]
+BellSensors = [ 'binary_sensor.gate_bell_2', 'binary_sensor.door_bell' ]
 
-DcSensors   = [ 'switch.car_gate', 'binary_sensor.ped_gate', 'switch.garage_door', 
+DcSensors   = [ 'switch.car_gate', 'binary_sensor.ped_gate', 'switch.garage_door',
                 'binary_sensor.pbath_door', 'binary_sensor.kitchen_door', 'binary_sensor.office_door',
                 'binary_sensor.chicken_gate', 'binary_sensor.ivy_gate', 'binary_sensor.garbage_gate' ]
 
 GateSound = 'doorbell.wav'
 BellSound = 'front_door_and_gate_bell.wav'
 DcSound   = 'short_beep.wav'
+
+GateToggle = ['binary_sensor.car_gate_btn']
+
 
 class HouseSecurity(hass.Hass):
 
@@ -32,6 +35,9 @@ class HouseSecurity(hass.Hass):
         for k in BellSensors:
             self._lastSound[k] = time.time()
             self.listen_state(self.sec_sound,k)
+
+        for k in GateToggle:
+            self.listen_state(self.gate_toggle,k)
 
     # Day care alarm, 5 second intervals
     def day_care(self, *args, **kwargs):
@@ -78,8 +84,15 @@ class HouseSecurity(hass.Hass):
                                   media_content_id='http://172.16.20.1:8123/local/sounds/'+ DcSound,
                                   media_content_type='music')
 
+    # Gate toggle
+    def gate_toggle(self, entity, attribute, old, new, *args, **kwargs):
+        if new == 'on':
+            cur = self.get_state('switch.car_gate')
 
-
+            if cur == 'on':
+                self.turn_off("switch.car_gate")
+            else:
+                self.turn_on("switch.car_gate")
 
 
 # Add relative path
