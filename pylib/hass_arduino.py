@@ -201,7 +201,7 @@ class ArduinoRelayBoard(object):
         self._rxCount     = 0
         self._reset       = 1
 
-        _LOGGER.warning("Created board={} address={}".format(name,address))
+        _LOGGER.info("Created board={} address={}".format(name,address))
 
     def addInput(self,idx,inp):
         self._inputs[idx] = inp
@@ -229,7 +229,7 @@ class ArduinoRelayBoard(object):
        
         # Make sure length is correct and the marker is present
         if words == None or len(words) != 13 or words[0] != "STATUS" : 
-            _LOGGER.error("Bad message from {} : {}".format(self._name,message))
+            _LOGGER.warning("Bad message from {} : {}".format(self._name,message))
             return
 
         # Process results
@@ -249,7 +249,7 @@ class ArduinoRelayBoard(object):
         # Log is true
         if newValue or (time.time() - self._logTime) > self._logPeriod:
             self._logTime = time.time()
-            _LOGGER.warning("Got {} messages from {} : {} Temp={} Timeouts={}".format(self._rxCount, self._name, message, tempValue, toCount))
+            _LOGGER.info("Got {} messages from {} : {} Temp={} Timeouts={}".format(self._rxCount, self._name, message, tempValue, toCount))
             self._rxCount = 0
 
     def sendMessage(self,new=True):
@@ -265,7 +265,7 @@ class ArduinoRelayBoard(object):
         msg += " " + str(self._reset)
 
         if new or self._reset:
-            _LOGGER.warning("Sending message to {} : {}".format(self._name,msg))
+            _LOGGER.info("Sending message to {} : {}".format(self._name,msg))
 
         self._reset = 0
         self._host.txData(self._addrData,msg)
@@ -301,7 +301,7 @@ class ArduinoRelayHost(object):
         # update thread
         self._thread = threading.Thread(target=self.update_run).start()
 
-        _LOGGER.warning("Created host={} on device={} xbee={}".format(self._name,self._device,xbeeEn))
+        _LOGGER.info("Created host={} on device={} xbee={}".format(self._name,self._device,xbeeEn))
 
     def addNode(self, node):
         self._byName[node.name] = node

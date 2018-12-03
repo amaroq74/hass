@@ -118,6 +118,6 @@ class RfxcomSensor(Entity):
         else:
             self._value = lval
 
-        _LOGGER.warning("Set {} = {}".format(self._name,self._value))
+        _LOGGER.info("Set {} = {}".format(self._name,self._value))
         self.async_update_ha_state()
 

@@ -24,13 +24,10 @@ config:
 
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 http:
-   api_password: !secret api_password
-   base_url: aliska.amaroq.net:8123
+  api_password: !secret api_password
+  base_url: aliska.amaroq.net:8123
    #   ssl_certificate: /amaroq/hass/config/ssl/ServerCertificate.cer
    #   ssl_key: /amaroq/hass/config/ssl/amaroq_private.key
-
-#
-#   base_url: example.duckdns.org:8123
 
 api:
 
@@ -53,7 +50,10 @@ conversation:
 history:
 
 recorder:
-   purge_keep_days: 30
+  purge_keep_days: 30
+
+logger:
+  default: info
 
 # View all events in a logbook
 logbook:
@@ -68,27 +68,27 @@ sun:
 apcupsd:
 
 rainforest_usb:
-   device: /dev/serial/by-id/usb-Rainforest_RFA-Z106-RA-PC_RAVEn_v2.3.21-if00-port0
-   name: Smartmeter
+  device: /dev/serial/by-id/usb-Rainforest_RFA-Z106-RA-PC_RAVEn_v2.3.21-if00-port0
+  name: Smartmeter
 
 rfxcom_rx:
-   device: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A6003Q5Y-if00-port0 
+  device: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A6003Q5Y-if00-port0 
 
 arduino_relay:
-   hosts:
-      serial_host:
-         device: /dev/serial/by-id/usb-FTDI_UB232R_FTDCJ7LC-if00-port0
-         xbee: false
-         boards:
-            pantry: 
-      xbee_host:
-         device: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A40084Bj-if00-port0
-         xbee: true
-         boards:
-           front_sprinklers: '00.13.A2.00.40.8B.2D.43'
-           garage_control: '00.13.A2.00.40.69.4E.CD'
-           east_sprinklers: '00.13.A2.00.40.79.C1.A8'
-           pool_control: '00.13.A2.00.40.6F.DC.78'
+  hosts:
+    serial_host:
+      device: /dev/serial/by-id/usb-FTDI_UB232R_FTDCJ7LC-if00-port0
+      xbee: false
+      boards:
+        pantry: 
+    xbee_host:
+      device: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A40084Bj-if00-port0
+      xbee: true
+      boards:
+        front_sprinklers: '00.13.A2.00.40.8B.2D.43'
+        garage_control: '00.13.A2.00.40.69.4E.CD'
+        east_sprinklers: '00.13.A2.00.40.79.C1.A8'
+        pool_control: '00.13.A2.00.40.6F.DC.78'
 
 # Boolean inputs
 input_boolean:
@@ -114,99 +114,99 @@ sensor:
       - temperature
   - platform: apcupsd
     resources:
-       - bcharge
-       - linev
-       - loadpct
-       - timeleft
+      - bcharge
+      - linev
+      - loadpct
+      - timeleft
   - platform: rainforest_usb
     resources:
-        - Rate
-        - Total
+      - Rate
+      - Total
   - platform: rfxcom_rx
     pressure_adjust: 6.0
     sources:
       thgr228n.c3:
-         topic: temp
-         name: BedTA
-         values:
-            - temp
-            - humidity
-            - battery
+        topic: temp
+        name: BedTA
+        values:
+          - temp
+          - humidity
+          - battery
       thwr288a.84:
-         topic: temp
-         name: Camper
-         values:
-            - temp
-            - battery
+        topic: temp
+        name: Camper
+        values:
+          - temp
+          - battery
       thgr228n.1f:
-         topic: temp
-         name: Garage
-         values:
-            - temp
-            - humidity
-            - battery
+        topic: temp
+        name: Garage
+        values:
+          - temp
+          - humidity
+          - battery
       thgr810.cc:
-         topic: temp
-         name: BedR
-         values:
-            - temp
-            - humidity
-            - battery
+        topic: temp
+        name: BedR
+        values:
+          - temp
+          - humidity
+          - battery
       bthr918n.1d:
-         topic: temp
-         name: Indoor
-         values:
-            - temp
-            - humidity
-            - battery
-            - barometer
-            - trend
+        topic: temp
+        name: Indoor
+        values:
+          - temp
+          - humidity
+          - battery
+          - barometer
+          - trend
       thgr228n.75:
-         topic: temp
-         name: Master
-         values:
-            - temp
-            - humidity
-            - battery
+        topic: temp
+        name: Master
+        values:
+          - temp
+          - humidity
+          - battery
       thgr228n.94:
-         topic: temp
-         name: Shed
-         values:
-            - temp
-            - humidity
-            - battery
+        topic: temp
+        name: Shed
+        values:
+          - temp
+          - humidity
+          - battery
       thgr810.02:
-         topic: temp
-         name: Outdoor
-         values:
-            - temp
-            - humidity
-            - battery
+        topic: temp
+        name: Outdoor
+        values:
+          - temp
+          - humidity
+          - battery
       f007pf.06.08:
-         topic: temp
-         name: 'Pool'
-         values:
-            - temp
+        topic: temp
+        name: 'Pool'
+        values:
+         - temp
       pcr800.1d:
-         topic: rain
-         name: Rain
-         values:
-            - speed
-            - total
-            - battery
+        topic: rain
+        name: Rain
+        values:
+          - speed
+          - total
+          - battery
       wgr800.30:
-         topic: wind
-         name: Wind
-         values:
-            - speed
-            - dir
-            - avgspeed
+        topic: wind
+        name: Wind
+        values:
+          - speed
+          - dir
+          - avgspeed
       thn132n.63:
-         topic: temp
-         name: Chickens
-         values:
-            - temp
-            - battery
+        topic: temp
+        name: Chickens
+        values:
+          - temp
+          - battery
   - platform: arduino_relay
     sources:
       pool_solar_in:
@@ -222,312 +222,312 @@ sensor:
 
 # Cloud
 cloud:
-   google_actions:
-      filter:
-         include_domains:
-            - light
-         include_entities:
-            - climate.house
-            - climate.pool
-            - switch.speakers
-            - switch.car_gate
-            - switch.garage_door
-            - switch.pool_main
-            - switch.pool_sweep
-            - input_boolean.dcare_bell
-            - input_boolean.gate_bell
+  google_actions:
+    filter:
+      include_domains:
+        - light
+      include_entities:
+        - climate.house
+        - climate.pool
+        - switch.speakers
+        - switch.car_gate
+        - switch.garage_door
+        - switch.pool_main
+        - switch.pool_sweep
+        - input_boolean.dcare_bell
+        - input_boolean.gate_bell
 
-#zoneminder:
-#  host: kapugen.maroq.net
-#  path: /zm
-#  path_zms: /cgi-bin/nph-zms
-#  ssl: True
-#  verify_ssl: False
-#  username: ryan
-#  password: Cxn1ssy
+zoneminder:
+  host: kapugen.amaroq.net
+  path: /zm
+  path_zms: /cgi-bin/nph-zms
+  ssl: True
+  verify_ssl: False
+  username: !secret zm_login
+  password: !secret zm_password
 
 zwave:
-   usb_path: /dev/serial/by-id/usb-0658_0200-if00
-   device_config: !include zwave_device_config.yaml
+  usb_path: /dev/serial/by-id/usb-0658_0200-if00
+  device_config: !include zwave_device_config.yaml
 
 binary_sensor:
-   - platform: arduino_relay
-     sources:
-       gate_ball:
-         board: pantry
-         input: 0
-         name: Gate Bell
-         inverted: False
-       door_bell:
-         board: pantry
-         input: 1
-         name: Door Bell
-         inverted: False
-       car_gate_btn:
-         board: pantry
-         input: 3
-         name: Car Gate Btn
-         inverted: False
+  - platform: arduino_relay
+    sources:
+      gate_ball:
+        board: pantry
+        input: 0
+        name: Gate Bell
+        inverted: False
+      door_bell:
+        board: pantry
+        input: 1
+        name: Door Bell
+        inverted: False
+      car_gate_btn:
+        board: pantry
+        input: 3
+        name: Car Gate Btn
+        inverted: False
 
 light:
-   - platform: template
-     lights:
-        bedr_light:
-           friendly_name: "BedR Light"
-           value_template: "{{ states('switch.bedr_light') }}"
-           turn_on:
-              service: switch.turn_on
-              entity_id: switch.bedr_light
-           turn_off:
-              service: switch.turn_off
-              entity_id: switch.bedr_light
-        bedta_light:
-           friendly_name: "BedTA Light"
-           value_template: "{{ states('switch.bedta_light') }}"
-           turn_on:
-              service: switch.turn_on
-              entity_id: switch.bedta_light
-           turn_off:
-              service: switch.turn_off
-              entity_id: switch.bedta_light
-        xmas_lights:
-           friendly_name: "Christmas Lights"
-           value_template: "{{ states('switch.xmas_lights') }}"
-           turn_on:
-              service: switch.turn_on
-              entity_id: switch.xmas_lights
-           turn_off:
-              service: switch.turn_off
-              entity_id: switch.xmas_lights
-        entry_light:
-           friendly_name: "Entry Light"
-           value_template: "{{ states('switch.entry_light') }}"
-           turn_on:
-              service: switch.turn_on
-              entity_id: switch.entry_light
-           turn_off:
-              service: switch.turn_off
-              entity_id: switch.entry_light
-        family_tree:
-           friendly_name: "Family Tree"
-           value_template: "{{ states('switch.family_tree') }}"
-           turn_on:
-              service: switch.turn_on
-              entity_id: switch.family_tree
-           turn_off:
-              service: switch.turn_off
-              entity_id: switch.family_tree
-        gate_light:
-           friendly_name: "Gate Light"
-           value_template: "{{ states('switch.gate_light') }}"
-           turn_on:
-              service: switch.turn_on
-              entity_id: switch.gate_light
-           turn_off:
-              service: switch.turn_off
-              entity_id: switch.gate_light
-        master_light:
-           friendly_name: "Master Light"
-           value_template: "{{ states('switch.master_light') }}"
-           turn_on:
-              service: switch.turn_on
-              entity_id: switch.master_light
-           turn_off:
-              service: switch.turn_off
-              entity_id: switch.master_light
-        office_light:
-           friendly_name: "Office Light"
-           value_template: "{{ states('switch.office_light') }}"
-           turn_on:
-              service: switch.turn_on
-              entity_id: switch.office_light
-           turn_off:
-              service: switch.turn_off
-              entity_id: switch.office_light
-        patio_lights:
-           friendly_name: "Patio Lights"
-           value_template: "{{ states('switch.patio_lights') }}"
-           turn_on:
-              service: switch.turn_on
-              entity_id: switch.patio_lights
-           turn_off:
-              service: switch.turn_off
-              entity_id: switch.patio_lights
-        pool_light:
-           friendly_name: "Pool Light"
-           value_template: "{{ states('switch.pool_light') }}"
-           turn_on:
-              service: switch.turn_on
-              entity_id: switch.pool_light
-           turn_off:
-              service: switch.turn_off
-              entity_id: switch.pool_light
-        yard_lights1:
-           friendly_name: "Yard Lights1"
-           value_template: "{{ states('switch.yard_lights1') }}"
-           turn_on:
-              service: switch.turn_on
-              entity_id: switch.yard_lights1
-           turn_off:
-              service: switch.turn_off
-              entity_id: switch.yard_lights1
-        yard_lights2:
-           friendly_name: "Yard Lights2"
-           value_template: "{{ states('switch.yard_lights2') }}"
-           turn_on:
-              service: switch.turn_on
-              entity_id: switch.yard_lights2
-           turn_off:
-              service: switch.turn_off
-              entity_id: switch.yard_lights2
+  - platform: template
+    lights:
+      bedr_light:
+        friendly_name: "BedR Light"
+        value_template: "{{ states('switch.bedr_light') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.bedr_light
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.bedr_light
+      bedta_light:
+        friendly_name: "BedTA Light"
+        value_template: "{{ states('switch.bedta_light') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.bedta_light
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.bedta_light
+      xmas_lights:
+        friendly_name: "Christmas Lights"
+        value_template: "{{ states('switch.xmas_lights') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.xmas_lights
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.xmas_lights
+      entry_light:
+        friendly_name: "Entry Light"
+        value_template: "{{ states('switch.entry_light') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.entry_light
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.entry_light
+      family_tree:
+        friendly_name: "Family Tree"
+        value_template: "{{ states('switch.family_tree') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.family_tree
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.family_tree
+      gate_light:
+        friendly_name: "Gate Light"
+        value_template: "{{ states('switch.gate_light') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.gate_light
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.gate_light
+      master_light:
+        friendly_name: "Master Light"
+        value_template: "{{ states('switch.master_light') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.master_light
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.master_light
+      office_light:
+        friendly_name: "Office Light"
+        value_template: "{{ states('switch.office_light') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.office_light
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.office_light
+            #        patio_lights:
+            #           friendly_name: "Patio Lights"
+            #           value_template: "{{ states('switch.patio_lights') }}"
+            #           turn_on:
+            #              service: switch.turn_on
+            #              entity_id: switch.patio_lights
+            #           turn_off:
+            #              service: switch.turn_off
+            #              entity_id: switch.patio_lights
+            #        pool_light:
+            #           friendly_name: "Pool Light"
+            #           value_template: "{{ states('switch.pool_light') }}"
+            #           turn_on:
+            #              service: switch.turn_on
+            #              entity_id: switch.pool_light
+            #           turn_off:
+            #              service: switch.turn_off
+            #              entity_id: switch.pool_light
+            #        yard_lights1:
+            #           friendly_name: "Yard Lights1"
+            #           value_template: "{{ states('switch.yard_lights1') }}"
+            #           turn_on:
+            #              service: switch.turn_on
+            #              entity_id: switch.yard_lights1
+            #           turn_off:
+            #              service: switch.turn_off
+            #              entity_id: switch.yard_lights1
+      yard_lights2:
+        friendly_name: "Yard Lights2"
+        value_template: "{{ states('switch.yard_lights2') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.yard_lights2
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.yard_lights2
 
 switch:
-   - platform: arduino_relay
-     outputs:
-       house_heat:
-         board: pantry
-         output: 0
-         name: House Heat
-         door: false
-         timeout: 2100
-       house_fan:
-         board: pantry
-         output: 1
-         name: House Fan
-         door: false
-         timeout: 7200
-       front_lawn_1:
-         board: front_sprinklers
-         output: 0
-         name: Front Lawn 1
-         door: false
-         timeout: 3600
-       front_lawn_2:
-         board: front_sprinklers
-         output: 1
-         name: Front Lawn 2
-         door: false
-         timeout: 3600
-       front_lawn_3:
-         board: front_sprinklers
-         output: 2
-         name: Front Lawn 3
-         door: false
-         timeout: 3600
-       west_trees:
-         board: front_sprinklers
-         output: 3
-         name: West Trees
-         door: false
-         timeout: 3600
-       car_gate:
-         board: front_sprinklers
-         output: 5
-         input: 0
-         name: Car Gate
-         door: true
-         inverted: true
-       rear_patio_1:
-         board: garage_control
-         output: 0
-         name: Rear Patio 1
-         door: false
-         timeout: 3600
-       rear_patio_2:
-         board: garage_control
-         output: 1
-         name: Rear Patio 2
-         door: false
-         timeout: 3600
-       rear_patio_3:
-         board: garage_control
-         output: 2
-         name: Rear Patio 3
-         door: false
-         timeout: 3600
-       front_flowers:
-         board: garage_control
-         output: 3
-         name: Front Flowers
-         door: false
-         timeout: 3600
-       garage_door:
-         board: garage_control
-         output: 5
-         input: 0
-         name: Garage Door
-         door: true
-         inverted: false
-       east_lawn_1:
-         board: east_sprinklers
-         output: 0
-         name: East Lawn 1
-         door: false
-         timeout: 3600
-       east_lawn_2:
-         board: east_sprinklers
-         output: 1
-         name: East Lawn 2
-         door: false
-         timeout: 3600
-       east_lemon:
-         board: east_sprinklers
-         output: 3
-         name: East Lemon
-         door: false
-         timeout: 3600
-       pool_main:
-         board: pool_control
-         output: 0
-         name: Pool Main
-         door: false
-         timeout: 3600
-       pool_sweep:
-         board: pool_control
-         output: 1
-         name: Pool Sweep
-         door: false
-         timeout: 3600
-       pool_heat:
-         board: pool_control
-         output: 2
-         name: Pool Heat
-         door: false
-         timeout: 3600
+  - platform: arduino_relay
+    outputs:
+      house_heat:
+        board: pantry
+        output: 0
+        name: House Heat
+        door: false
+        timeout: 2100
+      house_fan:
+        board: pantry
+        output: 1
+        name: House Fan
+        door: false
+        timeout: 7200
+      front_lawn_1:
+        board: front_sprinklers
+        output: 0
+        name: Front Lawn 1
+        door: false
+        timeout: 3600
+      front_lawn_2:
+        board: front_sprinklers
+        output: 1
+        name: Front Lawn 2
+        door: false
+        timeout: 3600
+      front_lawn_3:
+        board: front_sprinklers
+        output: 2
+        name: Front Lawn 3
+        door: false
+        timeout: 3600
+      west_trees:
+        board: front_sprinklers
+        output: 3
+        name: West Trees
+        door: false
+        timeout: 3600
+      car_gate:
+        board: front_sprinklers
+        output: 5
+        input: 0
+        name: Car Gate
+        door: true
+        inverted: true
+      rear_patio_1:
+        board: garage_control
+        output: 0
+        name: Rear Patio 1
+        door: false
+        timeout: 3600
+      rear_patio_2:
+        board: garage_control
+        output: 1
+        name: Rear Patio 2
+        door: false
+        timeout: 3600
+      rear_patio_3:
+        board: garage_control
+        output: 2
+        name: Rear Patio 3
+        door: false
+        timeout: 3600
+      front_flowers:
+        board: garage_control
+        output: 3
+        name: Front Flowers
+        door: false
+        timeout: 3600
+      garage_door:
+        board: garage_control
+        output: 5
+        input: 0
+        name: Garage Door
+        door: true
+        inverted: false
+      east_lawn_1:
+        board: east_sprinklers
+        output: 0
+        name: East Lawn 1
+        door: false
+        timeout: 3600
+      east_lawn_2:
+        board: east_sprinklers
+        output: 1
+        name: East Lawn 2
+        door: false
+        timeout: 3600
+      east_lemon:
+        board: east_sprinklers
+        output: 3
+        name: East Lemon
+        door: false
+        timeout: 3600
+      pool_main:
+        board: pool_control
+        output: 0
+        name: Pool Main
+        door: false
+        timeout: 3600
+      pool_sweep:
+        board: pool_control
+        output: 1
+        name: Pool Sweep
+        door: false
+        timeout: 3600
+      pool_heat:
+        board: pool_control
+        output: 2
+        name: Pool Heat
+        door: false
+        timeout: 3600
 
 climate:
-   - platform: generic_thermostat
-     name: House
-     heater: switch.house_heat
-     target_sensor: sensor.house_temperature
-     away_temp: 60
-     ac_mode: False
-   - platform: generic_thermostat
-     name: Chicken Coop
-     heater: switch.chicken_heat
-     target_sensor: sensor.chickens_temperature
-     min_temp: 32
-     ac_mode: False
-   - platform: generic_thermostat
-     name: Garage
-     heater: switch.garage_heat
-     target_sensor: sensor.garage_temperature
-     min_temp: 32
-     ac_mode: False
-   - platform: generic_thermostat
-     name: Camper
-     heater: switch.camper_heat
-     target_sensor: sensor.camper_temperature
-     min_temp: 32
-     ac_mode: False
-   - platform: generic_thermostat
-     name: Pool
-     heater: switch.pool_heat
-     target_sensor: sensor.pool_temperature
-     hot_tolerance: 1.0
-     min_temp: 32
-     max_temp: 95
-     ac_mode: False
+  - platform: generic_thermostat
+    name: House
+    heater: switch.house_heat
+    target_sensor: sensor.house_temperature
+    away_temp: 60
+    ac_mode: False
+  - platform: generic_thermostat
+    name: Chicken Coop
+    heater: switch.chicken_heat
+    target_sensor: sensor.chickens_temperature
+    min_temp: 32
+    ac_mode: False
+  - platform: generic_thermostat
+    name: Garage
+    heater: switch.garage_heat
+    target_sensor: sensor.garage_temperature
+    min_temp: 32
+    ac_mode: False
+  - platform: generic_thermostat
+    name: Camper
+    heater: switch.camper_heat
+    target_sensor: sensor.camper_temperature
+    min_temp: 32
+    ac_mode: False
+  - platform: generic_thermostat
+    name: Pool
+    heater: switch.pool_heat
+    target_sensor: sensor.pool_temperature
+    hot_tolerance: 1.0
+    min_temp: 32
+    max_temp: 95
+    ac_mode: False
 
 emulated_hue:
   host_ip: 172.16.20.1
