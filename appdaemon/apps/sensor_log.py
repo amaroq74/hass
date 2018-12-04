@@ -4,6 +4,7 @@
 import sys
 sys.path.append('/amaroq/hass/pylib')
 import hass_secrets as secrets
+import hass_mysql
 
 import MySQLdb
 from contextlib import closing
@@ -12,6 +13,7 @@ import appdaemon.plugins.hass.hassapi as hass
 from homeassistant.const import TEMP_FAHRENHEIT
 from datetime import datetime, timedelta
 import weather_convert
+import time
 
 LogSensors = {  'sensor.rain_total'           : {'type':'count',         'device':'Rain',           'units':'mm',       'conv':weather_convert.rainInToMm},
                 'sensor.rain_day'             : {'type':'count_day',     'device':'Rain',           'units':'mm',       'conv':weather_convert.rainInToMm},
@@ -39,8 +41,8 @@ LogSensors = {  'sensor.rain_total'           : {'type':'count',         'device
                 'sensor.camper_temperature'   : {'type':'temp',          'device':'Camper',         'units':'c',        'conv':weather_convert.tempFarToCel},
                 'sensor.chickens_temperature' : {'type':'temp',          'device':'Chickens',       'units':'c',        'conv':weather_convert.tempFarToCel},
                 'sensor.pool_temperature'     : {'type':'temp',          'device':'Pool',           'units':'c',        'conv':weather_convert.tempFarToCel},
-                'sensor.pool_solar_in_temp'   : {'type':'temp',          'device':'Pool_Solar_In',  'units':'c',        'conv':weather_convert.tempFarToCel},
-                'sensor.pool_solar_out_temp'  : {'type':'temp',          'device':'Pool_Solar_Out', 'units':'c',        'conv':weather_convert.tempFarToCel},
+                'sensor.pool_solar_in'        : {'type':'temp',          'device':'Pool_Solar_In',  'units':'c',        'conv':weather_convert.tempFarToCel},
+                'sensor.pool_solar_out'       : {'type':'temp',          'device':'Pool_Solar_Out', 'units':'c',        'conv':weather_convert.tempFarToCel},
                 'sensor.smartmeter_rate'      : {'type':'current',       'device':'SmartMeter',     'units':'KW',       'conv':None},
                 'sensor.smartmeter_total'     : {'type':'total',         'device':'SmartMeter',     'units':'KW_Hours', 'conv':None},
                 'sensor.ups_input_voltage'    : {'type':'line_voltage',  'device':'UPS',            'units':'V',        'conv':None},

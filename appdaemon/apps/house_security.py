@@ -1,21 +1,62 @@
 #!/usr/bin/env python3
 
+import sys
+sys.path.append('/amaroq/hass/pylib')
+import hass_secrets as secrets
+import zm_camera
+
 import appdaemon.plugins.hass.hassapi as hass
 import time
 from datetime import datetime, timedelta
 
-GateSensors = [ 'switch.car_gate', 'binary_sensor.ped_gate' ]
-BellSensors = [ 'binary_sensor.gate_bell_2', 'binary_sensor.door_bell' ]
+##################################
+# Button Setup
+##################################
+GateToggle = {'binary_sensor.car_gate_btn' : 'switch.car_gate'}
 
-DcSensors   = [ 'switch.car_gate', 'binary_sensor.ped_gate', 'switch.garage_door',
-                'binary_sensor.pbath_door', 'binary_sensor.kitchen_door', 'binary_sensor.office_door',
-                'binary_sensor.chicken_gate', 'binary_sensor.ivy_gate', 'binary_sensor.garbage_gate' ]
+##################################
+# Constants
+##################################
+Switches = [ 'dcare_bell', 'gate_bell', 'night_alarm', 'house_alarm', 'door_alarm', 'auto_light' ]
 
-GateSound = 'doorbell.wav'
-BellSound = 'front_door_and_gate_bell.wav'
-DcSound   = 'short_beep.wav'
+Sounds = { 'gate_bell':  'doorbell.wav',
+           'door_bell':  'front_door_and_gate_bell.wav',
+           'dcare_bell': 'short_beep.wav' }
 
-GateToggle = ['binary_sensor.car_gate_btn']
+CamTime = 120
+Cameras = { 'gate_cam'   : zm_camera.ZmCamera('1'),
+            'front_cam'  : zm_camera.ZmCamera('2'),
+            'garage_cam' : zm_camera.ZmCamera('4'),
+            'side_cam'   : zm_camera.ZmCamera('5') }
+
+Lights = { 'auto_light' :'switch.gate_light' }
+
+##################################
+# Sensor Setup
+##################################
+# Setup sensors
+SecSensors = { 'binary_sensor.ped_gate'      : [ 'gate_bell',   'dcare_bell',  'gate_cam',    'front_cam',  'night_alarm', 'auto_light' ],
+               'switch.car_gate'             : [ 'gate_bell',   'dcare_bell',  'gate_cam',    'front_cam',  'night_alarm', 'auto_light' ],
+               'switch.garage_door'          : [ 'dcare_bell',  'garage_cam',  'night_alarm', 'door_alarm'  ],
+               'binary_sensor.gate_dbell'    : [ 'door_bell',   'gate_cam',    'front_cam',   'auto_light'  ],
+               'binary_sensor.door_dbell'    : [ 'door_bell',   'gate_cam',    'front_cam',   'auto_light'  ],
+               'binary_sensor.family_door'   : [ 'front_cam',   'garage_cam',  'night_alarm', 'door_alarm'  ],
+               'binary_sensor.front_door'    : [ 'front_cam',   'night_alarm', 'door_alarm'   ],
+               'binary_sensor.pbath_door'    : [ 'dcare_bell',  'night_alarm', 'door_alarm'   ],
+               'binary_sensor.kitchen_door'  : [ 'dcare_bell',  'night_alarm', 'door_alarm'   ],
+               'binary_sensor.dining_door'   : [ 'night_alarm', 'door_alarm'   ],
+               'binary_sensor.garage_rdoor'  : [ 'night_alarm', 'door_alarm'   ],
+               'binary_sensor.garbage_gate'  : [ 'dcare_bell',  'garage_cam'   ],
+               'binary_sensor.chickens_gate' : [ 'dcare_bell',  'side_cam'     ],
+               'binary_sensor.office_door'   : [ 'dcare_bell'   ],
+               'binary_sensor.ivy_gate'      : [ 'dcare_bell'   ],
+               'binary_sensor.bedta_motion'  : [ 'house_alarm'  ],
+               'binary_sensor.bedr_motion'   : [ 'house_alarm'  ],
+               'binary_sensor.living_motion' : [ 'house_alarm'  ],
+               'binary_sensor.office_motion' : [ 'house_alarm'  ],
+               'binary_sensor.master_motion' : [ 'house_alarm'  ],
+               'binary_sensor.family_motion' : [ 'house_alarm'  ],
+               'binary_sensor.garage_motion' : [ 'house_alarm'  ] }
 
 
 class HouseSecurity(hass.Hass):
@@ -23,28 +64,47 @@ class HouseSecurity(hass.Hass):
     def initialize(self):
 
         # Day care alarm
+        self._dcSensors = []
+        for k,v in SecSensors.items():
+            if 'dcare_bell' in v:
+                self._dcSensors.append(k)
+
         self.run_every(self.day_care, datetime.now() + timedelta(seconds=5), 5)
 
         # Security sounds
         self._lastSound = {}
 
-        for k in GateSensors:
-            self._lastSound[k] = time.time()
-            self.listen_state(self.sec_sound,k)
+        # Security items
+        for k in SecSensors:
+            self._lastSound[k] =0
+            self.listen_state(self.sec_update,k)
 
-        for k in BellSensors:
-            self._lastSound[k] = time.time()
-            self.listen_state(self.sec_sound,k)
+        # Stop cameras
+        for k,v in Cameras.items():
+            try:
+                v.cancelCamera()
+            except:
+                self.log("Error cancelling camera: {}".format(k))
 
-        for k in GateToggle:
-            self.listen_state(self.gate_toggle,k)
+
+    # Gate toggle
+    def gate_toggle(self, entity, attribute, old, new, *args, **kwargs):
+        if new == 'on':
+            sw = GateToggle[entity]
+            cur = self.get_state(sw)
+
+            if cur == 'on':
+                self.turn_off(sw)
+            else:
+                self.turn_on(sw)
+
 
     # Day care alarm, 5 second intervals
     def day_care(self, *args, **kwargs):
         if self.get_state('input_boolean.dcare_bell') == 'on':
             count = 0
             lst = []
-            for sen in DcSensors:
+            for sen in self._dcSensors:
                 if self.get_state(sen) == 'on':
                     count += 1
                     lst.append(sen)
@@ -53,56 +113,43 @@ class HouseSecurity(hass.Hass):
                 self.log("Playing daycare alarm for: {}".format(lst))
                 self.call_service('media_player/play_media',
                                   entity_id='media_player.kitchen_speaker',
-                                  media_content_id='http://172.16.20.1:8123/local/sounds/'+ DcSound,
+                                  media_content_id='http://172.16.20.1:8123/local/sounds/'+ Sounds['dcare_bell'],
                                   media_content_type='music')
 
-    # Security Sounds
-    def sec_sound(self, entity, attribute, old, new, *args, **kwargs):
-        ldiff = time.time() - self._lastSound[entity]
 
-        if ldiff > 30 and new != old and new == 'on':
-            self._lastSound[entity] = time.time()
+    # Security update
+    def sec_update(self, entity, attribute, old, new, *args, **kwargs):
+        if new == old or new == 'off':
+            return
 
-            if entity in BellSensors:
-                self.log("Playing sound for: {}".format(entity))
-                self.call_service('media_player/play_media',
-                                  entity_id='media_player.kitchen_speaker',
-                                  media_content_id='http://172.16.20.1:8123/local/sounds/'+ BellSound,
-                                  media_content_type='music')
+        # Procss each action
+        for action in SecSensors[entity]:
 
-            elif self.get_state('input_boolean.gate_bell') == 'on' and entity in GateSensors:
-                self.log("Playing sound for: {}".format(entity))
-                self.call_service('media_player/play_media',
-                                  entity_id='media_player.kitchen_speaker',
-                                  media_content_id='http://172.16.20.1:8123/local/sounds/'+ GateSound,
-                                  media_content_type='music')
+            # Make sure action is enabled
+            if action not in Switches or self.get_state('input_boolean.' + action) == 'on':
 
-            elif self.get_state('input_boolean.dcare_bell') == 'on' and entity in DcSensors:
-                self.log("Playing daycare alarm for: {}".format(entity))
-                self.call_service('media_player/play_media',
-                                  entity_id='media_player.kitchen_speaker',
-                                  media_content_id='http://172.16.20.1:8123/local/sounds/'+ DcSound,
-                                  media_content_type='music')
+                # Check for sound
+                if (time.time() - self._lastSound[entity]) > 15 and action in Sounds:
+                    self._lastSound[entity] = time.time()
+                    self.log("Playing sound for: {}".format(entity))
+                    self.call_service('media_player/play_media',
+                                      entity_id='media_player.kitchen_speaker',
+                                      media_content_id='http://172.16.20.1:8123/local/sounds/' + Sounds[action],
+                                      media_content_type='music')
 
-    # Gate toggle
-    def gate_toggle(self, entity, attribute, old, new, *args, **kwargs):
-        if new == 'on':
-            cur = self.get_state('switch.car_gate')
+                # Check for camera
+                if action in Cameras:
+                    try:
+                        Cameras[action].triggerCamera(entity,CamTime)
+                        self.log("Triggering camera: {}".format(action))
+                    except:
+                        self.log("Error triggering camera: {}".format(action))
 
-            if cur == 'on':
-                self.turn_off("switch.car_gate")
-            else:
-                self.turn_on("switch.car_gate")
+                # Check for lights
+                if action in Lights:
+                    self.turn_on(Lights[action])
 
 
-# Add relative path
-#import sys,os
-#sys.path.append(os.path.dirname(__file__) + "/../pylib")
-
-# Libraries
-#import time
-#from amaroq_home import zoneminder
-#from amaroq_home import mysql
 #import smtplib
 #from email.mime.multipart import MIMEMultipart
 ##from email.mime.text      import MIMEText
@@ -110,92 +157,6 @@ class HouseSecurity(hass.Hass):
 # Notifications
 #EmailAddrs = 'ryan@amaroq.com,steph@amaroq.com'
 
-# Constants
-#service = "home_security"
-
-# Mysql
-#db = mysql.Mysql(service)
-
-# Cameras
-#CamTime = 120
-#Cameras = { 'GateCam'   : zoneminder.ZmCamera("1"),
-#            'FrontCam'  : zoneminder.ZmCamera("2"),
-#            'GarageCam' : zoneminder.ZmCamera("4"),
-#            'SideCam'   : zoneminder.ZmCamera("5") }
-#
-## Alarm group levels
-#GroupLevels = {'night' : 'Alarm',
-#               'dcare' : 'Alert',
-#               'door'  : 'Alarm',
-#               'house' : 'Alarm'}
-
-# Variables
-#lastAlarm = 0
-
-# Setup sensors
-#SecSensors = { 'Car_Gate'      : {'type':'gate',   'lights':['Gate_Light'], 'cameras':['GateCam','FrontCam']   ,'groups':['night']                 },
-#               'Ped_Gate'      : {'type':'gate',   'lights':['Gate_Light'], 'cameras':['GateCam','FrontCam']   ,'groups':['night']                 },
-#               'Gate_Bell'     : {'type':'bell',   'lights':['Gate_Light'], 'cameras':['GateCam','FrontCam']   ,'groups':[]                        },
-#               'Door_Bell'     : {'type':'bell',   'lights':['Gate_Light'], 'cameras':['GateCam','FrontCam']   ,'groups':[]                        },
-#               'Garage_Door'   : {'type':'door',   'lights':[],             'cameras':['GarageCam']            ,'groups':['night','dcare','door']  },
-#               'PBath_Door'    : {'type':'door',   'lights':[],             'cameras':[]                       ,'groups':['night','dcare','door']  },
-#               'Kitchen_Door'  : {'type':'door',   'lights':[],             'cameras':[]                       ,'groups':['night','dcare','door']  },
-#               'Dining_Door'   : {'type':'door',   'lights':[],             'cameras':[]                       ,'groups':['night','door']          },
-#               'Family_Door'   : {'type':'door',   'lights':[],             'cameras':['FrontCam','GarageCam'] ,'groups':['night','door']          },
-#               'Front_Door'    : {'type':'door',   'lights':[],             'cameras':['FrontCam']             ,'groups':['night','door']          },
-#               'Garage_Door2'  : {'type':'door',   'lights':[],             'cameras':[]                       ,'groups':['night','door']          },
-#               'Office_Door'   : {'type':'door',   'lights':[],             'cameras':[]                       ,'groups':['dcare']                 },
-#               'East_Gate'     : {'type':'gate',   'lights':[],             'cameras':['GarageCam']            ,'groups':['dcare']                 },
-#               'West_Gate'     : {'type':'gate',   'lights':[],             'cameras':[]                       ,'groups':['dcare']                 },
-#               'Gar_Gate'      : {'type':'gate',   'lights':[],             'cameras':['SideCam']              ,'groups':['dcare']                 },
-#               'BedTA_Motion'  : {'type':'motion', 'lights':[],             'cameras':[]                       ,'groups':['house']                 },
-#               'BedR_Motion'   : {'type':'motion', 'lights':[],             'cameras':[]                       ,'groups':['house']                 },
-#               'Living_Motion' : {'type':'motion', 'lights':[],             'cameras':[]                       ,'groups':['house']                 },
-#               'Office_Motion' : {'type':'motion', 'lights':[],             'cameras':[]                       ,'groups':['house']                 },
-#               'Master_Motion' : {'type':'motion', 'lights':[],             'cameras':[]                       ,'groups':['house']                 },
-#               'Family_Motion' : {'type':'motion', 'lights':[],             'cameras':[]                       ,'groups':['house']                 },
-#               'Garage_Motion' : {'type':'motion', 'lights':[],             'cameras':[]                       ,'groups':['house']                 } }
-
-# Add tracking fields
-#for k,v in SecSensors.items():
-#    v['state'] = 'normal'
-#    v['lastAlarm'] = 0
-
-
-# Process results
-#def secCb(res):
-#    global db
-#    global Cameras
-#    global SecSensors
-#    global lastAlarm
-#
-#    sensor = res["zone"]
-#    state  = res["event"]
-#
-#    typ  = SecSensors[sensor]['type']
-#    old  = SecSensors[sensor]['state']
-#    SecSensors[sensor]['state'] = state
-#
-#    # No state change
-#    if old == state: return
-#
-#    # Sensor going to alert
-#    if state == 'alert':
-#
-#        # Auto light
-#        if len(SecSensors[sensor]['lights']) > 0 and db.getVariable('Security','auto_light') > 0:
-#            for light in SecSensors[sensor]['lights']:
-#                db.setDevice(light,"100")
-#            db.setLog("inf", sensor, "Turned on lights: " + str(SecSensors[sensor]['lights']))
-#
-#        # Camera Trigger
-#        for cam in SecSensors[sensor]['cameras']:
-#            try:
-#                Cameras[cam].triggerCamera(sensor,CamTime)
-#                db.setLog("inf", sensor, "Triggered camera: " + cam)
-#            except:
-#                db.setLog("wrn", sensor, "Error triggering camera: " + cam)
-#
 #        # Determine if any of the groups are armed
 #        if (time.time() - SecSensors[sensor]['lastAlarm']) > 3600:
 #            level = None
@@ -228,31 +189,5 @@ class HouseSecurity(hass.Hass):
 #                   db.setLog("wrn", sensor, "Error sending alarm email to " + EmailAddrs)
 #
 #    db.setLog("inf", sensor, "Processed event for state " + state)
-#
-## Callback config for sensors
-#for sensor in SecSensors:
-#    db.addPollCallback(secCb,"security_current", {"zone"  :sensor})
-#
-#print "Security Daemon Starting"
-#
-## Setup network
-#db.pollEnable(0.5)
-#db.setLog("inf", "main", "Starting!")
-#
-#while True:
-#    try:
-#        time.sleep(.1)
-#    except KeyboardInterrupt:
-#        break
-#
-#db.setLog("inf", "main", "Stopping!")
-#
-## Stop
-#for cam in Cameras:
-#    Cameras[cam].halt()
-#
-#db.pollDisable()
-#db.disconnect()
-#print "Security Daemon Stopped"
-#
+
 

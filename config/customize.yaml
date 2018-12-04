@@ -308,6 +308,60 @@ sensor.ecolink_motion_sensor_sourcenodeid_6:
 sensor.ecolink_motion_sensor_sourcenodeid_7:
   hidden: true
 
-sensor.car_gate_btn:
+binary_sensor.car_gate_btn:
+  hidden: true
+
+sensor.chickens_events:
+  hidden: true
+
+sensor.chickens_status:
+  hidden: true
+
+sensor.front_events:
+  hidden: true
+
+sensor.front_status:
+  hidden: true
+
+sensor.garage_events:
+  hidden: true
+
+sensor.garage_status:
+  hidden: true
+
+sensor.gate_events:
+  hidden: true
+
+sensor.gate_status:
+  hidden: true
+
+sensor.rear_events:
+  hidden: true
+
+sensor.rear_status:
+  hidden: true
+
+sensor.side_events:
+  hidden: true
+
+sensor.side_status:
+  hidden: true
+
+sensor.test_record_events:
+  hidden: true
+
+sensor.test_record_status:
+  hidden: true
+
+sensor.test_trigger_events:
+  hidden: true
+
+sensor.test_trigger_status:
+  hidden: true
+
+camera.test_trigger:
+  hidden: true
+
+camera.test_record:
   hidden: true
 

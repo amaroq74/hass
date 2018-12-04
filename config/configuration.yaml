@@ -112,6 +112,8 @@ sensor:
     forecast: 72
     monitored_conditions:
       - temperature
+  - platform: zoneminder
+    include_archived: true
   - platform: apcupsd
     resources:
       - bcharge
@@ -241,10 +243,12 @@ zoneminder:
   host: kapugen.amaroq.net
   path: /zm
   path_zms: /cgi-bin/nph-zms
-  ssl: True
-  verify_ssl: False
+  ssl: false
   username: !secret zm_login
   password: !secret zm_password
+
+camera:
+  - platform: zoneminder
 
 zwave:
   usb_path: /dev/serial/by-id/usb-0658_0200-if00
@@ -253,21 +257,21 @@ zwave:
 binary_sensor:
   - platform: arduino_relay
     sources:
-      gate_ball:
+      gate_dbell:
         board: pantry
         input: 0
         name: Gate Bell
-        inverted: False
-      door_bell:
+        inverted: false
+      door_dbell:
         board: pantry
         input: 1
         name: Door Bell
-        inverted: False
+        inverted: false
       car_gate_btn:
         board: pantry
         input: 3
         name: Car Gate Btn
-        inverted: False
+        inverted: false
 
 light:
   - platform: template
@@ -501,25 +505,25 @@ climate:
     heater: switch.house_heat
     target_sensor: sensor.house_temperature
     away_temp: 60
-    ac_mode: False
+    ac_mode: false
   - platform: generic_thermostat
     name: Chicken Coop
     heater: switch.chicken_heat
     target_sensor: sensor.chickens_temperature
     min_temp: 32
-    ac_mode: False
+    ac_mode: false
   - platform: generic_thermostat
     name: Garage
     heater: switch.garage_heat
     target_sensor: sensor.garage_temperature
     min_temp: 32
-    ac_mode: False
+    ac_mode: false
   - platform: generic_thermostat
     name: Camper
     heater: switch.camper_heat
     target_sensor: sensor.camper_temperature
     min_temp: 32
-    ac_mode: False
+    ac_mode: false
   - platform: generic_thermostat
     name: Pool
     heater: switch.pool_heat
@@ -527,7 +531,7 @@ climate:
     hot_tolerance: 1.0
     min_temp: 32
     max_temp: 95
-    ac_mode: False
+    ac_mode: false
 
 emulated_hue:
   host_ip: 172.16.20.1
