@@ -116,6 +116,7 @@ class HouseSecurity(hass.Hass):
 
     # Gate toggle
     def gate_toggle(self, entity, attribute, old, new, *args, **kwargs):
+        self.log("Got gate toggle {} {} {} {}".format(entity,attribute,old,new))
         if new == 'on':
             sw = GateToggle[entity]
             cur = self.get_state(sw)
