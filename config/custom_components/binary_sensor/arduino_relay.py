@@ -68,10 +68,8 @@ class ArduinoBinarySensor(BinarySensorDevice,hass_arduino.ArduinoRelayInput):
         if ret: self.async_schedule_update_ha_state(force_refresh=True)
 
         if ret and self._state and self._event:
-            self._hass.bus.fire('state_changed', {
-                ATTR_ENTITY_ID: self.entity_id,
-                'new_state': 'on',
-                'old_state': 'off' })
+            _LOGGER.info('firing pushbutton event for {}'.format(self.entity_id))
+            self._hass.bus.fire('button_pressed', { ATTR_ENTITY_ID: self.entity_id })
 
         return ret
 

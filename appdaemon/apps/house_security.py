@@ -102,6 +102,13 @@ class HouseSecurity(hass.Hass):
             except Exception as msg:
                 self.log('ERROR',"Error cancelling camera {}: {}".format(k,msg))
 
+        # Pushbutton events
+        listen_event(self.button_pressed,'button_pressed')
+
+
+    def button_pressed(self, name, data, **kwargs):
+        self.log('button pressed {} {}'.format(name,data))
+
 
     # Gate toggle
     def gate_toggle(self, entity, attribute, old, new, *args, **kwargs):
