@@ -34,11 +34,10 @@ class ZmCamera(threading.Thread):
         self.join()
         self.cancelCamera()
 
-    def triggerCamera ( self, sensor, period ):
+    def triggerCamera ( self, sensor, text, period ):
         """ Trigger the camera. Pass sensor value and period to trigger for. """
         self._lock.acquire()
 
-        self._sensor    = sensor
         self._triggered = 1
         self._trigTime  = time.time() + period
 
@@ -47,7 +46,7 @@ class ZmCamera(threading.Thread):
         s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         s.connect((self._host,self._port))
 
-        msg = self._camera + "|on|255|"  + self._sensor + "|" + self._sensor + " Triggered|" + self._sensor + "\n"
+        msg = '{}|on|255|{}|{}|\n'.format(self._camera,sensor,text)
         s.send(msg.encode('utf-8'))
         s.close()
 
@@ -63,7 +62,7 @@ class ZmCamera(threading.Thread):
         s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         s.connect((self._host,self._port))
 
-        msg = self._camera + "|off|255|"  + self._sensor + "|" + self._sensor + " Cancel|" + self._sensor + "\n"
+        msg = '{}|on|0|||\n'.format(self._camera)
         s.send(msg.encode('utf-8'))
         s.close()
 

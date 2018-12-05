@@ -171,7 +171,7 @@ class HouseSecurity(hass.Hass):
                 # Check for camera
                 if action in Cameras:
                     try:
-                        Cameras[action].triggerCamera(entity,CamTime)
+                        Cameras[action].triggerCamera(entity,'HASS',CamTime)
                         self.log("Triggering camera: {}".format(action))
                     except Exception as msg:
                         self.log("Error triggering camera {}: {}".format(action,msg)) # ERROR
@@ -206,7 +206,7 @@ class HouseSecurity(hass.Hass):
             urlData = { 'view' : 'events',
                         'filter[Query][terms][0][attr]' : 'Notes',
                         'filter[Query][terms][0][op]'   : '=~',
-                        'filter[Query][terms][0][val]'  : 'Triggered',
+                        'filter[Query][terms][0][val]'  : 'HASS',
                         'filter[Query][terms][1][cnj]'  : 'and',
                         'filter[Query][terms][1][attr]' : 'StartDateTime',
                         'filter[Query][terms][1][op]'   : '>=',
@@ -226,7 +226,7 @@ class HouseSecurity(hass.Hass):
             urlData = { 'view' : 'events',
                         'filter[Query][terms][0][attr]' : 'Notes',
                         'filter[Query][terms][0][op]'   : '=~',
-                        'filter[Query][terms][0][val]'  : 'Triggered',
+                        'filter[Query][terms][0][val]'  : 'HASS',
                         'filter[Query][terms][1][cnj]'  : 'and',
                         'filter[Query][terms][1][attr]' : 'StartDateTime',
                         'filter[Query][terms][1][op]'   : '>=',
