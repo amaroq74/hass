@@ -52,8 +52,8 @@ EmailAddrs = 'ryan@amaroq.com'
 SecSensors = { 'binary_sensor.ped_gate'      : [ 'gate_bell',   'dcare_bell',  'gate_cam',    'front_cam',  'night_alarm', 'auto_light' ],
                'switch.car_gate'             : [ 'gate_bell',   'dcare_bell',  'gate_cam',    'front_cam',  'night_alarm', 'auto_light' ],
                'switch.garage_door'          : [ 'dcare_bell',  'garage_cam',  'night_alarm', 'door_alarm'  ],
-               'binary_sensor.gate_dbell'    : [ 'door_bell',   'gate_cam',    'front_cam',   'auto_light'  ],
-               'binary_sensor.door_dbell'    : [ 'door_bell',   'gate_cam',    'front_cam',   'auto_light'  ],
+               'binary_sensor.gate_bell'     : [ 'door_bell',   'gate_cam',    'front_cam',   'auto_light'  ],
+               'binary_sensor.door_bell'     : [ 'door_bell',   'gate_cam',    'front_cam',   'auto_light'  ],
                'binary_sensor.family_door'   : [ 'front_cam',   'garage_cam',  'night_alarm', 'door_alarm'  ],
                'binary_sensor.front_door'    : [ 'front_cam',   'night_alarm', 'door_alarm'   ],
                'binary_sensor.pbath_door'    : [ 'dcare_bell',  'night_alarm', 'door_alarm'   ],
@@ -100,7 +100,7 @@ class HouseSecurity(hass.Hass):
             try:
                 v.cancelCamera()
             except Exception as msg:
-                self.error("Error cancelling camera {}: {}".format(k,msg))
+                self.log('ERROR',"Error cancelling camera {}: {}".format(k,msg))
 
 
     # Gate toggle
@@ -135,6 +135,7 @@ class HouseSecurity(hass.Hass):
 
     # Security update
     def sec_update(self, entity, attribute, old, new, *args, **kwargs):
+        self.log("Got event {} {} {} {}".format(entity,attribute,old,new))
         emailActions = []
 
         if new == old or new == 'off' or old != 'off':
@@ -161,7 +162,7 @@ class HouseSecurity(hass.Hass):
                         Cameras[action].triggerCamera(entity,CamTime)
                         self.log("Triggering camera: {}".format(action))
                     except Exception as msg:
-                        self.error("Error triggering camera {}: {}".format(action,msg))
+                        self.log('ERROR',"Error triggering camera {}: {}".format(action,msg))
 
                 # Check for lights
                 if action in Lights:
@@ -186,8 +187,8 @@ class HouseSecurity(hass.Hass):
             msg['From']    = "home@amaroq.com"
             msg['To']      = EmailAddrs
 
-            text = '<b>{} triggered by sensor {}</b>\n'.format(level,entity)
-            text += '<p><center>\n'
+            text  = '<center>\n'
+            text += '<b>{} triggered by sensor {}</b><br><p>\n'.format(level,entity)
 
             urlData = { 'view' : 'events',
                         'filter[Query][terms][0][attr]' : 'Notes',
@@ -242,7 +243,14 @@ class HouseSecurity(hass.Hass):
                         'MonitorId[1]' : '5' }
 
             text += '<a href=https://www.amaroq.net/zm/index.php?{}>Back Yard</a><br><p>\n'.format(urlencode(urlData))
-            text += '<a href=https://www.amaroq.net/zm/index.php>Zoneminder</a><br><p>\n'
+
+            urlData = { 'view'         : 'console',
+                        'action'       : '',
+                        'filtering'    : '',
+                        'MonitorName'  : '',
+                        'Source'       : ''}
+
+            text += '<a href=https://www.amaroq.net/zm/index.php?{}>Zoneminder</a><br><p>\n'.format(urlencode(urlData))
             text += '</center>\n'
 
             msg.attach(MIMEText(text, 'html'))
@@ -252,5 +260,5 @@ class HouseSecurity(hass.Hass):
                smtpObj.sendmail('home@amaroq.com', EmailAddrs, msg.as_string())
                self.log("Sent email to: " + EmailAddrs)
             except smtplib.SMTPException:
-               self.error("Error sending alarm email to: " + EmailAddrs)
+               self.log('ERROR',"Error sending alarm email to: " + EmailAddrs)
 

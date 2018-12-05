@@ -90,15 +90,15 @@ CamList = { 'Garage'   : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monit
             'Side'     : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=5&scale=100&maxfps=1&user=home&pass=monitor",
             'Chickens' : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=6&scale=100&maxfps=1&user=home&pass=monitor"}
 
-DoorList = [{'label':'Ped<br/>Gate',      'key':'binary_sensor.ped_gate',     'box':None },
-            {'label':'Car<br/>Gate',      'key':'switch.car_gate',            'box':None },
-            {'label':'Chicken<br/>Gate',  'key':'binary_sensor.chicken_gate', 'box':None },
-            {'label':'Ivy<br/>Gate',      'key':'binary_sensor.ivy_gate',     'box':None },
-            {'label':'Garbage<br/>Gate',  'key':'binary_sensor.garbage_gate', 'box':None },
-            {'label':'Garage<br/>Door',   'key':'switch.garage_door',         'box':None },
-            {'label':'Office<br/>Door',   'key':'binary_sensor.office_door',  'box':None },
-            {'label':'Bath<br/>Door',     'key':'binary_sensor.pbath_door',   'box':None },
-            {'label':'Kitchen<br/>Door',  'key':'binary_sensor.kitchen_door', 'box':None }]
+DoorList = [{'label':'Ped<br/>Gate',      'key':'binary_sensor.ped_gate',      'box':None },
+            {'label':'Car<br/>Gate',      'key':'switch.car_gate',             'box':None },
+            {'label':'Chickens<br/>Gate', 'key':'binary_sensor.chickens_gate', 'box':None },
+            {'label':'Ivy<br/>Gate',      'key':'binary_sensor.ivy_gate',      'box':None },
+            {'label':'Garbage<br/>Gate',  'key':'binary_sensor.garbage_gate',  'box':None },
+            {'label':'Garage<br/>Door',   'key':'switch.garage_door',          'box':None },
+            {'label':'Office<br/>Door',   'key':'binary_sensor.office_door',   'box':None },
+            {'label':'Bath<br/>Door',     'key':'binary_sensor.pbath_door',    'box':None },
+            {'label':'Kitchen<br/>Door',  'key':'binary_sensor.kitchen_door',  'box':None }]
 
 class WindChart(QWidget):
     def __init__(self, db, parent=None):

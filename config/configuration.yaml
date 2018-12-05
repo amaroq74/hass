@@ -257,21 +257,24 @@ zwave:
 binary_sensor:
   - platform: arduino_relay
     sources:
-      gate_dbell:
+      gate_bell:
         board: pantry
         input: 0
         name: Gate Bell
         inverted: false
-      door_dbell:
+        fire_event: true
+      door_bell:
         board: pantry
         input: 1
         name: Door Bell
         inverted: false
+        fire_event: true
       car_gate_btn:
         board: pantry
         input: 3
         name: Car Gate Btn
         inverted: false
+        fire_event: true
 
 light:
   - platform: template

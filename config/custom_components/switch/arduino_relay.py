@@ -47,6 +47,10 @@ class ArduinoRelaySwitch(SwitchDevice,hass_arduino.ArduinoRelayOutput):
         self._off_icon = None
 
     @property
+    def unique_id(self):
+        return self._entity
+
+    @property
     def name(self):
         return self._name
 

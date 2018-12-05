@@ -6,7 +6,7 @@ import logging
 import hass_arduino
 
 from custom_components.arduino_relay import DOMAIN
-from homeassistant.const import TEMP_FAHRENHEIT
+from homeassistant.const import ATTR_ENTITY_ID, ATTR_STATE, TEMP_FAHRENHEIT
 from homeassistant.components.binary_sensor import (BinarySensorDevice)
 
 _LOGGER = logging.getLogger(__name__)
@@ -18,14 +18,15 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     sources = config['sources']
 
     for k,v in sources.items():
-        board    = v['board']
-        inp      = v['input']
-        name     = v['name']
-        inverted = v['inverted']
+        board      = v['board']
+        inp        = v['input']
+        name       = v['name']
+        inverted   = v['inverted']
+        fire_event = v['fire_event']
 
         if board in data['boards']:
             brd = data['boards'][board]
-            sen = ArduinoBinarySensor(brd, k, name, inverted)
+            sen = ArduinoBinarySensor(brd, k, name, inverted, hass, fire_event)
             brd.addInput(inp, sen)
 
             lst.append(sen)
@@ -34,11 +35,13 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
 
 class ArduinoBinarySensor(BinarySensorDevice,hass_arduino.ArduinoRelayInput):
 
-    def __init__(self, parent, entity, name, inv):
+    def __init__(self, parent, entity, name, inv, hass, event):
         super(ArduinoBinarySensor,self).__init__(parent,entity,name,inv)
 
-        self._icon  = ''
-        self._class = None
+        self._icon     = ''
+        self._class    = None
+        self._hass     = hass
+        self._event    = event
 
     @property
     def unique_id(self):
@@ -63,5 +66,12 @@ class ArduinoBinarySensor(BinarySensorDevice,hass_arduino.ArduinoRelayInput):
     def locInputState(self,state):
         ret = super(ArduinoBinarySensor,self).locInputState(state)
         if ret: self.async_schedule_update_ha_state(force_refresh=True)
+
+        if ret and self._state and self._event:
+            self._hass.bus.fire('state_changed', {
+                ATTR_ENTITY_ID: self.entity_id,
+                'new_state': 'on',
+                'old_state': 'off' })
+
         return ret
 
