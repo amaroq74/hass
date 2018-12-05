@@ -22,11 +22,11 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
         inp        = v['input']
         name       = v['name']
         inverted   = v['inverted']
-        fire_event = v['fire_event']
+        pushbutton = v['pushbutton']
 
         if board in data['boards']:
             brd = data['boards'][board]
-            sen = ArduinoBinarySensor(brd, k, name, inverted, hass, fire_event)
+            sen = ArduinoBinarySensor(brd, k, name, inverted, pushbutton)
             brd.addInput(inp, sen)
 
             lst.append(sen)
@@ -35,13 +35,12 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
 
 class ArduinoBinarySensor(BinarySensorDevice,hass_arduino.ArduinoRelayInput):
 
-    def __init__(self, parent, entity, name, inv, hass, event):
+    def __init__(self, parent, entity, name, inv, pushbutton):
         super(ArduinoBinarySensor,self).__init__(parent,entity,name,inv)
 
-        self._icon     = ''
-        self._class    = None
-        self._hass     = hass
-        self._event    = event
+        self._icon       = ''
+        self._class      = None
+        self._pushbutton = pushbutton
 
     @property
     def unique_id(self):
@@ -57,7 +56,10 @@ class ArduinoBinarySensor(BinarySensorDevice,hass_arduino.ArduinoRelayInput):
 
     @property
     def is_on(self):
-        return self._state
+        if self._pushbutton:
+            return False
+        else:
+            return self._state
 
     @property
     def device_class(self):
@@ -67,9 +69,8 @@ class ArduinoBinarySensor(BinarySensorDevice,hass_arduino.ArduinoRelayInput):
         ret = super(ArduinoBinarySensor,self).locInputState(state)
         if ret: self.async_schedule_update_ha_state(force_refresh=True)
 
-        if ret and self._state and self._event:
-            _LOGGER.info('firing pushbutton event for {}'.format(self.entity_id))
-            self._hass.bus.fire('button_pressed', { ATTR_ENTITY_ID: self.entity_id })
+        if ret and self._state and self._pushbutton:
+            self.hass.bus.fire('button_pressed', { ATTR_ENTITY_ID: self.entity_id })
 
         return ret
 

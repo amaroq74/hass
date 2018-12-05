@@ -51,10 +51,10 @@ class WeatherPost(hass.Hass):
             fh.close()
 
             if ures != b'success':
-                self.log('WARNING',"Bad url post result = {}".format(ures))
+                self.log("Bad url post result = {}".format(ures)) # WARNING
 
         except Exception as msg:
-            self.log('ERROR',"Got exception: {}".format(msg))
+            self.log("Got exception: {}".format(msg)) # ERROR
         except:
-            self.log('ERROR',"Got unknown exception")
+            self.log("Got unknown exception") # ERROR
 

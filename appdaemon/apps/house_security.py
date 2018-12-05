@@ -100,14 +100,18 @@ class HouseSecurity(hass.Hass):
             try:
                 v.cancelCamera()
             except Exception as msg:
-                self.log('ERROR',"Error cancelling camera {}: {}".format(k,msg))
+                self.log("Error cancelling camera {}: {}".format(k,msg)) # ERROR
 
         # Pushbutton events
-        listen_event(self.button_pressed,'button_pressed')
+        self.listen_event(self.button_pressed,'button_pressed')
 
 
-    def button_pressed(self, name, data, **kwargs):
-        self.log('button pressed {} {}'.format(name,data))
+    # Pushbutton listener
+    def button_pressed(self, name, data, *arg, **kwargs):
+        if data['entity_id'] in SecSensors:
+            self.sec_update(data['entity_id'], None, 'off', 'on')
+        elif data['entity_id'] in GateToggle:
+            self.gate_toggle(data['entity_id'], None, 'off', 'on')
 
 
     # Gate toggle
@@ -169,7 +173,7 @@ class HouseSecurity(hass.Hass):
                         Cameras[action].triggerCamera(entity,CamTime)
                         self.log("Triggering camera: {}".format(action))
                     except Exception as msg:
-                        self.log('ERROR',"Error triggering camera {}: {}".format(action,msg))
+                        self.log("Error triggering camera {}: {}".format(action,msg)) # ERROR
 
                 # Check for lights
                 if action in Lights:
@@ -267,5 +271,5 @@ class HouseSecurity(hass.Hass):
                smtpObj.sendmail('home@amaroq.com', EmailAddrs, msg.as_string())
                self.log("Sent email to: " + EmailAddrs)
             except smtplib.SMTPException:
-               self.log('ERROR',"Error sending alarm email to: " + EmailAddrs)
+               self.log("Error sending alarm email to: " + EmailAddrs) # ERROR
 

@@ -49,7 +49,7 @@ class HouseClimate(hass.Hass):
                 tot += (float(val) * v)
                 div += TempWeights[k]
             else:
-                self.log('WARNING',"Missing data from = {}".format(k))
+                self.log("Missing data from {}".format(k)) # WARNING
 
         if div > 0.0:
             newF = tot / div
@@ -76,7 +76,7 @@ class HouseClimate(hass.Hass):
 
 
         else:
-            self.log('ERROR',"Unable to calculate dewPt Temp = {}, Humid = {}".format(temp,humid))
+            self.log("Unable to calculate dewPt Temp = {}, Humid = {}".format(temp,humid)) # Warning
 
     # rain calc
     def rain_calc(self, *args, **kwargs):
@@ -87,7 +87,7 @@ class HouseClimate(hass.Hass):
         if count_now == 'unknown' or count_now is None or count_hour is None or count_day is None:
             val_hour = 0.0
             val_day  = 0.0
-            self.log('ERROR',"Unable to calculate rain now = {}, hour = {}, day = {}".format(count_now,count_hour,count_day))
+            self.log("Unable to calculate rain now = {}, hour = {}, day = {}".format(count_now,count_hour,count_day)) # ERROR
         else:
             val_hour = float(count_now) - weather_convert.rainMmToIn(count_hour)
             val_day  = float(count_now) - weather_convert.rainMmToIn(count_day)

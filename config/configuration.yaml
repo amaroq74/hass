@@ -105,6 +105,12 @@ input_boolean:
   auto_light:
     name: Auto Light
 
+# Custom event
+#event: button_pressed
+#  event_data_template:
+#    name: button_pressed
+#    customData: "{{ entity_id }}"
+
 # Sensors
 sensor:
   - platform: yr
@@ -262,19 +268,19 @@ binary_sensor:
         input: 0
         name: Gate Bell
         inverted: false
-        fire_event: true
+        pushbutton: true
       door_bell:
         board: pantry
         input: 1
         name: Door Bell
         inverted: false
-        fire_event: true
+        pushbutton: true
       car_gate_btn:
         board: pantry
         input: 3
         name: Car Gate Btn
         inverted: false
-        fire_event: true
+        pushbutton: true
 
 light:
   - platform: template
