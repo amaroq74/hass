@@ -9,6 +9,11 @@ import appdaemon.plugins.hass.hassapi as hass
 import time
 from datetime import datetime, timedelta
 
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text      import MIMEText
+from urllib.parse import urlencode, quote_plus
+
 ##################################
 # Button Setup
 ##################################
@@ -30,6 +35,15 @@ Cameras = { 'gate_cam'   : zm_camera.ZmCamera('1'),
             'side_cam'   : zm_camera.ZmCamera('5') }
 
 Lights = { 'auto_light' :'switch.gate_light' }
+
+# Alarm group levels
+EmailLevels = {'night_alarm' : 'Alarm',
+               'dcare_bell'  : 'Alert',
+               'door_alarm'  : 'Alarm',
+               'house_alarm' : 'Alarm'}
+
+EmailAddrs = 'ryan@amaroq.com'
+#EmailAddrs = 'ryan@amaroq.com,steph@amaroq.com'
 
 ##################################
 # Sensor Setup
@@ -73,18 +87,20 @@ class HouseSecurity(hass.Hass):
 
         # Security sounds
         self._lastSound = {}
+        self._lastEmail = {}
 
         # Security items
         for k in SecSensors:
             self._lastSound[k] =0
+            self._lastEmail[k] = 0
             self.listen_state(self.sec_update,k)
 
         # Stop cameras
         for k,v in Cameras.items():
             try:
                 v.cancelCamera()
-            except:
-                self.log("Error cancelling camera: {}".format(k))
+            except Exception as msg:
+                self.error("Error cancelling camera {}: {}".format(k,msg))
 
 
     # Gate toggle
@@ -119,7 +135,9 @@ class HouseSecurity(hass.Hass):
 
     # Security update
     def sec_update(self, entity, attribute, old, new, *args, **kwargs):
-        if new == old or new == 'off':
+        emailActions = []
+
+        if new == old or new == 'off' or old != 'off':
             return
 
         # Procss each action
@@ -142,52 +160,97 @@ class HouseSecurity(hass.Hass):
                     try:
                         Cameras[action].triggerCamera(entity,CamTime)
                         self.log("Triggering camera: {}".format(action))
-                    except:
-                        self.log("Error triggering camera: {}".format(action))
+                    except Exception as msg:
+                        self.error("Error triggering camera {}: {}".format(action,msg))
 
                 # Check for lights
                 if action in Lights:
                     self.turn_on(Lights[action])
 
+                # Check for email actions
+                if action in EmailLevels:
+                    emailActions.append(action)
 
-#import smtplib
-#from email.mime.multipart import MIMEMultipart
-##from email.mime.text      import MIMEText
+        # Form email
+        if len(emailActions) != 0 and (time.time() - self._lastEmail[entity]) > 15:
+            self._lastEmail[entity] = time.time()
+            level = 'Alert'
 
-# Notifications
-#EmailAddrs = 'ryan@amaroq.com,steph@amaroq.com'
+            for action in emailActions:
+                if EmailLevels[action] == 'Alarm':
+                    level = 'Alarm'
 
-#        # Determine if any of the groups are armed
-#        if (time.time() - SecSensors[sensor]['lastAlarm']) > 3600:
-#            level = None
-#
-#            for grp in SecSensors[sensor]['groups']:
-#                if db.getVariable('Security',grp + '_arm') > 0:
-#                    level = GroupLevels[grp]
-#                    if level == 'Alarm':
-#                        break;
-#
-#            if level is not None:
-#                SecSensors[sensor]['lastAlarm'] = time.time()
-#
-#                # Send email
-#                msg = MIMEMultipart('alternative')
-#                msg['Subject'] = level + ": " + sensor
-#                msg['From']    = "home@amaroq.com"
-#                msg['To']      = EmailAddrs
-#
-#                text = level + " triggered by sensor " + sensor + "\n"
-#                text += "\nhttps://www.amaroq.net/home/?key=lolhak\n"
-#                text += "\nhttps://www.amaroq.net/home/cameras/\n"
-#                msg.attach(MIMEText(text, 'plain'))
-#
-#                try:
-#                   smtpObj = smtplib.SMTP('localhost')
-#                   smtpObj.sendmail('home@amaroq.com', EmailAddrs, msg.as_string())
-#                   db.setLog("inf", sensor, "Sent email to " + EmailAddrs)
-#                except smtplib.SMTPException:
-#                   db.setLog("wrn", sensor, "Error sending alarm email to " + EmailAddrs)
-#
-#    db.setLog("inf", sensor, "Processed event for state " + state)
+            # Send email
+            msg = MIMEMultipart('alternative')
+            msg['Subject'] = level + ": " + entity
+            msg['From']    = "home@amaroq.com"
+            msg['To']      = EmailAddrs
 
+            text = '<b>{} triggered by sensor {}</b>\n'.format(level,entity)
+            text += '<p><center>\n'
+
+            urlData = { 'view' : 'events',
+                        'filter[Query][terms][0][attr]' : 'Notes',
+                        'filter[Query][terms][0][op]'   : '=~',
+                        'filter[Query][terms][0][val]'  : 'Triggered',
+                        'filter[Query][terms][1][cnj]'  : 'and',
+                        'filter[Query][terms][1][attr]' : 'StartDateTime',
+                        'filter[Query][terms][1][op]'   : '>=',
+                        'filter[Query][terms][1][val]'  : '{0:%Y-%m-%d %H:%M:%S}'.format(datetime.now()+timedelta(minutes=-15)),
+                        'filter[Query][terms][2][cnj]'  : 'and',
+                        'filter[Query][terms][2][attr]' : 'StartDateTime',
+                        'filter[Query][terms][2][op]'   : '<=',
+                        'filter[Query][terms][2][val]'  : '{0:%Y-%m-%d %H:%M:%S}'.format(datetime.now()+timedelta(minutes=+15)),
+                        'sort_field' : 'StartDateTime',
+                        'sort_asc'   : '0',
+                        'limit'      : '100',
+                        'page'       : '0'}
+
+
+            text += '<a href=https://www.amaroq.net/zm/index.php?{}>Relative Events</a><br><p>\n'.format(urlencode(urlData))
+
+            urlData = { 'view' : 'events',
+                        'filter[Query][terms][0][attr]' : 'Notes',
+                        'filter[Query][terms][0][op]'   : '=~',
+                        'filter[Query][terms][0][val]'  : 'Triggered',
+                        'filter[Query][terms][1][cnj]'  : 'and',
+                        'filter[Query][terms][1][attr]' : 'StartDateTime',
+                        'filter[Query][terms][1][op]'   : '>=',
+                        'filter[Query][terms][2][val]'  : '-1+day',
+                        'sort_field' : 'StartDateTime',
+                        'sort_asc'   : '0',
+                        'limit'      : '100',
+                        'page'       : '0'}
+
+            text += '<a href=https://www.amaroq.net/zm/index.php?{}>24 Hour Events</a><br><p>\n'.format(urlencode(urlData))
+
+            urlData = { 'view'         : 'montage',
+                        'filtering'    : '',
+                        'MonitorName'  : '',
+                        'Source'       : '',
+                        'MonitorId[0]' : '1',
+                        'MonitorId[1]' : '2',
+                        'MonitorId[2]' : '4' }
+
+            text += '<a href=https://www.amaroq.net/zm/index.php?{}>Front Yard</a><br><p>\n'.format(urlencode(urlData))
+
+            urlData = { 'view'         : 'montage',
+                        'filtering'    : '',
+                        'MonitorName'  : '',
+                        'Source'       : '',
+                        'MonitorId[0]' : '3',
+                        'MonitorId[1]' : '5' }
+
+            text += '<a href=https://www.amaroq.net/zm/index.php?{}>Back Yard</a><br><p>\n'.format(urlencode(urlData))
+            text += '<a href=https://www.amaroq.net/zm/index.php>Zoneminder</a><br><p>\n'
+            text += '</center>\n'
+
+            msg.attach(MIMEText(text, 'html'))
+
+            try:
+               smtpObj = smtplib.SMTP('localhost')
+               smtpObj.sendmail('home@amaroq.com', EmailAddrs, msg.as_string())
+               self.log("Sent email to: " + EmailAddrs)
+            except smtplib.SMTPException:
+               self.error("Error sending alarm email to: " + EmailAddrs)
 

@@ -62,7 +62,7 @@ class SensorLog(hass.Hass):
         self.run_every(self.sensor_all, datetime.now() + timedelta(seconds=60), 60*5)
 
         # 15 min sparese
-        self.run_every(self.sparse_15min, datetime.now() + timedelta(seconds=60), 60*15)
+        #self.run_every(self.sparse_15min, datetime.now() + timedelta(seconds=60), 60*15)
 
         # Run once per day
         #self.run_daily(self.sparse_day,datetime.time(02, 15, 0))

@@ -48,7 +48,7 @@ class ZmCamera(threading.Thread):
         s.connect((self._host,self._port))
 
         msg = self._camera + "|on|255|"  + self._sensor + "|" + self._sensor + " Triggered|" + self._sensor + "\n"
-        s.send(msg)
+        s.send(msg.encode('utf-8'))
         s.close()
 
     def cancelCamera ( self ):
@@ -64,7 +64,7 @@ class ZmCamera(threading.Thread):
         s.connect((self._host,self._port))
 
         msg = self._camera + "|off|255|"  + self._sensor + "|" + self._sensor + " Cancel|" + self._sensor + "\n"
-        s.send(msg)
+        s.send(msg.encode('utf-8'))
         s.close()
 
     def run(self):
