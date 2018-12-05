@@ -34,7 +34,7 @@ Cameras = { 'gate_cam'   : zm_camera.ZmCamera('1'),
             'garage_cam' : zm_camera.ZmCamera('4'),
             'side_cam'   : zm_camera.ZmCamera('5') }
 
-Lights = { 'auto_light' :'switch.gate_light' }
+Lights = { 'auto_light' : ['switch.gate_light', 'switch.xmas_lights', 'switch.entry_light', 'switch.yard_lights2'] }
 
 # Alarm group levels
 EmailLevels = {'night_alarm' : 'Alarm',
@@ -178,7 +178,8 @@ class HouseSecurity(hass.Hass):
 
                 # Check for lights
                 if action in Lights:
-                    self.turn_on(Lights[action])
+                    for light in Lights[action]:
+                        self.turn_on(lights)
 
                 # Check for email actions
                 if action in EmailLevels:
