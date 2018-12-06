@@ -59,7 +59,7 @@ class HouseClimate(hass.Hass):
 
             self.set_state("sensor.house_temperature", 
                            state=newF, 
-                           attributes={'friendly_name' : 'House Temperature', 'unit_of_measurement' : TEMP_FAHRENHEIT, 'device_class' : 'temperature'})
+                           attributes={'friendly_name' : 'House Temp', 'unit_of_measurement' : TEMP_FAHRENHEIT, 'device_class' : 'temperature'})
 
     # New dew point source received
     def comp_dewpt(self, *args, **kwargs):
@@ -81,8 +81,13 @@ class HouseClimate(hass.Hass):
     # rain calc
     def rain_calc(self, *args, **kwargs):
         count_now  = self.get_state('sensor.rain_total')
-        count_hour = self._db.getSensorHour('rain','count')
-        count_day  = self._db.getSensorDay('rain','count')
+
+        try:
+            count_hour = self._db.getSensorHour('rain','count')
+            count_day  = self._db.getSensorDay('rain','count')
+        except:
+            count_hour = None
+            count_day  = None
 
         if count_now == 'unknown' or count_now is None or count_hour is None or count_day is None:
             val_hour = 0.0

@@ -22,19 +22,27 @@ CONFIG_SCHEMA = vol.Schema({
 
 async def async_setup(hass, config):
     data = {}
-    data['sources'] = {}
+    data['ids'] = {}
+    data['new'] = None
 
     def on_message(message):
         source = message['source']
+        topic  = message.topic
 
-        if source in data['sources']:
-            for value, newVal in message.values.items():
-                if value in data['sources'][source]:
-                    data['sources'][source][value]._update(newVal)
-        else:
-            _LOGGER.warning("Got data from unknown source: {}".format(source))
+        for key, newValue in message.values.items():
+            if key != 'topic' and key != 'source' and key != 'sensor':
+                uid = topic + '_' + key + '_' + source.replace('.','_')
+
+                if uid in data['ids']:
+                    data['ids'][uid]._update(newValue)
+                elif data['new'] is not None:
+                    _LOGGER.warning("Auto adding new entity: {}".format(uid))
+                    data['new'](uid,topic,key,newValue)
 
     data['dev'] = hass_rfxcom.RFXCom(on_message,device=config[DOMAIN].get(CONF_DEVICE))
+
+    def stop_rfxcom(*args, **kwargs):
+        data['dev'].stop()
 
     def rxrun():
         data['dev'].setup()
@@ -44,7 +52,7 @@ async def async_setup(hass, config):
     threading.Thread(target=rxrun).start()
 
     hass.data[DOMAIN] = data
-    hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, data['dev'].stop)
+    hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, stop_rfxcom)
 
     return True
 

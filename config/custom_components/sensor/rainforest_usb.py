@@ -9,7 +9,7 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     lst = []
 
     for resource in config[CONF_RESOURCES]:
-        entity_id = '{}_{}'.format(cfg['name'].resource)
+        entity_id = '{}_{}'.format(cfg['name'],resource)
         name      = '{} {}'.format(cfg['name'].capitalize(),resource.capitalize())
 
         sen = RainforestSensor(resource, entity_id, name)

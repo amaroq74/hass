@@ -82,7 +82,7 @@ class Rainforest(threading.Thread):
 
         self.start() 
 
-    def stop(self):
+    def stop(self, *args, **kwargs):
         self._runEn = False
         self.join()
 

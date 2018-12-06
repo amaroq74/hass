@@ -14,27 +14,37 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     data = hass.data[DOMAIN]
     lst = []
 
-    pres_adjust = config['pressure_adjust']
+    if 'pressure_adjust' in config:
+        pres_adjust = config['pressure_adjust']
+    else:
+        pres_adjust = 0.0
 
-    for source in config['sources']:
-        topic = config['sources'][source]['topic']
-        name  = config['sources'][source]['name']
+    if 'sources' in config:
+        for source in config['sources']:
+            topic = config['sources'][source]['topic']
+            name  = config['sources'][source]['name']
 
-        if source not in data['sources']:
-            data['sources'][source] = {}
+            for value in config['sources'][source]['values']:
+                uid = topic + '_' + value + '_' + source.replace('.','_')
+                sen = RfxcomSensor(uid,topic,name,value,pres_adjust)
+                lst.append(sen)
+                data['ids'][uid] = sen
 
-        for value in config['sources'][source]['values']:
-            sen = RfxcomSensor(source,topic,name,value,pres_adjust)
-            lst.append(sen)
-            data['sources'][source][value] = sen
+    def add_new(uid,topic,key,newValue):
+        sen = RfxcomSensor(uid,topic,uid,key,pres_adjust)
+        data['ids'][uid] = sen
+        async_add_entities([sen])
+        sen._update(newValue)
+
+    data['new'] = add_new
 
     async_add_entities(lst)
 
 
 class RfxcomSensor(Entity):
 
-    def __init__(self, source, topic, name, value, pressure_adjust):
-        self._source  = source
+    def __init__(self, uid, topic, name, value, pressure_adjust):
+        self._id      = uid
         self._topic   = topic
         self._name    = name
         self._val     = value
@@ -83,9 +93,6 @@ class RfxcomSensor(Entity):
             self._name += ' Average'
             self._conv  = weather_convert.speedMpsToMph
             self._units = "MPH"
-
-        # Generate Entity ID
-        self._id = self._name.lower().replace(' ','_')
 
     @property
     def unique_id(self):

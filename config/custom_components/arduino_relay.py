@@ -32,7 +32,11 @@ async def async_setup(hass, config):
             data['hosts'][host].addNode(brd)
             data['boards'][k] = brd
 
-        hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, data['hosts'][host].stop)
+    def stop_arduino(*args, **kwargs):
+        for host in data['hosts']:
+            host.stop()
+
+    hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, stop_arduino)
 
     hass.data[DOMAIN] = data
 
