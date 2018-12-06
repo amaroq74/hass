@@ -107,6 +107,10 @@ input_boolean:
 
 # Sensors
 sensor:
+  - platform: yr
+    name: Weather
+    monitored_conditions:
+      - symbol
   - platform: zoneminder
     include_archived: true
   - platform: apcupsd
