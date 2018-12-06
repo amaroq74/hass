@@ -81,6 +81,10 @@ class ArduinoRelayDoorGate(SwitchDevice,hass_arduino.ArduinoRelayDoorGate):
         self._off_icon = None
 
     @property
+    def unique_id(self):
+        return self._entity
+
+    @property
     def name(self):
         return self._name
 

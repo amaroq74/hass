@@ -89,7 +89,7 @@ class RfxcomSensor(Entity):
 
     @property
     def unique_id(self):
-        return self._id
+        return self._id   # This should really be self._source
 
     @property
     def icon(self):

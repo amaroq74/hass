@@ -9,14 +9,12 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     lst = []
 
     for resource in config[CONF_RESOURCES]:
-        channel = resource.lower()
+        entity_id = '{}_{}'.format(cfg['name'].resource)
+        name      = '{} {}'.format(cfg['name'].capitalize(),resource.capitalize())
 
-        entity_id = '{}_{}'.format(cfg['name'].lower(),channel)
-        name      = '{} {}'.format(cfg['name'],resource)
-
-        sen = RainforestSensor(channel, entity_id, name)
+        sen = RainforestSensor(resource, entity_id, name)
         lst.append(sen)
-        cfg['channels'][channel] = sen
+        cfg['channels'][resource] = sen
 
     async_add_entities(lst)
 

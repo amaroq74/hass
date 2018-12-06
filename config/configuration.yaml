@@ -69,7 +69,7 @@ apcupsd:
 
 rainforest_usb:
   device: /dev/serial/by-id/usb-Rainforest_RFA-Z106-RA-PC_RAVEn_v2.3.21-if00-port0
-  name: Smartmeter
+  name: smartmeter
 
 rfxcom_rx:
   device: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A6003Q5Y-if00-port0 
@@ -105,12 +105,6 @@ input_boolean:
   auto_light:
     name: Auto Light
 
-# Custom event
-#event: button_pressed
-#  event_data_template:
-#    name: button_pressed
-#    customData: "{{ entity_id }}"
-
 # Sensors
 sensor:
   - platform: yr
@@ -128,8 +122,8 @@ sensor:
       - timeleft
   - platform: rainforest_usb
     resources:
-      - Rate
-      - Total
+      - rate
+      - total
   - platform: rfxcom_rx
     pressure_adjust: 6.0
     sources:
@@ -234,6 +228,7 @@ cloud:
     filter:
       include_domains:
         - light
+        - fan
       include_entities:
         - climate.house
         - climate.pool
@@ -244,6 +239,8 @@ cloud:
         - switch.pool_sweep
         - input_boolean.dcare_bell
         - input_boolean.gate_bell
+        - input_boolean.door_alarm
+        - input_boolean.house_alarm
 
 zoneminder:
   host: kapugen.amaroq.net
