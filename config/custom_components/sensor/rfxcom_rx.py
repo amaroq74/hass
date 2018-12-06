@@ -31,7 +31,7 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
                 data['ids'][uid] = sen
 
     def add_new(uid,topic,key,newValue):
-        sen = RfxcomSensor(uid,topic,uid,key,pres_adjust)
+        sen = RfxcomSensor(uid,topic,'Unknown',key,pres_adjust)
         data['ids'][uid] = sen
         async_add_entities([sen])
         sen._update(newValue)

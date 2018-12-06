@@ -55,7 +55,7 @@ class RainforestSensor(Entity):
         return self._units
 
     def _update(self,value):
-        self._value = value
+        self._value = round(value,2)
         self.async_update_ha_state()
 
 

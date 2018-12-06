@@ -52,7 +52,7 @@ class HouseClimate(hass.Hass):
                 self.log("Missing data from {}".format(k)) # WARNING
 
         if div > 0.0:
-            newF = tot / div
+            newF = round(tot / div,2)
             newC = weather_convert.tempFarToCel(newF)
             self._db.setSensor('House', 'temp', newC, 'c')
             self.log("New house temp = {}".format(newF))
@@ -94,8 +94,8 @@ class HouseClimate(hass.Hass):
             val_day  = 0.0
             self.log("Unable to calculate rain now = {}, hour = {}, day = {}".format(count_now,count_hour,count_day)) # ERROR
         else:
-            val_hour = float(count_now) - weather_convert.rainMmToIn(count_hour)
-            val_day  = float(count_now) - weather_convert.rainMmToIn(count_day)
+            val_hour = round(float(count_now) - weather_convert.rainMmToIn(count_hour),2)
+            val_day  = round(float(count_now) - weather_convert.rainMmToIn(count_day),2)
 
         if val_hour < 0.001:
             val_hour = 0.0

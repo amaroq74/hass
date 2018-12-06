@@ -23,32 +23,32 @@ def windDegToCompass ( deg ):
     return wDir
 
 def tempCelToFar ( cel ) :
-    return ((float(cel) * 9.0/5.0) + 32.0)
+    return round(((float(cel) * 9.0/5.0) + 32.0),2)
 
 def tempFarToCel ( far ) :
-    return((float(far) - 32.0) * (5.0/9.0))
+    return round(((float(far) - 32.0) * (5.0/9.0)),2)
 
 def speedMpsToMph ( mps ):
-    return (float(mps) * 2.2369362920544 )
+    return round((float(mps) * 2.2369362920544 ),2)
 
 def speedMphToMps ( mph ):
-    return (float(mph) / 2.2369362920544 )
+    return round((float(mph) / 2.2369362920544 ),2)
 
 def rainMmToIn ( mm ) :
-    return (float(mm) / 25.4)
+    return round((float(mm) / 25.4),2)
 
 def rainInToMm ( inc ) :
-    return (float(inc) * 25.4)
+    return round((float(inc) * 25.4),2)
 
 def pressureHpaToInhg ( hpa ) :
-    return ( float(hpa) / 33.8638 )
+    return round(( float(hpa) / 33.8638 ),2)
 
 def pressureInhgToHpa ( inhg ) :
-    return ( float(inhg) * 33.8638 )
+    return round(( float(inhg) * 33.8638 ),2)
 
 def compDewPtCel ( tempC, humidity ):
-    return(float(tempC) - ((100.0 - float(humidity))/5.0))
+    return round((float(tempC) - ((100.0 - float(humidity))/5.0)),2)
 
 def compDewPtFar ( tempF, humidity ):
-    return tempCelToFar(compDewPtCel(tempFarToCel(tempF),humidity))
+    return round(tempCelToFar(compDewPtCel(tempFarToCel(tempF),humidity)),2)
 
