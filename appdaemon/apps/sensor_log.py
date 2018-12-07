@@ -51,6 +51,15 @@ LogSensors = {  'sensor.rain_total'           : {'type':'count',         'device
 
 class SensorLog(hass.Hass):
 
+    def warning(self,msg):
+        self.log(msg,level='WARNING')
+
+    def error(self,msg):
+        self.log(msg,level='ERROR')
+
+    def debug(self,msg):
+        self.log(msg,level='DEBUG')
+
     def initialize(self):
         self._db = hass_mysql.Mysql("hass-app")
 
@@ -68,7 +77,7 @@ class SensorLog(hass.Hass):
         #self.run_daily(self.sparse_day,datetime.time(02, 15, 0))
 
     def sensor_rx(self, entity, attribute, old, new, *args, **kwargs):
-        self.log("Got new value for {} = {}".format(entity,new))
+        self.debug("Got new value for {} = {}".format(entity,new))
         ent = LogSensors[entity]
 
         if ent['conv'] is not None:
@@ -79,7 +88,7 @@ class SensorLog(hass.Hass):
         self._db.setSensor(ent['device'], ent['type'], val, ent['units'])
 
     def sensor_all(self, *args, **kwargs):
-        self.log("Logging all sensors")
+        self.debug("Logging all sensors")
         for k,ent in LogSensors.items():
             new = self.get_state(k)
 
@@ -125,7 +134,7 @@ class SensorLog(hass.Hass):
                device = row["device"]
 
                start_time = '%i-%i-%i %i:%i:00' % (year,month,day,hour,min_st)
-               self.log("device = %s, type = %s, id=%i, start=%s" % (device,type,row['id'],start_time))
+               self.debug("device = %s, type = %s, id=%i, start=%s" % (device,type,row['id'],start_time))
 
                # Get all of 15-minute period records
                query  = "select id, time, type, device, current, units, sparsed, time(time) as time from sensor_log where type = '" + str(type) + "' "
@@ -170,7 +179,6 @@ class SensorLog(hass.Hass):
                   cnt = cnt + 1
 
                   query = "update sensor_log set sparsed = '1' where id = '" + str(id) + "'"
-                  #self.log("Query: " + query)
                   cursor3.execute(query)
 
                # Setup query, avoid null fields
@@ -179,7 +187,7 @@ class SensorLog(hass.Hass):
                query += "','" + str(units) + "','" + str(first) + "','" + str(last) + "','" + str(sum/cnt) + "','" + str(min) + "','" + str(max) + "','" + str(min_time)
                query += "','" + str(max_time) + "')"
                cursor3.execute(query)
-               self.log("Query: " + query)
+               self.debug("Query: " + query)
 
 
     def sparse_day(self, *args, **kwargs):
@@ -269,10 +277,10 @@ class SensorLog(hass.Hass):
                query += "','" + str(units) + "','" + str(first) + "','" + str(last) + "','" + str(sum/cnt) + "','" + str(min)
                query += "','" + str(max) + "','" + str(min_time) + "','" + str(max_time) + "')"
                cursor3.execute(query)
-               self.log("Query: " + query)
+               self.debug("Query: " + query)
 
             query = "delete from sensor_log where time < (now() - interval 30 day) and sparsed = '1'"
-            self.log("Query: " + query)
+            self.debug("Query: " + query)
             cursor1.execute(query)
 
 

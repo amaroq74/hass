@@ -75,6 +75,15 @@ SecSensors = { 'binary_sensor.ped_gate'      : [ 'gate_bell',   'dcare_bell',  '
 
 class HouseSecurity(hass.Hass):
 
+    def warning(self,msg):
+        self.log(msg,level='WARNING')
+
+    def error(self,msg):
+        self.log(msg,level='ERROR')
+
+    def debug(self,msg):
+        self.log(msg,level='DEBUG')
+
     def initialize(self):
 
         # Day care alarm
@@ -100,7 +109,7 @@ class HouseSecurity(hass.Hass):
             try:
                 v.cancelCamera()
             except Exception as msg:
-                self.log("Error cancelling camera {}: {}".format(k,msg)) # ERROR
+                self.error("Error cancelling camera {}: {}".format(k,msg)) # ERROR
 
         # Pushbutton events
         self.listen_event(self.button_pressed,'button_pressed')
@@ -147,7 +156,7 @@ class HouseSecurity(hass.Hass):
 
     # Security update
     def sec_update(self, entity, attribute, old, new, *args, **kwargs):
-        self.log("Got event {} {} {} {}".format(entity,attribute,old,new))
+        self.debug("Got event {} {} {} {}".format(entity,attribute,old,new))
         emailActions = []
 
         if new == old or new == 'off' or old != 'off':
@@ -172,9 +181,9 @@ class HouseSecurity(hass.Hass):
                 if action in Cameras:
                     try:
                         Cameras[action].triggerCamera(entity,'HASS',CamTime)
-                        self.log("Triggering camera: {}".format(action))
+                        self.debug("Triggering camera: {}".format(action))
                     except Exception as msg:
-                        self.log("Error triggering camera {}: {}".format(action,msg)) # ERROR
+                        self.error("Error triggering camera {}: {}".format(action,msg))
 
                 # Check for lights
                 if action in Lights:
@@ -273,5 +282,5 @@ class HouseSecurity(hass.Hass):
                smtpObj.sendmail('home@amaroq.com', EmailAddrs, msg.as_string())
                self.log("Sent email to: " + EmailAddrs)
             except smtplib.SMTPException:
-               self.log("Error sending alarm email to: " + EmailAddrs) # ERROR
+               self.error("Error sending alarm email to: " + EmailAddrs)
 

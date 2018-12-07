@@ -17,6 +17,15 @@ TempWeights = { "sensor.bedr_temperature"   : 1.0,
 
 class HouseClimate(hass.Hass):
 
+    def warning(self,msg):
+        self.log(msg,level='WARNING')
+
+    def error(self,msg):
+        self.log(msg,level='ERROR')
+
+    def debug(self,msg):
+        self.log(msg,level='DEBUG')
+
     def initialize(self):
         self._db = hass_mysql.Mysql("hass-app")
 
@@ -49,13 +58,13 @@ class HouseClimate(hass.Hass):
                 tot += (float(val) * v)
                 div += TempWeights[k]
             else:
-                self.log("Missing data from {}".format(k)) # WARNING
+                self.warning("Missing data from {}".format(k))
 
         if div > 0.0:
             newF = round(tot / div,2)
             newC = weather_convert.tempFarToCel(newF)
             self._db.setSensor('House', 'temp', newC, 'c')
-            self.log("New house temp = {}".format(newF))
+            self.debug("New house temp = {}".format(newF))
 
             self.set_state("sensor.house_temperature", 
                            state=newF, 
@@ -68,7 +77,7 @@ class HouseClimate(hass.Hass):
 
         if temp is not None and temp != 'unknown' and humid is not None and humid != 'unknown':
             dewPt = weather_convert.compDewPtFar(float(temp), float(humid))
-            self.log("Comp dewpt temp = {} humid = {} dewPt = {}".format(temp,humid,dewPt))
+            self.debug("Comp dewpt temp = {} humid = {} dewPt = {}".format(temp,humid,dewPt))
 
             self.set_state("sensor.outdoor_dewpoint", 
                            state=dewPt,
@@ -76,7 +85,7 @@ class HouseClimate(hass.Hass):
 
 
         else:
-            self.log("Unable to calculate dewPt Temp = {}, Humid = {}".format(temp,humid)) # Warning
+            self.warning("Unable to calculate dewPt Temp = {}, Humid = {}".format(temp,humid))
 
     # rain calc
     def rain_calc(self, *args, **kwargs):
@@ -92,7 +101,7 @@ class HouseClimate(hass.Hass):
         if count_now == 'unknown' or count_now is None or count_hour is None or count_day is None:
             val_hour = 0.0
             val_day  = 0.0
-            self.log("Unable to calculate rain now = {}, hour = {}, day = {}".format(count_now,count_hour,count_day)) # ERROR
+            self.warning("Unable to calculate rain now = {}, hour = {}, day = {}".format(count_now,count_hour,count_day))
         else:
             val_hour = round(float(count_now) - weather_convert.rainMmToIn(count_hour),2)
             val_day  = round(float(count_now) - weather_convert.rainMmToIn(count_day),2)
@@ -104,7 +113,7 @@ class HouseClimate(hass.Hass):
             val_day = 0.0
 
         if val_hour >= 0.0 and val_day >= 0.0:
-            self.log("Rain calc. count now = {}, count hour = {}, count day = {}, val hour = {}, val day = {}".format(count_now,count_hour,count_day,val_hour,val_day))
+            self.debug("Rain calc. count now = {}, count hour = {}, count day = {}, val hour = {}, val day = {}".format(count_now,count_hour,count_day,val_hour,val_day))
 
             self.set_state("sensor.rain_hour",
                            state=val_hour,

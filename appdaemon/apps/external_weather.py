@@ -23,6 +23,15 @@ SensorList = { 'sensor.wind_gust'           : 'windgustmph'  ,
 
 class WeatherPost(hass.Hass):
 
+    def warning(self,msg):
+        self.log(msg,level='WARNING')
+
+    def error(self,msg):
+        self.log(msg,level='ERROR')
+
+    def debug(self,msg):
+        self.log(msg,level='DEBUG')
+
     def initialize(self):
         self.run_every(self.post_weather, datetime.now() + timedelta(seconds=10), 5)
 
@@ -45,16 +54,15 @@ class WeatherPost(hass.Hass):
                 data += "&{}={}".format(v,val)
 
         try:
-            #self.log("Posting {}".format(data))
             fh = urllib.request.urlopen(data)
             ures = fh.read().rstrip()
             fh.close()
 
             if ures != b'success':
-                self.log("Bad url post result = {}".format(ures)) # WARNING
+                self.warning("Bad url post result = {}".format(ures))
 
         except Exception as msg:
-            self.log("Got exception: {}".format(msg)) # ERROR
+            self.error("Got exception: {}".format(msg))
         except:
-            self.log("Got unknown exception") # ERROR
+            self.error("Got unknown exception")
 

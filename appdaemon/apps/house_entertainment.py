@@ -4,6 +4,15 @@ import appdaemon.plugins.hass.hassapi as hass
 
 class HouseEntertainment(hass.Hass):
 
+    def warning(self,msg):
+        self.log(msg,level='WARNING')
+
+    def error(self,msg):
+        self.log(msg,level='ERROR')
+
+    def debug(self,msg):
+        self.log(msg,level='DEBUG')
+
     def initialize(self):
 
         # Chrome state
