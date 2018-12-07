@@ -25,10 +25,10 @@ async def async_setup(hass, config):
         xbee   = hosts[host]['xbee']
         boards = hosts[host]['boards']
 
-        data['hosts'][host] = hass_arduino.ArduinoRelayHost(host,device,xbee)
+        data['hosts'][host] = hass_arduino.ArduinoRelayHost(host,device,xbee,_LOGGER)
 
         for k,v in boards.items():
-            brd = hass_arduino.ArduinoRelayBoard(k, data['hosts'][host], v)
+            brd = hass_arduino.ArduinoRelayBoard(k, data['hosts'][host], v,_LOGGER)
             data['hosts'][host].addNode(brd)
             data['boards'][k] = brd
 

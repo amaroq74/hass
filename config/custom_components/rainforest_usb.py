@@ -101,7 +101,7 @@ class Rainforest(threading.Thread):
                     _LOGGER.info("Opened serial port")
                     last = time.time()
                 except Exception as msg:
-                    _LOGGER.error("Got exception: {}".format(msg))
+                    _LOGGER.warning("Got exception: {}".format(msg))
                     time.sleep(1)
                     continue
 
@@ -153,7 +153,6 @@ class Rainforest(threading.Thread):
                     block = ''
 
             except Exception as msg:
-                _LOGGER.warning("Got exception: {}".format(msg))
                 block = ''
                 ser.flushInput()
 

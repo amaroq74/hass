@@ -7,8 +7,6 @@ import xbee
 import serial
 import threading
 
-_LOGGER = logging.getLogger(__name__)
-
 # Temperature vs resistance table
 PoolSolarTableRaw = { 185: 150,    208: 145,    234: 140,    264: 135,    300: 130,
                       341: 125,    389: 120,    438: 116,    444: 115,    472: 113,
@@ -185,7 +183,7 @@ class ArduinoRelayDoorGate(object):
 class ArduinoRelayBoard(object):
     """Class to handle a the arduino relay board."""
 
-    def __init__(self, name, host, address=None):
+    def __init__(self, name, host, address, log=None):
         self._sendPeriod  = 10
         self._logPeriod   = 60*5
         self._warnPeriod  = 60*60
@@ -201,7 +199,12 @@ class ArduinoRelayBoard(object):
         self._rxCount     = 0
         self._reset       = 1
 
-        _LOGGER.info("Created board={} address={}".format(name,address))
+        if log is None:
+            self._log = logging.getLogger(__name__)
+        else:
+            self._log = log
+
+        self._log.info("Created board={} address={}".format(name,address))
 
     def addInput(self,idx,inp):
         self._inputs[idx] = inp
@@ -229,7 +232,7 @@ class ArduinoRelayBoard(object):
        
         # Make sure length is correct and the marker is present
         if words == None or len(words) != 13 or words[0] != "STATUS" : 
-            _LOGGER.warning("Bad message from {} : {}".format(self._name,message))
+            self._log.warning("Bad message from {} : {}".format(self._name,message))
             return
 
         # Process results
@@ -249,12 +252,12 @@ class ArduinoRelayBoard(object):
         # Log is true
         if newValue or (time.time() - self._logTime) > self._logPeriod:
             self._logTime = time.time()
-            _LOGGER.info("Got {} messages from {} : {} Temp={} Timeouts={}".format(self._rxCount, self._name, message, tempValue, toCount))
+            self._log.info("Got {} messages from {} : {} Temp={} Timeouts={}".format(self._rxCount, self._name, message, tempValue, toCount))
             self._rxCount = 0
 
     def sendMessage(self,new=True):
         if self._addrData is None:
-            _LOGGER.warning("Skipping send for {}".format(self._name))
+            self._log.warning("Skipping send for {}".format(self._name))
             self._sendTime = time.time()
             return
 
@@ -265,7 +268,7 @@ class ArduinoRelayBoard(object):
         msg += " " + str(self._reset)
 
         if new or self._reset:
-            _LOGGER.info("Sending message to {} : {}".format(self._name,msg))
+            self._log.info("Sending message to {} : {}".format(self._name,msg))
 
         self._reset = 0
         self._host.txData(self._addrData,msg)
@@ -277,13 +280,13 @@ class ArduinoRelayBoard(object):
 
         # Make sure we are getting message from device
         if (time.time() - self._warnTime) > self._warnPeriod:
-           _LOGGER.error("Have not received a message from {} in over an hour!".format(self._name))
+           self._log.error("Have not received a message from {} in over an hour!".format(self._name))
            self._warnTime = time.time()
 
 
 class ArduinoRelayHost(object):
 
-    def __init__(self,name,device,xbeeEn):
+    def __init__(self,name,device,xbeeEn,log=None):
         self._name      = name
         self._byName    = {}
         self._byAddr    = {}
@@ -291,6 +294,11 @@ class ArduinoRelayHost(object):
         self._runEnable = True
         self._device    = device
         self._xb        = None
+
+        if log is None:
+            self._log = logging.getLogger(__name__)
+        else:
+            self._log = log
 
         # Serial device
         self._ser = serial.Serial(port = device, baudrate = 9600)
@@ -301,7 +309,7 @@ class ArduinoRelayHost(object):
         # update thread
         self._thread = threading.Thread(target=self.update_run).start()
 
-        _LOGGER.info("Created host={} on device={} xbee={}".format(self._name,self._device,xbeeEn))
+        self._log.info("Created host={} on device={} xbee={}".format(self._name,self._device,xbeeEn))
 
     def addNode(self, node):
         self._byName[node.name] = node
@@ -316,7 +324,7 @@ class ArduinoRelayHost(object):
             else:
                 self._ser.write((msg + "\n").encode('utf-8'))
         except:
-            _LOGGER.error("Transmit exception")
+            self._log.error("Transmit exception")
 
     def stop(self):
         self._runEnable = False
@@ -341,7 +349,7 @@ class ArduinoRelayHost(object):
                 v.update()
 
             if (time.time() - self._lastRx) > 900:
-                _LOGGER.error("Have not received a message in 15 minutes!")
+                self._log.error("Have not received a message in 15 minutes!")
                 self._lastRx = time.time()
 
     # XBEE callback
@@ -358,10 +366,10 @@ class ArduinoRelayHost(object):
             if 'rf_data' in data and src64 in self._byAddr:
                 self._byAddr[src64].rxData(addr,data['rf_data'].decode('utf-8'))
             else:
-                _LOGGER.warning("Dropping message from unknown source: {}".format(src64))
+                self._log.warning("Dropping message from unknown source: {}".format(src64))
 
         except Exception as err:
-            _LOGGER.error("Callback exception in xbee_rx: {}".format(err))
+            self._log.error("Callback exception in xbee_rx: {}".format(err))
         except :
-            _LOGGER.error("Unknown exception in xbee_rx")
+            self._log.error("Unknown exception in xbee_rx")
 

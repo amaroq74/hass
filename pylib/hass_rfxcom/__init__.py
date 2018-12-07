@@ -61,13 +61,17 @@ class RFXCom(object):
 
     parsers = [ getattr(hass_rfxcom.parsers, x)() for x in hass_rfxcom.parsers.__all__ ]
 
-    def __init__(self, on_message, dedup=2.5, device='/dev/serial/by-id/usb-FTDI_FT232R_USB_UART_*-if00-port0', serial_type=Pyserial):
+    def __init__(self, on_message, dedup=2.5, device='/dev/serial/by-id/usb-FTDI_FT232R_USB_UART_*-if00-port0', serial_type=Pyserial, log=None):
         self.on_message = on_message
         self.dedup = dedup
         self.device = device
         self.serial_type = serial_type
-        
-        self.logger = logging.getLogger('rfxcom')
+       
+        if log is None:
+            self.logger = logging.getLogger('rfxcom')
+        else:
+            self.logger = log
+
         self.stopping = False
         self.last_messages = []
         self.last_timestamps = []
@@ -143,7 +147,7 @@ class RFXCom(object):
         if len(data) == bytes:
             return self.decode(length, data)
         else:
-            self.logger.error('Read short - expected %d, received %d bytes' % (bytes, len(data)))
+            self.logger.warning('Read short - expected %d, received %d bytes' % (bytes, len(data)))
             return None
 
     def stop(self):
@@ -181,9 +185,9 @@ class RFXCom(object):
                 self.last_messages.append(message)
                 self.last_timestamps.append(now)
 
-                self.logger.info('Message: %s' % message)
+                self.logger.debug('Message: %s' % message)
                 return message
         
-        self.logger.warn('Unhandled data: [%s]' % (' '.join('%02x' % d for d in packet)))
+        self.logger.warning('Unhandled data: [%s]' % (' '.join('%02x' % d for d in packet)))
         return None
 

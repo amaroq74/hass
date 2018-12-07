@@ -39,7 +39,7 @@ async def async_setup(hass, config):
                     _LOGGER.warning("Auto adding new entity: {}".format(uid))
                     data['new'](uid,topic,key,newValue)
 
-    data['dev'] = hass_rfxcom.RFXCom(on_message,device=config[DOMAIN].get(CONF_DEVICE))
+    data['dev'] = hass_rfxcom.RFXCom(on_message,device=config[DOMAIN].get(CONF_DEVICE),log=_LOGGER)
 
     def stop_rfxcom(*args, **kwargs):
         data['dev'].stop()
