@@ -67,7 +67,7 @@ class SensorLog(hass.Hass):
         for k,v in LogSensors.items():
             self.listen_state(self.sensor_rx, k)
 
-        # Log envery 5 min
+        # Log every 5 min
         self.run_every(self.sensor_all, datetime.now() + timedelta(seconds=60), 60*5)
 
         # 15 min sparese
