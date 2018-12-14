@@ -11,7 +11,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="2" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="CacheLoad">
+	<Node id="2" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
 		<Manufacturer id="14a" name="Ecolink">
 			<Product type="1" id="2" name="Door/Window Sensor" />
 		</Manufacturer>
@@ -69,7 +69,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="3" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="CacheLoad">
+	<Node id="3" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
 		<Manufacturer id="14a" name="Ecolink">
 			<Product type="1" id="1" name="Motion Sensor" />
 		</Manufacturer>
@@ -79,7 +79,7 @@
 			</CommandClass>
 			<CommandClass id="48" name="COMMAND_CLASS_SENSOR_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
 				<SensorMap index="0" type="46" />
 				<SensorMap index="0" type="62" />
 				<SensorMap index="0" type="193" />
@@ -211,7 +211,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="5" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="CacheLoad">
+	<Node id="5" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
 		<Manufacturer id="14a" name="Ecolink">
 			<Product type="1" id="2" name="Door/Window Sensor" />
 		</Manufacturer>
@@ -267,7 +267,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="6" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="CacheLoad">
+	<Node id="6" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
 		<Manufacturer id="14a" name="Ecolink">
 			<Product type="1" id="1" name="Motion Sensor" />
 		</Manufacturer>
@@ -330,7 +330,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="9" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="CacheLoad">
+	<Node id="9" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
 		<Manufacturer id="14a" name="Ecolink">
 			<Product type="1" id="1" name="Motion Sensor" />
 		</Manufacturer>
@@ -340,7 +340,7 @@
 			</CommandClass>
 			<CommandClass id="48" name="COMMAND_CLASS_SENSOR_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
 				<SensorMap index="0" type="36" />
 				<SensorMap index="0" type="52" />
 				<SensorMap index="0" type="203" />
@@ -451,7 +451,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="14" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="CacheLoad">
+	<Node id="14" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
 		<Manufacturer id="14a" name="Ecolink">
 			<Product type="1" id="2" name="Door/Window Sensor" />
 		</Manufacturer>
@@ -509,7 +509,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="15" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="CacheLoad">
+	<Node id="15" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
 		<Manufacturer id="14a" name="Ecolink">
 			<Product type="1" id="2" name="Door/Window Sensor" />
 		</Manufacturer>
@@ -901,7 +901,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="48" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3072" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="CacheLoad">
+	<Node id="48" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3072" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
 		<Manufacturer id="14a" name="Ecolink">
 			<Product type="4" id="2" name="Door/Window Sensor" />
 		</Manufacturer>
@@ -1007,7 +1007,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="51" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3072" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="CacheLoad">
+	<Node id="51" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3072" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
 		<Manufacturer id="14a" name="Ecolink">
 			<Product type="4" id="2" name="Door/Window Sensor" />
 		</Manufacturer>
@@ -1113,7 +1113,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="52" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3072" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Session">
+	<Node id="52" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3072" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Dynamic">
 		<Manufacturer id="14a" name="Ecolink">
 			<Product type="4" id="2" name="Door/Window Sensor" />
 		</Manufacturer>
@@ -1219,7 +1219,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="53" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3072" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Session">
+	<Node id="53" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3072" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Dynamic">
 		<Manufacturer id="14a" name="Ecolink">
 			<Product type="4" id="2" name="Door/Window Sensor" />
 		</Manufacturer>
@@ -1966,7 +1966,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -2107,7 +2107,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="63" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="CacheLoad">
+	<Node id="63" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
 		<Manufacturer id="14a" name="Ecolink">
 			<Product type="1" id="1" name="Motion Sensor" />
 		</Manufacturer>
@@ -2170,7 +2170,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="64" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="CacheLoad">
+	<Node id="64" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
 		<Manufacturer id="14a" name="Ecolink">
 			<Product type="1" id="1" name="Motion Sensor" />
 		</Manufacturer>
@@ -2180,7 +2180,7 @@
 			</CommandClass>
 			<CommandClass id="48" name="COMMAND_CLASS_SENSOR_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 				<SensorMap index="0" type="56" />
 				<SensorMap index="0" type="109" />
 				<SensorMap index="0" type="117" />
@@ -2235,7 +2235,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="65" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="CacheLoad">
+	<Node id="65" name="" location="" basic="4" generic="32" specific="1" type="Routing Binary Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
 		<Manufacturer id="14a" name="Ecolink">
 			<Product type="1" id="1" name="Motion Sensor" />
 		</Manufacturer>
@@ -2860,7 +2860,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -3124,14 +3124,14 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="82" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3072" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Session">
+	<Node id="82" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3072" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
 		<Manufacturer id="14a" name="Ecolink">
 			<Product type="4" id="2" name="Door/Window Sensor" />
 		</Manufacturer>
 		<CommandClasses>
 			<CommandClass id="32" name="COMMAND_CLASS_BASIC" version="1" request_flags="4" innif="true" setasreport="true">
 				<Instance index="1" />
-				<Value type="byte" genre="basic" instance="1" index="0" label="Basic" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="255" />
+				<Value type="byte" genre="basic" instance="1" index="0" label="Basic" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 			</CommandClass>
 			<CommandClass id="48" name="COMMAND_CLASS_SENSOR_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
