@@ -188,6 +188,6 @@ class RFXCom(object):
                 self.logger.debug('Message: %s' % message)
                 return message
         
-        self.logger.warning('Unhandled data: [%s]' % (' '.join('%02x' % d for d in packet)))
+        self.logger.debug('Unhandled data: [%s]' % (' '.join('%02x' % d for d in packet)))
         return None
 
