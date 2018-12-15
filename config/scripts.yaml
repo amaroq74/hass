@@ -104,3 +104,19 @@ rear_patio_sprinklers:
     data:
       entity_id: switch.rear_patio_1
     service: switch.turn_off
+movie_lights:
+  alias: Movie Lights
+  sequence:
+  - alias: Lights Off
+    data:
+      entity_id: light.kitchen_island
+      entity_id: light.kitchen_light
+      entity_id: light.kitchen_table
+      entity_id: light.couch_light
+      entity_id: light.bar_light
+    service: light.turn_off
+  - alias: Lights On
+    data:
+      entity_id: light.bookcases
+      brighness_pct: 50
+    service: light.turn_on

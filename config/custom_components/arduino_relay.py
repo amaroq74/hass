@@ -34,7 +34,7 @@ async def async_setup(hass, config):
 
     def stop_arduino(*args, **kwargs):
         for host in data['hosts']:
-            host.stop()
+            data['hosts'][host].stop()
 
     hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, stop_arduino)
 

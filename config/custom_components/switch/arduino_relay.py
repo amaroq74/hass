@@ -21,16 +21,18 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
         output   = v['output']
         name     = v['name']
         door     = v['door']
+        iconon   = v['iconon']
+        iconoff  = v['iconoff']
 
         if board in data['boards']:
             brd = data['boards'][board]
 
             if door:
                 inp = v['input']
-                sw = ArduinoRelayDoorGate(brd, k, name, v['inverted'])
+                sw = ArduinoRelayDoorGate(brd, k, name, v['inverted'],iconon,iconoff)
                 brd.addInput(inp, sw)
             else:
-                sw = ArduinoRelaySwitch(brd, k, name, v['timeout'])
+                sw = ArduinoRelaySwitch(brd, k, name, v['timeout'],iconon,iconoff)
 
             brd.addOutput(output, sw)
 
@@ -40,15 +42,22 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
 
 class ArduinoRelaySwitch(SwitchDevice,hass_arduino.ArduinoRelayOutput):
 
-    def __init__(self, parent, entity, name, timeout):
+    def __init__(self, parent, entity, name, timeout,iconon,iconoff):
         super(ArduinoRelaySwitch,self).__init__(parent,entity,name,timeout)
 
-        self._on_icon  = None
-        self._off_icon = None
+        self._on_icon  = iconon
+        self._off_icon = iconoff
 
     @property
     def unique_id(self):
         return self._entity
+
+    @property
+    def icon(self):
+        if self._state:
+            return self._on_icon
+        else:
+            return self._off_icon
 
     @property
     def name(self):
@@ -74,15 +83,22 @@ class ArduinoRelaySwitch(SwitchDevice,hass_arduino.ArduinoRelayOutput):
 
 class ArduinoRelayDoorGate(SwitchDevice,hass_arduino.ArduinoRelayDoorGate):
 
-    def __init__(self, parent, entity, name, inverted):
+    def __init__(self, parent, entity, name, inverted,iconon,iconoff):
         super(ArduinoRelayDoorGate,self).__init__(parent,entity,name,inverted)
 
-        self._on_icon  = None
-        self._off_icon = None
+        self._on_icon  = iconon
+        self._off_icon = iconoff
 
     @property
     def unique_id(self):
         return self._entity
+
+    @property
+    def icon(self):
+        if self._state:
+            return self._on_icon
+        else:
+            return self._off_icon
 
     @property
     def name(self):

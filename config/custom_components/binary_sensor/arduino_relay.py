@@ -23,10 +23,11 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
         name       = v['name']
         inverted   = v['inverted']
         pushbutton = v['pushbutton']
+        icon       = v['icon']
 
         if board in data['boards']:
             brd = data['boards'][board]
-            sen = ArduinoBinarySensor(brd, k, name, inverted, pushbutton)
+            sen = ArduinoBinarySensor(brd, k, name, inverted, pushbutton, icon)
             brd.addInput(inp, sen)
 
             lst.append(sen)
@@ -35,10 +36,10 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
 
 class ArduinoBinarySensor(BinarySensorDevice,hass_arduino.ArduinoRelayInput):
 
-    def __init__(self, parent, entity, name, inv, pushbutton):
+    def __init__(self, parent, entity, name, inv, pushbutton, icon):
         super(ArduinoBinarySensor,self).__init__(parent,entity,name,inv)
 
-        self._icon       = ''
+        self._icon       = icon
         self._class      = None
         self._pushbutton = pushbutton
 
@@ -48,7 +49,7 @@ class ArduinoBinarySensor(BinarySensorDevice,hass_arduino.ArduinoRelayInput):
 
     @property
     def icon(self):
-        self._icon
+        return self._icon
 
     @property
     def name(self):

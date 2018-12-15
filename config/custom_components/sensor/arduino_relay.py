@@ -22,10 +22,11 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
         inp   = v['input']
         name  = v['name']
         per   = v['avgPeriod']
+        icon  = v['icon']
 
         if board in data['boards']:
             brd = data['boards'][board]
-            sen = ArduinoSensor(brd, k, name, per)
+            sen = ArduinoSensor(brd, k, name, per, icon)
             brd.addInput(inp, sen)
 
             lst.append(sen)
@@ -34,12 +35,12 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
 
 class ArduinoSensor(Entity,hass_arduino.ArduinoRelayPoolSolar):
 
-    def __init__(self, parent, entity, name, avgPeriod):
+    def __init__(self, parent, entity, name, avgPeriod,icon):
         super(ArduinoSensor,self).__init__(parent,entity,name,avgPeriod)
 
         self._units = TEMP_FAHRENHEIT
         self._conv  = weather_convert.tempCelToFar
-        self._icon  = 'mdi:thermometer'
+        self._icon  = icon
 
     @property
     def unique_id(self):
@@ -47,7 +48,7 @@ class ArduinoSensor(Entity,hass_arduino.ArduinoRelayPoolSolar):
 
     @property
     def icon(self):
-        self._icon
+        return self._icon
 
     @property
     def name(self):

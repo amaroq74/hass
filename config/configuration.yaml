@@ -132,11 +132,13 @@ sensor:
         input: 2
         name: Pool Solar In
         avgPeriod: 60
+        icon: 'mdi:thermometer'
       pool_solar_out:
         board: pool_control
         input: 3
         name: Pool Solar Out
         avgPeriod: 60
+        icon: 'mdi:thermometer'
 
 # Cloud
 cloud:
@@ -157,6 +159,7 @@ cloud:
         - input_boolean.gate_bell
         - input_boolean.door_alarm
         - input_boolean.house_alarm
+        - script.movie_lights
 
 zoneminder:
   host: kapugen.amaroq.net
@@ -182,18 +185,21 @@ binary_sensor:
         name: Gate Bell
         inverted: false
         pushbutton: true
+        icon: 'mdi:bell'
       door_bell:
         board: pantry
         input: 1
         name: Door Bell
         inverted: false
         pushbutton: true
+        icon: 'mdi:bell'
       car_gate_btn:
         board: pantry
         input: 3
         name: Car Gate Btn
         inverted: false
         pushbutton: true
+        icon: 'mdi:garage'
 
 light:
   - platform: template
@@ -306,6 +312,24 @@ light:
         turn_off:
           service: switch.turn_off
           entity_id: switch.yard_lights2
+      kitchen_island:
+        friendly_name: "Kitchen Island"
+        value_template: "{{ states('switch.kichen_island') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.kitchen_island
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.kitchen_island
+      kitchen_light:
+        friendly_name: "Kitchen Light"
+        value_template: "{{ states('switch.kichen_light') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.kitchen_light
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.kitchen_light
 
 switch:
   - platform: arduino_relay
@@ -316,36 +340,48 @@ switch:
         name: House Heat
         door: false
         timeout: 2100
+        iconon: 'mdi:radiator'
+        iconoff: 'mdi:radiator-disabled'
       house_fan:
         board: pantry
         output: 1
         name: House Fan
         door: false
         timeout: 7200
+        iconon: 'mdi:fan'
+        iconoff: 'mdi:fan-off'
       front_lawn_1:
         board: front_sprinklers
         output: 0
         name: Front Lawn 1
         door: false
         timeout: 3600
+        iconon: 'mdi:water'
+        iconoff: 'mdi:water-off'
       front_lawn_2:
         board: front_sprinklers
         output: 1
         name: Front Lawn 2
         door: false
         timeout: 3600
+        iconon: 'mdi:water'
+        iconoff: 'mdi:water-off'
       front_lawn_3:
         board: front_sprinklers
         output: 2
         name: Front Lawn 3
         door: false
         timeout: 3600
+        iconon: 'mdi:water'
+        iconoff: 'mdi:water-off'
       west_trees:
         board: front_sprinklers
         output: 3
         name: West Trees
         door: false
         timeout: 3600
+        iconon: 'mdi:water'
+        iconoff: 'mdi:water-off'
       car_gate:
         board: front_sprinklers
         output: 5
@@ -353,30 +389,40 @@ switch:
         name: Car Gate
         door: true
         inverted: true
+        iconon: 'mdi:garage-open'
+        iconoff: 'mdi:garage'
       rear_patio_1:
         board: garage_control
         output: 0
         name: Rear Patio 1
         door: false
         timeout: 3600
+        iconon: 'mdi:water'
+        iconoff: 'mdi:water-off'
       rear_patio_2:
         board: garage_control
         output: 1
         name: Rear Patio 2
         door: false
         timeout: 3600
+        iconon: 'mdi:water'
+        iconoff: 'mdi:water-off'
       rear_patio_3:
         board: garage_control
         output: 2
         name: Rear Patio 3
         door: false
         timeout: 3600
+        iconon: 'mdi:water'
+        iconoff: 'mdi:water-off'
       front_flowers:
         board: garage_control
         output: 3
         name: Front Flowers
         door: false
         timeout: 3600
+        iconon: 'mdi:water'
+        iconoff: 'mdi:water-off'
       garage_door:
         board: garage_control
         output: 5
@@ -384,42 +430,56 @@ switch:
         name: Garage Door
         door: true
         inverted: false
+        iconon: 'mdi:garage-open'
+        iconoff: 'mdi:garage'
       east_lawn_1:
         board: east_sprinklers
         output: 0
         name: East Lawn 1
         door: false
         timeout: 3600
+        iconon: 'mdi:water'
+        iconoff: 'mdi:water-off'
       east_lawn_2:
         board: east_sprinklers
         output: 1
         name: East Lawn 2
         door: false
         timeout: 3600
+        iconon: 'mdi:water'
+        iconoff: 'mdi:water-off'
       east_lemon:
         board: east_sprinklers
         output: 3
         name: East Lemon
         door: false
         timeout: 3600
+        iconon: 'mdi:water'
+        iconoff: 'mdi:water-off'
       pool_main:
         board: pool_control
         output: 0
         name: Pool Main
         door: false
         timeout: 3600
+        iconon: 'mdi:pool'
+        iconoff: 'mdi:pool'
       pool_sweep:
         board: pool_control
         output: 1
         name: Pool Sweep
         door: false
         timeout: 3600
+        iconon: 'mdi:pool'
+        iconoff: 'mdi:pool'
       pool_heat:
         board: pool_control
         output: 2
         name: Pool Heat
         door: false
         timeout: 3600
+        iconon: 'mdi:pool'
+        iconoff: 'mdi:pool'
 
 climate:
   - platform: generic_thermostat

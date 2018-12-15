@@ -73,27 +73,34 @@ class RfxcomSensor(Entity):
             self._conv   = weather_convert.pressureHpaToInhg
             self._units  = "INHG"
             self._adjust = pressure_adjust
+            self._icon  = 'mdi:speedometer'
         elif value == 'trend':
             self._name += ' Trend'
+            self._icon  = 'mdi:weather-cloudy'
         elif topic == 'rain' and value == 'speed':
             self._name += ' Rate'
             self._conv  = weather_convert.rainMmToIn
             self._units = "INPH"
+            self._icon  = 'mdi:weather-rainy'
         elif topic == 'rain' and value == 'total':
             self._name += ' Total'
             self._conv  = weather_convert.rainMmToIn
             self._units = "IN"
+            self._icon  = 'mdi:weather-rainy'
         elif topic == 'wind' and value == 'speed':
             self._name += ' Gust'
             self._conv  = weather_convert.speedMpsToMph
             self._units = "MPH"
+            self._icon  = 'mdi:weather-windy'
         elif topic == 'wind' and value == 'dir':
             self._name += ' Direction'
             self._units = "Deg"
+            self._icon  = 'mdi:weather-windy'
         elif topic == 'wind' and value == 'avgspeed':
             self._name += ' Average'
             self._conv  = weather_convert.speedMpsToMph
             self._units = "MPH"
+            self._icon  = 'mdi:weather-windy'
 
     @property
     def unique_id(self):
@@ -101,7 +108,7 @@ class RfxcomSensor(Entity):
 
     @property
     def icon(self):
-        self._icon
+        return self._icon
 
     @property
     def name(self):

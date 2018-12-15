@@ -305,3 +305,13 @@
         entity_id: media_player.kitchen_speaker
         volume_level: 0.40
       service: media_player.volume_set
+- id: fans_off
+  alias: Fans Off
+  trigger:
+  - at: '01:00:00'
+    platform: time
+  action:
+  - data:
+      entity_id: fan.bedr_fan
+      entity_id: fan.bedta_fan
+    service: fan.turn_off

@@ -40,7 +40,7 @@ class RainforestSensor(Entity):
 
     @property
     def icon(self):
-        self._icon
+        return self._icon
 
     @property
     def name(self):
