@@ -314,7 +314,7 @@ light:
           entity_id: switch.yard_lights2
       kitchen_island:
         friendly_name: "Kitchen Island"
-        value_template: "{{ states('switch.kichen_island') }}"
+        value_template: "{{ states('switch.kitchen_island') }}"
         turn_on:
           service: switch.turn_on
           entity_id: switch.kitchen_island
@@ -323,7 +323,7 @@ light:
           entity_id: switch.kitchen_island
       kitchen_light:
         friendly_name: "Kitchen Light"
-        value_template: "{{ states('switch.kichen_light') }}"
+        value_template: "{{ states('switch.kitchen_light') }}"
         turn_on:
           service: switch.turn_on
           entity_id: switch.kitchen_light
