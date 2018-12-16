@@ -330,6 +330,42 @@ light:
         turn_off:
           service: switch.turn_off
           entity_id: switch.kitchen_light
+      living_entry:
+        friendly_name: "Living Entry"
+        value_template: "{{ states('switch.living_entry') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.living_entry
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.living_entry
+      living_tree:
+        friendly_name: "Living Tree"
+        value_template: "{{ states('switch.living_tree') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.living_tree
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.living_tree
+      living_floor:
+        friendly_name: "Living Floor"
+        value_template: "{{ states('switch.living_floor') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.living_floor
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.living_floor
+      living_lights:
+        friendly_name: "Living Lights"
+        value_template: "{{ states('switch.living_lights') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.living_lights
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.living_lights
 
 switch:
   - platform: arduino_relay

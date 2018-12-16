@@ -107,16 +107,29 @@ rear_patio_sprinklers:
 movie_lights:
   alias: Movie Lights
   sequence:
-  - alias: Lights Off
+  - alias: step1
     data:
       entity_id: light.kitchen_island
+    service: light.turn_off
+  - alias: step2
+    data:
       entity_id: light.kitchen_light
+    service: light.turn_off
+  - alias: step3
+    data:
       entity_id: light.kitchen_table
+    service: light.turn_off
+  - alias: step4
+    data:
       entity_id: light.couch_light
+    service: light.turn_off
+  - alias: step5
+    data:
       entity_id: light.bar_light
     service: light.turn_off
-  - alias: Lights On
+  - alias: step6
     data:
       entity_id: light.bookcases
-      brighness_pct: 50
+      brightness_pct: 50
     service: light.turn_on
+
