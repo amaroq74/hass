@@ -160,6 +160,8 @@ cloud:
         - input_boolean.door_alarm
         - input_boolean.house_alarm
         - script.movie_lights
+        - script.house_lights_off
+        - script.welcome_lights
 
 zoneminder:
   host: kapugen.amaroq.net

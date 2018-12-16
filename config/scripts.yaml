@@ -109,27 +109,55 @@ movie_lights:
   sequence:
   - alias: step1
     data:
-      entity_id: light.kitchen_island
+      entity_id: 
+        - light.kitchen_island
+        - light.kitchen_light
+        - light.kitchen_table
+        - light.couch_light
+        - light.bar_light
     service: light.turn_off
   - alias: step2
-    data:
-      entity_id: light.kitchen_light
-    service: light.turn_off
-  - alias: step3
-    data:
-      entity_id: light.kitchen_table
-    service: light.turn_off
-  - alias: step4
-    data:
-      entity_id: light.couch_light
-    service: light.turn_off
-  - alias: step5
-    data:
-      entity_id: light.bar_light
-    service: light.turn_off
-  - alias: step6
     data:
       entity_id: light.bookcases
       brightness_pct: 50
     service: light.turn_on
-
+house_lights_off:
+  alias: House Lights Off
+  sequence:
+  - alias: step1
+    data:
+      entity_id: 
+        - light.bar_light
+        - light.bedr_light
+        - light.bedta_light
+        - light.bookcases
+        - light.couch_light
+        - light.dining_room
+        - light.family_tree
+        - light.kitchen_island
+        - light.kitchen_light
+        - light.kitchen_table
+        - light.living_chandelier
+        - light.living_entry
+        - light.living_floor
+        - light.living_lights
+        - light.living_tree
+        - light.master_light
+        - light.office_light
+    service: light.turn_off
+  - alias: step2
+    data:
+      entity_id: remote.harmony_hub
+    service: remote.turn_off
+welcome_lights:
+  alias: Welcome Lights
+  sequence:
+  - alias: step1
+    data:
+      entity_id: 
+        - light.bookcases
+        - light.family_tree
+        - light.kitchen_island
+        - light.living_floor
+        - light.living_tree
+    service: light.turn_on
