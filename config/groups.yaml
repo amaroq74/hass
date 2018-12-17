@@ -211,7 +211,6 @@ pool:
       - climate.pool
       - switch.pool_main
       - switch.pool_sweep
-      - light.pool_light
       - sensor.pool_solar_in
       - sensor.pool_solar_out
       - automation.pool_main_on_timer
@@ -262,25 +261,19 @@ lights_bedr:
    control: hidden
    entities:
       - light.bedr_light
-      - fan.bedr_fan
 
 lights_bedta:
    name: Amelia & Tessa's Room
-   control: hidden
    entities:
       - light.bedta_light
-      - fan.bedta_fan
 
 lights_master:
    name: Master Bedroom
-   control: hidden
    entities:
       - light.master_light
-      - fan.master_fan
 
 lights_living:
    name: Living Room
-   control: hidden
    entities:
       - light.living_light
       - light.living_floor
@@ -291,13 +284,11 @@ lights_living:
 
 lights_dining:
    name: Dining Room
-   control: hidden
    entities:
       - light.dining_room
 
 lights_kitchen:
    name: Kitchen
-   control: hidden
    entities:
       - light.kitchen_light
       - light.kitchen_island
@@ -305,24 +296,20 @@ lights_kitchen:
 
 lights_family:
    name: Family Room
-   control: hidden
    entities:
       - light.couch_light
       - light.bookcases
       - light.bar_light
       - light.family_tree
       - light.bar_plug
-      - fan.family_fan
 
 lights_office:
    name: Office
-   control: hidden
    entities:
       - light.office_light
 
 lights_hall:
    name: Hallway
-   control: hidden
    entities:
       - light.long_hall
       - light.short_hall
