@@ -176,6 +176,7 @@ class HouseSecurity(hass.Hass):
                 if (time.time() - self._lastSound[entity]) > 15 and action in Sounds:
                     self._lastSound[entity] = time.time()
                     self.log("Playing sound for: {}".format(entity))
+                    self.turn_on('media_player.kitchen_speaker')
                     self.call_service('media_player/play_media',
                                       entity_id='media_player.kitchen_speaker',
                                       media_content_id='http://172.16.20.1:8123/local/sounds/' + Sounds[action],

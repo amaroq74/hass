@@ -1,5 +1,6 @@
 
-climate:
+#climate:
+default_view:
    name: Climate
    view: true
    entities:
@@ -15,6 +16,7 @@ security:
       - group.gates
       - group.doors
       - group.motion
+      - group.security_controls
       - group.camera_gate
       - group.camera_front
       - group.camera_garage
@@ -35,6 +37,7 @@ lights:
       - group.lights_bedr
       - group.lights_bedta
       - group.lights_hall
+      - group.lights_yard
 
 yard:
    name: Yard
@@ -46,6 +49,20 @@ yard:
       - group.irrigation_flower_box
       - group.irrigation_rear_patio
 
+entertain:
+   name: Entertainment
+   view: true
+   entities:
+      - group.entertain_other
+      - media_player.chrome_family
+      - media_player.family_room
+      - media_player.chrome_master
+      - media_player.master
+      - media_player.kitchen_speaker
+      - media_player.rxv677_b95979
+      - media_player.rxv677_b95979_zone_2
+      - media_player.samsung_8_series_65_un65mu800d
+
 monitor:
    name: Monitor
    view: true
@@ -53,6 +70,15 @@ monitor:
       - group.power
       - group.batteries
       - group.all_automations
+      - group.zwave
+
+
+entertain_other:
+   name: Entertain
+   control: hidden
+   entities:
+      - switch.speakers
+      - remote.harmony_hub
 
 motion:
    name: Motion Sensors
@@ -86,6 +112,18 @@ gates:
       - binary_sensor.garbage_gate
       - binary_sensor.chickens_gate
       - binary_sensor.ivy_gate
+
+security_controls:
+   name: Controls
+   control: hidden
+   entities:
+      - input_boolean.dcare_bell
+      - input_boolean.night_alarm
+      - input_boolean.door_alarm
+      - input_boolean.house_alarm
+      - script.house_lights_off
+      - script.movie_lights
+      - script.welcome_lights
 
 batteries:
    name: Batteries
@@ -131,7 +169,7 @@ climate_weather:
       - sensor.rain_hour
 
 climate_temperature:
-   name: Temperatures
+   name: Temperature
    control: hidden
    entities:
       - climate.house
@@ -148,7 +186,7 @@ climate_humidity:
    name: Humidity
    control: hidden
    entities:
-      - sensor.family_humidity
+      - sensor.indoor_humidity
       - sensor.master_humidity
       - sensor.bedr_humidity
       - sensor.bedta_humidity
@@ -289,6 +327,17 @@ lights_hall:
       - light.long_hall
       - light.short_hall
 
+lights_yard:
+   name: Yard
+   entities:
+      - light.gate_light
+      - light.yard_lights1
+      - light.yard_lights2
+      - light.patio_lights
+      - light.entry_light
+      - light.xmas_lights
+      - light.pool_light
+
 camera_gate:
    name: Gate Camera
    entities:
@@ -330,4 +379,64 @@ camera_chickens:
       #- sensor.chickens_status
       #- sensor.chickens_events
       - camera.chickens
+
+zwave:
+   name: ZWave
+   entities:
+     - zwave.aeotec_zw090_zstick_gen5_us
+     - zwave.bar_light
+     - zwave.bar_plug
+     - zwave.bedr_fan
+     - zwave.bedr_light
+     - zwave.bedr_motion
+     - zwave.bedta_fan
+     - zwave.bedta_light
+     - zwave.bedta_motion
+     - zwave.bookcases
+     - zwave.camper_heat
+     - zwave.chickens_gate
+     - zwave.chicken_heat
+     - zwave.couch_light
+     - zwave.dining_door
+     - zwave.dining_room
+     - zwave.ecolink_doorwindow_sensor_12
+     - zwave.entry_light
+     - zwave.family_door
+     - zwave.family_fan
+     - zwave.family_motion
+     - zwave.family_tree
+     - zwave.front_door
+     - zwave.garage_heat
+     - zwave.garage_motion
+     - zwave.garage_rdoor
+     - zwave.garbage_gate
+     - zwave.gate_light
+     - zwave.ivy_gate
+     - zwave.kitchen_door
+     - zwave.kitchen_island
+     - zwave.kitchen_light
+     - zwave.kitchen_table
+     - zwave.living_chandelier
+     - zwave.living_entry
+     - zwave.living_floor
+     - zwave.living_lights
+     - zwave.living_motion
+     - zwave.living_tree
+     - zwave.master_fan
+     - zwave.master_light
+     - zwave.master_motion
+     - zwave.office_door
+     - zwave.office_light
+     - zwave.office_motion
+     - zwave.patio_fountain
+     - zwave.patio_lights
+     - zwave.patio_sec1
+     - zwave.pbath_door
+     - zwave.ped_gate
+     - zwave.pool_light
+     - zwave.shed_door
+     - zwave.speakers_new
+     - zwave.xmas_lights
+     - zwave.yard_lights1
+     - zwave.yard_lights2
 
