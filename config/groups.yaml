@@ -1,0 +1,333 @@
+
+climate:
+   name: Climate
+   view: true
+   entities:
+      - group.climate_weather
+      - group.climate_temperature
+      - group.climate_humidity
+      - group.climate_fans
+
+security:
+   name: Security
+   view: true
+   entities:
+      - group.gates
+      - group.doors
+      - group.motion
+      - group.camera_gate
+      - group.camera_front
+      - group.camera_garage
+      - group.camera_rear
+      - group.camera_side
+      - group.camera_chickens
+
+lights:
+   name: Lights
+   view: true
+   entities:
+      - group.lights_family
+      - group.lights_kitchen
+      - group.lights_office
+      - group.lights_dining
+      - group.lights_living
+      - group.lights_master
+      - group.lights_bedr
+      - group.lights_bedta
+      - group.lights_hall
+
+yard:
+   name: Yard
+   view: true
+   entities:
+      - group.pool
+      - group.yard_other
+      - group.irrigation_front_yard
+      - group.irrigation_flower_box
+      - group.irrigation_rear_patio
+
+monitor:
+   name: Monitor
+   view: true
+   entities:
+      - group.power
+      - group.batteries
+      - group.all_automations
+
+motion:
+   name: Motion Sensors
+   entities:
+      - binary_sensor.family_motion
+      - binary_sensor.living_motion
+      - binary_sensor.master_motion
+      - binary_sensor.office_motion
+      - binary_sensor.bedr_motion
+      - binary_sensor.bedta_motion
+      - binary_sensor.garage_motion
+
+doors:
+   name: Doors
+   entities:
+      - switch.garage_door
+      - binary_sensor.family_door
+      - binary_sensor.front_door
+      - binary_sensor.office_door
+      - binary_sensor.dining_door
+      - binary_sensor.kitchen_door
+      - binary_sensor.pbath_door
+      - binary_sensor.shed_door
+      - binary_sensor.garage_rdoor
+
+gates:
+   name: Gates
+   entities:
+      - switch.car_gate
+      - binary_sensor.ped_gate
+      - binary_sensor.garbage_gate
+      - binary_sensor.chickens_gate
+      - binary_sensor.ivy_gate
+
+batteries:
+   name: Batteries
+   entities:
+      - sensor.indoor_battery
+      - sensor.master_battery
+      - sensor.bedr_battery
+      - sensor.bedta_battery
+      - sensor.shed_battery
+      - sensor.garage_battery
+      - sensor.chickens_battery
+      - sensor.camper_battery
+      - sensor.outdoor_battery
+      - sensor.wind_battery
+      - sensor.pool_battery
+      - sensor.rain_battery
+
+power:
+   name: Power
+   entities:
+      - sensor.smartmeter_rate
+      - sensor.smartmeter_total
+      - sensor.ups_input_voltage
+      - sensor.ups_battery
+      - sensor.ups_load
+      - sensor.ups_time_left
+
+climate_weather:
+   name: Weather
+   entities:
+      - sensor.weather_symbol
+      - sun.next_setting
+      - sun.next_rising
+      - sensor.wind_compass
+      - sensor.wind_average
+      - sensor.wind_gust
+      - sensor.outdoor_temperature
+      - sensor.outdoor_humidity
+      - sensor.outdoor_dewpoint
+      - sensor.indoor_pressure
+      - sensor.indoor_trend
+      - sensor.rain_day
+      - sensor.rain_hour
+
+climate_temperature:
+   name: Temperatures
+   control: hidden
+   entities:
+      - climate.house
+      - sensor.indoor_temperature
+      - sensor.master_temperature
+      - sensor.bedr_temperature
+      - sensor.bedta_temperature
+      - sensor.shed_temperature
+      - climate.garage
+      - climate.chicken_coop
+      - climate.camper
+
+climate_humidity:
+   name: Humidity
+   control: hidden
+   entities:
+      - sensor.family_humidity
+      - sensor.master_humidity
+      - sensor.bedr_humidity
+      - sensor.bedta_humidity
+      - sensor.garage_humidity
+      - sensor.shed_humidity
+
+climate_fans:
+   name: Fans
+   control: hidden
+   entities:
+      - fan.family_fan
+      - fan.master_fan
+      - fan.bedr_fan
+      - fan.bedta_fan
+      - switch.house_fan
+
+pool:
+   name: Pool
+   control: hidden
+   entities:
+      - sensor.pool_temperature
+      - climate.pool
+      - switch.pool_main
+      - switch.pool_sweep
+      - light.pool_light
+      - sensor.pool_solar_in
+      - sensor.pool_solar_out
+      - automation.pool_main_on_timer
+      - automation.pool_sweep_on_timer
+      - automation.pool_main_off_timer
+      - automation.pool_sweep_off_timer
+
+yard_other:
+   name: Yard Other
+   control: hidden
+   entities:
+      - switch.patio_fountain
+      - switch.patio_sec1
+
+irrigation_front_yard:
+   name: Front Yard Irrigation
+   control: hidden
+   entities:
+      - automation.front_yard_sprinklers_timer
+      - script.front_yard_sprinklers
+      - switch.west_trees
+      - switch.east_lemon
+      - switch.front_lawn_1
+      - switch.front_lawn_2
+      - switch.front_lawn_3
+      - switch.east_lawn_1
+      - switch.east_lawn_2
+
+irrigation_flower_box:
+   name: Flower Boxes Irrigation
+   control: hidden
+   entities:
+      - automation.flower_box_sprinklers_timer
+      - script.flower_box_sprinklers
+      - switch.front_flowers
+      - switch.rear_patio_2
+
+irrigation_rear_patio:
+   name: Rear Patio Irrigation
+   control: hidden
+   entities:
+      - automation.rear_patio_sprinklers_timer
+      - script.rear_patio_sprinklers
+      - switch.rear_patio_1
+
+lights_bedr:
+   name: Rachel's Room
+   control: hidden
+   entities:
+      - light.bedr_light
+      - fan.bedr_fan
+
+lights_bedta:
+   name: Amelia & Tessa's Room
+   control: hidden
+   entities:
+      - light.bedta_light
+      - fan.bedta_fan
+
+lights_master:
+   name: Master Bedroom
+   control: hidden
+   entities:
+      - light.master_light
+      - fan.master_fan
+
+lights_living:
+   name: Living Room
+   control: hidden
+   entities:
+      - light.living_light
+      - light.living_floor
+      - light.living_tree
+      - light.living_chandelier
+      - light.living_entry
+      - light.bar_plug
+
+lights_dining:
+   name: Dining Room
+   control: hidden
+   entities:
+      - light.dining_room
+
+lights_kitchen:
+   name: Kitchen
+   control: hidden
+   entities:
+      - light.kitchen_light
+      - light.kitchen_island
+      - light.kitchen_table
+
+lights_family:
+   name: Family Room
+   control: hidden
+   entities:
+      - light.couch_light
+      - light.bookcases
+      - light.bar_light
+      - light.family_tree
+      - light.bar_plug
+      - fan.family_fan
+
+lights_office:
+   name: Office
+   control: hidden
+   entities:
+      - light.office_light
+
+lights_hall:
+   name: Hallway
+   control: hidden
+   entities:
+      - light.long_hall
+      - light.short_hall
+
+camera_gate:
+   name: Gate Camera
+   entities:
+      #- sensor.gate_status
+      #- sensor.gate_events
+      - camera.gate
+
+camera_front:
+   name: Front Camera
+   entities:
+      #- sensor.front_status
+      #- sensor.front_events
+      - camera.front
+
+camera_garage:
+   name: Garage Camera
+   entities:
+      #- sensor.garage_status
+      #- sensor.garage_events
+      - camera.garage
+
+camera_rear:
+   name: Rear Camera
+   entities:
+      #- sensor.rear_status
+      #- sensor.rear_events
+      - camera.rear
+
+camera_side:
+   name: Side Camera
+   entities:
+      #- sensor.side_status
+      #- sensor.side_events
+      - camera.side
+
+camera_chickens:
+   name: Chickens Camera
+   entities:
+      #- sensor.chickens_status
+      #- sensor.chickens_events
+      - camera.chickens
+

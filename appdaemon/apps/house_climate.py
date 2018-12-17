@@ -68,7 +68,10 @@ class HouseClimate(hass.Hass):
 
             self.set_state("sensor.house_temperature", 
                            state=newF, 
-                           attributes={'friendly_name' : 'House Temp', 'unit_of_measurement' : TEMP_FAHRENHEIT, 'device_class' : 'temperature'})
+                           attributes={'friendly_name' : 'House Temp', 
+                                       'unit_of_measurement' : TEMP_FAHRENHEIT, 
+                                       'device_class' : 'temperature',
+                                       'icon' : 'mdi:thermometer'})
 
     # New dew point source received
     def comp_dewpt(self, *args, **kwargs):
@@ -81,8 +84,10 @@ class HouseClimate(hass.Hass):
 
             self.set_state("sensor.outdoor_dewpoint", 
                            state=dewPt,
-                           attributes={'friendly_name' : 'Outdoor Dew Point', 'unit_of_measurement' : TEMP_FAHRENHEIT, 'device_class' : 'temperature'})
-
+                           attributes={'friendly_name' : 'Outdoor Dew Point', 
+                                       'unit_of_measurement' : TEMP_FAHRENHEIT, 
+                                       'device_class' : 'temperature',
+                                       'icon' : 'mdi:thermometer'})
 
         else:
             self.warning("Unable to calculate dewPt Temp = {}, Humid = {}".format(temp,humid))
@@ -117,11 +122,17 @@ class HouseClimate(hass.Hass):
 
             self.set_state("sensor.rain_hour",
                            state=val_hour,
-                           attributes={'friendly_name' : 'Rain Hour', 'unit_of_measurement' : 'IN', 'device_class' : ''})
+                           attributes={'friendly_name' : 'Rain Hour', 
+                                       'unit_of_measurement' : 
+                                       'IN', 'device_class' : '',
+                                       'icon' : 'mdi:weather-rainy'})
 
             self.set_state("sensor.rain_day", 
                            state=val_day,
-                           attributes={'friendly_name' : 'Rain Day', 'unit_of_measurement' : 'IN', 'device_class' : ''})
+                           attributes={'friendly_name' : 'Rain Day', 
+                                       'unit_of_measurement' : 'IN', 
+                                       'device_class' : '',
+                                       'icon' : 'mdi:weather-rainy'})
 
     # Set compass direction
     def wind_comp(self, *args, **kwargs):
@@ -132,5 +143,9 @@ class HouseClimate(hass.Hass):
 
             self.set_state("sensor.wind_compass",
                            state=new,
-                           attributes={'friendly_name' : 'Wind Compass', 'unit_of_measurement' : '', 'device_class' : ''})
+                           attributes={'friendly_name' : 'Wind Compass', 
+                                       'unit_of_measurement' : '', 
+                                       'device_class' : '',
+                                       'device_class' : '',
+                                       'icon' : 'mdi:weather-windy'})
 

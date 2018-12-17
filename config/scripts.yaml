@@ -1,5 +1,5 @@
 front_yard_sprinklers:
-  alias: Front Yard Sprinklers
+  alias: Front Yard Sprinklers Run
   sequence:
   - alias: West Trees On
     data:
@@ -71,7 +71,7 @@ front_yard_sprinklers:
       entity_id: switch.east_lawn_2
     service: switch.turn_off
 flower_box_sprinklers:
-  alias: Flower Box Sprinklers
+  alias: Flower Box Sprinklers Run
   sequence:
   - alias: Front Flowers On
     data:
@@ -93,7 +93,7 @@ flower_box_sprinklers:
       entity_id: switch.rear_patio_2
     service: switch.turn_off
 rear_patio_sprinklers:
-  alias: Rear Patio Sprinklers
+  alias: Rear Patio Sprinklers Run
   sequence:
   - alias: Rear Patio 1 On
     data:

@@ -1,24 +1,5 @@
-- id: sec_lights_off
-  alias: Security Lights Off
-  trigger:
-  - event: sunrise
-    offset: -01:00:00
-    platform: sun
-  action:
-  - data:
-      entity_id: switch.patio_sec1
-    service: switch.turn_off
-- id: sec_lights_on
-  alias: Security Lights On
-  trigger:
-  - at: 00:05:00
-    platform: time
-  action:
-  - data:
-      entity_id: switch.patio_sec1
-    service: switch.turn_on
 - id: yard_lights_on
-  alias: Yard Lights On
+  alias: Yard Lights On Timer
   trigger:
   - event: sunset
     offset: +00:00:00
@@ -36,8 +17,11 @@
       - switch.pool_light
       - switch.gate_light
     service: switch.turn_on
+  - data:
+      entity_id: switch.patio_sec1
+    service: switch.turn_off
 - id: yard_lights_off
-  alias: Yard Lights Off
+  alias: Yard Lights Off Timer
   trigger:
   - event: sunrise
     offset: -01:00:00
@@ -59,17 +43,11 @@
       - switch.pool_light
       - switch.gate_light
     service: switch.turn_off
-- id: speak_off
-  alias: Speakers Off
-  trigger:
-  - at: '23:55:00'
-    platform: time
-  action:
   - data:
-      entity_id: switch.speakers
-    service: switch.turn_off
+      entity_id: switch.patio_sec1
+    service: switch.turn_on
 - id: pool_main_off
-  alias: Pool Main Off
+  alias: Pool Main Off Timer
   trigger:
   - at: 00:30:00
     platform: time
@@ -79,8 +57,15 @@
   - data:
       entity_id: switch.pool_main
     service: switch.turn_off
+  - data:
+      entity_id: climate.pool
+    service: climate.turn_off
+  - data:
+      entity_id: climate.pool
+      temperature: 32
+    service: climate.set_temperature
 - id: pool_main_on
-  alias: Pool Main On
+  alias: Pool Main On Timer
   trigger:
   - at: '12:00:00'
     platform: time
@@ -89,7 +74,7 @@
       entity_id: switch.pool_main
     service: switch.turn_on
 - id: pool_sweep_on
-  alias: Pool Sweep On
+  alias: Pool Sweep On Timer
   trigger:
   - at: '12:30:00'
     platform: time
@@ -98,7 +83,7 @@
       entity_id: switch.pool_sweep
     service: switch.turn_on
 - id: pool_sweep_off
-  alias: Pool Sweep Off
+  alias: Pool Sweep Off Timer
   trigger:
   - at: '15:00:00'
     platform: time
@@ -107,7 +92,7 @@
       entity_id: switch.pool_sweep
     service: switch.turn_off
 - id: '1541799676159'
-  alias: Rear Patio Sprinklers
+  alias: Rear Patio Sprinklers Timer
   trigger:
   - at: '11:00:00'
     platform: time
@@ -121,7 +106,7 @@
   action:
   - service: script.rear_patio_sprinklers
 - id: '1541800366517'
-  alias: Flower Box Sprinklers
+  alias: Flower Box Sprinklers Timer
   trigger:
   - at: '12:30:00'
     platform: time
@@ -129,7 +114,7 @@
   action:
   - service: script.flower_box_sprinklers
 - id: '1541800460669'
-  alias: Front Yard Sprinklers
+  alias: Front Yard Sprinklers Timer
   trigger:
   - event: sunset
     offset: +01:00:00
@@ -138,7 +123,7 @@
   action:
   - service: script.front_yard_sprinklers
 - id: '1541801995724'
-  alias: Heater Night
+  alias: Heater Night Timer
   trigger:
   - at: '23:45:00'
     platform: time
@@ -149,7 +134,7 @@
       temperature: 62
     service: climate.set_temperature
 - id: '1541802268414'
-  alias: Heater Evening
+  alias: Heater Evening Timer
   trigger:
   - at: '17:45:00'
     platform: time
@@ -161,7 +146,7 @@
       temperature: 68
     service: climate.set_temperature
 - id: '1541802437123'
-  alias: Heater Weekday
+  alias: Heater Weekday Timer
   trigger:
   - at: 06:45:00
     platform: time
@@ -179,7 +164,7 @@
       temperature: 65
     service: climate.set_temperature
 - id: heater_midmorn
-  alias: Heater Mid Morning
+  alias: Heater Mid Morning Timer
   trigger:
   - at: '10:00:00'
     platform: time
@@ -197,7 +182,7 @@
       temperature: 67
     service: climate.set_temperature
 - id: '1541802601105'
-  alias: Heater Weekend
+  alias: Heater Weekend Timer
   trigger:
   - at: 07:45:00
     platform: time
@@ -212,7 +197,7 @@
       temperature: 65
     service: climate.set_temperature
 - id: dcare_arm
-  alias: Day Care Bell Arm
+  alias: Day Care Bell Arm Timer
   trigger:
   - at: '08:00:00'
     platform: time
@@ -229,7 +214,7 @@
       entity_id: input_boolean.dcare_bell
     service: input_boolean.turn_on
 - id: dcare_disarm
-  alias: Day Care Bell Disarm
+  alias: Day Care Bell Disarm Timer
   trigger:
   - at: '17:30:00'
     platform: time
@@ -246,7 +231,7 @@
       entity_id: input_boolean.dcare_bell
     service: input_boolean.turn_off
 - id: night_arm
-  alias: Night Alarm Arm
+  alias: Night Alarm Arm Timer
   trigger:
   - at: 01:30:00
     platform: time
@@ -255,7 +240,7 @@
       entity_id: input_boolean.night_alarm
     service: input_boolean.turn_on
 - id: night_disarm
-  alias: Night Alarm Disarm
+  alias: Night Alarm Disarm Timer
   trigger:
   - at: 06:30:00
     platform: time
@@ -263,28 +248,8 @@
   - data:
       entity_id: input_boolean.night_alarm
     service: input_boolean.turn_off
-- id: auto_light_arm
-  alias: Auto Light Arm
-  trigger:
-  - event: sunset
-    offset: +01:00:00
-    platform: sun
-  action:
-  - data:
-      entity_id: input_boolean.auto_light
-    service: input_boolean.turn_on
-- id: auto_light_disarm
-  alias: Auto Light Disarm
-  trigger:
-  - event: sunrise
-    offset: -01:00:00
-    platform: sun
-  action:
-  - data:
-      entity_id: input_boolean.auto_light
-    service: input_boolean.turn_off
 - id: kitch_speaker_down
-  alias: Kitchen Speaker Down
+  alias: Kitchen Speaker Down Timer
   trigger:
   - at: '13:30:00'
     platform: time
@@ -294,7 +259,7 @@
         volume_level: 0.05
       service: media_player.volume_set
 - id: kitchen_speaker_up
-  alias: Kitchen Speaker Up
+  alias: Kitchen Speaker Up Timer
   trigger:
   - at: '08:00:00'
     platform: time
@@ -306,12 +271,14 @@
         volume_level: 0.40
       service: media_player.volume_set
 - id: fans_off
-  alias: Fans Off
+  alias: Fans Off Timer
   trigger:
   - at: '01:00:00'
     platform: time
   action:
   - data:
-      entity_id: fan.bedr_fan
-      entity_id: fan.bedta_fan
+      entity_id: 
+      - fan.bedr_fan
+      - fan.bedta_fan
+      - fan.family_fan
     service: fan.turn_off

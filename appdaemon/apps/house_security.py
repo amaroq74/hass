@@ -22,7 +22,7 @@ GateToggle = {'binary_sensor.car_gate_btn' : 'switch.car_gate'}
 ##################################
 # Constants
 ##################################
-Switches = [ 'dcare_bell', 'gate_bell', 'night_alarm', 'house_alarm', 'door_alarm', 'auto_light' ]
+Switches = [ 'dcare_bell', 'night_alarm', 'house_alarm', 'door_alarm']
 
 Sounds = { 'gate_bell':  'doorbell.wav',
            'door_bell':  'front_door_and_gate_bell.wav',
@@ -190,7 +190,7 @@ class HouseSecurity(hass.Hass):
                         self.error("Error triggering camera {}: {}".format(action,msg))
 
                 # Check for lights
-                if action in Lights:
+                if self.sun_down() and action in Lights:
                     for light in Lights[action]:
                         self.turn_on(lights)
 

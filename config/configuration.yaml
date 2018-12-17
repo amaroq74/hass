@@ -14,7 +14,7 @@ homeassistant:
   customize: !include customize.yaml
 
 # Show links to resources in log and frontend
-#introduction:
+introduction:
 
 # Enables the frontend
 frontend:
@@ -44,7 +44,7 @@ updater:
 discovery:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
-conversation:
+#conversation:
 
 # Enables support for tracking state changes over time
 history:
@@ -94,16 +94,12 @@ arduino_relay:
 input_boolean:
   dcare_bell:
     name: Daycare Bell
-  gate_bell:
-    name: Gate Bell
   night_alarm:
     name: Night Alarm
   house_alarm:
     name: House Alarm
   door_alarm:
     name: Door Alarm
-  auto_light:
-    name: Auto Light
 
 # Sensors
 sensor:
@@ -156,7 +152,6 @@ cloud:
         - switch.pool_main
         - switch.pool_sweep
         - input_boolean.dcare_bell
-        - input_boolean.gate_bell
         - input_boolean.door_alarm
         - input_boolean.house_alarm
         - script.movie_lights
@@ -368,6 +363,24 @@ light:
         turn_off:
           service: switch.turn_off
           entity_id: switch.living_lights
+      long_hall:
+        friendly_name: "Long Hall"
+        value_template: "{{ states('switch.long_hall') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.long_hall
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.long_hall
+      short_hall:
+        friendly_name: "Short Hall"
+        value_template: "{{ states('switch.short_hall') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.short_hall
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.short_hall
 
 switch:
   - platform: arduino_relay
