@@ -207,7 +207,6 @@ pool:
    name: Pool
    control: hidden
    entities:
-      - sensor.pool_temperature
       - climate.pool
       - switch.pool_main
       - switch.pool_sweep

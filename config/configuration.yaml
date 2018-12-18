@@ -398,7 +398,7 @@ switch:
         output: 1
         name: House Fan
         door: false
-        timeout: 7200
+        timeout: 36000
         iconon: 'mdi:fan'
         iconoff: 'mdi:fan-off'
       front_lawn_1:
@@ -512,7 +512,7 @@ switch:
         output: 0
         name: Pool Main
         door: false
-        timeout: 3600
+        timeout: 36000
         iconon: 'mdi:pool'
         iconoff: 'mdi:pool'
       pool_sweep:
@@ -520,7 +520,7 @@ switch:
         output: 1
         name: Pool Sweep
         door: false
-        timeout: 3600
+        timeout: 36000
         iconon: 'mdi:pool'
         iconoff: 'mdi:pool'
       pool_heat:
@@ -528,7 +528,7 @@ switch:
         output: 2
         name: Pool Heat
         door: false
-        timeout: 3600
+        timeout: 36000
         iconon: 'mdi:pool'
         iconoff: 'mdi:pool'
 
