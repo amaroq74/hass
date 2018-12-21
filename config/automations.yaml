@@ -1,3 +1,4 @@
+
 - id: yard_lights_on
   alias: Yard Lights On Timer
   trigger:
@@ -6,20 +7,12 @@
     platform: sun
   action:
   - data:
-      entity_id:
-      - switch.gate_light
-      - switch.entry_light
-      - switch.yard_lights1
-      - switch.patio_lights
-      - switch.yard_lights2
-      - switch.gate_light
-      - switch.xmas_lights
-      - switch.pool_light
-      - switch.gate_light
+      entity_id: group.lights_yard
     service: switch.turn_on
   - data:
       entity_id: switch.patio_sec1
     service: switch.turn_off
+
 - id: yard_lights_off
   alias: Yard Lights Off Timer
   trigger:
@@ -32,30 +25,32 @@
     platform: time
   action:
   - data:
-      entity_id:
-      - switch.gate_light
-      - switch.entry_light
-      - switch.yard_lights1
-      - switch.patio_lights
-      - switch.yard_lights2
-      - switch.gate_light
-      - switch.xmas_lights
-      - switch.pool_light
-      - switch.gate_light
+      entity_id: group.lights_yard
     service: switch.turn_off
   - data:
       entity_id: switch.patio_sec1
     service: switch.turn_on
-- id: pool_main_off
-  alias: Pool Main Off Timer
+
+- id: pool_main_on
+  alias: Pool Main On Timer
   trigger:
-  - at: 00:30:00
-    platform: time
-  - at: '16:15:00'
-    platform: time
+   - platform: template
+     value_template: '{{ states.sensor.time.state == (states.input_datetime.pool_start_time.attributes.timestamp | int | timestamp_custom("%H:%M", False)) }}'
   action:
   - data:
       entity_id: switch.pool_main
+    service: switch.turn_on
+
+- id: pool_all_off
+  alias: Pool All Off Timer
+  trigger:
+  - at: 00:30:00
+    platform: time
+  action:
+  - data:
+      entity_id: 
+        - switch.pool_sweep
+        - switch.pool_main
     service: switch.turn_off
   - data:
       entity_id: climate.pool
@@ -64,65 +59,44 @@
       entity_id: climate.pool
       temperature: 32
     service: climate.set_temperature
-- id: pool_main_on
-  alias: Pool Main On Timer
-  trigger:
-  - at: '12:00:00'
-    platform: time
-  action:
-  - data:
-      entity_id: switch.pool_main
-    service: switch.turn_on
-- id: pool_sweep_on
-  alias: Pool Sweep On Timer
-  trigger:
-  - at: '12:30:00'
-    platform: time
-  action:
-  - data:
-      entity_id: switch.pool_sweep
-    service: switch.turn_on
-- id: pool_sweep_off
-  alias: Pool Sweep Off Timer
-  trigger:
-  - at: '15:00:00'
-    platform: time
-  action:
-  - data:
-      entity_id: switch.pool_sweep
-    service: switch.turn_off
-- id: '1541799676159'
+
+- id: rear_patio_sprinklers
   alias: Rear Patio Sprinklers Timer
   trigger:
-  - at: '11:00:00'
-    platform: time
-  - at: '13:00:00'
-    platform: time
-  - at: '15:00:00'
-    platform: time
-  - at: '17:00:00'
-    platform: time
-  condition: []
+   - platform: template
+     value_template: '{{ states.sensor.time.state == (states.input_datetime.rear_patio_start_time.attributes.timestamp | int | timestamp_custom("%H:%M", False)) }}'
+  condition:
+     condition: state
+     entity_id: sensor.rear_patio_watering_day
+     state: 'true'
   action:
   - service: script.rear_patio_sprinklers
-- id: '1541800366517'
+
+- id: flower_box_sprinklers
   alias: Flower Box Sprinklers Timer
   trigger:
-  - at: '12:30:00'
-    platform: time
-  condition: []
+   - platform: template
+     value_template: '{{ states.sensor.time.state == (states.input_datetime.flower_box_start_time.attributes.timestamp | int | timestamp_custom("%H:%M", False)) }}'
+  condition:
+     condition: state
+     entity_id: sensor.flower_box_watering_day
+     state: 'true'
   action:
   - service: script.flower_box_sprinklers
-- id: '1541800460669'
+
+- id: front_yard_sprinklers
   alias: Front Yard Sprinklers Timer
   trigger:
-  - event: sunset
-    offset: +01:00:00
-    platform: sun
-  condition: []
+   - platform: template
+     value_template: '{{ states.sensor.time.state == (states.input_datetime.front_yard_start_time.attributes.timestamp | int | timestamp_custom("%H:%M", False)) }}'
+  condition:
+     condition: state
+     entity_id: sensor.front_yard_watering_day
+     state: 'true'
   action:
   - service: script.front_yard_sprinklers
-- id: '1541801995724'
+
+- id: heater_night_timer
   alias: Heater Night Timer
   trigger:
   - at: '23:45:00'
@@ -133,7 +107,8 @@
       entity_id: climate.house
       temperature: 62
     service: climate.set_temperature
-- id: '1541802268414'
+
+- id: heater_evening_timer
   alias: Heater Evening Timer
   trigger:
   - at: '17:45:00'
@@ -145,7 +120,8 @@
       entity_id: climate.house
       temperature: 68
     service: climate.set_temperature
-- id: '1541802437123'
+
+- id: heater_weekday_timer
   alias: Heater Weekday Timer
   trigger:
   - at: 06:45:00
@@ -163,7 +139,8 @@
       entity_id: climate.house
       temperature: 65
     service: climate.set_temperature
-- id: heater_midmorn
+
+- id: heater_midmorn_timer
   alias: Heater Mid Morning Timer
   trigger:
   - at: '10:00:00'
@@ -181,7 +158,8 @@
       entity_id: climate.house
       temperature: 67
     service: climate.set_temperature
-- id: '1541802601105'
+
+- id: heater_weekend_timer
   alias: Heater Weekend Timer
   trigger:
   - at: 07:45:00
@@ -196,6 +174,7 @@
       entity_id: climate.house
       temperature: 65
     service: climate.set_temperature
+
 - id: dcare_arm
   alias: Day Care Bell Arm Timer
   trigger:
@@ -213,6 +192,7 @@
   - data:
       entity_id: input_boolean.dcare_bell
     service: input_boolean.turn_on
+
 - id: dcare_disarm
   alias: Day Care Bell Disarm Timer
   trigger:
@@ -230,6 +210,7 @@
   - data:
       entity_id: input_boolean.dcare_bell
     service: input_boolean.turn_off
+
 - id: night_arm
   alias: Night Alarm Arm Timer
   trigger:
@@ -239,6 +220,7 @@
   - data:
       entity_id: input_boolean.night_alarm
     service: input_boolean.turn_on
+
 - id: night_disarm
   alias: Night Alarm Disarm Timer
   trigger:
@@ -248,6 +230,7 @@
   - data:
       entity_id: input_boolean.night_alarm
     service: input_boolean.turn_off
+
 - id: kitch_speaker_down
   alias: Kitchen Speaker Down Timer
   trigger:
@@ -258,6 +241,7 @@
         entity_id: media_player.kitchen_speaker
         volume_level: 0.05
       service: media_player.volume_set
+
 - id: kitchen_speaker_up
   alias: Kitchen Speaker Up Timer
   trigger:
@@ -270,6 +254,7 @@
         entity_id: media_player.kitchen_speaker
         volume_level: 0.40
       service: media_player.volume_set
+
 - id: fans_off
   alias: Fans Off Timer
   trigger:
@@ -282,3 +267,4 @@
       - fan.bedta_fan
       - fan.family_fan
     service: fan.turn_off
+

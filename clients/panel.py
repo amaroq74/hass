@@ -616,8 +616,9 @@ class HassListener(QThread):
 
     def _newValue(self,e):
         key = e['entity_id']
+        #print("{} = {}".format(key,e))
 
-        if 'climate' in key: 
+        if 'climate.' in key: 
             val = e['attributes']['temperature']
         else:
             val = e['state']
@@ -640,7 +641,8 @@ class HassListener(QThread):
             elif d['type'] == 'event':
                 e = d['event']['data']['new_state'] 
                 self._newValue(e)
-        except Exception as e:
+        except Exception as emsg:
+            print("Got Read Exception: {}".format(emsg))
             return False
 
         return True
@@ -663,8 +665,8 @@ class HassListener(QThread):
                     if not self._read(ws):
                         break
 
-            except Exception as e:
-                pass
+            except Exception as emsg:
+                print("Got Run Exception: {}".format(emsg))
 
 class Panel(QWidget):
 

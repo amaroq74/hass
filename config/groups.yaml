@@ -48,6 +48,7 @@ yard:
       - group.irrigation_front_yard
       - group.irrigation_flower_box
       - group.irrigation_rear_patio
+      - group.irrigation_manual
 
 entertain:
    name: Entertainment
@@ -70,6 +71,7 @@ monitor:
       - group.power
       - group.batteries
       - group.all_automations
+      - group.all_scripts
       - group.zwave
 
 
@@ -167,6 +169,7 @@ climate_weather:
       - sensor.indoor_trend
       - sensor.rain_day
       - sensor.rain_hour
+      - sensor.rain_72h
 
 climate_temperature:
    name: Temperature
@@ -213,9 +216,9 @@ pool:
       - sensor.pool_solar_in
       - sensor.pool_solar_out
       - automation.pool_main_on_timer
-      - automation.pool_sweep_on_timer
-      - automation.pool_main_off_timer
-      - automation.pool_sweep_off_timer
+      - input_datetime.pool_start_time
+      - input_number.pool_pump_duration
+      - input_number.pool_sweep_duration
 
 yard_other:
    name: Yard Other
@@ -229,31 +232,108 @@ irrigation_front_yard:
    control: hidden
    entities:
       - automation.front_yard_sprinklers_timer
+      - input_datetime.front_yard_start_time
+      - group.irrigation_front_yard_days
+      - sensor.front_yard_watering_day
       - script.front_yard_sprinklers
-      - switch.west_trees
-      - switch.east_lemon
-      - switch.front_lawn_1
-      - switch.front_lawn_2
-      - switch.front_lawn_3
-      - switch.east_lawn_1
-      - switch.east_lawn_2
+      - input_number.west_trees_duration
+      - input_number.east_lemon_duration
+      - input_number.front_lawn_1_duration
+      - input_number.front_lawn_2_duration
+      - input_number.front_lawn_3_duration
+      - input_number.east_lawn_1_duration
+      - input_number.east_lawn_2_duration
+
+irrigation_front_yard_days:
+ control: hidden
+ name: 'Watering days'
+ icon: mdi:calendar-multiple-check
+ entities:
+   - input_boolean.front_yard_sunday
+   - input_boolean.front_yard_monday
+   - input_boolean.front_yard_tuesday
+   - input_boolean.front_yard_wednesday
+   - input_boolean.front_yard_thursday
+   - input_boolean.front_yard_friday
+   - input_boolean.front_yard_saturday
 
 irrigation_flower_box:
    name: Flower Boxes Irrigation
    control: hidden
    entities:
       - automation.flower_box_sprinklers_timer
+      - input_datetime.flower_box_start_time
+      - group.irrigation_flower_box_days
+      - sensor.flower_box_watering_day
       - script.flower_box_sprinklers
-      - switch.front_flowers
-      - switch.rear_patio_2
+      - input_number.front_flower_box_duration
+      - input_number.rear_patio_2_duration
+
+irrigation_flower_box_days:
+ control: hidden
+ name: 'Watering days'
+ icon: mdi:calendar-multiple-check
+ entities:
+   - input_boolean.flower_box_sunday
+   - input_boolean.flower_box_monday
+   - input_boolean.flower_box_tuesday
+   - input_boolean.flower_box_wednesday
+   - input_boolean.flower_box_thursday
+   - input_boolean.flower_box_friday
+   - input_boolean.flower_box_saturday
 
 irrigation_rear_patio:
    name: Rear Patio Irrigation
    control: hidden
    entities:
       - automation.rear_patio_sprinklers_timer
+      - input_datetime.rear_patio_start_time
+      - group.irrigation_rear_patio_days
+      - sensor.rear_patio_watering_day
       - script.rear_patio_sprinklers
+      - input_number.rear_patio_1_duration
+
+irrigation_rear_patio_days:
+ control: hidden
+ name: 'Watering days'
+ icon: mdi:calendar-multiple-check
+ entities:
+   - input_boolean.rear_patio_sunday
+   - input_boolean.rear_patio_monday
+   - input_boolean.rear_patio_tuesday
+   - input_boolean.rear_patio_wednesday
+   - input_boolean.rear_patio_thursday
+   - input_boolean.rear_patio_friday
+   - input_boolean.rear_patio_saturday
+
+irrigation_manual:
+   name: Manual Irrigation
+   control: hidden
+   entities:
+      - switch.front_lawn_1
+      - switch.front_lawn_2
+      - switch.front_lawn_3
+      - switch.east_lawn_1
+      - switch.east_lawn_2
+      - switch.west_trees
+      - switch.east_lemon
+      - switch.front_flowers
       - switch.rear_patio_1
+      - switch.rear_patio_2
+      - switch.rear_patio_3
+
+lights_house:
+   name: House Lights
+   entities:
+      - group.lights_family
+      - group.lights_kitchen
+      - group.lights_office
+      - group.lights_dining
+      - group.lights_living
+      - group.lights_master
+      - group.lights_bedr
+      - group.lights_bedta
+      - group.lights_hall
 
 lights_bedr:
    name: Rachel's Room

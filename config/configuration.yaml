@@ -50,7 +50,7 @@ discovery:
 history:
 
 recorder:
-  purge_keep_days: 30
+  purge_keep_days: 10
 
 logger:
   default: info
@@ -100,6 +100,148 @@ input_boolean:
     name: House Alarm
   door_alarm:
     name: Door Alarm
+  front_yard_sunday:
+    name: Sunday
+  front_yard_monday:
+    name: Monday
+  front_yard_tuesday:
+    name: Tuesday
+  front_yard_wednesday:
+    name: Wednesday
+  front_yard_thursday:
+    name: Thursday
+  front_yard_friday:
+    name: Friday
+  front_yard_saturday:
+    name: Saturday
+  flower_box_sunday:
+    name: Sunday
+  flower_box_monday:
+    name: Monday
+  flower_box_tuesday:
+    name: Tuesday
+  flower_box_wednesday:
+    name: Wednesday
+  flower_box_thursday:
+    name: Thursday
+  flower_box_friday:
+    name: Friday
+  flower_box_saturday:
+    name: Saturday
+  rear_patio_sunday:
+    name: Sunday
+  rear_patio_monday:
+    name: Monday
+  rear_patio_tuesday:
+    name: Tuesday
+  rear_patio_wednesday:
+    name: Wednesday
+  rear_patio_thursday:
+    name: Thursday
+  rear_patio_friday:
+    name: Friday
+  rear_patio_saturday:
+    name: Saturday
+
+# Start Times
+input_datetime:
+   pool_start_time:
+      name: Pool Pump Start Time
+      has_date: false
+      has_time: true
+   front_yard_start_time:
+      name: Front Yard Start Time
+      has_date: false
+      has_time: true
+   flower_box_start_time:
+      name: Flowers Start Time
+      has_date: false
+      has_time: true
+   rear_patio_start_time:
+      name: Rear Patio Start Time
+      has_date: false
+      has_time: true
+
+# Run durations
+input_number:
+   pool_pump_duration:
+      name: Pool Pump
+      min: 60
+      max: 360
+      step: 15
+      icon: mdi:camera-timer
+   pool_sweep_duration:
+      name: Pool Sweep
+      min: 30
+      max: 360
+      step: 15
+      icon: mdi:camera-timer
+   front_lawn_1_duration:
+      name: Front Lawn 1
+      min: 0
+      max: 60
+      step: 1
+      icon: mdi:camera-timer
+   front_lawn_2_duration:
+      name: Front Lawn 2
+      min: 0
+      max: 60
+      step: 1
+      icon: mdi:camera-timer
+   front_lawn_3_duration:
+      name: Front Lawn 3
+      min: 0
+      max: 60
+      step: 1
+      icon: mdi:camera-timer
+   west_trees_duration:
+      name: West Trees
+      min: 0
+      max: 60
+      step: 1
+      icon: mdi:camera-timer
+   rear_patio_1_duration:
+      name: Rear Patio 1
+      min: 0
+      max: 60
+      step: 1
+      icon: mdi:camera-timer
+   rear_patio_2_duration:
+      name: Rear Patio 2
+      min: 0
+      max: 60
+      step: 1
+      icon: mdi:camera-timer
+   rear_patio_3_duration:
+      name: Rear Patio 3
+      min: 0
+      max: 60
+      step: 1
+      icon: mdi:camera-timer
+   front_flower_box_duration:
+      name: Front Flowers
+      min: 0
+      max: 60
+      step: 1
+      icon: mdi:camera-timer
+   east_lawn_1_duration:
+      name: East Lawn 1
+      min: 0
+      max: 60
+      step: 1
+      icon: mdi:camera-timer
+   east_lawn_2_duration:
+      name: east Lawn 2
+      min: 0
+      max: 60
+      step: 1
+      icon: mdi:camera-timer
+   east_lemon_duration:
+      name: East Lemon
+      min: 0
+      max: 60
+      step: 1
+      icon: mdi:camera-timer
 
 # Sensors
 sensor:
@@ -107,6 +249,14 @@ sensor:
     name: Weather
     monitored_conditions:
       - symbol
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+      - 'date_time'
+      - 'time_date'
+      - 'time_utc'
+      - 'beat'
   - platform: zoneminder
     include_archived: true
   - platform: apcupsd
@@ -135,6 +285,32 @@ sensor:
         name: Pool Solar Out
         avgPeriod: 60
         icon: 'mdi:thermometer'
+  - platform: template    # determine if today is selected as a watering day for program 1
+    sensors:
+      rear_patio_watering_day:
+        friendly_name: "Rear Patio Watering Day"
+        entity_id: sensor.time
+        value_template: >
+          {% set sensor_names = [ 'monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'] %}
+          {% set today_name = sensor_names[now().weekday()] %}
+          {% set entity_id = 'input_boolean.rear_patio_'+today_name %}
+          {{ is_state(entity_id, 'on') }}
+      flower_box_watering_day:
+        friendly_name: "Flower Box Watering Day"
+        entity_id: sensor.time
+        value_template: >
+          {% set sensor_names = [ 'monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'] %}
+          {% set today_name = sensor_names[now().weekday()] %}
+          {% set entity_id = 'input_boolean.flower_box_'+today_name %}
+          {{ is_state(entity_id, 'on') }}
+      front_yard_watering_day:
+        friendly_name: "Front Yard Watering Day"
+        entity_id: sensor.time
+        value_template: >
+          {% set sensor_names = [ 'monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'] %}
+          {% set today_name = sensor_names[now().weekday()] %}
+          {% set entity_id = 'input_boolean.front_yard_'+today_name %}
+          {{ is_state(entity_id, 'on') }}
 
 # Cloud
 cloud:

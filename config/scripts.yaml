@@ -1,11 +1,12 @@
+
 front_yard_sprinklers:
-  alias: Front Yard Sprinklers Run
+  alias: Front Yard Sprinklers Running
   sequence:
   - alias: West Trees On
     data:
       entity_id: switch.west_trees
     service: switch.turn_on
-  - delay: 00:10:00
+  - delay: "00:{{ states('input_number.west_trees_duration')|int }}:00"
   - alias: West Tress Off
     data:
       entity_id: switch.west_trees
@@ -15,7 +16,7 @@ front_yard_sprinklers:
     data:
       entity_id: switch.east_lemon
     service: switch.turn_on
-  - delay: 00:05:00
+  - delay: "00:{{ states('input_number.east_lemon_duration')|int }}:00"
   - alias: East Lemon Off
     data:
       entity_id: switch.east_lemon
@@ -25,7 +26,7 @@ front_yard_sprinklers:
     data:
       entity_id: switch.front_lawn_1
     service: switch.turn_on
-  - delay: 00:10:00
+  - delay: "00:{{ states('input_number.front_lawn_1_duration')|int }}:00"
   - alias: Front Lawn 1 Off
     data:
       entity_id: switch.front_lawn_1
@@ -35,7 +36,7 @@ front_yard_sprinklers:
     data:
       entity_id: switch.front_lawn_2
     service: switch.turn_on
-  - delay: 00:05:00
+  - delay: "00:{{ states('input_number.front_lawn_2_duration')|int }}:00"
   - alias: Front Lawn 2 Off
     data:
       entity_id: switch.front_lawn_2
@@ -43,9 +44,9 @@ front_yard_sprinklers:
   - delay: 00:00:10
   - alias: Front Lawn 3 On
     data:
-      entity_id: switch.front_lawn_4
+      entity_id: switch.front_lawn_3
     service: switch.turn_on
-  - delay: 00:10:00
+  - delay: "00:{{ states('input_number.front_lawn_3_duration')|int }}:00"
   - alias: Front Lawn 3 Off
     data:
       entity_id: switch.front_lawn_3
@@ -55,7 +56,7 @@ front_yard_sprinklers:
     data:
       entity_id: switch.east_lawn_1
     service: switch.turn_on
-  - delay: 00:05:00
+  - delay: "00:{{ states('input_number.east_lawn_1_duration')|int }}:00"
   - alias: East Lawn 1 Off
     data:
       entity_id: switch.east_lawn_1
@@ -65,19 +66,20 @@ front_yard_sprinklers:
     data:
       entity_id: switch.east_lawn_2
     service: switch.turn_on
-  - delay: 00:10:00
+  - delay: "00:{{ states('input_number.east_lawn_2_duration')|int }}:00"
   - alias: East Lawn 2 Off
     data:
       entity_id: switch.east_lawn_2
     service: switch.turn_off
+
 flower_box_sprinklers:
-  alias: Flower Box Sprinklers Run
+  alias: Flower Box Sprinklers Running
   sequence:
   - alias: Front Flowers On
     data:
       entity_id: switch.front_flowers
     service: switch.turn_on
-  - delay: 00:01:00
+  - delay: "00:{{ states('input_number.front_flowers_duration')|int }}:00"
   - alias: Front Flowers Off
     data:
       entity_id: switch.front_flowers
@@ -87,23 +89,56 @@ flower_box_sprinklers:
     data:
       entity_id: switch.rear_patio_2
     service: switch.turn_on
-  - delay: 00:01:00
+  - delay: "00:{{ states('input_number.rear_patio_2_duration')|int }}:00"
   - alias: Rear Patio 2 Off
     data:
       entity_id: switch.rear_patio_2
     service: switch.turn_off
+
 rear_patio_sprinklers:
-  alias: Rear Patio Sprinklers Run
+  alias: Rear Patio Sprinklers Running
   sequence:
   - alias: Rear Patio 1 On
     data:
       entity_id: switch.rear_patio_1
     service: switch.turn_on
-  - delay: 00:5:00
+  - delay: "00:{{ states('input_number.rear_patio_1_duration')|int }}:00"
   - alias: Rear Patio 1 Off
     data:
       entity_id: switch.rear_patio_1
     service: switch.turn_off
+
+pool_pump_run:
+  alias: Pool Pump Running
+  sequence:
+  - alias: Pool Pump On
+    data:
+      entity_id: switch.pool_pump
+    service: switch.turn_on
+  - delay: "00:{{ states('input_number.pool_pump_duration')|int - 15 }}:00"
+  - alias: Heater off
+    data:
+      entity_id: climate.pool
+    service: climate.turn_off
+  - delay: 00:15:00
+  - alias: Pool Pump Off
+    data:
+      entity_id: switch.pool_pump
+    service: switch.turn_off
+
+pool_sweep_run:
+  alias: Pool Sweep Running
+  sequence:
+  - alias: Pool Sweep On
+    data:
+      entity_id: switch.pool_sweep
+    service: switch.turn_on
+  - delay: "00:{{ states('input_number.pool_sweep_duration')|int }}:00"
+  - alias: Pool Sweep Off
+    data:
+      entity_id: switch.pool_sweep
+    service: switch.turn_off
+
 movie_lights:
   alias: Movie Lights
   sequence:
@@ -121,34 +156,20 @@ movie_lights:
       entity_id: light.bookcases
       brightness_pct: 50
     service: light.turn_on
+
 house_lights_off:
   alias: House Lights Off
   sequence:
   - alias: step1
     data:
       entity_id: 
-        - light.bar_light
-        - light.bedr_light
-        - light.bedta_light
-        - light.bookcases
-        - light.couch_light
-        - light.dining_room
-        - light.family_tree
-        - light.kitchen_island
-        - light.kitchen_light
-        - light.kitchen_table
-        - light.living_chandelier
-        - light.living_entry
-        - light.living_floor
-        - light.living_lights
-        - light.living_tree
-        - light.master_light
-        - light.office_light
+        - group.lights_house
     service: light.turn_off
   - alias: step2
     data:
       entity_id: remote.harmony_hub
     service: remote.turn_off
+
 welcome_lights:
   alias: Welcome Lights
   sequence:
@@ -161,3 +182,4 @@ welcome_lights:
         - light.living_floor
         - light.living_tree
     service: light.turn_on
+

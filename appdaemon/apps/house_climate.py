@@ -95,43 +95,33 @@ class HouseClimate(hass.Hass):
     # rain calc
     def rain_calc(self, *args, **kwargs):
         count_now  = self.get_state('sensor.rain_total')
+        counts = {'rain_hour' : {'name' : 'Rain Hour', 'count' : None},
+                  'rain_day'  : {'name' : 'Rain Day',  'count' : None},
+                  'rain_72h'  : {'name' : 'Rain 72H',  'count' : None} }
+
+        if count_now == 'uknown':
+            self.warning("Unable to get current rain count")
+            return
 
         try:
-            count_hour = self._db.getSensorHour('rain','count')
-            count_day  = self._db.getSensorDay('rain','count')
+            counts['rain_hour']['count'] = self._db.getSensorHour('rain','count')
+            counts['rain_day']['count']  = self._db.getSensorDay('rain','count')
+            counts['rain_72h']['count']  = self._db.getSensorHours('rain','count',72)
         except:
-            count_hour = None
-            count_day  = None
+            self.warning("Unable to get previous rain counts")
 
-        if count_now == 'unknown' or count_now is None or count_hour is None or count_day is None:
-            val_hour = 0.0
-            val_day  = 0.0
-            self.warning("Unable to calculate rain now = {}, hour = {}, day = {}".format(count_now,count_hour,count_day))
-        else:
-            val_hour = round(float(count_now) - weather_convert.rainMmToIn(count_hour),2)
-            val_day  = round(float(count_now) - weather_convert.rainMmToIn(count_day),2)
+        for k,v in counts.items():
+            if v['count'] is not None:
+                calc = round(float(count_now) - weather_convert.rainMmToIn(v['count']),2)
+                if calc < 0.001: calc = 0.0
+                self.debug("Rain calc. count_now = {}, {} = {}".format(count_now,k,calc))
+            else:
+                calc = 0.0
 
-        if val_hour < 0.001:
-            val_hour = 0.0
-
-        if val_day < 0.001:
-            val_day = 0.0
-
-        if val_hour >= 0.0 and val_day >= 0.0:
-            self.debug("Rain calc. count now = {}, count hour = {}, count day = {}, val hour = {}, val day = {}".format(count_now,count_hour,count_day,val_hour,val_day))
-
-            self.set_state("sensor.rain_hour",
-                           state=val_hour,
-                           attributes={'friendly_name' : 'Rain Hour', 
+            self.set_state("sensor.{}".format(k), state=calc,
+                           attributes={'friendly_name' : v['name'], 
                                        'unit_of_measurement' : 
                                        'IN', 'device_class' : '',
-                                       'icon' : 'mdi:weather-rainy'})
-
-            self.set_state("sensor.rain_day", 
-                           state=val_day,
-                           attributes={'friendly_name' : 'Rain Day', 
-                                       'unit_of_measurement' : 'IN', 
-                                       'device_class' : '',
                                        'icon' : 'mdi:weather-rainy'})
 
     # Set compass direction
