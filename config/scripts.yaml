@@ -165,10 +165,10 @@ house_lights_off:
       entity_id: 
         - group.lights_house
     service: light.turn_off
-  - alias: step2
-    data:
-      entity_id: remote.harmony_hub
-    service: remote.turn_off
+    #  - alias: step2
+    #    data:
+    #      entity_id: remote.harmony_hub
+    #    service: remote.turn_off
 
 welcome_lights:
   alias: Welcome Lights

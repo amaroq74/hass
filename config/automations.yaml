@@ -126,7 +126,7 @@
 - id: heater_evening_timer
   alias: Heater Evening Timer
   trigger:
-  - at: '17:45:00'
+  - at: '17:30:00'
     platform: time
   condition: []
   action:
