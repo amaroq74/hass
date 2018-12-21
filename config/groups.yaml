@@ -28,6 +28,7 @@ lights:
    name: Lights
    view: true
    entities:
+      - group.lights_controls
       - group.lights_family
       - group.lights_kitchen
       - group.lights_office
@@ -54,7 +55,7 @@ entertain:
    name: Entertainment
    view: true
    entities:
-      - group.entertain_other
+      - group.entertain_control
       - media_player.chrome_family
       - media_player.family_room
       - media_player.chrome_master
@@ -75,10 +76,11 @@ monitor:
       - group.zwave
 
 
-entertain_other:
-   name: Entertain
+entertain_control:
+   name: Controls
    control: hidden
    entities:
+      - script.movie_lights
       - switch.speakers
       - remote.harmony_hub
 
@@ -123,9 +125,6 @@ security_controls:
       - input_boolean.night_alarm
       - input_boolean.door_alarm
       - input_boolean.house_alarm
-      - script.house_lights_off
-      - script.movie_lights
-      - script.welcome_lights
 
 batteries:
    name: Batteries
@@ -215,7 +214,7 @@ pool:
       - switch.pool_sweep
       - sensor.pool_solar_in
       - sensor.pool_solar_out
-      - automation.pool_main_on_timer
+      - automation.pool_pump_timer
       - input_datetime.pool_start_time
       - input_number.pool_pump_duration
       - input_number.pool_sweep_duration
@@ -307,7 +306,7 @@ irrigation_rear_patio_days:
    - input_boolean.rear_patio_saturday
 
 irrigation_manual:
-   name: Manual Irrigation
+   name: Manual Control
    control: hidden
    entities:
       - switch.front_lawn_1
@@ -321,6 +320,14 @@ irrigation_manual:
       - switch.rear_patio_1
       - switch.rear_patio_2
       - switch.rear_patio_3
+
+lights_controls:
+   name: Controls
+   control: hidden
+   entities:
+      - script.house_lights_off
+      - script.welcome_lights
+      - script.movie_lights
 
 lights_house:
    name: House Lights

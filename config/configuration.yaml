@@ -170,78 +170,91 @@ input_number:
       max: 360
       step: 15
       icon: mdi:camera-timer
+      mode: box
    pool_sweep_duration:
       name: Pool Sweep
       min: 30
       max: 360
       step: 15
       icon: mdi:camera-timer
+      mode: box
    front_lawn_1_duration:
       name: Front Lawn 1
       min: 0
       max: 60
       step: 1
       icon: mdi:camera-timer
+      mode: box
    front_lawn_2_duration:
       name: Front Lawn 2
       min: 0
       max: 60
       step: 1
       icon: mdi:camera-timer
+      mode: box
    front_lawn_3_duration:
       name: Front Lawn 3
       min: 0
       max: 60
       step: 1
       icon: mdi:camera-timer
+      mode: box
    west_trees_duration:
       name: West Trees
       min: 0
       max: 60
       step: 1
       icon: mdi:camera-timer
+      mode: box
    rear_patio_1_duration:
       name: Rear Patio 1
       min: 0
       max: 60
       step: 1
       icon: mdi:camera-timer
+      mode: box
    rear_patio_2_duration:
       name: Rear Patio 2
       min: 0
       max: 60
       step: 1
       icon: mdi:camera-timer
+      mode: box
    rear_patio_3_duration:
       name: Rear Patio 3
       min: 0
       max: 60
       step: 1
       icon: mdi:camera-timer
+      mode: box
    front_flower_box_duration:
       name: Front Flowers
       min: 0
       max: 60
       step: 1
       icon: mdi:camera-timer
+      mode: box
    east_lawn_1_duration:
       name: East Lawn 1
       min: 0
       max: 60
       step: 1
       icon: mdi:camera-timer
+      mode: box
    east_lawn_2_duration:
       name: east Lawn 2
       min: 0
       max: 60
       step: 1
       icon: mdi:camera-timer
+      mode: box
    east_lemon_duration:
       name: East Lemon
       min: 0
       max: 60
       step: 1
       icon: mdi:camera-timer
+      mode: box
 
 # Sensors
 sensor:

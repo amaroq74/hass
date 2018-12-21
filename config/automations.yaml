@@ -31,11 +31,11 @@
       entity_id: switch.patio_sec1
     service: switch.turn_on
 
-- id: pool_main_on
-  alias: Pool Main On Timer
+- id: pool_pump_timer
+  alias: Pool Pump Timer
   trigger:
-   - platform: template
-     value_template: '{{ states.sensor.time.state == (states.input_datetime.pool_start_time.attributes.timestamp | int | timestamp_custom("%H:%M", False)) }}'
+     platform: template
+     value_template: "{{ states('sensor.time') == (states.input_datetime.pool_start_time.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
   action:
   - data:
       entity_id: switch.pool_main
@@ -63,36 +63,51 @@
 - id: rear_patio_sprinklers
   alias: Rear Patio Sprinklers Timer
   trigger:
-   - platform: template
-     value_template: '{{ states.sensor.time.state == (states.input_datetime.rear_patio_start_time.attributes.timestamp | int | timestamp_custom("%H:%M", False)) }}'
+     platform: template
+     value_template: "{{ states('sensor.time') == (states.input_datetime.rear_patio_start_time.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
   condition:
-     condition: state
-     entity_id: sensor.rear_patio_watering_day
-     state: 'true'
+     condition: and
+     conditions:
+        - condition: state
+          entity_id: sensor.rear_patio_watering_day
+          state: 'True'
+        - condition: state
+          entity_id: sensor.rain_72h
+          state: '0.0'
   action:
   - service: script.rear_patio_sprinklers
 
 - id: flower_box_sprinklers
   alias: Flower Box Sprinklers Timer
   trigger:
-   - platform: template
-     value_template: '{{ states.sensor.time.state == (states.input_datetime.flower_box_start_time.attributes.timestamp | int | timestamp_custom("%H:%M", False)) }}'
+     platform: template
+     value_template: "{{ states('sensor.time') == (states.input_datetime.flower_box_start_time.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
   condition:
-     condition: state
-     entity_id: sensor.flower_box_watering_day
-     state: 'true'
+     condition: and
+     conditions:
+        - condition: state
+          entity_id: sensor.flower_box_watering_day
+          state: 'True'
+        - condition: state
+          entity_id: sensor.rain_72h
+          state: '0.0'
   action:
   - service: script.flower_box_sprinklers
 
 - id: front_yard_sprinklers
   alias: Front Yard Sprinklers Timer
   trigger:
-   - platform: template
-     value_template: '{{ states.sensor.time.state == (states.input_datetime.front_yard_start_time.attributes.timestamp | int | timestamp_custom("%H:%M", False)) }}'
+     platform: template
+     value_template: "{{ states('sensor.time') == (states.input_datetime.front_yard_start_time.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
   condition:
-     condition: state
-     entity_id: sensor.front_yard_watering_day
-     state: 'true'
+     condition: and
+     conditions:
+        - condition: state
+          entity_id: sensor.front_yard_watering_day
+          state: 'True'
+        - condition: state
+          entity_id: sensor.rain_72h
+          state: '0.0'
   action:
   - service: script.front_yard_sprinklers
 
