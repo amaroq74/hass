@@ -8,7 +8,7 @@
   action:
   - data:
       entity_id: group.lights_yard
-    service: switch.turn_on
+    service: group.turn_on
   - data:
       entity_id: switch.patio_sec1
     service: switch.turn_off
@@ -26,7 +26,7 @@
   action:
   - data:
       entity_id: group.lights_yard
-    service: switch.turn_off
+    service: group.turn_off
   - data:
       entity_id: switch.patio_sec1
     service: switch.turn_on

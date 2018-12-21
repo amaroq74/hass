@@ -162,9 +162,8 @@ house_lights_off:
   sequence:
   - alias: step1
     data:
-      entity_id: 
-        - group.lights_house
-    service: light.turn_off
+      entity_id: group.lights_house
+    service: group.turn_off
     #  - alias: step2
     #    data:
     #      entity_id: remote.harmony_hub
@@ -175,11 +174,6 @@ welcome_lights:
   sequence:
   - alias: step1
     data:
-      entity_id: 
-        - light.bookcases
-        - light.family_tree
-        - light.kitchen_island
-        - light.living_floor
-        - light.living_tree
-    service: light.turn_on
+      entity_id: group.lights_welcome
+    service: group.turn_off
 

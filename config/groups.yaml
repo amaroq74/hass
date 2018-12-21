@@ -342,6 +342,15 @@ lights_house:
       - group.lights_bedta
       - group.lights_hall
 
+lights_welcome:
+   name: Welcome Lights
+   entities:
+      - light.bookcases
+      - light.family_tree
+      - light.kitchen_island
+      - light.living_floor
+      - light.living_tree
+
 lights_bedr:
    name: Rachel's Room
    control: hidden
