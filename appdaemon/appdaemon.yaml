@@ -7,4 +7,4 @@ appdaemon:
     HASS:
       type: hass
       ha_url: http://aliska.amaroq.net:8123
-      ha_key: TEST1234
+      token: !secret token

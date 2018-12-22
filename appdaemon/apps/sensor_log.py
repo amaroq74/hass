@@ -10,7 +10,7 @@ import MySQLdb
 from contextlib import closing
 
 import appdaemon.plugins.hass.hassapi as hass
-from homeassistant.const import TEMP_FAHRENHEIT
+
 from datetime import datetime, timedelta
 import weather_convert
 import time

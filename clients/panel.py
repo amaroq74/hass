@@ -6,6 +6,7 @@ sys.path.append('/amaroq/hass/pylib')
 
 import time, pytz
 import hass_mysql as mysql
+import hass_secrets as secrets
 import weather_convert as convert
 
 from PyQt5.QtWidgets import *
@@ -653,7 +654,7 @@ class HassListener(QThread):
             try:
                 ws = create_connection('ws://aliska.amaroq.net:8123/api/websocket',timeout=60*10)
 
-                ws.send(json.dumps({'type': 'auth', 'api_password': 'TEST1234'}))
+                ws.send(json.dumps({'type': 'auth', 'access_token': secrets.homemon_key}))
                 self._read(ws)
 
                 ws.send(json.dumps({'id': 1, 'type': 'get_states'}))

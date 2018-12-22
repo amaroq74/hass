@@ -6,7 +6,6 @@ sys.path.append('/amaroq/hass/pylib')
 import hass_mysql
 
 import appdaemon.plugins.hass.hassapi as hass
-from homeassistant.const import TEMP_FAHRENHEIT
 import weather_convert
 from datetime import datetime, timedelta
 
@@ -14,6 +13,8 @@ TempWeights = { "sensor.bedr_temperature"   : 1.0,
                 "sensor.master_temperature" : 1.2,
                 "sensor.indoor_temperature" : 0.8,
                 "sensor.bedta_temperature"  : 1.0 }
+
+TEMP_FAHRENHEIT = '<C2><B0>F'
 
 class HouseClimate(hass.Hass):
 
