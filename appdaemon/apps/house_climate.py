@@ -14,7 +14,7 @@ TempWeights = { "sensor.bedr_temperature"   : 1.0,
                 "sensor.indoor_temperature" : 0.8,
                 "sensor.bedta_temperature"  : 1.0 }
 
-TEMP_FAHRENHEIT = '<C2><B0>F'
+TEMP_FAHRENHEIT = '°F'
 
 class HouseClimate(hass.Hass):
 

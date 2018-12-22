@@ -82,7 +82,7 @@ entertain_control:
    entities:
       - script.movie_lights
       - switch.speakers
-        #      - remote.harmony_hub
+      - remote.family_room
 
 motion:
    name: Motion Sensors
