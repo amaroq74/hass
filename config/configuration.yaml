@@ -24,7 +24,6 @@ config:
 
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 http:
-  api_password: !secret api_password
   base_url: aliska.amaroq.net:8123
    #   ssl_certificate: /amaroq/hass/config/ssl/ServerCertificate.cer
    #   ssl_key: /amaroq/hass/config/ssl/amaroq_private.key
