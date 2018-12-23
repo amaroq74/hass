@@ -113,7 +113,7 @@ pool_pump_run:
   sequence:
   - alias: Pool Pump On
     data:
-      entity_id: switch.pool_pump
+      entity_id: switch.pool_main
     service: switch.turn_on
   - delay: "00:{{ states('input_number.pool_pump_duration')|int - 15 }}:00"
   - alias: Heater off
@@ -123,7 +123,7 @@ pool_pump_run:
   - delay: 00:15:00
   - alias: Pool Pump Off
     data:
-      entity_id: switch.pool_pump
+      entity_id: switch.pool_main
     service: switch.turn_off
 
 pool_sweep_run:
@@ -163,7 +163,7 @@ house_lights_off:
   - alias: step1
     data:
       entity_id: group.lights_house
-    service: group.turn_off
+    service: homeassistant.turn_off
     #  - alias: step2
     #    data:
     #      entity_id: remote.harmony_hub
@@ -175,5 +175,5 @@ welcome_lights:
   - alias: step1
     data:
       entity_id: group.lights_welcome
-    service: group.turn_off
+    service: homeassistant.turn_on
 

@@ -66,6 +66,10 @@ sun:
 # UPS
 apcupsd:
 
+   #weather:
+   #   -platform: darksky
+   #    api_key: 4b68f27575944261afe90f2719466fe1
+
 rainforest_usb:
   device: /dev/serial/by-id/usb-Rainforest_RFA-Z106-RA-PC_RAVEn_v2.3.21-if00-port0
   name: smartmeter
@@ -241,7 +245,7 @@ input_number:
       icon: mdi:camera-timer
       mode: box
    east_lawn_2_duration:
-      name: east Lawn 2 Mins
+      name: East Lawn 2 Mins
       min: 0
       max: 60
       step: 1

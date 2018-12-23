@@ -8,7 +8,7 @@
   action:
   - data:
       entity_id: group.lights_yard
-    service: group.turn_on
+    service: homeassistant.turn_on
   - data:
       entity_id: switch.patio_sec1
     service: switch.turn_off
@@ -26,7 +26,7 @@
   action:
   - data:
       entity_id: group.lights_yard
-    service: group.turn_off
+    service: homeassistant.turn_on
   - data:
       entity_id: switch.patio_sec1
     service: switch.turn_on
@@ -37,9 +37,8 @@
      platform: template
      value_template: "{{ states('sensor.time') == (states.input_datetime.pool_start_time.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
   action:
-  - data:
-      entity_id: switch.pool_main
-    service: switch.turn_on
+     - service: script.pool_pump_run
+     - service: script.pool_sweep_run
 
 - id: pool_all_off
   alias: Pool All Off Timer
