@@ -164,10 +164,10 @@ house_lights_off:
     data:
       entity_id: group.lights_house
     service: homeassistant.turn_off
-    #  - alias: step2
-    #    data:
-    #      entity_id: remote.harmony_hub
-    #    service: remote.turn_off
+  - alias: step2
+    data:
+      entity_id: remote.family_room
+    service: remote.turn_off
 
 welcome_lights:
   alias: Welcome Lights

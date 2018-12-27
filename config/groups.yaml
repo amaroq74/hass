@@ -86,6 +86,7 @@ entertain_control:
 
 motion:
    name: Motion Sensors
+   control: hidden
    entities:
       - binary_sensor.family_motion
       - binary_sensor.living_motion
@@ -97,6 +98,7 @@ motion:
 
 doors:
    name: Doors
+   control: hidden
    entities:
       - switch.garage_door
       - binary_sensor.family_door
@@ -110,6 +112,7 @@ doors:
 
 gates:
    name: Gates
+   control: hidden
    entities:
       - switch.car_gate
       - binary_sensor.ped_gate
@@ -128,6 +131,7 @@ security_controls:
 
 batteries:
    name: Batteries
+   control: hidden
    entities:
       - sensor.indoor_battery
       - sensor.master_battery
@@ -139,11 +143,11 @@ batteries:
       - sensor.camper_battery
       - sensor.outdoor_battery
       - sensor.wind_battery
-      - sensor.pool_battery
       - sensor.rain_battery
 
 power:
    name: Power
+   control: hidden
    entities:
       - sensor.smartmeter_rate
       - sensor.smartmeter_total
@@ -154,11 +158,11 @@ power:
 
 climate_weather:
    name: Weather
+   control: hidden
    entities:
       - sensor.weather_symbol
-      - sun.next_setting
-      - sun.next_rising
       - sensor.wind_compass
+      - sensor.wind_direction
       - sensor.wind_average
       - sensor.wind_gust
       - sensor.outdoor_temperature
@@ -359,26 +363,28 @@ lights_bedr:
 
 lights_bedta:
    name: Amelia & Tessa's Room
+   control: hidden
    entities:
       - light.bedta_light
 
 lights_master:
    name: Master Bedroom
+   control: hidden
    entities:
       - light.master_light
 
 lights_living:
    name: Living Room
    entities:
-      - light.living_light
+      - light.living_lights
       - light.living_floor
       - light.living_tree
       - light.living_chandelier
       - light.living_entry
-      - light.bar_plug
 
 lights_dining:
    name: Dining Room
+   control: hidden
    entities:
       - light.dining_room
 
@@ -396,10 +402,10 @@ lights_family:
       - light.bookcases
       - light.bar_light
       - light.family_tree
-      - light.bar_plug
 
 lights_office:
    name: Office
+   control: hidden
    entities:
       - light.office_light
 
@@ -422,6 +428,7 @@ lights_yard:
 
 camera_gate:
    name: Gate Camera
+   control: hidden
    entities:
       #- sensor.gate_status
       #- sensor.gate_events
@@ -429,6 +436,7 @@ camera_gate:
 
 camera_front:
    name: Front Camera
+   control: hidden
    entities:
       #- sensor.front_status
       #- sensor.front_events
@@ -436,6 +444,7 @@ camera_front:
 
 camera_garage:
    name: Garage Camera
+   control: hidden
    entities:
       #- sensor.garage_status
       #- sensor.garage_events
@@ -443,6 +452,7 @@ camera_garage:
 
 camera_rear:
    name: Rear Camera
+   control: hidden
    entities:
       #- sensor.rear_status
       #- sensor.rear_events
@@ -450,6 +460,7 @@ camera_rear:
 
 camera_side:
    name: Side Camera
+   control: hidden
    entities:
       #- sensor.side_status
       #- sensor.side_events
@@ -457,6 +468,7 @@ camera_side:
 
 camera_chickens:
    name: Chickens Camera
+   control: hidden
    entities:
       #- sensor.chickens_status
       #- sensor.chickens_events
@@ -464,6 +476,7 @@ camera_chickens:
 
 zwave:
    name: ZWave
+   control: hidden
    entities:
      - zwave.aeotec_zw090_zstick_gen5_us
      - zwave.bar_light

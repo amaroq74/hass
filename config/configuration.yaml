@@ -731,24 +731,28 @@ climate:
     target_sensor: sensor.house_temperature
     away_temp: 60
     ac_mode: false
+    precision: 0.1
   - platform: generic_thermostat
     name: Chicken Coop
     heater: switch.chicken_heat
     target_sensor: sensor.chickens_temperature
     min_temp: 32
     ac_mode: false
+    precision: 0.1
   - platform: generic_thermostat
     name: Garage
     heater: switch.garage_heat
     target_sensor: sensor.garage_temperature
     min_temp: 32
     ac_mode: false
+    precision: 0.1
   - platform: generic_thermostat
     name: Camper
     heater: switch.camper_heat
     target_sensor: sensor.camper_temperature
     min_temp: 32
     ac_mode: false
+    precision: 0.1
   - platform: generic_thermostat
     name: Pool
     heater: switch.pool_heat
@@ -757,6 +761,7 @@ climate:
     min_temp: 32
     max_temp: 95
     ac_mode: false
+    precision: 0.1
 
 emulated_hue:
   host_ip: 172.16.20.1
