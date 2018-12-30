@@ -38,6 +38,7 @@ lights:
       - group.lights_bedr
       - group.lights_bedta
       - group.lights_hall
+      - group.lights_shed
       - group.lights_yard
 
 yard:
@@ -345,6 +346,7 @@ lights_house:
       - group.lights_bedr
       - group.lights_bedta
       - group.lights_hall
+      - group.lights_shed
 
 lights_welcome:
    name: Welcome Lights
@@ -354,6 +356,9 @@ lights_welcome:
       - light.kitchen_island
       - light.living_floor
       - light.living_tree
+      - light.living_mantel
+      - light.short_hall
+      - light.bar_lights
 
 lights_bedr:
    name: Rachel's Room
@@ -415,6 +420,12 @@ lights_hall:
       - light.long_hall
       - light.short_hall
 
+lights_shed:
+   name: Shed Lights
+   control: hidden
+   entities:
+      - light.shed_light
+
 lights_yard:
    name: Yard
    entities:
@@ -425,6 +436,7 @@ lights_yard:
       - light.entry_light
       - light.xmas_lights
       - light.pool_light
+      - light.shed_porch
 
 camera_gate:
    name: Gate Camera
@@ -515,6 +527,7 @@ zwave:
      - zwave.living_entry
      - zwave.living_floor
      - zwave.living_lights
+     - zwave.living_mantel
      - zwave.living_motion
      - zwave.living_tree
      - zwave.long_hall
@@ -531,6 +544,8 @@ zwave:
      - zwave.ped_gate
      - zwave.pool_light
      - zwave.shed_door
+     - zwave.shed_light
+     - zwave.shed_porch
      - zwave.short_hall
      - zwave.speakers_new
      - zwave.xmas_lights

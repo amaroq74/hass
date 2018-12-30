@@ -573,6 +573,25 @@ light:
         turn_off:
           service: switch.turn_off
           entity_id: switch.short_hall
+      shed_light:
+        friendly_name: "Shed Light"
+        value_template: "{{ states('switch.shed_light') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.shed_light
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.shed_light
+      shed_porch:
+        friendly_name: "Shed Porch"
+        value_template: "{{ states('switch.shed_porch') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.shed_porch
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.shed_porch
+
 
 switch:
   - platform: arduino_relay

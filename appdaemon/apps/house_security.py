@@ -43,7 +43,6 @@ Lights = { 'auto_light' : ['switch.gate_light',
 # Alarm group levels
 EmailLevels = {'night_alarm' : 'Alarm',
                'door_bell'   : 'Alert',
-               'gate_bell'   : 'Alert',
                'door_alarm'  : 'Alarm',
                'house_alarm' : 'Alarm'}
 
