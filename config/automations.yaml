@@ -250,6 +250,14 @@
   trigger:
   - at: '13:30:00'
     platform: time
+  condition:
+    condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
   action:
     - data:
         entity_id: media_player.kitchen_speaker
@@ -266,7 +274,7 @@
   action:
     - data:
         entity_id: media_player.kitchen_speaker
-        volume_level: 0.40
+        volume_level: 0.50
       service: media_player.volume_set
 
 - id: fans_off

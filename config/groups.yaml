@@ -58,10 +58,9 @@ entertain:
    entities:
       - group.entertain_control
       - media_player.chrome_family
-      - media_player.family_room
       - media_player.chrome_master
-      - media_player.master
       - media_player.kitchen_speaker
+      - media_player.lr
       - media_player.rxv677_b95979
       - media_player.rxv677_b95979_zone_2
       - media_player.samsung_8_series_65_un65mu800d
@@ -358,7 +357,7 @@ lights_welcome:
       - light.living_tree
       - light.living_mantel
       - light.short_hall
-      - light.bar_lights
+      - light.bar_light
 
 lights_bedr:
    name: Rachel's Room
@@ -386,6 +385,7 @@ lights_living:
       - light.living_tree
       - light.living_chandelier
       - light.living_entry
+      - light.living_mantel
 
 lights_dining:
    name: Dining Room
