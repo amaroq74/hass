@@ -129,6 +129,7 @@ pool_pump_run:
 pool_sweep_run:
   alias: Pool Sweep Running
   sequence:
+  - delay: "00:05;00"
   - alias: Pool Sweep On
     data:
       entity_id: switch.pool_sweep
@@ -145,9 +146,7 @@ movie_lights:
   - alias: step1
     data:
       entity_id: 
-        - light.kitchen_island
-        - light.kitchen_light
-        - light.kitchen_table
+        - light.kitchen_island - light.kitchen_light - light.kitchen_table
         - light.couch_light
         - light.bar_light
     service: light.turn_off

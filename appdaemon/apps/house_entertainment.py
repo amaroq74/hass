@@ -21,7 +21,7 @@ class HouseEntertainment(hass.Hass):
     # Turn on TV when chrome starts
     def chrome_changed(self, entity, attribute, old, new, *args, **kwargs):
         pass
-        if new != 'off' and new != 'unavailable' and old == 'off':
-            self.log("Setting Harmony state due to chrome state new {} old {} harmony = {}".format(new,old,self.get_state('remote.family_room')))
-            self.turn_on("remote.family_room", activity = "Watch Chrome tv" )
+#        if new != 'off' and new != 'unavailable' and old == 'off':
+#            self.log("Setting Harmony state due to chrome state new {} old {} harmony = {}".format(new,old,self.get_state('remote.family_room')))
+#            self.turn_on("remote.family_room", activity = "Watch Chrome tv" )
 
