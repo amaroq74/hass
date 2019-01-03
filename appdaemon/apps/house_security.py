@@ -55,7 +55,7 @@ EmailAddrs = 'ryan@amaroq.com'
 # Setup sensors
 SecSensors = { 'binary_sensor.ped_gate'      : [ 'gate_bell',   'dcare_bell',  'gate_cam',    'front_cam',  'night_alarm', 'auto_light' ],
                'switch.car_gate'             : [ 'gate_bell',   'dcare_bell',  'gate_cam',    'front_cam',  'night_alarm', 'auto_light' ],
-               'switch.garage_door'          : [ 'dcare_bell',  'garage_cam',  'night_alarm', 'door_alarm'  ],
+            #  'switch.garage_door'          : [ 'dcare_bell',  'garage_cam',  'night_alarm', 'door_alarm'  ],
                'binary_sensor.gate_bell'     : [ 'door_bell',   'gate_cam',    'front_cam',   'auto_light'  ],
                'binary_sensor.door_bell'     : [ 'door_bell',   'gate_cam',    'front_cam',   'auto_light'  ],
                'binary_sensor.family_door'   : [ 'front_cam',   'garage_cam',  'night_alarm', 'door_alarm'  ],
