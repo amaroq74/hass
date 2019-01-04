@@ -146,7 +146,9 @@ movie_lights:
   - alias: step1
     data:
       entity_id: 
-        - light.kitchen_island - light.kitchen_light - light.kitchen_table
+        - light.kitchen_island 
+        - light.kitchen_light 
+        - light.kitchen_table
         - light.couch_light
         - light.bar_light
     service: light.turn_off

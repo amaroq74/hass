@@ -55,7 +55,7 @@ class HouseClimate(hass.Hass):
 
         for k,v in TempWeights.items():
             val = self.get_state(k)
-            if val is not None and val != 'unknown':
+            if val is not None and val != 'unknown' and val is not 'NoneType':
                 tot += (float(val) * v)
                 div += TempWeights[k]
             else:
