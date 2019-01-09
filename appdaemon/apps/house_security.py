@@ -35,7 +35,7 @@ Cameras = { 'gate_cam'   : zm_camera.ZmCamera('1'),
             'side_cam'   : zm_camera.ZmCamera('5') }
 
 Lights = { 'auto_light' : ['switch.gate_light', 
-                           'switch.xmas_lights', 
+                           #'switch.xmas_lights', 
                            'switch.entry_light', 
                            'switch.yard_lights1',
                            'switch.yard_lights2'] }

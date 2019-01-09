@@ -284,9 +284,6 @@
     platform: time
   action:
   - data:
-      entity_id: 
-      - fan.bedr_fan
-      - fan.bedta_fan
-      - fan.family_fan
-    service: fan.turn_off
+      entity_id: fans.auto_fans
+    service: homeassistant.turn_off
 

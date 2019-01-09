@@ -129,7 +129,7 @@ pool_pump_run:
 pool_sweep_run:
   alias: Pool Sweep Running
   sequence:
-  - delay: "00:05;00"
+  - delay: "00:05:00"
   - alias: Pool Sweep On
     data:
       entity_id: switch.pool_sweep

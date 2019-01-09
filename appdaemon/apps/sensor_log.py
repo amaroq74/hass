@@ -39,6 +39,7 @@ LogSensors = {  'sensor.rain_total'           : {'type':'count',         'device
                 'sensor.bedta_temperature'    : {'type':'temp',          'device':'BedTA',          'units':'c',        'conv':weather_convert.tempFarToCel},
                 'sensor.bedta_humidity'       : {'type':'humidity',      'device':'BedTA',          'units':'%',        'conv':None},
                 'sensor.camper_temperature'   : {'type':'temp',          'device':'Camper',         'units':'c',        'conv':weather_convert.tempFarToCel},
+                'sensor.camper_humidity'      : {'type':'humidity',      'device':'Camper',         'units':'%',        'conv':None},
                 'sensor.chickens_temperature' : {'type':'temp',          'device':'Chickens',       'units':'c',        'conv':weather_convert.tempFarToCel},
                 'sensor.pool_temperature'     : {'type':'temp',          'device':'Pool',           'units':'c',        'conv':weather_convert.tempFarToCel},
                 'sensor.pool_solar_in'        : {'type':'temp',          'device':'Pool_Solar_In',  'units':'c',        'conv':weather_convert.tempFarToCel},
