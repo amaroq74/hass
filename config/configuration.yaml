@@ -18,12 +18,13 @@ lovelace:
 
 device_tracker:
    - platform: nmap_tracker
-     hosts: 172.16.20.0/24 
-     hosts: 172.16.30.0/24 
+     hosts: 
+       - 172.16.20.0/24 
+       - 172.16.30.0/24 
      home_interval: 10
 
 # Show links to resources in log and frontend
-introduction:
+#introduction:
 
 # Enables the frontend
 frontend:

@@ -79,6 +79,11 @@ views:
   - title: Security
     cards:
       - type: entities
+        title: People
+        show_header_toggle: false
+        entities:
+          - device_tracker.ryan_phone
+      - type: entities
         title: Gates
         show_header_toggle: false
         entities:
@@ -379,7 +384,7 @@ views:
           - sensor.master_battery
           - sensor.bedr_battery
           - sensor.bedta_battery
-          - sensor.garage_battery2
+          - sensor.garage_battery
           - sensor.chickens_battery
           - sensor.outdoor_battery
           - sensor.wind_battery
