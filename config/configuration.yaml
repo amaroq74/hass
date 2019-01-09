@@ -270,10 +270,22 @@ input_number:
 
 # Sensors
 sensor:
-  - platform: yr
-    name: Weather
+  - platform: wunderground
+    api_key: !secret wunder_api
+    pws_id: KCAREDWO4
     monitored_conditions:
-      - symbol
+       - alerts
+       - weather
+       - solarradiation
+       - UV
+       - weather_1d
+       - weather_1n
+       - weather_2d
+       - weather_2n
+       - weather_3d
+       - weather_3n
+       - weather_4d
+       - weather_4n
   - platform: time_date
     display_options:
       - 'time'

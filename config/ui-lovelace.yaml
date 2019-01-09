@@ -11,7 +11,7 @@ views:
         title: Weather
         show_header_toggle: false
         entities:
-          - sensor.weather_symbol
+          - sensor.pws_weather
           - sensor.wind_compass
           - sensor.wind_direction
           - sensor.wind_average
@@ -21,9 +21,26 @@ views:
           - sensor.outdoor_dewpoint
           - sensor.indoor_pressure
           - sensor.indoor_trend
+          - sensor.pws_uv
+          - sensor.pws_solarradiation
           - sensor.rain_day
           - sensor.rain_hour
           - sensor.rain_72h
+
+      - type: entities
+        title: Forecast
+        show_header_toggle: false
+        entities:
+          - sensor.pws_alerts
+          - sensor.pws_weather_1d
+          - sensor.pws_weather_1n
+          - sensor.pws_weather_2d
+          - sensor.pws_weather_2n
+          - sensor.pws_weather_3d
+          - sensor.pws_weather_3n
+          - sensor.pws_weather_4d
+          - sensor.pws_weather_4n
+
       - type: entities
         title: Temperature
         show_header_toggle: false
@@ -58,15 +75,6 @@ views:
           - sensor.ups_time_left
           - sensor.camper_luminance
           - sensor.shed_luminance
-      - type: entities
-        title: Fans
-        show_header_toggle: false
-        entities:
-          - fan.family_fan
-          - fan.master_fan
-          - fan.bedr_fan
-          - fan.bedta_fan
-          - switch.house_fan
 
   - title: Security
     cards:
@@ -235,6 +243,16 @@ views:
           - light.pool_light
           - light.shed_porch
 
+      - type: entities
+        title: Fans
+        show_header_toggle: false
+        entities:
+          - fan.family_fan
+          - fan.master_fan
+          - fan.bedr_fan
+          - fan.bedta_fan
+          - switch.house_fan
+
   - title: Yard
     cards:
       - type: entities
@@ -361,7 +379,7 @@ views:
           - sensor.master_battery
           - sensor.bedr_battery
           - sensor.bedta_battery
-          - sensor.garage_battery
+          - sensor.garage_battery2
           - sensor.chickens_battery
           - sensor.outdoor_battery
           - sensor.wind_battery
