@@ -79,10 +79,11 @@ views:
   - title: Security
     cards:
       - type: entities
-        title: People
+        title: Tracking
         show_header_toggle: false
         entities:
           - device_tracker.ryan_phone
+          - device_tracker.steph_phone
       - type: entities
         title: Gates
         show_header_toggle: false
@@ -117,9 +118,7 @@ views:
           - binary_sensor.bedta_motion
           - binary_sensor.garage_motion
           - binary_sensor.shed_motion
-          - sensor.shed_motion
           - binary_sensor.camper_motion
-          - sensor.camper_motion
       - type: entities
         title: Controls
         show_header_toggle: false
@@ -376,6 +375,11 @@ views:
 
   - title: Monitor
     cards:
+      - type: entities
+        title: Roomba1
+        show_header_toggle: false
+        entities:
+          - vacuum.roomba1
       - type: entities
         title: Batteries
         show_header_toggle: false

@@ -23,6 +23,13 @@ device_tracker:
        - 172.16.30.0/24 
      home_interval: 10
 
+vacuum:
+   - platform: roomba
+     host: roomba1.amaroq.net
+     name: Roomba1
+     username: !secret roomba_user
+     password: !secret roomba_pass
+
 # Show links to resources in log and frontend
 #introduction:
 
@@ -388,6 +395,16 @@ zwave:
   device_config: !include zwave_device_config.yaml
 
 binary_sensor:
+  - platform: template
+    sensors:
+      shed_motion:
+        friendly_name: "Shed Motion"
+        device_class: motion
+        value_template: "{{ states('sensor.shed_motion')|int == 8 }}"
+      camper_motion:
+        friendly_name: "Camper Motion"
+        device_class: motion
+        value_template: "{{ states('sensor.camper_motion')|int == 8 }}"
   - platform: arduino_relay
     sources:
       gate_bell:
