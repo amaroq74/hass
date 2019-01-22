@@ -33,7 +33,8 @@ class WeatherPost(hass.Hass):
         self.log(msg,level='DEBUG')
 
     def initialize(self):
-        self.run_every(self.post_weather, datetime.now() + timedelta(seconds=10), 5)
+        #self.run_every(self.post_weather, datetime.now() + timedelta(seconds=10), 5)
+        self.listen_state(self.post_weather,'sensor.wind_gust')
 
     def post_weather(self, *args, **kwargs):
 
