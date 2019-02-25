@@ -9,10 +9,10 @@ import appdaemon.plugins.hass.hassapi as hass
 import weather_convert
 from datetime import datetime, timedelta
 
-TempWeights = { "sensor.bedr_temperature"   : 1.0,
-                "sensor.master_temperature" : 1.2,
-                "sensor.indoor_temperature" : 0.8,
-                "sensor.bedta_temperature"  : 1.0 }
+TempWeights = { "sensor.bedr_temperature"   : 1.5,
+                "sensor.master_temperature" : 1.5,
+                "sensor.indoor_temperature" : 0.5,
+                "sensor.bedta_temperature"  : 1.5 }
 
 TEMP_FAHRENHEIT = '°F'
 

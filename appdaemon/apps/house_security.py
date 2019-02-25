@@ -195,7 +195,7 @@ class HouseSecurity(hass.Hass):
                 # Check for lights
                 if self.sun_down() and action in Lights:
                     for light in Lights[action]:
-                        self.turn_on(lights)
+                        self.turn_on(light)
 
                 # Check for email actions
                 if action in EmailLevels:

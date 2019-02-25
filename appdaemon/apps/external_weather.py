@@ -33,8 +33,11 @@ class WeatherPost(hass.Hass):
         self.log(msg,level='DEBUG')
 
     def initialize(self):
-        #self.run_every(self.post_weather, datetime.now() + timedelta(seconds=10), 5)
+        self.run_every(self.post_weather, datetime.now() + timedelta(seconds=10), 30)
         self.listen_state(self.post_weather,'sensor.wind_gust')
+
+        self._last = time.time()
+        self._count = 0
 
     def post_weather(self, *args, **kwargs):
 
@@ -61,6 +64,12 @@ class WeatherPost(hass.Hass):
 
             if ures != b'success':
                 self.warning("Bad url post result = {}".format(ures))
+            else:
+                self._count += 1
+                if (time.time() - self._last) > 300.0:
+                    self.log("Posted {} times in {} seconds".format(self._count,(time.time() - self._last)))
+                    self._last  = time.time()
+                    self._count = 0
 
         except Exception as msg:
             self.error("Got exception: {}".format(msg))
