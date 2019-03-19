@@ -98,21 +98,29 @@ class WeatherPost(hass.Hass):
             code = code & 0x7fff
             password = str(code)
 
+            # https://weather.gladstonefamily.net/aprswxnet.html
             weather = '_{:03d}/{:03d}g{:03d}t{:03d}r{:03d}P{:03d}h{:02d}b{:05d}'.format(
-                int(float(self.get_state('sensor.wind_direction'))),
-                int(float(self.get_state('sensor.wind_average'))),
-                int(float(self.get_state('sensor.wind_gust'))),
-                int(float(self.get_state('sensor.outdoor_temperature'))),
-                int(float(self.get_state('sensor.rain_hour'))*100),
-                int(float(self.get_state('sensor.rain_day'))*100),
-                int(self.get_state('sensor.outdoor_humidity')),
-                int(weather_convert.pressureInhgToHpa(float(self.get_state('sensor.indoor_pressure')))*10))
+                round(float(self.get_state('sensor.wind_direction'))),
+                round(float(self.get_state('sensor.wind_average'))),
+                round(float(self.get_state('sensor.wind_gust'))),
+                round(float(self.get_state('sensor.outdoor_temperature'))),
+                round(float(self.get_state('sensor.rain_hour'))*100.0),
+                round(float(self.get_state('sensor.rain_day'))*100.0),
+                round(float(self.get_state('sensor.outdoor_humidity'))),
+                round(weather_convert.pressureInhgToHpa(float(self.get_state('sensor.indoor_pressure')))*10.0))
 
             login = 'user {} pass {} vers "Python" \n'.format(hass_secrets.callSign,password)
-            message = '{}>APRS,TCPIP*:!{}{}eHass\n'.format(hass_secrets.callSign,hass_secrets.position,weather)
+            message = '{}>APRS,TCPIP*:!{}{}Amaroq\n'.format(hass_secrets.callSign,hass_secrets.position,weather)
 
-            self.warning(login)
-            self.warning(message)
+            #self.warning(login)
+            #self.warning(message)
+
+            sSock = socket(AF_INET, SOCK_STREAM)
+            sSock.connect((serverHost, serverPort))
+            sSock.send(login.encode('UTF-8'))
+            sSock.send(message.encode('UTF-8'))
+            sSock.shutdown(0)
+            sSock.close()
 
         except Exception as msg:
             self.error("Got exception: {}".format(msg))
