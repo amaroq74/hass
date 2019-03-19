@@ -3,11 +3,13 @@
 import sys
 sys.path.append('/amaroq/hass/pylib')
 import hass_secrets
+import weather_convert
 
 import appdaemon.plugins.hass.hassapi as hass
 import time
 import urllib
 import urllib.request
+from socket import *
 from datetime import datetime, timedelta
 
 # Sensor List
@@ -33,13 +35,20 @@ class WeatherPost(hass.Hass):
         self.log(msg,level='DEBUG')
 
     def initialize(self):
-        self.run_every(self.post_weather, datetime.now() + timedelta(seconds=10), 30)
-        self.listen_state(self.post_weather,'sensor.wind_gust')
+        self.run_every(self.post_period, datetime.now() + timedelta(seconds=10), 60)
+        self.listen_state(self.post_event,'sensor.wind_gust')
 
         self._last = time.time()
         self._count = 0
 
-    def post_weather(self, *args, **kwargs):
+    def post_event(self, *args, **kwargs):
+        self.post_wunderground()
+
+    def post_period(self, *args, **kwargs):
+        self.post_wunderground()
+        self.post_aprs()
+
+    def post_wunderground(self):
 
         # Generate WUG Url
         data  = "http://rtupdate.wunderground.com/weatherstation/"
@@ -70,6 +79,40 @@ class WeatherPost(hass.Hass):
                     self.log("Posted {} times in {} seconds".format(self._count,(time.time() - self._last)))
                     self._last  = time.time()
                     self._count = 0
+
+        except Exception as msg:
+            self.error("Got exception: {}".format(msg))
+        except:
+            self.error("Got unknown exception")
+
+    def post_aprs(self):
+        try:
+            serverHost = 'rotate.aprs.net'
+            serverPort = 14580
+
+            # Generate password
+            code = 0x73e2
+            for i, char in enumerate(hass_secrets.callSign.split('-')[0]):
+                code ^= ord(char) << (8 if not i % 2 else 0)
+
+            code = code & 0x7fff
+            password = str(code)
+
+            weather = '_{:03d}/{:03d}g{:03d}t{:03d}r{:03d}P{:03d}h{:02d}b{:05d}'.format(
+                int(float(self.get_state('sensor.wind_direction'))),
+                int(float(self.get_state('sensor.wind_average'))),
+                int(float(self.get_state('sensor.wind_gust'))),
+                int(float(self.get_state('sensor.outdoor_temperature'))),
+                int(float(self.get_state('sensor.rain_hour'))*100),
+                int(float(self.get_state('sensor.rain_day'))*100),
+                int(self.get_state('sensor.outdoor_humidity')),
+                int(weather_convert.pressureInhgToHpa(float(self.get_state('sensor.indoor_pressure')))*10))
+
+            login = 'user {} pass {} vers "Python" \n'.format(hass_secrets.callSign,password)
+            message = '{}>APRS,TCPIP*:!{}{}eHass\n'.format(hass_secrets.callSign,hass_secrets.position,weather)
+
+            self.warning(login)
+            self.warning(message)
 
         except Exception as msg:
             self.error("Got exception: {}".format(msg))
