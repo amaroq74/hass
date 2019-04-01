@@ -351,19 +351,13 @@ class ForecastWindow(QWidget):
                 dow  = day.findall('./title')[0].text
                 cond = day.findall('./fcttext')[0].text 
                 iurl = day.findall('./icon_url')[0].text 
-                pop  = day.findall('./pop')[0].text 
-                #print("Processing {}".format(per))
-                #print("DOW {}".format(dow))
-                #print("COND {}".format(cond))
-                #print("URL {}".format(iurl))
-                #print("pop {}".format(pop))
 
                 if per < 10:
                     with urllib.request.urlopen(iurl) as imgReq:
                         icon = imgReq.read()
 
                     self.dayName[per].setText(dow) 
-                    self.dayInfo[per].setText("%s\nPrec %s %%" % (cond,pop))
+                    self.dayInfo[per].setText(cond)
                     self.dayPixmap[per].loadFromData(icon) 
                     self.dayLabel[per].setPixmap(self.dayPixmap[per])
                     self.dayLabel[per].update()
