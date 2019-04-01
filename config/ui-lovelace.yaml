@@ -25,6 +25,7 @@ views:
           - sensor.pws_solarradiation
           - sensor.rain_day
           - sensor.rain_hour
+          - sensor.rain_24h
           - sensor.rain_72h
 
       - type: entities

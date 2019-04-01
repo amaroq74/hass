@@ -98,6 +98,7 @@ class HouseClimate(hass.Hass):
         count_now  = self.get_state('sensor.rain_total')
         counts = {'rain_hour' : {'name' : 'Rain Hour', 'count' : None},
                   'rain_day'  : {'name' : 'Rain Day',  'count' : None},
+                  'rain_24h'  : {'name' : 'Rain 24H',  'count' : None},
                   'rain_72h'  : {'name' : 'Rain 72H',  'count' : None} }
 
         if count_now == 'uknown':
@@ -107,6 +108,7 @@ class HouseClimate(hass.Hass):
         try:
             counts['rain_hour']['count'] = self._db.getSensorHour('rain','count')
             counts['rain_day']['count']  = self._db.getSensorDay('rain','count')
+            counts['rain_24h']['count']  = self._db.getSensorHours('rain','count',24)
             counts['rain_72h']['count']  = self._db.getSensorHours('rain','count',72)
         except:
             self.warning("Unable to get previous rain counts")

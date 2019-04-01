@@ -99,18 +99,19 @@ class WeatherPost(hass.Hass):
             password = str(code)
 
             # https://weather.gladstonefamily.net/aprswxnet.html
-            weather = '_{:03d}/{:03d}g{:03d}t{:03d}r{:03d}P{:03d}h{:02d}b{:05d}'.format(
+            weather = '_{:03d}/{:03d}g{:03d}t{:03d}r{:03d}p{:03d}P{:03d}h{:02d}b{:05d}'.format(
                 round(float(self.get_state('sensor.wind_direction'))),
                 round(float(self.get_state('sensor.wind_average'))),
                 round(float(self.get_state('sensor.wind_gust'))),
                 round(float(self.get_state('sensor.outdoor_temperature'))),
                 round(float(self.get_state('sensor.rain_hour'))*100.0),
+                round(float(self.get_state('sensor.rain_24h'))*100.0),
                 round(float(self.get_state('sensor.rain_day'))*100.0),
                 round(float(self.get_state('sensor.outdoor_humidity'))),
                 round(weather_convert.pressureInhgToHpa(float(self.get_state('sensor.indoor_pressure')))*10.0))
 
             login = 'user {} pass {} vers "Python" \n'.format(hass_secrets.callSign,password)
-            message = '{}>APRS,TCPIP*:!{}{}Amaroq\n'.format(hass_secrets.callSign,hass_secrets.position,weather)
+            message = '{}>APRS,TCPIP*:!{}{}Amaroq APRS TCPIP Weather Station\n'.format(hass_secrets.callSign,hass_secrets.position,weather)
 
             #self.warning(login)
             #self.warning(message)

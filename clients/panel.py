@@ -292,10 +292,10 @@ class ForecastWindow(QWidget):
         self.db = db
 
         nfont = QFont()
-        nfont.setPointSize(12)
+        nfont.setPointSize(10)
         nfont.setBold(True)
         ifont = QFont()
-        ifont.setPointSize(10)
+        ifont.setPointSize(8)
         ifont.setBold(True)
 
         self.dayName   = [None for i in range(0,10)]
@@ -305,11 +305,11 @@ class ForecastWindow(QWidget):
 
         gl = QGridLayout()
 
-        for idx in range(0,10):
+        for idx in range(0,8):
             self.dayName[idx] = QLabel()
             self.dayName[idx].setAlignment(Qt.AlignCenter)
             self.dayName[idx].setFont(nfont)
-            self.dayName[idx].setFixedSize(120,45)
+            self.dayName[idx].setFixedSize(130,20)
             self.dayName[idx].setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Fixed)
             gl.addWidget(self.dayName[idx],0,idx,1,1,Qt.AlignCenter)
 
@@ -321,8 +321,9 @@ class ForecastWindow(QWidget):
             self.dayInfo[idx] = QLabel()
             self.dayInfo[idx].setAlignment(Qt.AlignCenter)
             self.dayInfo[idx].setFont(ifont)
-            self.dayInfo[idx].setFixedSize(120,50)
+            self.dayInfo[idx].setFixedSize(130,80)
             self.dayInfo[idx].setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Fixed)
+            self.dayInfo[idx].setWordWrap(True);
             gl.addWidget(self.dayInfo[idx],2,idx,1,1,Qt.AlignCenter)
 
             self.dayPixmap[idx] = QPixmap()
@@ -338,29 +339,35 @@ class ForecastWindow(QWidget):
         try:
 
             # Get the forecast
-            with urllib.request.urlopen("http://api.wunderground.com/api/1fa664001be84d7a/forecast10day/q/94062.xml") as fh:
+            url = "http://api.wunderground.com/api/" + secrets.wunder_api + "/forecast/q/94062.xml"
+
+            with urllib.request.urlopen(url) as fh:
                 ures = fh.read().rstrip()
 
             root = ET.fromstring(ures)
 
-            for day in root.findall('./forecast/simpleforecast/forecastdays/forecastday'):
-                per  = int(day.findall('./period')[0].text) - 1
-                dow  = day.findall('./date/weekday')[0].text
-                high = day.findall('./high/fahrenheit')[0].text
-                low  = day.findall('./low/fahrenheit')[0].text
-                cond = day.findall('./conditions')[0].text
-                iurl = day.findall('./icon_url')[0].text
-                pop  = day.findall('./pop')[0].text
+            for day in root.findall('./forecast/txt_forecast/forecastdays/forecastday'):
+                per  = int(day.findall('./period')[0].text)
+                dow  = day.findall('./title')[0].text
+                cond = day.findall('./fcttext')[0].text 
+                iurl = day.findall('./icon_url')[0].text 
+                pop  = day.findall('./pop')[0].text 
+                #print("Processing {}".format(per))
+                #print("DOW {}".format(dow))
+                #print("COND {}".format(cond))
+                #print("URL {}".format(iurl))
+                #print("pop {}".format(pop))
 
-                with urllib.request.urlopen(iurl) as imgReq:
-                    icon = imgReq.read()
+                if per < 10:
+                    with urllib.request.urlopen(iurl) as imgReq:
+                        icon = imgReq.read()
 
-                self.dayName[per].setText(dow) 
-                self.dayInfo[per].setText("%s\nH %s  L %s\nPrec %s %%" % (cond,high,low,pop))
+                    self.dayName[per].setText(dow) 
+                    self.dayInfo[per].setText("%s\nPrec %s %%" % (cond,pop))
+                    self.dayPixmap[per].loadFromData(icon) 
+                    self.dayLabel[per].setPixmap(self.dayPixmap[per])
+                    self.dayLabel[per].update()
 
-                self.dayPixmap[per].loadFromData(icon) 
-                self.dayLabel[per].setPixmap(self.dayPixmap[per])
-                self.dayLabel[per].update()
         except Exception as e:
             print("got forecast exception: {}".format(e))
 
