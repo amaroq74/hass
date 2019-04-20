@@ -368,9 +368,9 @@ views:
       - type: media-control
         entity: media_player.living
       - type: media-control
-        entity: media_player.rxv677_b95979
+        entity: media_player.rx_v677_b95979
       - type: media-control
-        entity: media_player.rxv677_b95979_zone_2
+        entity: media_player.rx_v677_b95979_zone_2
       - type: media-control
         entity: media_player.samsung_8_series_65_un65mu800d
 
@@ -407,7 +407,7 @@ views:
         title: ZWave
         show_header_toggle: false
         entities:
-          - zwave.aeotec_zw090_zstick_gen5_us
+          - zwave.aeotec_zw090_z_stick_gen5_us
           - zwave.bar_light
           - zwave.bar_plug
           - zwave.bedr_fan
@@ -420,7 +420,6 @@ views:
           - zwave.camper_heat
           - zwave.camper_sensor
           - zwave.chickens_gate
-          - zwave.chickens_gate_old
           - zwave.chicken_heat
           - zwave.couch_light
           - zwave.dining_door
@@ -466,7 +465,7 @@ views:
           - zwave.shed_porch
           - zwave.shed_sensor
           - zwave.short_hall
-          - zwave.speakers_new
+          - zwave.speakers
           - zwave.sump_alarm
           - zwave.xmas_lights
           - zwave.yard_lights1

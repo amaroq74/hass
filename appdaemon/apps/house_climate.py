@@ -101,7 +101,7 @@ class HouseClimate(hass.Hass):
                   'rain_24h'  : {'name' : 'Rain 24H',  'count' : None},
                   'rain_72h'  : {'name' : 'Rain 72H',  'count' : None} }
 
-        if count_now == 'uknown':
+        if count_now == 'uknown' or count_now == None:
             self.warning("Unable to get current rain count")
             return
 
