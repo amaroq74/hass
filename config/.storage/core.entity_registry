@@ -461,24 +461,6 @@
                 "unique_id": "5-72057594127859873"
             },
             {
-                "config_entry_id": null,
-                "device_id": null,
-                "disabled_by": null,
-                "entity_id": "zwave.ecolink_motion_sensor_2",
-                "name": null,
-                "platform": "zwave",
-                "unique_id": "node-6"
-            },
-            {
-                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
-                "device_id": "38c08f33bb5e45c195898cd1a9c9f94e",
-                "disabled_by": null,
-                "entity_id": "binary_sensor.ecolink_motion_sensor_sensor_2",
-                "name": null,
-                "platform": "zwave",
-                "unique_id": "6-72057594143571968"
-            },
-            {
                 "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
                 "device_id": "38c08f33bb5e45c195898cd1a9c9f94e",
                 "disabled_by": null,
@@ -1037,24 +1019,6 @@
                 "unique_id": "63-72057595100938401"
             },
             {
-                "config_entry_id": null,
-                "device_id": null,
-                "disabled_by": null,
-                "entity_id": "zwave.ecolink_motion_sensor_6",
-                "name": null,
-                "platform": "zwave",
-                "unique_id": "node-64"
-            },
-            {
-                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
-                "device_id": "97d76734a5c5463f8c94c4d641a82e6a",
-                "disabled_by": null,
-                "entity_id": "binary_sensor.ecolink_motion_sensor_sensor_6",
-                "name": null,
-                "platform": "zwave",
-                "unique_id": "64-72057595116650496"
-            },
-            {
                 "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
                 "device_id": "97d76734a5c5463f8c94c4d641a82e6a",
                 "disabled_by": null,
@@ -1089,24 +1053,6 @@
                 "name": null,
                 "platform": "zwave",
                 "unique_id": "64-72057595117715617"
-            },
-            {
-                "config_entry_id": null,
-                "device_id": null,
-                "disabled_by": null,
-                "entity_id": "zwave.ecolink_motion_sensor_7",
-                "name": null,
-                "platform": "zwave",
-                "unique_id": "node-65"
-            },
-            {
-                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
-                "device_id": "457765cd14dd45b18814466f0dc84df6",
-                "disabled_by": null,
-                "entity_id": "binary_sensor.ecolink_motion_sensor_sensor_7",
-                "name": null,
-                "platform": "zwave",
-                "unique_id": "65-72057595133427712"
             },
             {
                 "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
@@ -3006,6 +2952,60 @@
                 "name": "Front Door",
                 "platform": "zwave",
                 "unique_id": "5-72057594126794752"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "457765cd14dd45b18814466f0dc84df6",
+                "disabled_by": null,
+                "entity_id": "binary_sensor.bedr_motion",
+                "name": "BedR Motion",
+                "platform": "zwave",
+                "unique_id": "65-72057595133427712"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "zwave.bedr_motion",
+                "name": "BedR Motion",
+                "platform": "zwave",
+                "unique_id": "node-65"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "97d76734a5c5463f8c94c4d641a82e6a",
+                "disabled_by": null,
+                "entity_id": "binary_sensor.master_motion",
+                "name": "Master Motion",
+                "platform": "zwave",
+                "unique_id": "64-72057595116650496"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "zwave.master_motion",
+                "name": "Master Motion",
+                "platform": "zwave",
+                "unique_id": "node-64"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "38c08f33bb5e45c195898cd1a9c9f94e",
+                "disabled_by": null,
+                "entity_id": "binary_sensor.bedta_motion",
+                "name": "BedTA Motion",
+                "platform": "zwave",
+                "unique_id": "6-72057594143571968"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "zwave.bedta_motion",
+                "name": "BedTA Motion",
+                "platform": "zwave",
+                "unique_id": "node-6"
             }
         ]
     },
