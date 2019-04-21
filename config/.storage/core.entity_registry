@@ -3006,6 +3006,69 @@
                 "name": "BedTA Motion",
                 "platform": "zwave",
                 "unique_id": "node-6"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_temp_temp_temp_wtgr800_1f_temperature",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "temp_temp_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_humidity_temp_humidity_wtgr800_1f_humidity",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "temp_humidity_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_battery_temp_battery_wtgr800_1f_battery",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "temp_battery_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_dir_wind_dir_wtgr800_1f_direction",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "wind_dir_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_speed_wind_speed_wtgr800_1f_gust",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "wind_speed_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_avgspeed_wind_avgspeed_wtgr800_1f_average",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "wind_avgspeed_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_battery_wind_battery_wtgr800_1f_battery",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "wind_battery_wtgr800_1f"
             }
         ]
     },
