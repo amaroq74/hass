@@ -250,6 +250,8 @@
   trigger:
   - at: '13:30:00'
     platform: time
+  - at: '22:00:00'
+    platform: time
   condition:
     condition: time
     weekday:
@@ -285,5 +287,25 @@
   action:
   - data:
       entity_id: fans.auto_fans
+    service: homeassistant.turn_off
+
+- id: fountain_on
+  alias: Fountain On
+  trigger:
+  - at: '09:00:00'
+    platform: time
+  action:
+  - data:
+      entity_id: switch.patio_fountain
+    service: homeassistant.turn_on
+
+- id: fountain_off
+  alias: Fountain Off
+  trigger:
+  - at: '22:00:00'
+    platform: time
+  action:
+  - data:
+      entity_id: switch.patio_fountain
     service: homeassistant.turn_off
 
