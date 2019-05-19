@@ -17,11 +17,12 @@ for tk,tv in dirs.items():
     for dk,dv in data.items():
         r,d,f = dv
         urb = r.replace('/amaroq','')
-        nb  = r.replace(tv,'').replace('/',' ')
+        #nb  = r.replace(tv,'').replace('/',' ')
+        nb  = r.replace(tv,'')
 
         for file in f:
             if file[0] != ".":
-                k = '{} -{} {}'.format(tk,nb,os.path.splitext(file)[0].replace(':',' '))
+                k = '{} - {}/{}'.format(tk,nb,os.path.splitext(file)[0].replace(':',' '))
                 v = 'http://172.16.20.1{}/{}'.format(urb,urllib.parse.quote(file))
                 lst[k] = v
 
