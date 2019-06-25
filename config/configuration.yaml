@@ -372,6 +372,7 @@ cloud:
         - switch.garage_door
         - switch.pool_main
         - switch.pool_sweep
+        - switch.patio_fountain
         - input_boolean.dcare_bell
         - input_boolean.door_alarm
         - input_boolean.house_alarm
@@ -459,6 +460,33 @@ light:
         turn_off:
           service: switch.turn_off
           entity_id: switch.xmas_lights
+      dining_entry:
+        friendly_name: "Dining Entry"
+        value_template: "{{ states('switch.dining_entry') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.dining_entry
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.dining_entry
+      kitchen_entry:
+        friendly_name: "Kitchen Entry"
+        value_template: "{{ states('switch.kitchen_entry') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.kitchen_entry
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.kitchen_entry
+      pbath_entry:
+        friendly_name: "PBath Entry"
+        value_template: "{{ states('switch.pbath_entry') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.pbath_entry
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.pbath_entry
       entry_light:
         friendly_name: "Entry Light"
         value_template: "{{ states('switch.entry_light') }}"

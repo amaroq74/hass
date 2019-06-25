@@ -286,7 +286,7 @@
     platform: time
   action:
   - data:
-      entity_id: fans.auto_fans
+      entity_id: group.auto_fans
     service: homeassistant.turn_off
 
 - id: fountain_on
@@ -302,7 +302,7 @@
 - id: fountain_off
   alias: Fountain Off
   trigger:
-  - at: '22:00:00'
+  - at: '23:00:00'
     platform: time
   action:
   - data:
