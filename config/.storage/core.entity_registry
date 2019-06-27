@@ -3564,6 +3564,60 @@
                 "name": "Dining Entry",
                 "platform": "zwave",
                 "unique_id": "112-72057595921776640"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_temp_temp_temp_f007pf_00_08_temperature",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "temp_temp_f007pf_00_08"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "zwave.shed_fan",
+                "name": "Shed Fan",
+                "platform": "zwave",
+                "unique_id": "node-113"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "d5432e740edb48f1bbddbe7f6bf96efe",
+                "disabled_by": null,
+                "entity_id": "switch.jasco_products_14291_in_wall_smart_switch_switch",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "114-72057595955331072"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "zwave.pbath_entry",
+                "name": "PBath Entry",
+                "platform": "zwave",
+                "unique_id": "node-114"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "7e9a49cb0ab440998a5cc49008bcf9aa",
+                "disabled_by": null,
+                "entity_id": "switch.jasco_products_14291_in_wall_smart_switch_switch_2",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "115-72057595972108288"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "zwave.kitchen_entry",
+                "name": "Kitchen Entry",
+                "platform": "zwave",
+                "unique_id": "node-115"
             }
         ]
     },

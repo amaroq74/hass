@@ -247,7 +247,9 @@ views:
           - light.yard_lights1
           - light.yard_lights2
           - light.patio_lights
+          - light.kitchen_entry
           - light.dining_entry
+          - light.pbath_entry
           - light.entry_light
           - light.xmas_lights
           - light.pool_light
@@ -261,6 +263,7 @@ views:
           - fan.master_fan
           - fan.bedr_fan
           - fan.bedta_fan
+          - fan.shed_fan
           - switch.house_fan
 
   - title: Yard
@@ -464,6 +467,7 @@ views:
           - zwave.gate_light
           - zwave.ivy_gate
           - zwave.kitchen_door
+          - zwave.kitchen_entry
           - zwave.kitchen_island
           - zwave.kitchen_light
           - zwave.kitchen_table
@@ -485,9 +489,11 @@ views:
           - zwave.patio_lights
           - zwave.patio_sec1
           - zwave.pbath_door
+          - zwave.pbath_entry
           - zwave.ped_gate
           - zwave.pool_light
           - zwave.shed_door
+          - zwave.shed_fan
           - zwave.shed_light
           - zwave.shed_porch
           - zwave.shed_sensor
