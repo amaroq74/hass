@@ -30,7 +30,7 @@ Sounds = { 'gate_bell':  'doorbell.wav',
 
 CamTime = 120
 Cameras = { 'gate_cam'   : zm_camera.ZmCamera('1'),
-            'front_cam'  : zm_camera.ZmCamera('2'),
+            'front_cam'  : zm_camera.ZmCamera('8'),
             'garage_cam' : zm_camera.ZmCamera('4'),
             'side_cam'   : zm_camera.ZmCamera('5') }
 
@@ -259,7 +259,7 @@ class HouseSecurity(hass.Hass):
                         'MonitorName'  : '',
                         'Source'       : '',
                         'MonitorId[0]' : '1',
-                        'MonitorId[1]' : '2',
+                        'MonitorId[1]' : '8',
                         'MonitorId[2]' : '4' }
 
             text += '<a href=https://www.amaroq.net/zm/index.php?{}>Front Yard</a><br><p>\n'.format(urlencode(urlData))

@@ -1,451 +1,7 @@
 {
     "data": [
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Night Alarm"
-                },
-                "context": {
-                    "id": "a91b038e0f0c413aae5dadb7f60aaad8",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.night_alarm",
-                "last_changed": "2019-06-29T13:30:00.019569+00:00",
-                "last_updated": "2019-06-29T13:30:00.019569+00:00",
-                "state": "off"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Sunday"
-                },
-                "context": {
-                    "id": "d7af5837831d482d8a0a7387b6e16672",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.rear_patio_sunday",
-                "last_changed": "2019-06-25T03:51:50.304460+00:00",
-                "last_updated": "2019-06-25T03:51:50.304460+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "House Alarm"
-                },
-                "context": {
-                    "id": "cb652a84ddc54627a63aecd9c959fdec",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.house_alarm",
-                "last_changed": "2019-06-25T03:51:50.304813+00:00",
-                "last_updated": "2019-06-25T03:51:50.304813+00:00",
-                "state": "off"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Door Alarm"
-                },
-                "context": {
-                    "id": "de900d13af094f8ba5dd19cb44c2c3d3",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.door_alarm",
-                "last_changed": "2019-06-25T03:51:50.305148+00:00",
-                "last_updated": "2019-06-25T03:51:50.305148+00:00",
-                "state": "off"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Monday"
-                },
-                "context": {
-                    "id": "c60d09cdff68444ab21a44273ae64fde",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.rear_patio_monday",
-                "last_changed": "2019-06-25T03:51:50.305483+00:00",
-                "last_updated": "2019-06-25T03:51:50.305483+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Sunday"
-                },
-                "context": {
-                    "id": "6c0b387738434b7ba52db8e9fd0a1977",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.front_yard_sunday",
-                "last_changed": "2019-06-25T03:51:50.305815+00:00",
-                "last_updated": "2019-06-25T03:51:50.305815+00:00",
-                "state": "off"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Tuesday"
-                },
-                "context": {
-                    "id": "93a946a3f8c44e82880540e76f5ea142",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.rear_patio_tuesday",
-                "last_changed": "2019-06-25T03:51:50.306163+00:00",
-                "last_updated": "2019-06-25T03:51:50.306163+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Monday"
-                },
-                "context": {
-                    "id": "ff40f14bb3d84268a80674a9d342e1c8",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.front_yard_monday",
-                "last_changed": "2019-06-25T03:51:50.306501+00:00",
-                "last_updated": "2019-06-25T03:51:50.306501+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Wednesday"
-                },
-                "context": {
-                    "id": "8259b2d3a62c48c69251b155542abdd0",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.rear_patio_wednesday",
-                "last_changed": "2019-06-25T03:51:50.306898+00:00",
-                "last_updated": "2019-06-25T03:51:50.306898+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Tuesday"
-                },
-                "context": {
-                    "id": "f8921dc2f2964e6f9dd7f27045712072",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.front_yard_tuesday",
-                "last_changed": "2019-06-25T03:51:50.307240+00:00",
-                "last_updated": "2019-06-25T03:51:50.307240+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Thursday"
-                },
-                "context": {
-                    "id": "430c0ec569174d90b948a8aa36a926aa",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.rear_patio_thursday",
-                "last_changed": "2019-06-25T03:51:50.307582+00:00",
-                "last_updated": "2019-06-25T03:51:50.307582+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Wednesday"
-                },
-                "context": {
-                    "id": "d14a0499c1894ea58477f4719eb21397",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.front_yard_wednesday",
-                "last_changed": "2019-06-25T03:51:50.307915+00:00",
-                "last_updated": "2019-06-25T03:51:50.307915+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Friday"
-                },
-                "context": {
-                    "id": "b6f0e04f375a4fafb47a33f59bf48c07",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.rear_patio_friday",
-                "last_changed": "2019-06-25T03:51:50.308248+00:00",
-                "last_updated": "2019-06-25T03:51:50.308248+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Thursday"
-                },
-                "context": {
-                    "id": "ecaea2780a464f4992967536f542d2c3",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.front_yard_thursday",
-                "last_changed": "2019-06-25T03:51:50.308590+00:00",
-                "last_updated": "2019-06-25T03:51:50.308590+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Saturday"
-                },
-                "context": {
-                    "id": "980e6cdde3b14580a12c18655a1a4c87",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.rear_patio_saturday",
-                "last_changed": "2019-06-25T03:51:50.308936+00:00",
-                "last_updated": "2019-06-25T03:51:50.308936+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Daycare Bell"
-                },
-                "context": {
-                    "id": "f5a8440272794c039e1994261de73836",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.dcare_bell",
-                "last_changed": "2019-06-29T00:30:00.020245+00:00",
-                "last_updated": "2019-06-29T00:30:00.020245+00:00",
-                "state": "off"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Saturday"
-                },
-                "context": {
-                    "id": "ce59d86b44a64245a7ece9413033607e",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.flower_box_saturday",
-                "last_changed": "2019-06-25T03:51:50.309613+00:00",
-                "last_updated": "2019-06-25T03:51:50.309613+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Friday"
-                },
-                "context": {
-                    "id": "9108884c7ef24a03bc987d5c77428416",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.front_yard_friday",
-                "last_changed": "2019-06-25T03:51:50.309980+00:00",
-                "last_updated": "2019-06-25T03:51:50.309980+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Saturday"
-                },
-                "context": {
-                    "id": "55b216a47caf46a59da7c7b400b1d2be",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.front_yard_saturday",
-                "last_changed": "2019-06-25T03:51:50.310329+00:00",
-                "last_updated": "2019-06-25T03:51:50.310329+00:00",
-                "state": "off"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Sunday"
-                },
-                "context": {
-                    "id": "5faf538f7048441cbbf4b9e7366a072a",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.flower_box_sunday",
-                "last_changed": "2019-06-25T03:51:50.310669+00:00",
-                "last_updated": "2019-06-25T03:51:50.310669+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Monday"
-                },
-                "context": {
-                    "id": "cc1881a25b4d455d9da59cab7d80137c",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.flower_box_monday",
-                "last_changed": "2019-06-25T03:51:50.311006+00:00",
-                "last_updated": "2019-06-25T03:51:50.311006+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Tuesday"
-                },
-                "context": {
-                    "id": "9025282d9ca14a15bf1e294cb392ac21",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.flower_box_tuesday",
-                "last_changed": "2019-06-25T03:51:50.311341+00:00",
-                "last_updated": "2019-06-25T03:51:50.311341+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Wednesday"
-                },
-                "context": {
-                    "id": "eb0e8637e0654ea9b3cd79d1e0de7dd0",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.flower_box_wednesday",
-                "last_changed": "2019-06-25T03:51:50.311672+00:00",
-                "last_updated": "2019-06-25T03:51:50.311672+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Thursday"
-                },
-                "context": {
-                    "id": "0e8927ff44594459997d9fa76bbfcf85",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.flower_box_thursday",
-                "last_changed": "2019-06-25T03:51:50.312007+00:00",
-                "last_updated": "2019-06-25T03:51:50.312007+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Friday"
-                },
-                "context": {
-                    "id": "14b3b7cde5f243adb9e6fc4bd1f6707b",
-                    "user_id": null
-                },
-                "entity_id": "input_boolean.flower_box_friday",
-                "last_changed": "2019-06-25T03:51:50.312347+00:00",
-                "last_updated": "2019-06-25T03:51:50.312347+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Rear Patio Start Time",
-                    "has_date": false,
-                    "has_time": true,
-                    "hour": 13,
-                    "minute": 0,
-                    "second": 0,
-                    "timestamp": 46800
-                },
-                "context": {
-                    "id": "dc891b7b83834816886aa368f3d882ba",
-                    "user_id": null
-                },
-                "entity_id": "input_datetime.rear_patio_start_time",
-                "last_changed": "2019-06-25T03:51:50.312740+00:00",
-                "last_updated": "2019-06-25T03:51:50.312740+00:00",
-                "state": "13:00:00"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Pool Pump Start Time",
-                    "has_date": false,
-                    "has_time": true,
-                    "hour": 12,
-                    "minute": 0,
-                    "second": 0,
-                    "timestamp": 43200
-                },
-                "context": {
-                    "id": "f06be5d623b74dc8beb3b375af01e37f",
-                    "user_id": null
-                },
-                "entity_id": "input_datetime.pool_start_time",
-                "last_changed": "2019-06-25T03:51:50.313104+00:00",
-                "last_updated": "2019-06-25T03:51:50.313104+00:00",
-                "state": "12:00:00"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "Flowers Start Time",
@@ -457,17 +13,61 @@
                     "timestamp": 45000
                 },
                 "context": {
-                    "id": "3bf3a3ff4ff6424894ae0d0c70499502",
+                    "id": "af808754f7524ee6afa812f6b21c0363",
                     "user_id": null
                 },
                 "entity_id": "input_datetime.flower_box_start_time",
-                "last_changed": "2019-06-25T03:51:50.313490+00:00",
-                "last_updated": "2019-06-25T03:51:50.313490+00:00",
+                "last_changed": "2019-06-29T16:52:37.241438+00:00",
+                "last_updated": "2019-06-29T16:52:37.241438+00:00",
                 "state": "12:30:00"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Rear Patio Start Time",
+                    "has_date": false,
+                    "has_time": true,
+                    "hour": 13,
+                    "minute": 0,
+                    "second": 0,
+                    "timestamp": 46800
+                },
+                "context": {
+                    "id": "c6c522db04e942aa868b5acb4195bd55",
+                    "user_id": null
+                },
+                "entity_id": "input_datetime.rear_patio_start_time",
+                "last_changed": "2019-06-29T16:52:37.241671+00:00",
+                "last_updated": "2019-06-29T16:52:37.241671+00:00",
+                "state": "13:00:00"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Pool Pump Start Time",
+                    "has_date": false,
+                    "has_time": true,
+                    "hour": 12,
+                    "minute": 0,
+                    "second": 0,
+                    "timestamp": 43200
+                },
+                "context": {
+                    "id": "a9d6f5f3486e4a41a7be5b225a024fdd",
+                    "user_id": null
+                },
+                "entity_id": "input_datetime.pool_start_time",
+                "last_changed": "2019-06-29T16:52:37.241869+00:00",
+                "last_updated": "2019-06-29T16:52:37.241869+00:00",
+                "state": "12:00:00"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "Front Yard Start Time",
@@ -479,193 +79,17 @@
                     "timestamp": 72000
                 },
                 "context": {
-                    "id": "afb09f33e9094035b50dee93c28c195a",
+                    "id": "861cfda7a08644c7816c4b47eb0320a8",
                     "user_id": null
                 },
                 "entity_id": "input_datetime.front_yard_start_time",
-                "last_changed": "2019-06-25T03:51:50.313853+00:00",
-                "last_updated": "2019-06-25T03:51:50.313853+00:00",
+                "last_changed": "2019-06-29T16:52:37.242068+00:00",
+                "last_updated": "2019-06-29T16:52:37.242068+00:00",
                 "state": "20:00:00"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Pool Sweep Mins",
-                    "icon": "mdi:camera-timer",
-                    "initial": null,
-                    "max": 360.0,
-                    "min": 30.0,
-                    "mode": "box",
-                    "step": 15.0
-                },
-                "context": {
-                    "id": "f96afe18241d4defb8729b7a32c7f356",
-                    "user_id": null
-                },
-                "entity_id": "input_number.pool_sweep_duration",
-                "last_changed": "2019-06-25T03:51:50.314218+00:00",
-                "last_updated": "2019-06-25T03:51:50.314218+00:00",
-                "state": "300.0"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "West Trees Mins",
-                    "icon": "mdi:camera-timer",
-                    "initial": null,
-                    "max": 60.0,
-                    "min": 0.0,
-                    "mode": "box",
-                    "step": 1.0
-                },
-                "context": {
-                    "id": "67ea69cc78f14a98a61f9f48d74a2ff0",
-                    "user_id": null
-                },
-                "entity_id": "input_number.west_trees_duration",
-                "last_changed": "2019-06-25T03:51:50.314577+00:00",
-                "last_updated": "2019-06-25T03:51:50.314577+00:00",
-                "state": "10.0"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "East Lemon Mins",
-                    "icon": "mdi:camera-timer",
-                    "initial": null,
-                    "max": 60.0,
-                    "min": 0.0,
-                    "mode": "box",
-                    "step": 1.0
-                },
-                "context": {
-                    "id": "9a5cefd89bde45228679433bd9944272",
-                    "user_id": null
-                },
-                "entity_id": "input_number.east_lemon_duration",
-                "last_changed": "2019-06-25T03:51:50.314931+00:00",
-                "last_updated": "2019-06-25T03:51:50.314931+00:00",
-                "state": "5.0"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Rear Patio 3 Mins",
-                    "icon": "mdi:camera-timer",
-                    "initial": null,
-                    "max": 60.0,
-                    "min": 0.0,
-                    "mode": "box",
-                    "step": 1.0
-                },
-                "context": {
-                    "id": "f40388724a84476b8546b1e056321c0f",
-                    "user_id": null
-                },
-                "entity_id": "input_number.rear_patio_3_duration",
-                "last_changed": "2019-06-25T03:51:50.315285+00:00",
-                "last_updated": "2019-06-25T03:51:50.315285+00:00",
-                "state": "0.0"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "East Lawn 2 Mins",
-                    "icon": "mdi:camera-timer",
-                    "initial": null,
-                    "max": 60.0,
-                    "min": 0.0,
-                    "mode": "box",
-                    "step": 1.0
-                },
-                "context": {
-                    "id": "bc6c79195e7244c886c3d302df42a45b",
-                    "user_id": null
-                },
-                "entity_id": "input_number.east_lawn_2_duration",
-                "last_changed": "2019-06-25T03:51:50.315635+00:00",
-                "last_updated": "2019-06-25T03:51:50.315635+00:00",
-                "state": "15.0"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Front Lawn 1 Mins",
-                    "icon": "mdi:camera-timer",
-                    "initial": null,
-                    "max": 60.0,
-                    "min": 0.0,
-                    "mode": "box",
-                    "step": 1.0
-                },
-                "context": {
-                    "id": "db65dcdbe4cf4f3d94375e138f17547d",
-                    "user_id": null
-                },
-                "entity_id": "input_number.front_lawn_1_duration",
-                "last_changed": "2019-06-25T03:51:50.315997+00:00",
-                "last_updated": "2019-06-25T03:51:50.315997+00:00",
-                "state": "15.0"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Rear Patio 1 Mins",
-                    "icon": "mdi:camera-timer",
-                    "initial": null,
-                    "max": 60.0,
-                    "min": 0.0,
-                    "mode": "box",
-                    "step": 1.0
-                },
-                "context": {
-                    "id": "a4282c66b47f402ca5c4c7091af810b9",
-                    "user_id": null
-                },
-                "entity_id": "input_number.rear_patio_1_duration",
-                "last_changed": "2019-06-25T03:51:50.316340+00:00",
-                "last_updated": "2019-06-25T03:51:50.316340+00:00",
-                "state": "15.0"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Front Flowers Mins",
-                    "icon": "mdi:camera-timer",
-                    "initial": null,
-                    "max": 60.0,
-                    "min": 0.0,
-                    "mode": "box",
-                    "step": 1.0
-                },
-                "context": {
-                    "id": "bdafa8d0a2194ab4b630989c049fc345",
-                    "user_id": null
-                },
-                "entity_id": "input_number.front_flower_box_duration",
-                "last_changed": "2019-06-25T03:51:50.316730+00:00",
-                "last_updated": "2019-06-25T03:51:50.316730+00:00",
-                "state": "10.0"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "Front Lawn 2 Mins",
@@ -677,39 +101,17 @@
                     "step": 1.0
                 },
                 "context": {
-                    "id": "bf1f127a125646259efcc7a312b8d7b3",
+                    "id": "06757d262ba140b190213a888dc77f54",
                     "user_id": null
                 },
                 "entity_id": "input_number.front_lawn_2_duration",
-                "last_changed": "2019-06-25T03:51:50.317089+00:00",
-                "last_updated": "2019-06-25T03:51:50.317089+00:00",
+                "last_changed": "2019-06-29T16:52:37.242277+00:00",
+                "last_updated": "2019-06-29T16:52:37.242277+00:00",
                 "state": "10.0"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Pool Pump Mins",
-                    "icon": "mdi:camera-timer",
-                    "initial": null,
-                    "max": 360.0,
-                    "min": 60.0,
-                    "mode": "box",
-                    "step": 15.0
-                },
-                "context": {
-                    "id": "b0672211a66e4656a65d9b907bc46258",
-                    "user_id": null
-                },
-                "entity_id": "input_number.pool_pump_duration",
-                "last_changed": "2019-06-25T03:51:50.317433+00:00",
-                "last_updated": "2019-06-25T03:51:50.317433+00:00",
-                "state": "360.0"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "Rear Patio 2 Mins",
@@ -721,17 +123,17 @@
                     "step": 1.0
                 },
                 "context": {
-                    "id": "565a006a2a434708be3f65311bea43e1",
+                    "id": "c02e8ded84ed4a108b96333ea0580764",
                     "user_id": null
                 },
                 "entity_id": "input_number.rear_patio_2_duration",
-                "last_changed": "2019-06-25T03:51:50.317780+00:00",
-                "last_updated": "2019-06-25T03:51:50.317780+00:00",
+                "last_changed": "2019-06-29T16:52:37.242476+00:00",
+                "last_updated": "2019-06-29T16:52:37.242476+00:00",
                 "state": "2.0"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "East Lawn 1 Mins",
@@ -743,17 +145,17 @@
                     "step": 1.0
                 },
                 "context": {
-                    "id": "31b376654618402d852901c60f729e0c",
+                    "id": "90ec1586acc246509d3b50ac9323ea97",
                     "user_id": null
                 },
                 "entity_id": "input_number.east_lawn_1_duration",
-                "last_changed": "2019-06-25T03:51:50.318119+00:00",
-                "last_updated": "2019-06-25T03:51:50.318119+00:00",
+                "last_changed": "2019-06-29T16:52:37.242667+00:00",
+                "last_updated": "2019-06-29T16:52:37.242667+00:00",
                 "state": "10.0"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "Front Lawn 3 Mins",
@@ -765,179 +167,633 @@
                     "step": 1.0
                 },
                 "context": {
-                    "id": "caf61d27b6df49628f16066ef5eb082c",
+                    "id": "db5094dcf51941dda382595d83d32686",
                     "user_id": null
                 },
                 "entity_id": "input_number.front_lawn_3_duration",
-                "last_changed": "2019-06-25T03:51:50.318468+00:00",
-                "last_updated": "2019-06-25T03:51:50.318468+00:00",
+                "last_changed": "2019-06-29T16:52:37.242854+00:00",
+                "last_updated": "2019-06-29T16:52:37.242854+00:00",
                 "state": "16.0"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
-                    "friendly_name": "Heater Night Timer",
-                    "id": "heater_night_timer",
-                    "last_triggered": "2019-06-29T06:45:00.023590+00:00"
+                    "friendly_name": "Rear Patio 3 Mins",
+                    "icon": "mdi:camera-timer",
+                    "initial": null,
+                    "max": 60.0,
+                    "min": 0.0,
+                    "mode": "box",
+                    "step": 1.0
                 },
                 "context": {
-                    "id": "95cd5d46bf3c4fe494c93f97095dec4c",
+                    "id": "80927bd7976b481886f0f1780cb4eaf8",
                     "user_id": null
                 },
-                "entity_id": "automation.heater_night_timer",
-                "last_changed": "2019-06-25T03:52:00.551060+00:00",
-                "last_updated": "2019-06-29T06:45:00.023819+00:00",
+                "entity_id": "input_number.rear_patio_3_duration",
+                "last_changed": "2019-06-29T16:52:37.243041+00:00",
+                "last_updated": "2019-06-29T16:52:37.243041+00:00",
+                "state": "0.0"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "East Lawn 2 Mins",
+                    "icon": "mdi:camera-timer",
+                    "initial": null,
+                    "max": 60.0,
+                    "min": 0.0,
+                    "mode": "box",
+                    "step": 1.0
+                },
+                "context": {
+                    "id": "b73b21dc041d4b45ad25d67d94190095",
+                    "user_id": null
+                },
+                "entity_id": "input_number.east_lawn_2_duration",
+                "last_changed": "2019-06-29T16:52:37.243227+00:00",
+                "last_updated": "2019-06-29T16:52:37.243227+00:00",
+                "state": "15.0"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Pool Pump Mins",
+                    "icon": "mdi:camera-timer",
+                    "initial": null,
+                    "max": 360.0,
+                    "min": 60.0,
+                    "mode": "box",
+                    "step": 15.0
+                },
+                "context": {
+                    "id": "e0ceccd0cbdc410bbbfc907225584692",
+                    "user_id": null
+                },
+                "entity_id": "input_number.pool_pump_duration",
+                "last_changed": "2019-06-29T16:52:37.243414+00:00",
+                "last_updated": "2019-06-29T16:52:37.243414+00:00",
+                "state": "360.0"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Pool Sweep Mins",
+                    "icon": "mdi:camera-timer",
+                    "initial": null,
+                    "max": 360.0,
+                    "min": 30.0,
+                    "mode": "box",
+                    "step": 15.0
+                },
+                "context": {
+                    "id": "b09b25c84aca4d33836029634e725f11",
+                    "user_id": null
+                },
+                "entity_id": "input_number.pool_sweep_duration",
+                "last_changed": "2019-06-29T16:52:37.243601+00:00",
+                "last_updated": "2019-06-29T16:52:37.243601+00:00",
+                "state": "300.0"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "West Trees Mins",
+                    "icon": "mdi:camera-timer",
+                    "initial": null,
+                    "max": 60.0,
+                    "min": 0.0,
+                    "mode": "box",
+                    "step": 1.0
+                },
+                "context": {
+                    "id": "2db494b692c245e096ebdf280af1f857",
+                    "user_id": null
+                },
+                "entity_id": "input_number.west_trees_duration",
+                "last_changed": "2019-06-29T16:52:37.243788+00:00",
+                "last_updated": "2019-06-29T16:52:37.243788+00:00",
+                "state": "10.0"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Rear Patio 1 Mins",
+                    "icon": "mdi:camera-timer",
+                    "initial": null,
+                    "max": 60.0,
+                    "min": 0.0,
+                    "mode": "box",
+                    "step": 1.0
+                },
+                "context": {
+                    "id": "3fe5f427463840ec817341e98348e317",
+                    "user_id": null
+                },
+                "entity_id": "input_number.rear_patio_1_duration",
+                "last_changed": "2019-06-29T16:52:37.243989+00:00",
+                "last_updated": "2019-06-29T16:52:37.243989+00:00",
+                "state": "15.0"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Front Flowers Mins",
+                    "icon": "mdi:camera-timer",
+                    "initial": null,
+                    "max": 60.0,
+                    "min": 0.0,
+                    "mode": "box",
+                    "step": 1.0
+                },
+                "context": {
+                    "id": "e6cd17d3caeb4d96bb7bbc3ac87a6b13",
+                    "user_id": null
+                },
+                "entity_id": "input_number.front_flower_box_duration",
+                "last_changed": "2019-06-29T16:52:37.244244+00:00",
+                "last_updated": "2019-06-29T16:52:37.244244+00:00",
+                "state": "10.0"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "East Lemon Mins",
+                    "icon": "mdi:camera-timer",
+                    "initial": null,
+                    "max": 60.0,
+                    "min": 0.0,
+                    "mode": "box",
+                    "step": 1.0
+                },
+                "context": {
+                    "id": "fae6adc1d8e143d48bd40446e977b48c",
+                    "user_id": null
+                },
+                "entity_id": "input_number.east_lemon_duration",
+                "last_changed": "2019-06-29T16:52:37.244436+00:00",
+                "last_updated": "2019-06-29T16:52:37.244436+00:00",
+                "state": "5.0"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Front Lawn 1 Mins",
+                    "icon": "mdi:camera-timer",
+                    "initial": null,
+                    "max": 60.0,
+                    "min": 0.0,
+                    "mode": "box",
+                    "step": 1.0
+                },
+                "context": {
+                    "id": "65334860964c4074913e4cd218210cd6",
+                    "user_id": null
+                },
+                "entity_id": "input_number.front_lawn_1_duration",
+                "last_changed": "2019-06-29T16:52:37.244624+00:00",
+                "last_updated": "2019-06-29T16:52:37.244624+00:00",
+                "state": "15.0"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Tuesday"
+                },
+                "context": {
+                    "id": "d07523e987704987b2a571ffedc245e6",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.flower_box_tuesday",
+                "last_changed": "2019-06-29T16:52:37.244821+00:00",
+                "last_updated": "2019-06-29T16:52:37.244821+00:00",
                 "state": "on"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
-                    "friendly_name": "Heater Mid Morning Timer",
-                    "id": "heater_midmorn_timer",
-                    "last_triggered": "2019-06-28T17:00:00.021822+00:00"
+                    "friendly_name": "Wednesday"
                 },
                 "context": {
-                    "id": "bed11ed007c54fcebe94d84d810bc4ad",
+                    "id": "a88e9f2e3be54481bebbf243f5635195",
                     "user_id": null
                 },
-                "entity_id": "automation.heater_mid_morning_timer",
-                "last_changed": "2019-06-25T03:52:00.552128+00:00",
-                "last_updated": "2019-06-28T17:00:00.022181+00:00",
+                "entity_id": "input_boolean.flower_box_wednesday",
+                "last_changed": "2019-06-29T16:52:37.245006+00:00",
+                "last_updated": "2019-06-29T16:52:37.245006+00:00",
                 "state": "on"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
-                    "friendly_name": "Front Yard Sprinklers Timer",
-                    "id": "front_yard_sprinklers",
-                    "last_triggered": "2019-06-29T03:00:01.034514+00:00"
+                    "friendly_name": "Night Alarm"
                 },
                 "context": {
-                    "id": "c6a4b14f2092462b8db5feaf302e3f8b",
+                    "id": "69e039ffb8f744f9859d1bf3ffc8a076",
                     "user_id": null
                 },
-                "entity_id": "automation.front_yard_sprinklers_timer",
-                "last_changed": "2019-06-25T03:52:00.553454+00:00",
-                "last_updated": "2019-06-29T03:00:01.034688+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Day Care Bell Disarm Timer",
-                    "id": "dcare_disarm",
-                    "last_triggered": "2019-06-29T00:30:00.026250+00:00"
-                },
-                "context": {
-                    "id": "9b852ae7fb5e4e42aca7acb48dffbc14",
-                    "user_id": null
-                },
-                "entity_id": "automation.day_care_bell_disarm_timer",
-                "last_changed": "2019-06-25T03:52:00.554818+00:00",
-                "last_updated": "2019-06-29T00:30:00.026495+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Flower Box Sprinklers Timer",
-                    "id": "flower_box_sprinklers",
-                    "last_triggered": "2019-06-28T19:30:01.059227+00:00"
-                },
-                "context": {
-                    "id": "4efd6cd5ce454c8e92ebc2bbe41c2c8e",
-                    "user_id": null
-                },
-                "entity_id": "automation.flower_box_sprinklers_timer",
-                "last_changed": "2019-06-25T03:52:00.555895+00:00",
-                "last_updated": "2019-06-28T19:30:01.059433+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Rear Patio Sprinklers Timer",
-                    "id": "rear_patio_sprinklers",
-                    "last_triggered": "2019-06-28T20:00:01.042717+00:00"
-                },
-                "context": {
-                    "id": "2fbb89e7dcf1463082c23b946b7c8507",
-                    "user_id": null
-                },
-                "entity_id": "automation.rear_patio_sprinklers_timer",
-                "last_changed": "2019-06-25T03:52:00.557107+00:00",
-                "last_updated": "2019-06-28T20:00:01.042891+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Pool All Off Timer",
-                    "id": "pool_all_off",
-                    "last_triggered": "2019-06-29T07:30:00.025509+00:00"
-                },
-                "context": {
-                    "id": "5033cbdafea84d23bc0adbc816f23362",
-                    "user_id": null
-                },
-                "entity_id": "automation.pool_all_off_timer",
-                "last_changed": "2019-06-25T03:52:00.558142+00:00",
-                "last_updated": "2019-06-29T07:30:00.025715+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Yard Lights On Timer",
-                    "id": "yard_lights_on",
-                    "last_triggered": "2019-06-29T03:34:19.094238+00:00"
-                },
-                "context": {
-                    "id": "8a1cf563a40e4c958f26a76502890ebd",
-                    "user_id": null
-                },
-                "entity_id": "automation.yard_lights_on_timer",
-                "last_changed": "2019-06-25T03:52:00.748118+00:00",
-                "last_updated": "2019-06-29T03:34:19.094473+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Pool Pump Timer",
-                    "id": "pool_pump_timer",
-                    "last_triggered": "2019-06-23T19:00:01.042163+00:00"
-                },
-                "context": {
-                    "id": "75a25f7d31974351b32fbd808ff5d94f",
-                    "user_id": null
-                },
-                "entity_id": "automation.pool_pump_timer",
-                "last_changed": "2019-06-25T03:51:54.128209+00:00",
-                "last_updated": "2019-06-25T03:51:54.128209+00:00",
+                "entity_id": "input_boolean.night_alarm",
+                "last_changed": "2019-06-30T13:30:00.011732+00:00",
+                "last_updated": "2019-06-30T13:30:00.011732+00:00",
                 "state": "off"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Thursday"
+                },
+                "context": {
+                    "id": "d04931e08d924c27b24a771a219a5641",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.flower_box_thursday",
+                "last_changed": "2019-06-29T16:52:37.245376+00:00",
+                "last_updated": "2019-06-29T16:52:37.245376+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Friday"
+                },
+                "context": {
+                    "id": "37ccd8f2276f48efbb47176b03bc91fb",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.flower_box_friday",
+                "last_changed": "2019-06-29T16:52:37.245560+00:00",
+                "last_updated": "2019-06-29T16:52:37.245560+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "House Alarm"
+                },
+                "context": {
+                    "id": "82e6cf1ae8bf429588c14cf1dae326d4",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.house_alarm",
+                "last_changed": "2019-06-29T16:52:37.245739+00:00",
+                "last_updated": "2019-06-29T16:52:37.245739+00:00",
+                "state": "off"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Door Alarm"
+                },
+                "context": {
+                    "id": "588a3630e67f411fbd2fd86591a73c66",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.door_alarm",
+                "last_changed": "2019-06-29T16:52:37.245917+00:00",
+                "last_updated": "2019-06-29T16:52:37.245917+00:00",
+                "state": "off"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Sunday"
+                },
+                "context": {
+                    "id": "a13ad6d263f2439990bc444fe6c56e73",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.rear_patio_sunday",
+                "last_changed": "2019-06-29T16:52:37.246099+00:00",
+                "last_updated": "2019-06-29T16:52:37.246099+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Sunday"
+                },
+                "context": {
+                    "id": "585c4aa88d284a29931f22b7720195d6",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.front_yard_sunday",
+                "last_changed": "2019-06-29T16:52:37.246281+00:00",
+                "last_updated": "2019-06-29T16:52:37.246281+00:00",
+                "state": "off"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Monday"
+                },
+                "context": {
+                    "id": "de68af2ee65f457cae5d9af49cb683e0",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.rear_patio_monday",
+                "last_changed": "2019-06-29T16:52:37.246471+00:00",
+                "last_updated": "2019-06-29T16:52:37.246471+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Monday"
+                },
+                "context": {
+                    "id": "d3ded77c74bf4c18a80c6f005bcddc9d",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.front_yard_monday",
+                "last_changed": "2019-06-29T16:52:37.246663+00:00",
+                "last_updated": "2019-06-29T16:52:37.246663+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Tuesday"
+                },
+                "context": {
+                    "id": "498565a1528b4caeb021c2acd9f1f5a3",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.rear_patio_tuesday",
+                "last_changed": "2019-06-29T16:52:37.246850+00:00",
+                "last_updated": "2019-06-29T16:52:37.246850+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Tuesday"
+                },
+                "context": {
+                    "id": "2ee064576c66456abb49f273e0c9d19b",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.front_yard_tuesday",
+                "last_changed": "2019-06-29T16:52:37.247038+00:00",
+                "last_updated": "2019-06-29T16:52:37.247038+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Wednesday"
+                },
+                "context": {
+                    "id": "8530b51a18804a9bb29149ddd8b113c1",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.rear_patio_wednesday",
+                "last_changed": "2019-06-29T16:52:37.247226+00:00",
+                "last_updated": "2019-06-29T16:52:37.247226+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Wednesday"
+                },
+                "context": {
+                    "id": "ef3586181fd049f484606a7754423445",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.front_yard_wednesday",
+                "last_changed": "2019-06-29T16:52:37.247426+00:00",
+                "last_updated": "2019-06-29T16:52:37.247426+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Thursday"
+                },
+                "context": {
+                    "id": "9cb1d298288346f4ac7f2eb1970313c7",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.rear_patio_thursday",
+                "last_changed": "2019-06-29T16:52:37.247621+00:00",
+                "last_updated": "2019-06-29T16:52:37.247621+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Thursday"
+                },
+                "context": {
+                    "id": "8df51452ca4e464596ef83ee076f2edc",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.front_yard_thursday",
+                "last_changed": "2019-06-29T16:52:37.247814+00:00",
+                "last_updated": "2019-06-29T16:52:37.247814+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Friday"
+                },
+                "context": {
+                    "id": "9c2204b08f304dd597b5c5bc9862177b",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.rear_patio_friday",
+                "last_changed": "2019-06-29T16:52:37.248002+00:00",
+                "last_updated": "2019-06-29T16:52:37.248002+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Saturday"
+                },
+                "context": {
+                    "id": "807916896ae94036ae334afa494a0870",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.flower_box_saturday",
+                "last_changed": "2019-06-29T16:52:37.248191+00:00",
+                "last_updated": "2019-06-29T16:52:37.248191+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Saturday"
+                },
+                "context": {
+                    "id": "de0c2ee3791940f7b22ff51dc1a8a277",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.rear_patio_saturday",
+                "last_changed": "2019-06-29T16:52:37.248380+00:00",
+                "last_updated": "2019-06-29T16:52:37.248380+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Friday"
+                },
+                "context": {
+                    "id": "62a748bc1de64ae696173ab8d34b0d34",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.front_yard_friday",
+                "last_changed": "2019-06-29T16:52:37.248570+00:00",
+                "last_updated": "2019-06-29T16:52:37.248570+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Daycare Bell"
+                },
+                "context": {
+                    "id": "d6fe540ef6b74919b7f3a6085268e596",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.dcare_bell",
+                "last_changed": "2019-06-29T16:52:37.248759+00:00",
+                "last_updated": "2019-06-29T16:52:37.248759+00:00",
+                "state": "off"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Saturday"
+                },
+                "context": {
+                    "id": "6564e23916e84d3eb8a1d0367886b1cd",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.front_yard_saturday",
+                "last_changed": "2019-06-29T16:52:37.248947+00:00",
+                "last_updated": "2019-06-29T16:52:37.248947+00:00",
+                "state": "off"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Sunday"
+                },
+                "context": {
+                    "id": "04388c0d74574708a141c85cceb81c47",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.flower_box_sunday",
+                "last_changed": "2019-06-29T16:52:37.249136+00:00",
+                "last_updated": "2019-06-29T16:52:37.249136+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Monday"
+                },
+                "context": {
+                    "id": "0b332a02abda48bd82585ea9ecd75999",
+                    "user_id": null
+                },
+                "entity_id": "input_boolean.flower_box_monday",
+                "last_changed": "2019-06-29T16:52:37.249322+00:00",
+                "last_updated": "2019-06-29T16:52:37.249322+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Fans Off Timer",
+                    "id": "fans_off",
+                    "last_triggered": "2019-06-30T08:00:00.022648+00:00"
+                },
+                "context": {
+                    "id": "c8fb7b42316740c4ba3ceaf0ef359935",
+                    "user_id": null
+                },
+                "entity_id": "automation.fans_off_timer",
+                "last_changed": "2019-06-29T16:52:49.052749+00:00",
+                "last_updated": "2019-06-30T08:00:00.022893+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "Day Care Bell Arm Timer",
@@ -945,161 +801,197 @@
                     "last_triggered": "2019-06-28T15:00:00.023827+00:00"
                 },
                 "context": {
-                    "id": "ed7bd41cf86b420d9145b9e07fd68d65",
+                    "id": "ac611f485b1d48b7b00c9d5f30425a8f",
                     "user_id": null
                 },
                 "entity_id": "automation.day_care_bell_arm_timer",
-                "last_changed": "2019-06-25T03:52:00.750068+00:00",
-                "last_updated": "2019-06-28T15:00:00.024231+00:00",
-                "state": "on"
+                "last_changed": "2019-06-30T19:22:05.691478+00:00",
+                "last_updated": "2019-06-30T19:22:05.691478+00:00",
+                "state": "off"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Fountain Off",
-                    "id": "fountain_off",
-                    "last_triggered": "2019-06-29T06:00:00.012933+00:00"
-                },
-                "context": {
-                    "id": "325c08db41b343e086eceffbbdc7d889",
-                    "user_id": null
-                },
-                "entity_id": "automation.fountain_off",
-                "last_changed": "2019-06-25T03:52:00.751913+00:00",
-                "last_updated": "2019-06-29T06:00:00.013257+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Yard Lights Off Timer",
-                    "id": "yard_lights_off",
-                    "last_triggered": "2019-06-29T11:50:05.048764+00:00"
-                },
-                "context": {
-                    "id": "00c30caacd0b4945bb1bcc05b728b9a7",
-                    "user_id": null
-                },
-                "entity_id": "automation.yard_lights_off_timer",
-                "last_changed": "2019-06-25T03:52:00.754752+00:00",
-                "last_updated": "2019-06-29T11:50:05.048973+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Night Alarm Arm Timer",
-                    "id": "night_arm",
-                    "last_triggered": "2019-06-29T08:30:00.019285+00:00"
-                },
-                "context": {
-                    "id": "98ce47f815a1446482c6aa0a26cf585c",
-                    "user_id": null
-                },
-                "entity_id": "automation.night_alarm_arm_timer",
-                "last_changed": "2019-06-25T03:52:00.756387+00:00",
-                "last_updated": "2019-06-29T08:30:00.019616+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Kitchen Speaker Down Timer",
-                    "id": "kitch_speaker_down",
-                    "last_triggered": "2019-06-29T05:00:00.016156+00:00"
-                },
-                "context": {
-                    "id": "c87e21c29c1a4238adc185be94b5a844",
-                    "user_id": null
-                },
-                "entity_id": "automation.kitchen_speaker_down_timer",
-                "last_changed": "2019-06-25T03:52:00.759388+00:00",
-                "last_updated": "2019-06-29T05:00:00.016410+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Heater Weekend Timer",
-                    "id": "heater_weekend_timer",
-                    "last_triggered": "2019-06-29T14:45:00.016447+00:00"
-                },
-                "context": {
-                    "id": "34e35d7a4ab649b1a6de28a206fb6235",
-                    "user_id": null
-                },
-                "entity_id": "automation.heater_weekend_timer",
-                "last_changed": "2019-06-25T03:52:00.761698+00:00",
-                "last_updated": "2019-06-29T14:45:00.016817+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Night Alarm Disarm Timer",
-                    "id": "night_disarm",
-                    "last_triggered": "2019-06-29T13:30:00.024749+00:00"
-                },
-                "context": {
-                    "id": "70b5c123174e43eba75ce4af22e802f8",
-                    "user_id": null
-                },
-                "entity_id": "automation.night_alarm_disarm_timer",
-                "last_changed": "2019-06-25T03:52:00.764656+00:00",
-                "last_updated": "2019-06-29T13:30:00.024972+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "friendly_name": "Kitchen Speaker Up Timer",
-                    "id": "kitchen_speaker_up",
-                    "last_triggered": "2019-06-29T15:00:00.020966+00:00"
-                },
-                "context": {
-                    "id": "a07aa9c3e4794c5a9298e8c167cea97d",
-                    "user_id": null
-                },
-                "entity_id": "automation.kitchen_speaker_up_timer",
-                "last_changed": "2019-06-25T03:52:00.767622+00:00",
-                "last_updated": "2019-06-29T15:00:00.021279+00:00",
-                "state": "on"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "Fountain On",
                     "id": "fountain_on",
-                    "last_triggered": "2019-06-29T16:00:00.014316+00:00"
+                    "last_triggered": "2019-06-30T16:00:00.012760+00:00"
                 },
                 "context": {
-                    "id": "6734c95c821940779e3f46916cf38f4e",
+                    "id": "1d2e3e051eee478285767fe8ecdce1d0",
                     "user_id": null
                 },
                 "entity_id": "automation.fountain_on",
-                "last_changed": "2019-06-25T03:52:00.769406+00:00",
-                "last_updated": "2019-06-29T16:00:00.014633+00:00",
+                "last_changed": "2019-06-29T16:52:49.055291+00:00",
+                "last_updated": "2019-06-30T16:00:00.013061+00:00",
                 "state": "on"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Fountain Off",
+                    "id": "fountain_off",
+                    "last_triggered": "2019-06-30T06:00:00.019398+00:00"
+                },
+                "context": {
+                    "id": "c3be8b21507843fe8527e47fce5660a2",
+                    "user_id": null
+                },
+                "entity_id": "automation.fountain_off",
+                "last_changed": "2019-06-29T16:52:49.056307+00:00",
+                "last_updated": "2019-06-30T06:00:00.019689+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Night Alarm Arm Timer",
+                    "id": "night_arm",
+                    "last_triggered": "2019-06-30T08:30:00.013885+00:00"
+                },
+                "context": {
+                    "id": "ed88b564d6004910b672daf38d358451",
+                    "user_id": null
+                },
+                "entity_id": "automation.night_alarm_arm_timer",
+                "last_changed": "2019-06-29T16:52:49.057297+00:00",
+                "last_updated": "2019-06-30T08:30:00.014064+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Yard Lights Off Timer",
+                    "id": "yard_lights_off",
+                    "last_triggered": "2019-06-30T11:50:29.055286+00:00"
+                },
+                "context": {
+                    "id": "d1981c99a9314384a5c64a61ae049940",
+                    "user_id": null
+                },
+                "entity_id": "automation.yard_lights_off_timer",
+                "last_changed": "2019-06-29T16:52:49.059866+00:00",
+                "last_updated": "2019-06-30T11:50:29.055464+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Rear Patio Sprinklers Timer",
+                    "id": "rear_patio_sprinklers",
+                    "last_triggered": "2019-06-30T20:00:01.021726+00:00"
+                },
+                "context": {
+                    "id": "b7cff3c5b75c4808bfc7b2fbf5c40a2b",
+                    "user_id": null
+                },
+                "entity_id": "automation.rear_patio_sprinklers_timer",
+                "last_changed": "2019-06-29T16:52:49.061445+00:00",
+                "last_updated": "2019-06-30T20:00:01.021849+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Front Yard Sprinklers Timer",
+                    "id": "front_yard_sprinklers",
+                    "last_triggered": "2019-06-29T03:00:01.034514+00:00"
+                },
+                "context": {
+                    "id": "72e6052e9ef743cc8f27bb2125d12cd8",
+                    "user_id": null
+                },
+                "entity_id": "automation.front_yard_sprinklers_timer",
+                "last_changed": "2019-06-30T19:22:02.330532+00:00",
+                "last_updated": "2019-06-30T19:22:02.330532+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Pool Pump Timer",
+                    "id": "pool_pump_timer",
+                    "last_triggered": "2019-06-30T19:14:53.978878+00:00"
+                },
+                "context": {
+                    "id": "f18d5c0e46e444baaf2a957135e11685",
+                    "user_id": null
+                },
+                "entity_id": "automation.pool_pump_timer",
+                "last_changed": "2019-06-30T19:15:03.292291+00:00",
+                "last_updated": "2019-06-30T19:15:03.292291+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Heater Evening Timer",
+                    "id": "heater_evening_timer",
+                    "last_triggered": "2019-07-01T00:30:00.032871+00:00"
+                },
+                "context": {
+                    "id": "9144532b250e41899efdf3654fe866fb",
+                    "user_id": null
+                },
+                "entity_id": "automation.heater_evening_timer",
+                "last_changed": "2019-06-29T16:52:49.063654+00:00",
+                "last_updated": "2019-07-01T00:30:00.033970+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Pool All Off Timer",
+                    "id": "pool_all_off",
+                    "last_triggered": "2019-06-30T07:30:00.013993+00:00"
+                },
+                "context": {
+                    "id": "89bbb3cd078d4ce48fdeb940d2b1f9c4",
+                    "user_id": null
+                },
+                "entity_id": "automation.pool_all_off_timer",
+                "last_changed": "2019-06-29T16:52:49.064815+00:00",
+                "last_updated": "2019-06-30T07:30:00.014106+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Heater Night Timer",
+                    "id": "heater_night_timer",
+                    "last_triggered": "2019-06-30T06:45:00.014257+00:00"
+                },
+                "context": {
+                    "id": "66996e2a7b444e1e96fc202db93903b1",
+                    "user_id": null
+                },
+                "entity_id": "automation.heater_night_timer",
+                "last_changed": "2019-06-29T16:52:49.065872+00:00",
+                "last_updated": "2019-06-30T06:45:00.014450+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "Heater Weekday Timer",
@@ -1107,53 +999,161 @@
                     "last_triggered": "2019-06-28T13:45:00.015503+00:00"
                 },
                 "context": {
-                    "id": "966b5bb287194f068d1a954f3b06319a",
+                    "id": "ef5752f9ddbd4c6f973c11d994a6a903",
                     "user_id": null
                 },
                 "entity_id": "automation.heater_weekday_timer",
-                "last_changed": "2019-06-25T03:52:00.771456+00:00",
-                "last_updated": "2019-06-28T13:45:00.015826+00:00",
+                "last_changed": "2019-06-29T16:52:49.066885+00:00",
+                "last_updated": "2019-06-29T16:52:49.066885+00:00",
                 "state": "on"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
-                    "friendly_name": "Fans Off Timer",
-                    "id": "fans_off",
-                    "last_triggered": "2019-06-29T08:00:00.023140+00:00"
+                    "friendly_name": "Kitchen Speaker Up Timer",
+                    "id": "kitchen_speaker_up",
+                    "last_triggered": "2019-06-30T23:00:00.010049+00:00"
                 },
                 "context": {
-                    "id": "5bbf755694554f51a928049c952ed135",
+                    "id": "77f871ea950f4a1bb010f3ca2f00c9b6",
                     "user_id": null
                 },
-                "entity_id": "automation.fans_off_timer",
-                "last_changed": "2019-06-25T03:52:00.773262+00:00",
-                "last_updated": "2019-06-29T08:00:00.023416+00:00",
+                "entity_id": "automation.kitchen_speaker_up_timer",
+                "last_changed": "2019-06-29T16:52:49.068422+00:00",
+                "last_updated": "2019-06-30T23:00:00.010275+00:00",
                 "state": "on"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
-                    "friendly_name": "Heater Evening Timer",
-                    "id": "heater_evening_timer",
-                    "last_triggered": "2019-06-29T00:30:00.027587+00:00"
+                    "friendly_name": "Day Care Bell Disarm Timer",
+                    "id": "dcare_disarm",
+                    "last_triggered": "2019-06-29T00:30:00.026250+00:00"
                 },
                 "context": {
-                    "id": "56eac4447edd4e989fcf234638d6b007",
+                    "id": "fdd8d9a3df7040bd9d43cf30f6d15a23",
                     "user_id": null
                 },
-                "entity_id": "automation.heater_evening_timer",
-                "last_changed": "2019-06-25T03:52:00.775277+00:00",
-                "last_updated": "2019-06-29T00:30:00.027718+00:00",
+                "entity_id": "automation.day_care_bell_disarm_timer",
+                "last_changed": "2019-06-29T16:52:49.069458+00:00",
+                "last_updated": "2019-06-29T16:52:49.069458+00:00",
                 "state": "on"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Heater Mid Morning Timer",
+                    "id": "heater_midmorn_timer",
+                    "last_triggered": "2019-06-28T17:00:00.021822+00:00"
+                },
+                "context": {
+                    "id": "d0ab8fde5c64466aba66181218de185f",
+                    "user_id": null
+                },
+                "entity_id": "automation.heater_mid_morning_timer",
+                "last_changed": "2019-06-29T16:52:49.070456+00:00",
+                "last_updated": "2019-06-29T16:52:49.070456+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Night Alarm Disarm Timer",
+                    "id": "night_disarm",
+                    "last_triggered": "2019-06-30T13:30:00.016361+00:00"
+                },
+                "context": {
+                    "id": "0b98f99f3fba4b5fb2700d4e4025b5b4",
+                    "user_id": null
+                },
+                "entity_id": "automation.night_alarm_disarm_timer",
+                "last_changed": "2019-06-29T16:52:49.071527+00:00",
+                "last_updated": "2019-06-30T13:30:00.016606+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Kitchen Speaker Down Timer",
+                    "id": "kitch_speaker_down",
+                    "last_triggered": "2019-06-29T05:00:00.016156+00:00"
+                },
+                "context": {
+                    "id": "397cfaecc525439a8e227afabb93eb38",
+                    "user_id": null
+                },
+                "entity_id": "automation.kitchen_speaker_down_timer",
+                "last_changed": "2019-06-29T16:52:49.072950+00:00",
+                "last_updated": "2019-06-29T16:52:49.072950+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Heater Weekend Timer",
+                    "id": "heater_weekend_timer",
+                    "last_triggered": "2019-06-30T14:45:00.011472+00:00"
+                },
+                "context": {
+                    "id": "3ed71fb9e7b84b32b93335d5baef36b7",
+                    "user_id": null
+                },
+                "entity_id": "automation.heater_weekend_timer",
+                "last_changed": "2019-06-29T16:52:49.074100+00:00",
+                "last_updated": "2019-06-30T14:45:00.011739+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Flower Box Sprinklers Timer",
+                    "id": "flower_box_sprinklers",
+                    "last_triggered": "2019-06-30T19:30:01.041532+00:00"
+                },
+                "context": {
+                    "id": "8e2338292de5447c86365572cdd8d0a1",
+                    "user_id": null
+                },
+                "entity_id": "automation.flower_box_sprinklers_timer",
+                "last_changed": "2019-06-29T16:52:49.075240+00:00",
+                "last_updated": "2019-06-30T19:30:01.041731+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Yard Lights On Timer",
+                    "id": "yard_lights_on",
+                    "last_triggered": "2019-07-01T03:34:20.078897+00:00"
+                },
+                "context": {
+                    "id": "beacbaf595724cf8a875e759a0ea3f43",
+                    "user_id": null
+                },
+                "entity_id": "automation.yard_lights_on_timer",
+                "last_changed": "2019-06-29T16:52:49.076538+00:00",
+                "last_updated": "2019-07-01T03:34:20.079147+00:00",
+                "state": "on"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "Ryan",
@@ -1165,17 +1165,17 @@
                     "source_type": "router"
                 },
                 "context": {
-                    "id": "ab070d675d7342b1b2ad9dc0e828dde2",
+                    "id": "8386355b910c4b72833628f93138a33f",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.ryan_phone",
-                "last_changed": "2019-06-28T23:57:16.839171+00:00",
-                "last_updated": "2019-06-28T23:57:16.839171+00:00",
+                "last_changed": "2019-06-30T18:50:57.538665+00:00",
+                "last_updated": "2019-06-30T18:50:57.538665+00:00",
                 "state": "home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "Stephanie",
@@ -1187,17 +1187,17 @@
                     "source_type": "router"
                 },
                 "context": {
-                    "id": "5ad1ef348c064cb2ac127b9264cdd3ac",
+                    "id": "9c079c891c7b4f4abf5ba7f7ae6845b8",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.steph_phone",
-                "last_changed": "2019-06-29T16:04:44.052230+00:00",
-                "last_updated": "2019-06-29T16:04:44.052230+00:00",
+                "last_changed": "2019-07-01T02:03:22.962121+00:00",
+                "last_updated": "2019-07-01T02:03:22.962121+00:00",
                 "state": "home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "Ford Flex",
@@ -1206,17 +1206,17 @@
                     "source_type": "router"
                 },
                 "context": {
-                    "id": "08a5fb2d9d1645c4b01d140cbbba2344",
+                    "id": "6a60ed073f84411291754fbd90f98814",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.ford_flex",
-                "last_changed": "2019-06-29T16:29:00.006120+00:00",
-                "last_updated": "2019-06-29T16:29:00.006120+00:00",
+                "last_changed": "2019-07-01T02:24:00.006193+00:00",
+                "last_updated": "2019-07-01T02:24:00.006193+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "d0c5d38ee03f",
@@ -1228,123 +1228,124 @@
                     "source_type": "router"
                 },
                 "context": {
-                    "id": "7453308a6a7d44618740dd9aa869ad07",
+                    "id": "dcccccad90ab47efaaec156230d7685a",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.d0c5d38ee03f",
-                "last_changed": "2019-06-25T03:51:54.430802+00:00",
-                "last_updated": "2019-06-25T03:52:00.497199+00:00",
+                "last_changed": "2019-06-29T16:52:40.421354+00:00",
+                "last_updated": "2019-06-29T16:52:48.966756+00:00",
                 "state": "home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "b8819887a37a",
                     "source_type": "router"
                 },
                 "context": {
-                    "id": "094e13c7d9044acab70d8c07b021a122",
+                    "id": "a546bb2b33f64c45984303b6c962a329",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.b8819887a37a",
-                "last_changed": "2019-06-25T03:51:54.431465+00:00",
-                "last_updated": "2019-06-25T03:51:54.431465+00:00",
+                "last_changed": "2019-06-29T16:52:40.422048+00:00",
+                "last_updated": "2019-06-29T16:52:40.422048+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "8cec4b8898ce",
                     "source_type": "router"
                 },
                 "context": {
-                    "id": "ddb97b098cf14a82968223b9621d4794",
+                    "id": "ff7581fc33904956851467ced2210ee3",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.8cec4b8898ce",
-                "last_changed": "2019-06-25T03:51:54.432133+00:00",
-                "last_updated": "2019-06-25T03:51:54.432133+00:00",
+                "last_changed": "2019-06-29T16:52:40.422685+00:00",
+                "last_updated": "2019-06-29T16:52:40.422685+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "8cec4b731747",
                     "source_type": null
                 },
                 "context": {
-                    "id": "02054577dc8b426c91d1b5e9d29e7053",
+                    "id": "f6680e8f10a041698ed489c93c76b3dc",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.8cec4b731747",
-                "last_changed": "2019-06-25T03:51:54.432786+00:00",
-                "last_updated": "2019-06-25T03:51:54.432786+00:00",
+                "last_changed": "2019-06-29T16:52:40.423322+00:00",
+                "last_updated": "2019-06-29T16:52:40.423322+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "7cb0c2442a73",
-                    "ip": "172.16.20.135",
-                    "scanner": "NmapDeviceScanner",
                     "source_type": "router"
                 },
                 "context": {
-                    "id": "85886a881f324862bfe20e8607d22a3b",
+                    "id": "7f103fdeb871422cb7018372d5cadc06",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.7cb0c2442a73",
-                "last_changed": "2019-06-28T23:30:25.005257+00:00",
-                "last_updated": "2019-06-28T23:30:25.005257+00:00",
+                "last_changed": "2019-06-29T16:52:40.423973+00:00",
+                "last_updated": "2019-06-29T16:52:40.423973+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "3880dfed76ea",
+                    "gps_accuracy": 0,
                     "ip": "172.16.30.148",
+                    "latitude": 37.451,
+                    "longitude": -122.222,
                     "scanner": "NmapDeviceScanner",
                     "source_type": "router"
                 },
                 "context": {
-                    "id": "6b0d3771864d406fbf7c41aff3537708",
+                    "id": "5a306e7042354617bc93056c3e872408",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.3880dfed76ea",
-                "last_changed": "2019-06-28T23:25:15.004960+00:00",
-                "last_updated": "2019-06-28T23:25:15.004960+00:00",
-                "state": "not_home"
+                "last_changed": "2019-07-01T05:38:47.084732+00:00",
+                "last_updated": "2019-07-01T05:38:47.084732+00:00",
+                "state": "home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "a4e975873a1a",
                     "source_type": "router"
                 },
                 "context": {
-                    "id": "a88285aa7d2e49bea16c8b4ebde5ce49",
+                    "id": "1d1a2b6af72f445b863d5ba9e5fe22d3",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.a4e975873a1a",
-                "last_changed": "2019-06-25T03:51:54.434535+00:00",
-                "last_updated": "2019-06-25T03:51:54.434535+00:00",
+                "last_changed": "2019-06-29T16:52:40.425283+00:00",
+                "last_updated": "2019-06-29T16:52:40.425283+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "d03169d25088",
@@ -1353,153 +1354,153 @@
                     "source_type": "router"
                 },
                 "context": {
-                    "id": "470bd6e152924555b509ec69f24e1c4c",
+                    "id": "cf58c79a0cb44b30a3f8282e84f9fcec",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.d03169d25088",
-                "last_changed": "2019-06-29T02:20:25.005646+00:00",
-                "last_updated": "2019-06-29T02:20:25.005646+00:00",
+                "last_changed": "2019-06-30T01:56:05.004961+00:00",
+                "last_updated": "2019-06-30T01:56:05.004961+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "akela.amaroq.net",
                     "source_type": "router"
                 },
                 "context": {
-                    "id": "dcac249d9f3641b9908449f6e13a317f",
+                    "id": "ebb3ecc3f2d340d6a0262f14d0291117",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.akelaamaroqnet_2",
-                "last_changed": "2019-06-25T03:51:54.435579+00:00",
-                "last_updated": "2019-06-25T03:51:54.435579+00:00",
+                "last_changed": "2019-06-29T16:52:40.426578+00:00",
+                "last_updated": "2019-06-29T16:52:40.426578+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "006171d03dc8",
                     "source_type": "router"
                 },
                 "context": {
-                    "id": "9b8eaa3972c549d58249283d7d7a8535",
+                    "id": "ab65b5c721904542b12c9123a97ee3dc",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.006171d03dc8",
-                "last_changed": "2019-06-25T03:51:54.436109+00:00",
-                "last_updated": "2019-06-25T03:51:54.436109+00:00",
+                "last_changed": "2019-06-29T16:52:40.427207+00:00",
+                "last_updated": "2019-06-29T16:52:40.427207+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "7c04d050ed3a",
                     "source_type": "router"
                 },
                 "context": {
-                    "id": "4238eb8e339044b192af8efbd8c0ef0a",
+                    "id": "85ab20439b474785a704471970e8a64a",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.7c04d050ed3a",
-                "last_changed": "2019-06-25T03:51:54.436652+00:00",
-                "last_updated": "2019-06-25T03:51:54.436652+00:00",
+                "last_changed": "2019-06-29T16:52:40.427885+00:00",
+                "last_updated": "2019-06-29T16:52:40.427885+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "84c9b237bb11",
                     "source_type": null
                 },
                 "context": {
-                    "id": "d1dde7d96ef24324a5273cd08e31f530",
+                    "id": "ab3630175f0d4b53a79978f898cae868",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.84c9b237bb11",
-                "last_changed": "2019-06-25T03:51:54.437179+00:00",
-                "last_updated": "2019-06-25T03:51:54.437179+00:00",
+                "last_changed": "2019-06-29T16:52:40.428537+00:00",
+                "last_updated": "2019-06-29T16:52:40.428537+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "a4e975864b74",
                     "source_type": null
                 },
                 "context": {
-                    "id": "d0ed5dca78854097b3761e9604d19bb6",
+                    "id": "bf252800671b4998b9df6d07d72db6a2",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.a4e975864b74",
-                "last_changed": "2019-06-25T03:51:54.437703+00:00",
-                "last_updated": "2019-06-25T03:51:54.437703+00:00",
+                "last_changed": "2019-06-29T16:52:40.429171+00:00",
+                "last_updated": "2019-06-29T16:52:40.429171+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "a4e97587bca3",
                     "source_type": null
                 },
                 "context": {
-                    "id": "06992f2b15834bc5b8fe7817f4b76df8",
+                    "id": "f9777d712bf34603bc856553dc4981c6",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.a4e97587bca3",
-                "last_changed": "2019-06-25T03:51:54.438208+00:00",
-                "last_updated": "2019-06-25T03:51:54.438208+00:00",
+                "last_changed": "2019-06-29T16:52:40.429808+00:00",
+                "last_updated": "2019-06-29T16:52:40.429808+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "a4e975825514",
                     "source_type": null
                 },
                 "context": {
-                    "id": "04503e6975054822ad04a5e1d823bd64",
+                    "id": "1d52ff9d9ecc40d3939fca535bbb593d",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.a4e975825514",
-                "last_changed": "2019-06-25T03:51:54.438723+00:00",
-                "last_updated": "2019-06-25T03:51:54.438723+00:00",
+                "last_changed": "2019-06-29T16:52:40.430440+00:00",
+                "last_updated": "2019-06-29T16:52:40.430440+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "78acc0a9b512",
                     "source_type": null
                 },
                 "context": {
-                    "id": "1aad871369604201a6fedee9b48af0b0",
+                    "id": "e8b13639fc8b4f3591c06d39828f6d62",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.78acc0a9b512",
-                "last_changed": "2019-06-25T03:51:54.439243+00:00",
-                "last_updated": "2019-06-25T03:51:54.439243+00:00",
+                "last_changed": "2019-06-29T16:52:40.431084+00:00",
+                "last_updated": "2019-06-29T16:52:40.431084+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "14cc20004725",
@@ -1511,255 +1512,255 @@
                     "source_type": "router"
                 },
                 "context": {
-                    "id": "6a1cc6b7d7914dfa91a343c09da74811",
+                    "id": "9e44e458c4f445dabd48ee219d5f738f",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.14cc20004725",
-                "last_changed": "2019-06-25T03:51:54.439772+00:00",
-                "last_updated": "2019-06-25T03:52:00.489512+00:00",
+                "last_changed": "2019-06-29T16:52:40.431584+00:00",
+                "last_updated": "2019-06-29T16:52:48.960827+00:00",
                 "state": "home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "60 03 08 95 3f 10",
                     "source_type": "router"
                 },
                 "context": {
-                    "id": "cbfb638b8a4a4e879b13623264d9e0d9",
+                    "id": "eba6a1f13264413f8fbdf776ab00e4b2",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.60_03_08_95_3f_10",
-                "last_changed": "2019-06-25T03:51:54.440343+00:00",
-                "last_updated": "2019-06-25T03:51:54.440343+00:00",
+                "last_changed": "2019-06-29T16:52:40.432084+00:00",
+                "last_updated": "2019-06-29T16:52:40.432084+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "70 14 a6 56 7f 57",
                     "source_type": "router"
                 },
                 "context": {
-                    "id": "149e10e27739478581a3904de76d318c",
+                    "id": "45990dfa308e4490914b223b62c9de3d",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.70_14_a6_56_7f_57",
-                "last_changed": "2019-06-25T03:51:54.440893+00:00",
-                "last_updated": "2019-06-25T03:51:54.440893+00:00",
+                "last_changed": "2019-06-29T16:52:40.432613+00:00",
+                "last_updated": "2019-06-29T16:52:40.432613+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "UBNT",
                     "source_type": null
                 },
                 "context": {
-                    "id": "ef6f20617cdc4fc288e15c77028c3ffd",
+                    "id": "731ed1d7787a4e9399498bb6eefd8414",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.ubnt",
-                "last_changed": "2019-06-25T03:51:54.441409+00:00",
-                "last_updated": "2019-06-25T03:51:54.441409+00:00",
+                "last_changed": "2019-06-29T16:52:40.433117+00:00",
+                "last_updated": "2019-06-29T16:52:40.433117+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "UBNT",
                     "source_type": null
                 },
                 "context": {
-                    "id": "3b8233b473454ec5aac34e0522d2da13",
+                    "id": "051a6e59222945ee9ea0c158c9e2a332",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.ubnt_2",
-                "last_changed": "2019-06-25T03:51:54.441926+00:00",
-                "last_updated": "2019-06-25T03:51:54.441926+00:00",
+                "last_changed": "2019-06-29T16:52:40.433618+00:00",
+                "last_updated": "2019-06-29T16:52:40.433618+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "DEV0352B2",
                     "source_type": null
                 },
                 "context": {
-                    "id": "38e92df9b2ad442e883664e2faf49e30",
+                    "id": "ae15b1ca4bcb465299bfceb1999b6d79",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.dev0352b2",
-                "last_changed": "2019-06-25T03:51:54.442430+00:00",
-                "last_updated": "2019-06-25T03:51:54.442430+00:00",
+                "last_changed": "2019-06-29T16:52:40.434208+00:00",
+                "last_updated": "2019-06-29T16:52:40.434208+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "UBNT",
                     "source_type": null
                 },
                 "context": {
-                    "id": "9ac214b9baf042d1bec3c8214b368e74",
+                    "id": "001b6235c51940e19331224ff2519e6f",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.ubnt_3",
-                "last_changed": "2019-06-25T03:51:54.443566+00:00",
-                "last_updated": "2019-06-25T03:51:54.443566+00:00",
+                "last_changed": "2019-06-29T16:52:40.434720+00:00",
+                "last_updated": "2019-06-29T16:52:40.434720+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "dtv.amaroq.net",
                     "source_type": null
                 },
                 "context": {
-                    "id": "a06c0973d7be4c38adfa61bd157689d5",
+                    "id": "5d5575f4465543dcbb718c73ad45298d",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.dtv_amaroq_net",
-                "last_changed": "2019-06-25T03:51:54.444125+00:00",
-                "last_updated": "2019-06-25T03:51:54.444125+00:00",
+                "last_changed": "2019-06-29T16:52:40.435220+00:00",
+                "last_updated": "2019-06-29T16:52:40.435220+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "d4 9a 20 79 13 6c",
                     "source_type": null
                 },
                 "context": {
-                    "id": "ee671e4726bc46cbb1062c7e5b2ff623",
+                    "id": "5eee79d95ab4450db578a1e4515950d9",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.d4_9a_20_79_13_6c",
-                "last_changed": "2019-06-25T03:51:54.444638+00:00",
-                "last_updated": "2019-06-25T03:51:54.444638+00:00",
+                "last_changed": "2019-06-29T16:52:40.435732+00:00",
+                "last_updated": "2019-06-29T16:52:40.435732+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "miyax",
                     "source_type": null
                 },
                 "context": {
-                    "id": "eee6a3f591c84f15b0a95789b3438c50",
+                    "id": "aff20e5ac6034679918fe2c0ff37caa4",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.miyax",
-                "last_changed": "2019-06-25T03:51:54.445161+00:00",
-                "last_updated": "2019-06-25T03:51:54.445161+00:00",
+                "last_changed": "2019-06-29T16:52:40.436239+00:00",
+                "last_updated": "2019-06-29T16:52:40.436239+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "iPhone",
                     "source_type": null
                 },
                 "context": {
-                    "id": "c5dcf0c150414ccfb3e928ff458c4c73",
+                    "id": "a9a1cc2a79a94b9ea28af34e3476aa05",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.iphone",
-                "last_changed": "2019-06-25T03:51:54.445687+00:00",
-                "last_updated": "2019-06-25T03:51:54.445687+00:00",
+                "last_changed": "2019-06-29T16:52:40.436736+00:00",
+                "last_updated": "2019-06-29T16:52:40.436736+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "Kims-iPhone-6s",
                     "source_type": null
                 },
                 "context": {
-                    "id": "18ca59d2545a400b9befbc2961aa2725",
+                    "id": "346e33e30b1c49d4a1d0921d2affc486",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.kims_iphone_6s",
-                "last_changed": "2019-06-25T03:51:54.446199+00:00",
-                "last_updated": "2019-06-25T03:51:54.446199+00:00",
+                "last_changed": "2019-06-29T16:52:40.437795+00:00",
+                "last_updated": "2019-06-29T16:52:40.437795+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "UBNT",
                     "source_type": null
                 },
                 "context": {
-                    "id": "4bac3d74e54944cb811aaf35951f4c90",
+                    "id": "75b4ceaed838441096f42e4c94927f3d",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.ubnt_4",
-                "last_changed": "2019-06-25T03:51:54.446736+00:00",
-                "last_updated": "2019-06-25T03:51:54.446736+00:00",
+                "last_changed": "2019-06-29T16:52:40.438330+00:00",
+                "last_updated": "2019-06-29T16:52:40.438330+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "UBNT",
                     "source_type": null
                 },
                 "context": {
-                    "id": "8625e7fb810a423e991f0016a0f6af41",
+                    "id": "b2ac536a66a94bf3b07e1a5e378db8d4",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.ubnt_5",
-                "last_changed": "2019-06-25T03:51:54.447256+00:00",
-                "last_updated": "2019-06-25T03:51:54.447256+00:00",
+                "last_changed": "2019-06-29T16:52:40.438826+00:00",
+                "last_updated": "2019-06-29T16:52:40.438826+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "00 24 9b 4a c5 24",
                     "source_type": null
                 },
                 "context": {
-                    "id": "0c70f403fe11430cad6785520879e15e",
+                    "id": "d791b51494304e759bb4b99ff653d07c",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.00_24_9b_4a_c5_24",
-                "last_changed": "2019-06-25T03:51:54.447784+00:00",
-                "last_updated": "2019-06-25T03:51:54.447784+00:00",
+                "last_changed": "2019-06-29T16:52:40.439321+00:00",
+                "last_updated": "2019-06-29T16:52:40.439321+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "70 54 d2 7c b9 3a",
@@ -1771,85 +1772,85 @@
                     "source_type": "router"
                 },
                 "context": {
-                    "id": "ead438f5ab30428d90903869bcc5d475",
+                    "id": "8adad343757743459658d8e8aeaf4925",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.70_54_d2_7c_b9_3a",
-                "last_changed": "2019-06-29T00:30:09.961195+00:00",
-                "last_updated": "2019-06-29T00:30:09.961195+00:00",
+                "last_changed": "2019-06-29T16:52:40.439831+00:00",
+                "last_updated": "2019-06-29T16:52:48.963094+00:00",
                 "state": "home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "sta30",
                     "source_type": null
                 },
                 "context": {
-                    "id": "84076bbd46fd4a9b9dfa779c4f32a731",
+                    "id": "deb0c9022f8547159be77e74d659cbdd",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.sta30",
-                "last_changed": "2019-06-25T03:51:54.448911+00:00",
-                "last_updated": "2019-06-25T03:51:54.448911+00:00",
+                "last_changed": "2019-06-29T16:52:40.440327+00:00",
+                "last_updated": "2019-06-29T16:52:40.440327+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "iPad",
                     "source_type": null
                 },
                 "context": {
-                    "id": "8483b6949fba478381446035a0f21fa3",
+                    "id": "d6edef385d994a09866e58648f5770c4",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.ipad",
-                "last_changed": "2019-06-25T03:51:54.449419+00:00",
-                "last_updated": "2019-06-25T03:51:54.449419+00:00",
+                "last_changed": "2019-06-29T16:52:40.440865+00:00",
+                "last_updated": "2019-06-29T16:52:40.440865+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "iPad-4",
                     "source_type": null
                 },
                 "context": {
-                    "id": "c7ebc23b31f548eeb3f933073e8c5631",
+                    "id": "b4d78152c6ab45e19575eefa8c4ddaff",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.ipad_4",
-                "last_changed": "2019-06-25T03:51:54.449980+00:00",
-                "last_updated": "2019-06-25T03:51:54.449980+00:00",
+                "last_changed": "2019-06-29T16:52:40.441354+00:00",
+                "last_updated": "2019-06-29T16:52:40.441354+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "Leos-iPhone",
                     "source_type": null
                 },
                 "context": {
-                    "id": "35d55bd6f0fb4acdba686146b3e673c4",
+                    "id": "88d3325feda5468ea95392593360a86c",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.leos_iphone",
-                "last_changed": "2019-06-25T03:51:54.450543+00:00",
-                "last_updated": "2019-06-25T03:51:54.450543+00:00",
+                "last_changed": "2019-06-29T16:52:40.441948+00:00",
+                "last_updated": "2019-06-29T16:52:40.441948+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "58 cb 52 1f 1c 82",
@@ -1861,37 +1862,144 @@
                     "source_type": "router"
                 },
                 "context": {
-                    "id": "a05f4a4ddc2547fd98598d74869c1448",
+                    "id": "47874a46ec8149b49581249349a26c7e",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.58_cb_52_1f_1c_82",
-                "last_changed": "2019-06-29T01:14:02.422479+00:00",
-                "last_updated": "2019-06-29T01:14:02.422479+00:00",
+                "last_changed": "2019-06-30T17:22:21.723647+00:00",
+                "last_updated": "2019-06-30T17:22:21.723647+00:00",
                 "state": "home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
                     "friendly_name": "Sylvias-iPad",
                     "source_type": null
                 },
                 "context": {
-                    "id": "0a1abc82aaeb4979b6321bea08359015",
+                    "id": "4c37ef6c5b124eff8851de9001a7b048",
                     "user_id": null
                 },
                 "entity_id": "device_tracker.sylvias_ipad",
-                "last_changed": "2019-06-25T03:51:54.451598+00:00",
-                "last_updated": "2019-06-25T03:51:54.451598+00:00",
+                "last_changed": "2019-06-29T16:52:40.443041+00:00",
+                "last_updated": "2019-06-29T16:52:40.443041+00:00",
                 "state": "not_home"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
-                    "current_temperature": 69.3,
+                    "friendly_name": "58 cb 52 82 c0 35",
+                    "gps_accuracy": 0,
+                    "ip": "172.16.20.154",
+                    "latitude": 37.451,
+                    "longitude": -122.222,
+                    "scanner": "NmapDeviceScanner",
+                    "source_type": "router"
+                },
+                "context": {
+                    "id": "2bc0d03d781c4f978c05980fca847343",
+                    "user_id": null
+                },
+                "entity_id": "device_tracker.58_cb_52_82_c0_35",
+                "last_changed": "2019-06-30T01:01:30.757184+00:00",
+                "last_updated": "2019-06-30T01:01:30.757184+00:00",
+                "state": "home"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "diomedes",
+                    "gps_accuracy": 0,
+                    "ip": "172.16.30.42",
+                    "latitude": 37.451,
+                    "longitude": -122.222,
+                    "scanner": "NmapDeviceScanner",
+                    "source_type": "router"
+                },
+                "context": {
+                    "id": "b4e3ae24042b46ee85cf3ac2b041818b",
+                    "user_id": null
+                },
+                "entity_id": "device_tracker.diomedes",
+                "last_changed": "2019-07-01T05:27:58.449484+00:00",
+                "last_updated": "2019-07-01T05:27:58.449484+00:00",
+                "state": "home"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "iPhone",
+                    "ip": "172.16.30.119",
+                    "scanner": "NmapDeviceScanner",
+                    "source_type": "router"
+                },
+                "context": {
+                    "id": "c60d819d28a7457d8d24479a9fc01767",
+                    "user_id": null
+                },
+                "entity_id": "device_tracker.iphone_2",
+                "last_changed": "2019-07-01T03:38:10.006886+00:00",
+                "last_updated": "2019-07-01T03:38:10.006886+00:00",
+                "state": "not_home"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "Galaxy-S9",
+                    "gps_accuracy": 0,
+                    "ip": "172.16.30.204",
+                    "latitude": 37.451,
+                    "longitude": -122.222,
+                    "scanner": "NmapDeviceScanner",
+                    "source_type": "router"
+                },
+                "context": {
+                    "id": "9d56cdf2ab6a48ad8ce752d9aced24f2",
+                    "user_id": null
+                },
+                "entity_id": "device_tracker.galaxy_s9",
+                "last_changed": "2019-07-01T01:46:53.764413+00:00",
+                "last_updated": "2019-07-01T01:46:53.764413+00:00",
+                "state": "home"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "friendly_name": "iPhone-6",
+                    "gps_accuracy": 0,
+                    "ip": "172.16.30.86",
+                    "latitude": 37.451,
+                    "longitude": -122.222,
+                    "scanner": "NmapDeviceScanner",
+                    "source_type": "router"
+                },
+                "context": {
+                    "id": "9d6a948708f8428f8b427cd1ccff81e1",
+                    "user_id": null
+                },
+                "entity_id": "device_tracker.iphone_6",
+                "last_changed": "2019-07-01T03:42:07.747392+00:00",
+                "last_updated": "2019-07-01T03:42:07.747392+00:00",
+                "state": "home"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "current_temperature": 69.6,
                     "friendly_name": "Garage",
                     "max_temp": 95.0,
                     "min_temp": 32.0,
@@ -1904,47 +2012,20 @@
                     "temperature": 45.0
                 },
                 "context": {
-                    "id": "857ba04f43254733a95e1fa709ec6af8",
+                    "id": "775634bc6b36447090fe0d77ff893e1c",
                     "user_id": null
                 },
                 "entity_id": "climate.garage",
-                "last_changed": "2019-06-25T03:51:54.511728+00:00",
-                "last_updated": "2019-06-29T16:48:06.043175+00:00",
+                "last_changed": "2019-06-29T16:52:40.525096+00:00",
+                "last_updated": "2019-07-01T05:39:30.039170+00:00",
                 "state": "idle"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
-                    "away_mode": "off",
-                    "current_temperature": 67.0,
-                    "friendly_name": "House",
-                    "max_temp": 95.0,
-                    "min_temp": 44.6,
-                    "operation_list": [
-                        "heat",
-                        "off"
-                    ],
-                    "operation_mode": "heat",
-                    "supported_features": 1153,
-                    "temperature": 65.0
-                },
-                "context": {
-                    "id": "d2058cf9e3f64ba6a62304aa8e4898db",
-                    "user_id": null
-                },
-                "entity_id": "climate.house",
-                "last_changed": "2019-06-25T03:51:54.512566+00:00",
-                "last_updated": "2019-06-29T16:43:28.624881+00:00",
-                "state": "idle"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "current_temperature": 65.5,
+                    "current_temperature": 75.2,
                     "friendly_name": "Camper",
                     "max_temp": 95.0,
                     "min_temp": 32.0,
@@ -1957,20 +2038,73 @@
                     "temperature": 45.0
                 },
                 "context": {
-                    "id": "a755fd02ffaf4652af3c05e5f70fab4f",
+                    "id": "819921bb1d0b4303a835c8600c7f4a72",
                     "user_id": null
                 },
                 "entity_id": "climate.camper",
-                "last_changed": "2019-06-25T03:51:54.513451+00:00",
-                "last_updated": "2019-06-29T16:32:23.287368+00:00",
+                "last_changed": "2019-06-29T16:52:40.525647+00:00",
+                "last_updated": "2019-07-01T03:29:28.565574+00:00",
                 "state": "idle"
             }
         },
         {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
             "state": {
                 "attributes": {
-                    "current_temperature": 68.2,
+                    "away_mode": "off",
+                    "current_temperature": 74.4,
+                    "friendly_name": "House",
+                    "max_temp": 95.0,
+                    "min_temp": 44.6,
+                    "operation_list": [
+                        "heat",
+                        "off"
+                    ],
+                    "operation_mode": "heat",
+                    "supported_features": 1153,
+                    "temperature": 68.0
+                },
+                "context": {
+                    "id": "aa19f9c2305549f88c85c37f6aadd7e5",
+                    "user_id": null
+                },
+                "entity_id": "climate.house",
+                "last_changed": "2019-06-29T16:52:40.526152+00:00",
+                "last_updated": "2019-07-01T05:33:20.820679+00:00",
+                "state": "idle"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "current_temperature": 83.6,
+                    "friendly_name": "Pool",
+                    "max_temp": 95.0,
+                    "min_temp": 32.0,
+                    "operation_list": [
+                        "heat",
+                        "off"
+                    ],
+                    "operation_mode": "off",
+                    "supported_features": 129,
+                    "temperature": 88.0
+                },
+                "context": {
+                    "id": "43567e03d8bc4603948ab8e25b76850a",
+                    "user_id": "959b29044bae459b8ed3edf6af30c6d4"
+                },
+                "entity_id": "climate.pool",
+                "last_changed": "2019-06-30T22:39:42.851161+00:00",
+                "last_updated": "2019-06-30T22:39:42.851161+00:00",
+                "state": "off"
+            }
+        },
+        {
+            "last_seen": "2019-07-01T05:40:11.004831+00:00",
+            "state": {
+                "attributes": {
+                    "current_temperature": 63.3,
                     "friendly_name": "Chicken Coop",
                     "max_temp": 95.0,
                     "min_temp": 32.0,
@@ -1983,39 +2117,13 @@
                     "temperature": 39.0
                 },
                 "context": {
-                    "id": "d0acd65bf31d40268f65874a7f8e2882",
+                    "id": "383fb9360bec4579a94f6778b7528e6a",
                     "user_id": null
                 },
                 "entity_id": "climate.chicken_coop",
-                "last_changed": "2019-06-25T03:51:54.514195+00:00",
-                "last_updated": "2019-06-29T16:48:06.045031+00:00",
+                "last_changed": "2019-06-29T16:52:40.527169+00:00",
+                "last_updated": "2019-07-01T05:39:30.040105+00:00",
                 "state": "idle"
-            }
-        },
-        {
-            "last_seen": "2019-06-29T16:48:39.283518+00:00",
-            "state": {
-                "attributes": {
-                    "current_temperature": null,
-                    "friendly_name": "Pool",
-                    "max_temp": 95.0,
-                    "min_temp": 32.0,
-                    "operation_list": [
-                        "heat",
-                        "off"
-                    ],
-                    "operation_mode": "off",
-                    "supported_features": 129,
-                    "temperature": 32.0
-                },
-                "context": {
-                    "id": "bf958fd7bb424584994f26f3787b9257",
-                    "user_id": null
-                },
-                "entity_id": "climate.pool",
-                "last_changed": "2019-06-25T03:51:54.514923+00:00",
-                "last_updated": "2019-06-25T03:51:54.514923+00:00",
-                "state": "off"
             }
         }
     ],
