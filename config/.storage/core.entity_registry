@@ -2970,6 +2970,42 @@
                 "name": "Shed Fan",
                 "platform": "zwave",
                 "unique_id": "113-72057595938570241"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "zwave.ge_12722_on_off_relay_switch",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "node-22"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "73a7e92726fb4d78bb9eb17c1d1a3d36",
+                "disabled_by": null,
+                "entity_id": "switch.ge_12722_on_off_relay_switch_switch",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "22-72057594411827200"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "1f53e0344ac6428c90245404af94ef45",
+                "disabled_by": null,
+                "entity_id": "sensor.vision_zp3111_multisensor_4in1_general",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "106-72057595821309986"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.pool_temperature",
+                "name": "Pool Temperature",
+                "platform": "rfxcom_rx",
+                "unique_id": "temp_temp_f007pf_e6_08"
             }
         ]
     },
