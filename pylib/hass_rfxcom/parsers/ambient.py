@@ -67,7 +67,8 @@ class AmbientParser(object):
         data['hash'] = mHash
 
         data['tempc'] = (data['temp'] -32.0) * (5.0/9.0)
-        data['source'] = 'f007pf.%.2x.%.2x' % (data['tag'],data['chan'])
+        #data['source'] = 'f007pf.%.2x.%.2x' % (data['tag'],data['chan'])
+        data['source'] = 'f007pf.%.2x' % (data['chan'])
 
         return Message('temp', source=data['source'], sensor=data['source'], temp=data['tempc'])
 

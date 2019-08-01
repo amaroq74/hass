@@ -113,8 +113,8 @@ class WeatherPost(hass.Hass):
             login = 'user {} pass {} vers "Python" \n'.format(hass_secrets.callSign,password)
             message = '{}>APRS,TCPIP*:!{}{}Amaroq APRS TCPIP Weather Station\n'.format(hass_secrets.callSign,hass_secrets.position,weather)
 
-            #self.warning(login)
-            #self.warning(message)
+            self.warning(login)
+            self.warning(message)
 
             sSock = socket(AF_INET, SOCK_STREAM)
             sSock.connect((serverHost, serverPort))
