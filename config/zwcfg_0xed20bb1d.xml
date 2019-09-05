@@ -406,7 +406,7 @@
 			</CommandClass>
 			<CommandClass id="48" name="COMMAND_CLASS_SENSOR_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
 				<SensorMap index="0" type="39" />
 				<SensorMap index="0" type="55" />
 				<SensorMap index="0" type="200" />
@@ -427,7 +427,7 @@
 			</CommandClass>
 			<CommandClass id="128" name="COMMAND_CLASS_BATTERY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Battery Level" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="99" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Battery Level" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="100" />
 			</CommandClass>
 			<CommandClass id="132" name="COMMAND_CLASS_WAKE_UP" version="2" request_flags="2" innif="true">
 				<Instance index="1" />
@@ -657,7 +657,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="22" name="" location="" basic="4" generic="16" specific="1" type="Binary Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
+	<Node id="22" name="" location="" basic="4" generic="16" specific="1" type="Binary Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Dynamic">
 		<Manufacturer id="63" name="GE">
 			<Product type="4952" id="3032" name="12722 On/Off Relay Switch" />
 		</Manufacturer>
@@ -839,7 +839,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -1023,7 +1023,7 @@
 			</CommandClass>
 			<CommandClass id="48" name="COMMAND_CLASS_SENSOR_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
 				<SensorMap index="0" type="255" />
 			</CommandClass>
 			<CommandClass id="90" name="COMMAND_CLASS_DEVICE_RESET_LOCALLY" version="1">
@@ -1043,7 +1043,7 @@
 				<Value type="byte" genre="user" instance="1" index="0" label="Alarm Type" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 				<Value type="byte" genre="user" instance="1" index="1" label="Alarm Level" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 				<Value type="byte" genre="user" instance="1" index="2" label="SourceNodeId" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="user" instance="1" index="9" label="Access Control" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="23" />
+				<Value type="byte" genre="user" instance="1" index="9" label="Access Control" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="22" />
 				<Value type="byte" genre="user" instance="1" index="10" label="Burglar" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 				<Value type="byte" genre="user" instance="1" index="11" label="Power Management" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 			</CommandClass>
@@ -1091,7 +1091,7 @@
 			</CommandClass>
 			<CommandClass id="128" name="COMMAND_CLASS_BATTERY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Battery Level" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="99" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Battery Level" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="100" />
 			</CommandClass>
 			<CommandClass id="132" name="COMMAND_CLASS_WAKE_UP" version="2" request_flags="2" innif="true">
 				<Instance index="1" />
@@ -1118,7 +1118,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="52" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3072" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
+	<Node id="52" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3072" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Associations">
 		<Manufacturer id="14a" name="Ecolink">
 			<Product type="4" id="2" name="Door/Window Sensor" />
 		</Manufacturer>
@@ -1427,7 +1427,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -1514,7 +1514,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -1596,7 +1596,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -1764,7 +1764,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="59" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3078" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
+	<Node id="59" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3078" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Session">
 		<Manufacturer id="86" name="Aeotec">
 			<Product type="102" id="61" name="ZW097 Dry Contact Sensor Gen5" />
 		</Manufacturer>
@@ -2127,7 +2127,7 @@
 			</CommandClass>
 			<CommandClass id="48" name="COMMAND_CLASS_SENSOR_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 				<SensorMap index="0" type="2" />
 				<SensorMap index="0" type="18" />
 				<SensorMap index="0" type="237" />
@@ -2256,7 +2256,8 @@
 			</CommandClass>
 			<CommandClass id="48" name="COMMAND_CLASS_SENSOR_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
+				<SensorMap index="0" type="56" />
 				<SensorMap index="0" type="108" />
 				<SensorMap index="0" type="124" />
 				<SensorMap index="0" type="131" />
@@ -2319,7 +2320,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -2493,7 +2494,7 @@
 			</CommandClass>
 			<CommandClass id="38" name="COMMAND_CLASS_SWITCH_MULTILEVEL" version="1" innif="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="99" />
 				<Value type="button" genre="user" instance="1" index="1" label="Bright" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="button" genre="user" instance="1" index="2" label="Dim" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="bool" genre="system" instance="1" index="3" label="Ignore Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
@@ -2561,7 +2562,7 @@
 			</CommandClass>
 			<CommandClass id="38" name="COMMAND_CLASS_SWITCH_MULTILEVEL" version="1" innif="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="50" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 				<Value type="button" genre="user" instance="1" index="1" label="Bright" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="button" genre="user" instance="1" index="2" label="Dim" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="bool" genre="system" instance="1" index="3" label="Ignore Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
@@ -2629,7 +2630,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -3058,7 +3059,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -3135,7 +3136,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="82" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3072" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Associations">
+	<Node id="82" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3072" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Session">
 		<Manufacturer id="14a" name="Ecolink">
 			<Product type="4" id="2" name="Door/Window Sensor" />
 		</Manufacturer>
@@ -3251,7 +3252,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -3351,7 +3352,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="84" name="" location="" basic="4" generic="16" specific="1" type="Binary Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="ProtocolInfo">
+	<Node id="84" name="" location="" basic="4" generic="16" specific="1" type="Binary Power Switch" listening="true" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
 		<Manufacturer id="63" name="GE">
 			<Product type="4952" id="3032" name="12722 On/Off Relay Switch" />
 		</Manufacturer>
@@ -3448,7 +3449,7 @@
 			</CommandClass>
 			<CommandClass id="38" name="COMMAND_CLASS_SWITCH_MULTILEVEL" version="2" innif="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="61" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 				<Value type="button" genre="user" instance="1" index="1" label="Bright" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="button" genre="user" instance="1" index="2" label="Dim" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="bool" genre="system" instance="1" index="3" label="Ignore Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
@@ -3581,7 +3582,7 @@
 			</CommandClass>
 			<CommandClass id="38" name="COMMAND_CLASS_SWITCH_MULTILEVEL" version="2" innif="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="49" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 				<Value type="button" genre="user" instance="1" index="1" label="Bright" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="button" genre="user" instance="1" index="2" label="Dim" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="bool" genre="system" instance="1" index="3" label="Ignore Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
@@ -3714,7 +3715,7 @@
 			</CommandClass>
 			<CommandClass id="38" name="COMMAND_CLASS_SWITCH_MULTILEVEL" version="2" innif="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="33" />
 				<Value type="button" genre="user" instance="1" index="1" label="Bright" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="button" genre="user" instance="1" index="2" label="Dim" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="bool" genre="system" instance="1" index="3" label="Ignore Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
@@ -3980,7 +3981,7 @@
 			</CommandClass>
 			<CommandClass id="38" name="COMMAND_CLASS_SWITCH_MULTILEVEL" version="1" innif="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="99" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 				<Value type="button" genre="user" instance="1" index="1" label="Bright" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="button" genre="user" instance="1" index="2" label="Dim" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="bool" genre="system" instance="1" index="3" label="Ignore Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
@@ -4112,7 +4113,7 @@
 			</CommandClass>
 			<CommandClass id="38" name="COMMAND_CLASS_SWITCH_MULTILEVEL" version="2" innif="true">
 				<Instance index="1" />
-				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="99" />
+				<Value type="byte" genre="user" instance="1" index="0" label="Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 				<Value type="button" genre="user" instance="1" index="1" label="Bright" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="button" genre="user" instance="1" index="2" label="Dim" units="" read_only="false" write_only="true" verify_changes="false" poll_intensity="0" min="0" max="0" />
 				<Value type="bool" genre="system" instance="1" index="3" label="Ignore Start Level" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
@@ -4355,7 +4356,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -4818,7 +4819,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -5038,7 +5039,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -5451,7 +5452,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -5815,7 +5816,7 @@
 			</CommandClass>
 		</CommandClasses>
 	</Node>
-	<Node id="106" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3079" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Complete">
+	<Node id="106" name="" location="" basic="4" generic="7" specific="1" roletype="6" devicetype="3079" nodetype="0" type="Notification Sensor" listening="false" frequentListening="false" beaming="true" routing="true" max_baud_rate="40000" version="4" query_stage="Session">
 		<Manufacturer id="109" name="Vision">
 			<Product type="2021" id="2101" name="ZP3111 Multisensor 4in1" />
 		</Manufacturer>
@@ -5966,9 +5967,9 @@
 			</CommandClass>
 			<CommandClass id="49" name="COMMAND_CLASS_SENSOR_MULTILEVEL" version="7" innif="true">
 				<Instance index="1" />
-				<Value type="decimal" genre="user" instance="1" index="1" label="Temperature" units="C" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="24.65" />
-				<Value type="decimal" genre="user" instance="1" index="3" label="Luminance" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="0.87" />
-				<Value type="decimal" genre="user" instance="1" index="5" label="Relative Humidity" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="61.80" />
+				<Value type="decimal" genre="user" instance="1" index="1" label="Temperature" units="C" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="25.09" />
+				<Value type="decimal" genre="user" instance="1" index="3" label="Luminance" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="72.82" />
+				<Value type="decimal" genre="user" instance="1" index="5" label="Relative Humidity" units="%" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="61.42" />
 			</CommandClass>
 			<CommandClass id="90" name="COMMAND_CLASS_DEVICE_RESET_LOCALLY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -6094,7 +6095,7 @@
 			</CommandClass>
 			<CommandClass id="48" name="COMMAND_CLASS_SENSOR_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Sensor" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
 				<SensorMap index="0" type="255" />
 			</CommandClass>
 			<CommandClass id="90" name="COMMAND_CLASS_DEVICE_RESET_LOCALLY" version="1">
@@ -6114,7 +6115,7 @@
 				<Value type="byte" genre="user" instance="1" index="0" label="Alarm Type" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 				<Value type="byte" genre="user" instance="1" index="1" label="Alarm Level" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 				<Value type="byte" genre="user" instance="1" index="2" label="SourceNodeId" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
-				<Value type="byte" genre="user" instance="1" index="9" label="Access Control" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="23" />
+				<Value type="byte" genre="user" instance="1" index="9" label="Access Control" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="22" />
 				<Value type="byte" genre="user" instance="1" index="10" label="Burglar" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 				<Value type="byte" genre="user" instance="1" index="11" label="Power Management" units="" read_only="true" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="255" value="0" />
 			</CommandClass>
@@ -6199,7 +6200,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -6309,7 +6310,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -6551,7 +6552,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
@@ -6661,7 +6662,7 @@
 			</CommandClass>
 			<CommandClass id="37" name="COMMAND_CLASS_SWITCH_BINARY" version="1" request_flags="4" innif="true">
 				<Instance index="1" />
-				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="True" />
+				<Value type="bool" genre="user" instance="1" index="0" label="Switch" units="" read_only="false" write_only="false" verify_changes="false" poll_intensity="0" min="0" max="0" value="False" />
 			</CommandClass>
 			<CommandClass id="39" name="COMMAND_CLASS_SWITCH_ALL" version="1" request_flags="4" innif="true">
 				<Instance index="1" />

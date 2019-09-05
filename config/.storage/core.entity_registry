@@ -2970,6 +2970,285 @@
                 "name": "Shed Fan",
                 "platform": "zwave",
                 "unique_id": "113-72057595938570241"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "zwave.ge_12722_on_off_relay_switch",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "node-22"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "73a7e92726fb4d78bb9eb17c1d1a3d36",
+                "disabled_by": null,
+                "entity_id": "switch.ge_12722_on_off_relay_switch_switch",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "22-72057594411827200"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "1f53e0344ac6428c90245404af94ef45",
+                "disabled_by": null,
+                "entity_id": "sensor.vision_zp3111_multisensor_4in1_general",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "106-72057595821309986"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "1f53e0344ac6428c90245404af94ef45",
+                "disabled_by": null,
+                "entity_id": "sensor.vision_zp3111_multisensor_4in1_barometric_pressure",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "106-72057595821310098"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_temp_temp_temp_thwr800_f7_temperature",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "temp_temp_thwr800_f7"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_battery_temp_battery_thwr800_f7_battery",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "temp_battery_thwr800_f7"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_group_x10_group_o16",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "x10_group_o16"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_device_x10_device_o16",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "x10_device_o16"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_command_x10_command_o16",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "x10_command_o16"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_speed_rain_speed_pcr800_eb_rate",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "rain_speed_pcr800_eb"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_total_rain_total_pcr800_eb_total",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "rain_total_pcr800_eb"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_battery_rain_battery_pcr800_eb_battery",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "rain_battery_pcr800_eb"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_dir_wind_dir_wtgr800_1f_direction",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "wind_dir_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_speed_wind_speed_wtgr800_1f_gust",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "wind_speed_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_avgspeed_wind_avgspeed_wtgr800_1f_average",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "wind_avgspeed_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_battery_wind_battery_wtgr800_1f_battery",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "wind_battery_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_group_x10_group_o15",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "x10_group_o15"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_device_x10_device_o15",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "x10_device_o15"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_command_x10_command_o15",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "x10_command_o15"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.pool_temperature",
+                "name": "Pool Temperature",
+                "platform": "rfxcom_rx",
+                "unique_id": "temp_temp_f007pf_02"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_temp_temp_temp_wtgr800_1f_temperature",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "temp_temp_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_humidity_temp_humidity_wtgr800_1f_humidity",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "temp_humidity_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_battery_temp_battery_wtgr800_1f_battery",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "temp_battery_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "zwave.ecolink_door_window_sensor",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "node-116"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "ebcde5fbd91e4b8883008e2e3aeca825",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_sourcenodeid_14",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "116-72057595990130721"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "ebcde5fbd91e4b8883008e2e3aeca825",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_access_control_8",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "116-72057595990130833"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "ebcde5fbd91e4b8883008e2e3aeca825",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_burglar_14",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "116-72057595990130849"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "ebcde5fbd91e4b8883008e2e3aeca825",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_power_management_8",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "116-72057595990130865"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "ebcde5fbd91e4b8883008e2e3aeca825",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_alarm_type_2",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "116-72057595990130689"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "ebcde5fbd91e4b8883008e2e3aeca825",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_alarm_level_2",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "116-72057595990130705"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "ebcde5fbd91e4b8883008e2e3aeca825",
+                "disabled_by": null,
+                "entity_id": "binary_sensor.patio_gate",
+                "name": "Patio Gate",
+                "platform": "zwave",
+                "unique_id": "116-72057595989065728"
             }
         ]
     },

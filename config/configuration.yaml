@@ -13,7 +13,7 @@ homeassistant:
   # Customization file
   customize: !include customize.yaml
 
-  #packages: !include_dir_named packages
+  packages: !include_dir_named packages
 
 lovelace:
   mode: yaml

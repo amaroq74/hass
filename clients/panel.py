@@ -91,15 +91,18 @@ CamList = { 'Garage'   : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monit
             'Side'     : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=5&scale=100&maxfps=1&user=home&pass=monitor",
             'Chickens' : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=6&scale=100&maxfps=1&user=home&pass=monitor"}
 
-DoorList = [{'label':'Ped<br/>Gate',      'key':'binary_sensor.ped_gate',      'box':None },
-            {'label':'Car<br/>Gate',      'key':'switch.car_gate',             'box':None },
-            {'label':'Chickens<br/>Gate', 'key':'binary_sensor.chickens_gate', 'box':None },
-            {'label':'Ivy<br/>Gate',      'key':'binary_sensor.ivy_gate',      'box':None },
-            {'label':'Garbage<br/>Gate',  'key':'binary_sensor.garbage_gate',  'box':None },
-            {'label':'Garage<br/>Door',   'key':'switch.garage_door',          'box':None },
-            {'label':'Office<br/>Door',   'key':'binary_sensor.office_door',   'box':None },
-            {'label':'Bath<br/>Door',     'key':'binary_sensor.pbath_door',    'box':None },
-            {'label':'Kitchen<br/>Door',  'key':'binary_sensor.kitchen_door',  'box':None }]
+DoorList = [{'label':'Ped<br/>Gate',      'key':'binary_sensor.ped_gate',      'color':Qt.red,    'box':None },
+            {'label':'Car<br/>Gate',      'key':'switch.car_gate',             'color':Qt.red,    'box':None },
+            {'label':'Ivy<br/>Gate',      'key':'binary_sensor.ivy_gate',      'color':Qt.red,    'box':None },
+            {'label':'Garbage<br/>Gate',  'key':'binary_sensor.garbage_gate',  'color':Qt.red,    'box':None },
+            {'label':'Patio<br/>Gate',    'key':'binary_sensor.patio_gate',    'color':Qt.red,    'box':None },
+            {'label':'Garage<br/>Door',   'key':'switch.garage_door',          'color':Qt.red,    'box':None },
+            {'label':'Office<br/>Door',   'key':'binary_sensor.office_door',   'color':Qt.red,    'box':None },
+            {'label':'Bath<br/>Door',     'key':'binary_sensor.pbath_door',    'color':Qt.red,    'box':None },
+            {'label':'Kitchen<br/>Door',  'key':'binary_sensor.kitchen_door',  'color':Qt.red,    'box':None },
+            {'label':'Chicken<br/>Gate',  'key':'binary_sensor.chickens_gate', 'color':Qt.yellow, 'box':None },
+            {'label':'Shed<br/>Door',     'key':'binary_sensor.shed_door',     'color':Qt.yellow, 'box':None },
+            {'label':'Dining<br/>Door',   'key':'binary_sensor.dining_door',   'color':Qt.yellow, 'box':None }]
 
 class WindChart(QWidget):
     def __init__(self, db, parent=None):
@@ -208,6 +211,8 @@ class DoorWindow(QWidget):
         self.db = db
 
         gl = QGridLayout()
+        gl.setHorizontalSpacing(0)
+        gl.setVerticalSpacing(0)
         idx = 0
 
         lfont = QFont()
@@ -215,17 +220,21 @@ class DoorWindow(QWidget):
         lfont.setBold(True)
 
         for sen in DoorList:
-            sen['box'] = QTextEdit(sen['label'])
+            sen['box'] = QLabel(sen['label'])
+
             sen['box'].setFont(lfont)
             sen['box'].setAlignment(Qt.AlignCenter | Qt.AlignVCenter)
-            sen['box'].setReadOnly(True)
+            sen['box'].setMinimumSize( QSize(70, 50) )
+            sen['box'].setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding);
 
             p = QPalette()
-            p.setColor(QPalette.Base,Qt.green)
-            p.setColor(QPalette.Text,Qt.black)
-            sen['box'].setPalette(p)  
+            p.setColor(QPalette.Window,Qt.green)
+            p.setColor(QPalette.WindowText,Qt.black)
 
-            gl.addWidget(sen['box'],idx/3,idx%3,1,1,Qt.AlignCenter)
+            sen['box'].setAutoFillBackground(True)
+            sen['box'].setPalette(p)
+
+            gl.addWidget(sen['box'],idx/3,(idx%3)*2,1,2,Qt.AlignCenter | Qt.AlignVCenter)
             idx += 1
 
         self.setLayout(gl)
@@ -235,12 +244,12 @@ class DoorWindow(QWidget):
             if sen['key'] == key:
 
                 p = QPalette()
-                p.setColor(QPalette.Text,Qt.black)
+                p.setColor(QPalette.WindowText,Qt.black)
 
                 if value == 'on':
-                    p.setColor(QPalette.Base,Qt.red)
+                    p.setColor(QPalette.Window,sen['color'])
                 else:
-                    p.setColor(QPalette.Base,Qt.green)
+                    p.setColor(QPalette.Window,Qt.green)
                 sen['box'].setPalette(p)
 
 class StatusWindow(QWidget):

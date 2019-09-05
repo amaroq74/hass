@@ -98,6 +98,7 @@ views:
           - binary_sensor.garbage_gate
           - binary_sensor.chickens_gate
           - binary_sensor.ivy_gate
+          - binary_sensor.patio_gate
       - type: entities
         title: Doors
         show_header_toggle: false
