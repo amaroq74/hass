@@ -102,7 +102,7 @@ DoorList = [{'label':'Ped<br/>Gate',      'key':'binary_sensor.ped_gate',      '
             {'label':'Kitchen<br/>Door',  'key':'binary_sensor.kitchen_door',  'color':Qt.red,    'box':None },
             {'label':'Chicken<br/>Gate',  'key':'binary_sensor.chickens_gate', 'color':Qt.yellow, 'box':None },
             {'label':'Shed<br/>Door',     'key':'binary_sensor.shed_door',     'color':Qt.yellow, 'box':None },
-            {'label':'Dining<br/>Door',   'key':'binary_sensor.dining_door',   'color':Qt.yellow, 'box':None }]
+            {'label':'Garage<br/>R Door', 'key':'binary_sensor.garage_rdoor',  'color':Qt.yellow, 'box':None }]
 
 class WindChart(QWidget):
     def __init__(self, db, parent=None):
@@ -224,7 +224,7 @@ class DoorWindow(QWidget):
 
             sen['box'].setFont(lfont)
             sen['box'].setAlignment(Qt.AlignCenter | Qt.AlignVCenter)
-            sen['box'].setMinimumSize( QSize(70, 50) )
+            sen['box'].setMinimumSize( QSize(80, 50) )
             sen['box'].setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding);
 
             p = QPalette()
