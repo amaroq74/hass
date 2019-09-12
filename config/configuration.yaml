@@ -32,6 +32,15 @@ vacuum:
      username: !secret roomba_user
      password: !secret roomba_pass
 
+sonoff:
+  username: !secret sonoff_user
+  password: !secret sonoff_pass
+  scan_interval: 60 
+  grace_period: 600 
+  api_region: 'us'
+  entity_prefix: True 
+  debug: False 
+
 # Show links to resources in log and frontend
 #introduction:
 
@@ -375,6 +384,7 @@ cloud:
         - switch.pool_main
         - switch.pool_sweep
         - switch.patio_fountain
+        - switch.sonoff_10008c19be
         - input_boolean.dcare_bell
         - input_boolean.door_alarm
         - input_boolean.house_alarm

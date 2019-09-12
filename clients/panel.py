@@ -84,12 +84,12 @@ StatusList = [ {'label':'Out Temp',     'key':'sensor.outdoor_temperature',  'co
                {'label':'Pool Temp',    'key':'sensor.pool_temperature',     'conv':disp_temp,      'box':None } ]
 
 # Camera List
-CamList = { 'Garage'   : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=4&scale=100&maxfps=2&user=home&pass=monitor",
-            'Gate'     : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=1&scale=100&maxfps=2&user=home&pass=monitor",
+CamList = { 'Garage'   : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=15&scale=100&maxfps=2&user=home&pass=monitor",
+            'Gate'     : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=13&scale=100&maxfps=2&user=home&pass=monitor",
             'Front'    : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=8&scale=100&maxfps=2&user=home&pass=monitor",
-            'Rear'     : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=3&scale=100&maxfps=1&user=home&pass=monitor",
-            'Side'     : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=5&scale=100&maxfps=1&user=home&pass=monitor",
-            'Chickens' : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=6&scale=100&maxfps=1&user=home&pass=monitor"}
+            'Rear'     : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=14&scale=100&maxfps=1&user=home&pass=monitor",
+            'Side'     : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=11&scale=100&maxfps=1&user=home&pass=monitor",
+            'Chickens' : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=10&scale=100&maxfps=1&user=home&pass=monitor"}
 
 DoorList = [{'label':'Ped<br/>Gate',      'key':'binary_sensor.ped_gate',      'color':Qt.red,    'box':None },
             {'label':'Car<br/>Gate',      'key':'switch.car_gate',             'color':Qt.red,    'box':None },

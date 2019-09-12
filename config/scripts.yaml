@@ -79,7 +79,7 @@ flower_box_sprinklers:
     data:
       entity_id: switch.front_flowers
     service: switch.turn_on
-  - delay: "00:{{ states('input_number.front_flowers_duration')|int }}:00"
+  - delay: "00:{{ states('input_number.front_flower_box_duration')|int }}:00"
   - alias: Front Flowers Off
     data:
       entity_id: switch.front_flowers

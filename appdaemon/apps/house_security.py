@@ -29,10 +29,14 @@ Sounds = { 'gate_bell':  'doorbell.wav',
            'dcare_bell': 'short_beep.wav' }
 
 CamTime = 120
-Cameras = { 'gate_cam'   : zm_camera.ZmCamera('1'),
-            'front_cam'  : zm_camera.ZmCamera('8'),
-            'garage_cam' : zm_camera.ZmCamera('4'),
-            'side_cam'   : zm_camera.ZmCamera('5') }
+Cameras = { 'gatel_cam'   : zm_camera.ZmCamera('13'),
+            'frontl_cam'  : zm_camera.ZmCamera('8'),
+            'garagel_cam' : zm_camera.ZmCamera('15'),
+            'sidel_cam'   : zm_camera.ZmCamera('11'),
+            'gate_cam'    : zm_camera.ZmCamera('16'),
+            'front_cam'   : zm_camera.ZmCamera('7'),
+            'garage_cam'  : zm_camera.ZmCamera('18'),
+            'side_cam'   : zm_camera.ZmCamera('12') }
 
 Lights = { 'auto_light' : ['switch.gate_light', 
                            #'switch.xmas_lights', 
@@ -54,20 +58,20 @@ EmailAddrs = 'ryan@amaroq.com'
 # Sensor Setup
 ##################################
 # Setup sensors
-SecSensors = { 'binary_sensor.ped_gate'      : [ 'gate_bell',   'dcare_bell',  'gate_cam',    'front_cam',  'night_alarm', 'auto_light' ],
-               'switch.car_gate'             : [ 'gate_bell',   'dcare_bell',  'gate_cam',    'front_cam',  'night_alarm', 'auto_light' ],
-               'switch.garage_door'          : [ 'dcare_bell',  'garage_cam',  'night_alarm', 'door_alarm'  ],
-               'binary_sensor.gate_bell'     : [ 'door_bell',   'gate_cam',    'front_cam',   'auto_light'  ],
-               'binary_sensor.door_bell'     : [ 'door_bell',   'gate_cam',    'front_cam',   'auto_light'  ],
-               'binary_sensor.family_door'   : [ 'front_cam',   'garage_cam',  'night_alarm', 'door_alarm'  ],
-               'binary_sensor.front_door'    : [ 'front_cam',   'night_alarm', 'door_alarm'   ],
+SecSensors = { 'binary_sensor.ped_gate'      : [ 'gate_bell',   'dcare_bell',  'gate_cam',    'front_cam',   'gatel_cam', 'frontl_cam', 'night_alarm', 'auto_light' ],
+               'switch.car_gate'             : [ 'gate_bell',   'dcare_bell',  'gate_cam',    'front_cam',   'gatel_cam', 'frontl_cam', 'night_alarm', 'auto_light' ],
+               'switch.garage_door'          : [ 'dcare_bell',  'garage_cam',  'garagel_cam', 'night_alarm', 'door_alarm'  ],
+               'binary_sensor.gate_bell'     : [ 'door_bell',   'gate_cam',    'front_cam',   'gatel_cam',   'frontl_cam', 'auto_light'  ],
+               'binary_sensor.door_bell'     : [ 'door_bell',   'gate_cam',    'front_cam',   'gatel_cam',   'frontl_cam', 'auto_light'  ],
+               'binary_sensor.family_door'   : [ 'front_cam',   'frontl_cam',  'garage_cam',  'garagel_cam', 'night_alarm', 'door_alarm'  ],
+               'binary_sensor.front_door'    : [ 'front_cam',   'frontl_cam',  'night_alarm', 'door_alarm'   ],
                'binary_sensor.pbath_door'    : [ 'dcare_bell',  'night_alarm', 'door_alarm'   ],
                'binary_sensor.kitchen_door'  : [ 'night_alarm', 'door_alarm'   ],
                'binary_sensor.dining_door'   : [ 'night_alarm', 'door_alarm'   ],
                'binary_sensor.garage_rdoor'  : [ 'night_alarm', 'door_alarm'   ],
-               'binary_sensor.garbage_gate'  : [ 'dcare_bell',  'garage_cam'   ],
-               'binary_sensor.patio_gate'    : [ 'dcare_bell',  'side_cam'     ],
-               'binary_sensor.chickens_gate' : [ 'side_cam'     ],
+               'binary_sensor.garbage_gate'  : [ 'dcare_bell',  'garage_cam', 'garagel_cam' ],
+               'binary_sensor.patio_gate'    : [ 'dcare_bell',  'side_cam',   'sidel_cam'   ],
+               'binary_sensor.chickens_gate' : [ 'side_cam',    'sidel_cam'    ],
                'binary_sensor.office_door'   : [ 'dcare_bell'   ],
                'binary_sensor.ivy_gate'      : [ 'dcare_bell'   ],
                'binary_sensor.bedta_motion'  : [ 'house_alarm'  ],
@@ -258,9 +262,9 @@ class HouseSecurity(hass.Hass):
                         'filtering'    : '',
                         'MonitorName'  : '',
                         'Source'       : '',
-                        'MonitorId[0]' : '1',
+                        'MonitorId[0]' : '13',
                         'MonitorId[1]' : '8',
-                        'MonitorId[2]' : '4' }
+                        'MonitorId[2]' : '15' }
 
             text += '<a href=https://www.amaroq.net/zm/index.php?{}>Front Yard</a><br><p>\n'.format(urlencode(urlData))
 
@@ -268,8 +272,8 @@ class HouseSecurity(hass.Hass):
                         'filtering'    : '',
                         'MonitorName'  : '',
                         'Source'       : '',
-                        'MonitorId[0]' : '3',
-                        'MonitorId[1]' : '5' }
+                        'MonitorId[0]' : '11',
+                        'MonitorId[1]' : '14' }
 
             text += '<a href=https://www.amaroq.net/zm/index.php?{}>Back Yard</a><br><p>\n'.format(urlencode(urlData))
 
