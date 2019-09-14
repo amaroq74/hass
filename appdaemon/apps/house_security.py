@@ -36,7 +36,7 @@ Cameras = { 'gatel_cam'   : zm_camera.ZmCamera('13'),
             'gate_cam'    : zm_camera.ZmCamera('16'),
             'front_cam'   : zm_camera.ZmCamera('7'),
             'garage_cam'  : zm_camera.ZmCamera('18'),
-            'side_cam'   : zm_camera.ZmCamera('12') }
+            'side_cam'    : zm_camera.ZmCamera('12') }
 
 Lights = { 'auto_light' : ['switch.gate_light', 
                            #'switch.xmas_lights', 
@@ -73,7 +73,7 @@ SecSensors = { 'binary_sensor.ped_gate'      : [ 'gate_bell',   'dcare_bell',  '
                'binary_sensor.patio_gate'    : [ 'dcare_bell',  'side_cam',   'sidel_cam'   ],
                'binary_sensor.chickens_gate' : [ 'side_cam',    'sidel_cam'    ],
                'binary_sensor.office_door'   : [ 'dcare_bell'   ],
-               'binary_sensor.ivy_gate'      : [ 'dcare_bell'   ],
+               'binary_sensor.ivy_gate'      : [ 'dcare_bell',  'rear_cam', 'rearl_cam'],
                'binary_sensor.bedta_motion'  : [ 'house_alarm'  ],
                'binary_sensor.bedr_motion'   : [ 'house_alarm'  ],
                'binary_sensor.living_motion' : [ 'house_alarm'  ],

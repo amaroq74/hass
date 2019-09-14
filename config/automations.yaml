@@ -35,7 +35,7 @@
   alias: Chicken Coop Open
   trigger:
   - event: sunrise
-    offset: +00:00:00
+    offset: -00:30:00
     platform: sun
   action:
   - data:
@@ -46,7 +46,7 @@
   alias: Chicken Coop Close
   trigger:
   - event: sunset
-    offset: +01:00:00
+    offset: +00:30:00
     platform: sun
   action:
   - data:
