@@ -735,10 +735,10 @@ class Panel(QWidget):
         qbox.setSpacing(0)
         qbox.setContentsMargins(0,0,0,0)
 
-        qbox.addWidget(self.forecast,0,0,1,4, Qt.AlignCenter | Qt.AlignVCenter)
-        qbox.addWidget(self.temp,1,0,2,1, Qt.AlignCenter | Qt.AlignVCenter)
-        qbox.addWidget(self.wind,3,0,2,1, Qt.AlignCenter | Qt.AlignVCenter)
-        qbox.addWidget(self.door,5,0,2,1, Qt.AlignCenter | Qt.AlignVCenter)
+        qbox.addWidget(self.forecast,0,0,1,4)
+        qbox.addWidget(self.temp,1,0,2,1)
+        qbox.addWidget(self.wind,3,0,2,1)
+        qbox.addWidget(self.door,5,0,2,1)
                                              #  R  C  RS CS
         qbox.addWidget(self.camWin['Gate'],     1, 1, 4, 2, Qt.AlignCenter | Qt.AlignVCenter)
         qbox.addWidget(self.camWin['Garage'],   5, 1, 2, 1, Qt.AlignCenter | Qt.AlignVCenter)

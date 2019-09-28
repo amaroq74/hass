@@ -32,14 +32,9 @@ vacuum:
      username: !secret roomba_user
      password: !secret roomba_pass
 
-sonoff:
-  username: !secret sonoff_user
-  password: !secret sonoff_pass
-  scan_interval: 60 
-  grace_period: 600 
-  api_region: 'us'
-  entity_prefix: True 
-  debug: False 
+mqtt:
+   broker: 127.0.0.1
+
 
 # Show links to resources in log and frontend
 #introduction:
@@ -821,6 +816,14 @@ switch:
         timeout: 36000
         iconon: 'mdi:pool'
         iconoff: 'mdi:pool'
+  - platform: mqtt
+    name: "Test Switch"
+    state_topic: stat/testswitch/POWER
+    command_topic: cmnd/testswitch/POWER
+  - platform: mqtt
+    name: "Coop Door"
+    state_topic: stat/coop/POWER
+    command_topic: cmnd/coop/POWER
 
 climate:
   - platform: generic_thermostat

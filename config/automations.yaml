@@ -31,26 +31,26 @@
       entity_id: switch.patio_sec1
     service: switch.turn_on
 
-- id: chicken_coop_open
-  alias: Chicken Coop Open
+- id: coop_door_open
+  alias: Coop Door Open
   trigger:
   - event: sunrise
     offset: -00:30:00
     platform: sun
   action:
   - data:
-      entity_id: switch.sonoff_10008c19be
+      entity_id: switch.coop_door
     service: switch.turn_on
 
-- id: chicken_coop_close
-  alias: Chicken Coop Close
+- id: coop_door_close
+  alias: Coop Door Close
   trigger:
   - event: sunset
     offset: +00:30:00
     platform: sun
   action:
   - data:
-      entity_id: switch.sonoff_10008c19be
+      entity_id: switch.coop_door
     service: switch.turn_off
 
 - id: pool_pump_timer
