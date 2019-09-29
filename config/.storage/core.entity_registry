@@ -3015,6 +3015,177 @@
                 "name": "Patio Gate",
                 "platform": "zwave",
                 "unique_id": "116-72057595989065728"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_temp_temp_temp_thwr800_f7_temperature",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "temp_temp_thwr800_f7"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_battery_temp_battery_thwr800_f7_battery",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "temp_battery_thwr800_f7"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.wind_battery",
+                "name": "Wind Battery",
+                "platform": "rfxcom_rx",
+                "unique_id": "wind_battery_wgr800_71"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.wind_average",
+                "name": "Wind Average",
+                "platform": "rfxcom_rx",
+                "unique_id": "wind_avgspeed_wgr800_71"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.wind_gust",
+                "name": "Wind Gust",
+                "platform": "rfxcom_rx",
+                "unique_id": "wind_speed_wgr800_71"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.wind_direction",
+                "name": "Wind Direction",
+                "platform": "rfxcom_rx",
+                "unique_id": "wind_dir_wgr800_71"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_dir_wind_dir_wtgr800_1f_direction",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "wind_dir_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_speed_wind_speed_wtgr800_1f_gust",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "wind_speed_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_avgspeed_wind_avgspeed_wtgr800_1f_average",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "wind_avgspeed_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_battery_wind_battery_wtgr800_1f_battery",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "wind_battery_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_speed_rain_speed_pcr800_eb_rate",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "rain_speed_pcr800_eb"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_total_rain_total_pcr800_eb_total",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "rain_total_pcr800_eb"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_battery_rain_battery_pcr800_eb_battery",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "rain_battery_pcr800_eb"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_temp_temp_temp_wtgr800_1f_temperature",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "temp_temp_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_humidity_temp_humidity_wtgr800_1f_humidity",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "temp_humidity_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_battery_temp_battery_wtgr800_1f_battery",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "temp_battery_wtgr800_1f"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.rain_total",
+                "name": "Rain Total",
+                "platform": "rfxcom_rx",
+                "unique_id": "rain_total_pcr800_ac"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.rain_battery",
+                "name": "Rain Battery",
+                "platform": "rfxcom_rx",
+                "unique_id": "rain_battery_pcr800_ac"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.rain_rate",
+                "name": "Rain Rate",
+                "platform": "rfxcom_rx",
+                "unique_id": "rain_speed_pcr800_ac"
             }
         ]
     },
