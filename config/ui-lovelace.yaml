@@ -134,6 +134,12 @@ views:
           - input_boolean.door_alarm
           - input_boolean.house_alarm
       - type: picture-entity
+        title: Garage
+        entity: camera.garage
+        camera_image: camera.garage
+        show_info: true
+        tap_action: dialog
+      - type: picture-entity
         title: Gate
         entity: camera.gate
         camera_image: camera.gate
@@ -141,14 +147,8 @@ views:
         tap_action: dialog
       - type: picture-entity
         title: Front
-        entity: camera.frontlr
+        entity: camera.front
         camera_image: camera.front
-        show_info: true
-        tap_action: dialog
-      - type: picture-entity
-        title: Garage
-        entity: camera.garage
-        camera_image: camera.garage
         show_info: true
         tap_action: dialog
       - type: picture-entity
