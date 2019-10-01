@@ -391,31 +391,26 @@ camera:
     still_image_url: "http://nvr.amaroq.net/cgi-bin/api.cgi?cmd=Snap&channel=0&rs=<random_string_of_characters_and_numbers>&user=view&password=view123"
     stream_source: "rtsp://view:view123@nvr.amaroq.net:554/hh264Preview_1_sub"
 
-camera:    
   - platform: generic
     name: Gate
     still_image_url: "http://nvr.amaroq.net/cgi-bin/api.cgi?cmd=Snap&channel=1&rs=<random_string_of_characters_and_numbers>&user=view&password=view123"
     stream_source: "rtsp://view:view123@nvr.amaroq.net:554/hh264Preview_2_sub"
 
-camera:    
   - platform: generic
     name: Front
     still_image_url: "http://nvr.amaroq.net/cgi-bin/api.cgi?cmd=Snap&channel=2&rs=<random_string_of_characters_and_numbers>&user=view&password=view123"
     stream_source: "rtsp://view:view123@nvr.amaroq.net:554/hh264Preview_3_sub"
 
-camera:    
   - platform: generic
     name: Rear
     still_image_url: "http://nvr.amaroq.net/cgi-bin/api.cgi?cmd=Snap&channel=3&rs=<random_string_of_characters_and_numbers>&user=view&password=view123"
     stream_source: "rtsp://view:view123@nvr.amaroq.net:554/hh264Preview_4_sub"
 
-camera:    
   - platform: generic
     name: Side
     still_image_url: "http://nvr.amaroq.net/cgi-bin/api.cgi?cmd=Snap&channel=4&rs=<random_string_of_characters_and_numbers>&user=view&password=view123"
     stream_source: "rtsp://view:view123@nvr.amaroq.net:554/hh264Preview_5_sub"
 
-camera:    
   - platform: generic
     name: Chickens
     still_image_url: "http:/view:view@seccam6.amaroq.net/image.cgi"
