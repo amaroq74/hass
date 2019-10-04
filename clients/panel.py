@@ -408,6 +408,7 @@ class CamImage(QWidget):
 
         self.url = url
         self.time = time.time()
+        self.cnt = 0
 
         vb = QVBoxLayout()
         self.setLayout(vb)
@@ -438,16 +439,18 @@ class CamImage(QWidget):
 
                     self.label.setPixmap(QPixmap.fromImage(p))
                     self.label.update()
+                    self.cnt += 1
 
-                    time.sleep(0.1)
+                    time.sleep(0.50)
                     ret, frame = cap.read()
 
             except Exception as e:
                 eprint("got camera exception: {}".format(e))
 
-            time.sleep(1)
+            cap = None
+            eprint("Restarting {}. Processed {} frames in {} seconds.".format(self.url,self.cnt,(time.time() - self.time)))
+            time.sleep(5)
             self.time = time.time()
-            eprint("Restarting {}".format(self.url))
 
 class HassListener(QThread):
 
