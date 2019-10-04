@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
 
+ferr = open("/amaroq/home/media-family/panel.log","a")
+
+def eprint(*args, **kwargs):
+    global ferr
+    print(*args, file=ferr, **kwargs)
+    ferr.flush()
+
+eprint("----------------------- Starting ----------------------------")
+
 # Add relative path
 import sys,datetime
 sys.path.append('/amaroq/hass/pylib')
@@ -13,12 +22,13 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore    import *
 from PyQt5.QtGui     import *
 from PyQt5.QtWebKit  import *
+import PyQt5
 
 import matplotlib
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
-import urllib
+import urllib.request
 import xml.etree.ElementTree as ET
 
 from subprocess import call
@@ -26,6 +36,11 @@ from subprocess import call
 import json
 import yaml
 from websocket import create_connection
+
+import vlc
+import threading
+import cv2
+
 
 # Display functions
 def disp_temp(val, box):
@@ -82,14 +97,6 @@ StatusList = [ {'label':'Out Temp',     'key':'sensor.outdoor_temperature',  'co
                {'label':'Camper Temp',  'key':'sensor.camper_temperature',   'conv':disp_temp,      'box':None },
                {'label':'Chicken Temp', 'key':'sensor.chickens_temperature', 'conv':disp_temp,      'box':None },
                {'label':'Pool Temp',    'key':'sensor.pool_temperature',     'conv':disp_temp,      'box':None } ]
-
-# Camera List
-CamList = { 'Garage'   : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=20&scale=100&maxfps=5&user=home&pass=monitor",
-            'Gate'     : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=21&scale=100&maxfps=5&user=home&pass=monitor",
-            'Front'    : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=22scale=100&maxfps=5&user=home&pass=monitor",
-            'Rear'     : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=23&scale=100&maxfps=1&user=home&pass=monitor",
-            'Side'     : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=24&scale=100&maxfps=1&user=home&pass=monitor",
-            'Chickens' : "https://www.amaroq.net/cgi-bin/nph-zms?mode=jpeg&monitor=10&scale=100&maxfps=1&user=home&pass=monitor"}
 
 DoorList = [{'label':'Ped<br/>Gate',      'key':'binary_sensor.ped_gate',      'color':Qt.red,    'box':None },
             {'label':'Car<br/>Gate',      'key':'switch.car_gate',             'color':Qt.red,    'box':None },
@@ -262,10 +269,10 @@ class StatusWindow(QWidget):
         idx = 0
 
         lfont = QFont()
-        lfont.setPointSize(16)
+        lfont.setPointSize(14)
         lfont.setBold(True)
         vfont = QFont()
-        vfont.setPointSize(14)
+        vfont.setPointSize(12)
         vfont.setBold(True)
 
         for sen in StatusList:
@@ -372,245 +379,75 @@ class ForecastWindow(QWidget):
                     self.dayLabel[per].update()
 
         except Exception as e:
-            print("got forecast exception: {}".format(e))
+            eprint("go forecast exception: {}".format(e))
 
         QTimer.singleShot(10 * 60 * 1000,self.refreshForecast) # 15 minutes
 
-class CamListener(QThread):
+#class CamVlc(QWidget):
+#    def __init__(self, width, height, url, parent=None):
+#        super(CamVlc, self).__init__(parent)
+#
+#        self.setFixedSize(width,height)
+#
+#        self.vlc = vlc.Instance(['--video-on-top', '--no-audio'])
+#
+#        self.video = QFrame()
+#
+#        self.player = self.vlc.media_player_new()
+#        self.player.audio_set_mute(True)
+#        self.player.set_mrl(url)
+#        self.player.set_xwindow(int(self.winId()))
+#        self.player.play()
 
-    newFrame = pyqtSignal(str,object)
+class CamImage(QWidget):
+    def __init__(self, width, height, url, parent=None):
+        super(CamImage, self).__init__(parent)
 
-    def __init__(self, db, camName, parent=None):
-        QThread.__init__(self,parent)
+        self.height=height
+        self.width=width
 
-        self.db = db
-        self._camName = camName
-        self._pause = False
-        self._last = time.time()
-        self._fh   = None
+        self.url = url
+        self.time = time.time()
 
-        # Start threads
-        self._runEnable = True
-        self.start()
-        self.selfCheck()
+        vb = QVBoxLayout()
+        self.setLayout(vb)
 
-    def halt(self):
-        self._runEnable = False
+        self.label = QLabel()
+        self.label.setFixedSize(width,height)
+        self.label.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Fixed)
 
-    def pause(self):
-        self._pause = True
-        self._fh.close()
-        self._fh = None
+        vb.addWidget(self.label)
 
-    def resume(self):
-        self._pause = False
+        self.thread=threading.Thread(target=self.refresh)
+        self.thread.start()
 
-    def selfCheck(self):
-        if self._fh != None and (time.time() - self._last) > 60:
-            try:
-                self._fh.close()
-            except:
-                pass
-            self._fh = None
-            time.sleep(1)
-
-        QTimer.singleShot(60000,self.selfCheck) # One minute
-
-    def run(self):
-
-        while self._runEnable:
-
+    def refresh(self):
+        while True:
             try:
 
-                if self._pause:
-                    if self._fh != None: self._fh.close()
-                    self._fh = None
+                cap = cv2.VideoCapture(self.url) # it can be rtsp or http stream
+                ret, frame = cap.read()
 
-                    while self._pause:
-                        self._last = time.time()
-                        time.sleep(1)
+                while ret and ((time.time() - self.time) < 300):
+                    rgbImage = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-                if self._fh == None:
-                    self._last = time.time()
-                    self._fh = urllib.request.urlopen(CamList[self._camName])
+                    h, w, ch = rgbImage.shape
+                    bytesPerLine = ch * w
+                    convertToQtFormat = PyQt5.QtGui.QImage(rgbImage.data, w, h, bytesPerLine, PyQt5.QtGui.QImage.Format_RGB888)
+                    p = convertToQtFormat.scaled(self.width, self.height, Qt.KeepAspectRatio)
 
-                # Find marker
-                d = self._fh.readline()
-                while d.decode('utf-8').rstrip() != '--ZoneMinderFrame': 
-                    d = self._fh.readline()
+                    self.label.setPixmap(QPixmap.fromImage(p))
+                    self.label.update()
 
-                # Skip lines and extract length
-                self._fh.readline()
-                count = int(self._fh.readline().decode('utf-8').rstrip().split(':')[1])
-                self._fh.readline()
-
-                # Read image
-                img = self._fh.read(count)
-                self._last = time.time()
-                self.newFrame.emit(self._camName,img)
+                    time.sleep(0.1)
+                    ret, frame = cap.read()
 
             except Exception as e:
-                print("got camera exception: {}".format(e))
-                try:
-                    self._fh.close()
-                    self._fh = None
-                except:
-                    pass
+                eprint("got camera exception: {}".format(e))
 
-class CamWindow(QWidget):
-    def __init__(self, height, camName, parent=None):
-        super(CamWindow, self).__init__(parent)
-
-        self.label   = QLabel()
-        self.height  = height
-        self.camName = camName
-        self.timeOut = 0
-
-        gr = QGridLayout()
-        gr.addWidget(self.label,0,0)
-        self.setLayout(gr)
-
-    def newFrame(self,camName,img):
-        if self.timeOut != 0 and time.time() > self.timeOut:
-            self.camName = 'popup'
-            self.timeOut = 0
-            self.close()
-
-        if self.camName == camName:
-            pixmap = QPixmap()
-            pixmap.loadFromData(img)
-            pixmap = pixmap.scaledToHeight(self.height)
-            self.label.setPixmap(pixmap)
-            self.label.update()
-
-#class ControlWindow(QDialog):
-#    def __init__(self,db,parent=None):
-#        super(ControlWindow,self).__init__(parent)
-#        self.db = db
-#
-#        vbox = QVBoxLayout()
-#        self.setLayout(vbox)
-#
-#        gl = QGridLayout()
-#        vbox.addLayout(gl)
-#
-#        # Thermostat Control
-#        col = 0
-#        self.addHeader(gl,0,col,'Thermostat')
-#        self.addVariable(gl,1,col,'House_Heat','setpoint','Set Point') 
-#
-#        # Get device list
-#        dList = self.db.getDeviceList()
-#        dListIdx = {dev['name']:dev for dev in dList}
-#
-#        # Light Control
-#        self.addHeader(gl,2,col,'Lights & Other')
-#        row = 3
-#        for dev in dList:
-#            if dev['category'] == 'Lights' or dev['category'] == 'Other' and dev['hidden'] == 0:
-#                self.addDevice(gl,row,col,dev)
-#                row += 1
-#
-#        # Pool Controls
-#        col = 7
-#        row = 0
-#        self.addHeader(gl,row,col,'Pool')
-#        self.addDevice(gl,row+1,col,dListIdx['Pool_Main'])
-#        self.addDevice(gl,row+2,col,dListIdx['Pool_Sweep'])
-#        self.addVariable(gl,row+3,col,'Pool_Heat','setpoint','Set Point')
-#
-#        # Garage and gate
-#        self.addHeader(gl,row+4,col,'Garage & Gate')
-#        self.addDevice(gl,row+5,col,dListIdx['Car_Gate'])
-#        self.addDevice(gl,row+6,col,dListIdx['Garage_Door'])
-#
-#        # Irrigation
-#        row = 7
-#        self.addHeader(gl,row,col,'Irrigation')
-#        row += 1
-#        for dev in dList:
-#            if dev['category'] == 'Irrigation' and dev['hidden'] == 0:
-#                self.addDevice(gl,row,col,dev)
-#                row += 1
-#
-#        # Variables
-#        self.addHeader(gl,row,col,'Security')
-#
-#        self.addVariable(gl,row+1,col,'Security','dcare_arm','Dcare Arm') 
-#        self.addVariable(gl,row+2,col,'Security','house_arm','House Arm') 
-#        self.addVariable(gl,row+3,col,'Security','door_arm','Door Arm') 
-#
-#        cl = QPushButton('Close')
-#        cl.clicked.connect(self.accept)
-#        vbox.addWidget(cl)
-#
-#        self.setWindowTitle("Home Control")
-#
-#    def addVariable(self, lo, row, col, group, name, title):
-#        varInfo = self.db.getVariableInfo(group,name)
-#        lo.addWidget(QLabel(title), row, col, 1, 1, Qt.AlignRight)
-#        val = QSpinBox()
-#        val.setRange(varInfo['range_min'],varInfo['range_max'])
-#        val.setValue(varInfo['value'])
-#
-#        bset = QPushButton('Set')
-#        bset.clicked.connect(lambda: self.setVariable(group,name,val))
-#
-#        lo.addWidget (val, row, col+1, 1, 1, Qt.AlignHCenter )
-#        lo.addWidget (bset, row, col+2, 1, 1, Qt.AlignHCenter )
-#
-#    def addHeader(self, lo, row, col, text):
-#        lab = QLabel("<P><b><i><FONT COLOR='#0000FF' FONT SIZE = 4>%s</i></b></P>" % (text))
-#        lab.setFrameStyle(QFrame.Panel | QFrame.Sunken)
-#        lo.addWidget (lab, row, col, 1, 3, Qt.AlignHCenter)
-#
-#    def addDevice(self,lo, row,col,dev):
-#        lo.addWidget(QLabel(dev['name'] + ':'), row, col, 1, 1, Qt.AlignRight )
-#
-#        if dev['type'] == 'OnOff':
-#            on = QPushButton('On')
-#            on.clicked.connect(lambda: self.setDevice(dev['name'],100))
-#            lo.addWidget(on, row, col+1, 1, 1, Qt.AlignHCenter )
-#
-#            off = QPushButton('Off')
-#            off.clicked.connect(lambda: self.setDevice(dev['name'],0))
-#            lo.addWidget(off, row, col+2, 1, 1, Qt.AlignHCenter )
-#
-#        elif dev['type'] == 'OpenCloseToggle':
-#            on = QPushButton('Open')
-#            on.clicked.connect(lambda: self.setDevice(dev['name'],100))
-#            lo.addWidget(on, row, col+1, 1, 1, Qt.AlignHCenter )
-#
-#            off = QPushButton('Close')
-#            off.clicked.connect(lambda: self.setDevice(dev['name'],0))
-#            lo.addWidget(off, row, col+2, 1, 1, Qt.AlignHCenter )
-#
-#            tog = QPushButton('Toggle')
-#            tog.clicked.connect(lambda: self.setDevice(dev['name'],50))
-#            lo.addWidget(tog, row, col+3, 1, 1, Qt.AlignHCenter )
-#
-#        elif dev['type'] == 'Fan':
-#            on = QPushButton('Low')
-#            on.clicked.connect(lambda: self.setDevice(dev['name'],20))
-#            lo.addWidget(on, row, col+1, 1, 1, Qt.AlignHCenter )
-#
-#            off = QPushButton('Med')
-#            off.clicked.connect(lambda: self.setDevice(dev['name'],50))
-#            lo.addWidget(off, row, col+2, 1, 1, Qt.AlignHCenter )
-#
-#            off = QPushButton('High')
-#            off.clicked.connect(lambda: self.setDevice(dev['name'],50))
-#            lo.addWidget(off, row, col+3, 1, 1, Qt.AlignHCenter )
-#
-#            off = QPushButton('Off')
-#            off.clicked.connect(lambda: self.setDevice(dev['name'],100))
-#            lo.addWidget(off, row, col+4, 1, 1, Qt.AlignHCenter )
-#
-#    def setDevice(self,name,level):
-#        self.db.setDevice(name,level)
-#
-#    def setVariable(self,group,name,sbox):
-#        self.db.setVariable(group,name,sbox.value())
+            time.sleep(1)
+            self.time = time.time()
+            eprint("Restarting {}".format(self.url))
 
 class HassListener(QThread):
 
@@ -627,7 +464,7 @@ class HassListener(QThread):
 
     def _newValue(self,e):
         key = e['entity_id']
-        #print("{} = {}".format(key,e))
+        #eprint("{} = {}".format(key,e))
 
         if 'climate.' in key: 
             val = e['attributes']['temperature']
@@ -653,7 +490,7 @@ class HassListener(QThread):
                 e = d['event']['data']['new_state'] 
                 self._newValue(e)
         except Exception as emsg:
-            print("Got Read Exception: {}".format(emsg))
+            eprint("Got Read Exception: {}".format(emsg))
             return False
 
         return True
@@ -677,7 +514,7 @@ class HassListener(QThread):
                         break
 
             except Exception as emsg:
-                print("Got Run Exception: {}".format(emsg))
+                eprint("Got Run Exception: {}".format(emsg))
 
 class Panel(QWidget):
 
@@ -716,13 +553,6 @@ class Panel(QWidget):
         self.door     = DoorWindow(self.db,self)
         self.forecast = ForecastWindow(self.db,self)
 
-        self.camWin = {}
-        for cam in CamList:
-            if cam == 'Gate':
-                self.camWin[cam] = CamWindow(440,cam,self)
-            else:
-                self.camWin[cam] = CamWindow(220,cam,self)
-
         # Top
         hbox = QHBoxLayout()
         self.setLayout(hbox)
@@ -734,28 +564,29 @@ class Panel(QWidget):
         qbox = QGridLayout()
         qbox.setSpacing(0)
         qbox.setContentsMargins(0,0,0,0)
+        qbox.setHorizontalSpacing(0)
 
         qbox.addWidget(self.forecast,0,0,1,4)
         qbox.addWidget(self.temp,1,0,2,1)
         qbox.addWidget(self.wind,3,0,2,1)
         qbox.addWidget(self.door,5,0,2,1)
-                                             #  R  C  RS CS
-        qbox.addWidget(self.camWin['Gate'],     1, 1, 4, 2, Qt.AlignCenter | Qt.AlignVCenter)
-        qbox.addWidget(self.camWin['Garage'],   5, 1, 2, 1, Qt.AlignCenter | Qt.AlignVCenter)
-        qbox.addWidget(self.camWin['Front'],    5, 2, 2, 1, Qt.AlignCenter | Qt.AlignVCenter)
-        qbox.addWidget(self.camWin['Rear'],     1, 3, 2, 1, Qt.AlignCenter | Qt.AlignVCenter)
-        qbox.addWidget(self.camWin['Side'],     3, 3, 2, 1, Qt.AlignCenter | Qt.AlignVCenter)
-        qbox.addWidget(self.camWin['Chickens'], 5, 3, 2, 1, Qt.AlignCenter | Qt.AlignVCenter)
+
+        # 640 x 480
+        # 620 x 465
+        # 600 x 450
+        # 560 x 420
+                                                                                                      #  R  C  RS CS
+        qbox.addWidget(CamImage (600,450,'rtsp://view:lolhak@172.16.20.5:554/h264Preview_02_sub',self),  1, 1, 4, 2, Qt.AlignCenter | Qt.AlignVCenter)
+        qbox.addWidget(CamImage (300,225,'rtsp://view:lolhak@172.16.20.5:554/h264Preview_01_sub',self),  5, 1, 2, 1, Qt.AlignCenter | Qt.AlignVCenter)
+        qbox.addWidget(CamImage (300,225,'rtsp://view:lolhak@172.16.20.5:554/h264Preview_03_sub',self),  5, 2, 2, 1, Qt.AlignCenter | Qt.AlignVCenter)
+        qbox.addWidget(CamImage (300,225,'rtsp://view:lolhak@172.16.20.5:554/h264Preview_04_sub',self),  1, 3, 2, 1, Qt.AlignCenter | Qt.AlignVCenter)
+        qbox.addWidget(CamImage (300,225,'rtsp://view:lolhak@172.16.20.5:554/h264Preview_05_sub',self),  3, 3, 2, 1, Qt.AlignCenter | Qt.AlignVCenter)
+        qbox.addWidget(CamImage (300,225,'http://coopcam.amaroq.net/video.cgi',self),                    5, 3, 2, 1, Qt.AlignCenter | Qt.AlignVCenter)
         hbox.addLayout(qbox)
 
         # Stretch policy
         for i in range(0,4):
             qbox.setColumnStretch(i,1)
-
-        self.camGen = {}
-        for cam in CamList:
-            self.camGen[cam] = CamListener(self.db,cam,self)
-            self.camGen[cam].newFrame.connect(self.camWin[cam].newFrame)
 
         self.hass = HassListener()
 
@@ -764,16 +595,6 @@ class Panel(QWidget):
 
         self.showFullScreen()
 
-#    def mouseReleaseEvent(self, mouseEvent):
-#        for cam in CamList:
-#            self.camGen[cam].pause()
-#
-#        control = ControlWindow(self.db,self)
-#        control.exec_()
-#
-#        for cam in CamList:
-#            self.camGen[cam].resume()
- 
 app = QApplication(sys.argv)
 panel = Panel()
 panel.show()
