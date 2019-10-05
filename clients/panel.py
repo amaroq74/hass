@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 
-ferr = open("/amaroq/home/media-family/panel.log","a")
+#ferr = open("/amaroq/home/media-family/panel.log","a")
 
 def eprint(*args, **kwargs):
-    global ferr
-    print(*args, file=ferr, **kwargs)
-    ferr.flush()
+    pass
+    #global ferr
+    #print(*args, file=ferr, **kwargs)
+    #ferr.flush()
 
 eprint("----------------------- Starting ----------------------------")
 
@@ -37,9 +38,9 @@ import json
 import yaml
 from websocket import create_connection
 
-import vlc
 import threading
-import cv2
+import zmq
+import base64
 
 
 # Display functions
@@ -383,30 +384,15 @@ class ForecastWindow(QWidget):
 
         QTimer.singleShot(10 * 60 * 1000,self.refreshForecast) # 15 minutes
 
-#class CamVlc(QWidget):
-#    def __init__(self, width, height, url, parent=None):
-#        super(CamVlc, self).__init__(parent)
-#
-#        self.setFixedSize(width,height)
-#
-#        self.vlc = vlc.Instance(['--video-on-top', '--no-audio'])
-#
-#        self.video = QFrame()
-#
-#        self.player = self.vlc.media_player_new()
-#        self.player.audio_set_mute(True)
-#        self.player.set_mrl(url)
-#        self.player.set_xwindow(int(self.winId()))
-#        self.player.play()
 
 class CamImage(QWidget):
-    def __init__(self, width, height, url, parent=None):
+    def __init__(self, width, height, addr, parent=None):
         super(CamImage, self).__init__(parent)
 
         self.height=height
         self.width=width
 
-        self.url = url
+        self.addr = addr
         self.time = time.time()
         self.cnt = 0
 
@@ -423,36 +409,19 @@ class CamImage(QWidget):
         self.thread.start()
 
     def refresh(self):
+        ctx = zmq.Context()
+        sub = ctx.socket(zmq.SUB)
+        sub.connect(self.addr)
+        sub.setsockopt(zmq.SUBSCRIBE,''.encode('utf-8'))
+
         while True:
             try:
-
-                cap = cv2.VideoCapture(self.url) # it can be rtsp or http stream
-                ret, frame = cap.read()
-                cap = None
-
-                #while ret and ((time.time() - self.time) < 300):
-                if ret:
-                    rgbImage = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
-                    h, w, ch = rgbImage.shape
-                    bytesPerLine = ch * w
-                    convertToQtFormat = PyQt5.QtGui.QImage(rgbImage.data, w, h, bytesPerLine, PyQt5.QtGui.QImage.Format_RGB888)
-                    p = convertToQtFormat.scaled(self.width, self.height, Qt.KeepAspectRatio)
-
-                    self.label.setPixmap(QPixmap.fromImage(p))
-                    self.label.update()
-                    self.cnt += 1
-
-                    #time.sleep(0.50)
-                    #ret, frame = cap.read()
-
+                img = QPixmap.fromImage(QImage.fromData(base64.b64decode(sub.recv())))
+                self.label.setPixmap(img)
+                self.label.update()
             except Exception as e:
-                eprint("got camera exception: {}".format(e))
-
-            time.sleep(0.5)
-            #eprint("Restarting {}. Processed {} frames in {} seconds.".format(self.url,self.cnt,(time.time() - self.time)))
-            #time.sleep(5)
-            #self.time = time.time()
+                print("got camera exception: {}".format(e))
+                time.sleep(1)
 
 class HassListener(QThread):
 
@@ -576,17 +545,7 @@ class Panel(QWidget):
         qbox.addWidget(self.wind,3,0,2,1)
         qbox.addWidget(self.door,5,0,2,1)
 
-        # 640 x 480
-        # 620 x 465
-        # 600 x 450
-        # 560 x 420
-                                                                                                      #  R  C  RS CS
-        qbox.addWidget(CamImage (600,450,'rtsp://view:lolhak@172.16.20.5:554/h264Preview_02_sub',self),  1, 1, 4, 2, Qt.AlignCenter | Qt.AlignVCenter)
-        qbox.addWidget(CamImage (300,225,'rtsp://view:lolhak@172.16.20.5:554/h264Preview_01_sub',self),  5, 1, 2, 1, Qt.AlignCenter | Qt.AlignVCenter)
-        qbox.addWidget(CamImage (300,225,'rtsp://view:lolhak@172.16.20.5:554/h264Preview_03_sub',self),  5, 2, 2, 1, Qt.AlignCenter | Qt.AlignVCenter)
-        qbox.addWidget(CamImage (300,225,'rtsp://view:lolhak@172.16.20.5:554/h264Preview_04_sub',self),  1, 3, 2, 1, Qt.AlignCenter | Qt.AlignVCenter)
-        qbox.addWidget(CamImage (300,225,'rtsp://view:lolhak@172.16.20.5:554/h264Preview_05_sub',self),  3, 3, 2, 1, Qt.AlignCenter | Qt.AlignVCenter)
-        qbox.addWidget(CamImage (300,225,'http://coopcam.amaroq.net/video.cgi',self),                    5, 3, 2, 1, Qt.AlignCenter | Qt.AlignVCenter)
+        qbox.addWidget(CamImage (int(640*1.5),int(480*1.5),'tcp://aliska.amaroq.net:9020',self),  1, 1, 6, 3, Qt.AlignCenter | Qt.AlignVCenter)
         hbox.addLayout(qbox)
 
         # Stretch policy
