@@ -428,8 +428,10 @@ class CamImage(QWidget):
 
                 cap = cv2.VideoCapture(self.url) # it can be rtsp or http stream
                 ret, frame = cap.read()
+                cap = None
 
-                while ret and ((time.time() - self.time) < 300):
+                #while ret and ((time.time() - self.time) < 300):
+                if ret:
                     rgbImage = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
                     h, w, ch = rgbImage.shape
@@ -441,16 +443,16 @@ class CamImage(QWidget):
                     self.label.update()
                     self.cnt += 1
 
-                    time.sleep(0.50)
-                    ret, frame = cap.read()
+                    #time.sleep(0.50)
+                    #ret, frame = cap.read()
 
             except Exception as e:
                 eprint("got camera exception: {}".format(e))
 
-            cap = None
-            eprint("Restarting {}. Processed {} frames in {} seconds.".format(self.url,self.cnt,(time.time() - self.time)))
-            time.sleep(5)
-            self.time = time.time()
+            time.sleep(0.5)
+            #eprint("Restarting {}. Processed {} frames in {} seconds.".format(self.url,self.cnt,(time.time() - self.time)))
+            #time.sleep(5)
+            #self.time = time.time()
 
 class HassListener(QThread):
 
