@@ -32,7 +32,6 @@ const unsigned long relPulseTime = 500;     // 0.5 seconds
 const unsigned long rxTimeout    = 300000;  // 5 minutes
 const unsigned long pollPeriod   = 30000;   // 30 seconds
 
-
 // TX/RX Buffer
 String txBuffer;
 String rxBuffer;
@@ -51,8 +50,6 @@ unsigned long rxTime;
 unsigned int  x;
 unsigned int  txReq;
 unsigned int  tmp;
-unsigned int  toCount;
-unsigned int  toCountRst;
 char          mark[20];
 int           ret;
 
@@ -89,7 +86,6 @@ void setup() {
    txBuffer  = "";
    rxBuffer  = "";
    pollTime  = 0;
-   toCount   = 0;
    tempValue = 0;
    rxTime    = 0;
 
@@ -129,7 +125,6 @@ void loop() {
    if ( (currTime - rxTime ) > rxTimeout ) {
       for (x=0; x < relCnt; x++) relState[x] = relOff;
       rxTime = currTime;
-      toCount++;
    }
 
    // Poll timer
@@ -142,27 +137,30 @@ void loop() {
    if ( rxBuffer.length() > 5 && rxBuffer.endsWith("\n") ) {
 
       // Parse string
-      ret = sscanf(rxBuffer.c_str(),"%s %i %i %i %i %i %i %i", mark, &(newState[0]), &(newState[1]), &(newState[2]),
-                                                               &(newState[3]), &(newState[4]), &(newState[5]), &toCountRst);
+      ret = sscanf(rxBuffer.c_str(),"%s %i %i %i %i %i %i", mark, &(newState[0]), &(newState[1]), &(newState[2]),
+                                                            &(newState[3]), &(newState[4]), &(newState[5]));
+      rxBuffer = "";
 
       // Check marker
-      if ( ret == 8 && strcmp(mark,"STATE") == 0 ) {
+      if ( ret == 7 && strcmp(mark,"STATE") == 0 ) {
 
          // Update state
          for (x=0; x < relCnt; x++) {
-            relState[x] = newState[x];
-            relTime[x] = currTime;
+            if (relState[x] != relPulse ) {
+               relState[x] = newState[x];
+               relTime[x] = currTime;
+            }
+
+            // Turn on RX LED
+            digitalWrite(rxLedPin,LOW);
+            rxTime    = currTime;
+            rxLedTime = currTime;
          }
-
-         // Reset timeout counter
-         if ( toCountRst == 1 ) toCount = 0;
-
-         // Turn on RX LED
-         digitalWrite(rxLedPin,LOW);
-         rxTime    = currTime;
-         rxLedTime = currTime;
       }
    }
+
+   // Bad message
+   else if ( rxBuffer.length() > 40 ) rxBuffer = "";
 
    // Update relay states
    for (x=0; x < relCnt; x++) {
@@ -201,7 +199,6 @@ void loop() {
       txBuffer  = "STATUS";
       for (x=0; x < 4; x++) txBuffer += " " + String(inState[x]);
       txBuffer += " " + String(tempValue);
-      txBuffer += " " + String(toCount);
       for (x=0; x < 6; x++) txBuffer += " " + String(relState[x]);
       txBuffer += "\n";
 
