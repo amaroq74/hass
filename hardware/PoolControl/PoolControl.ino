@@ -26,7 +26,7 @@ unsigned int OutputMaxTime[]   = {36000000, 36000000, 36000000}; // 10 Hours
 
 // Analog Inputs
 unsigned int InAnalogCount     = 2;
-const char * InAnalogTopic[]   = {"/stat/pool_control/solar/in", "/stat/pool_control/solar/out"};
+const char * InAnalogTopic[]   = {"/stat/pool_control/solar_in", "/stat/pool_control/solar_out"};
 unsigned int InAnalogChannel[] = {2, 3};
 
 // Temperature
