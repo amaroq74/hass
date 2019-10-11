@@ -13,8 +13,9 @@ unsigned int logPort     = 8111;
 IPAddress    logAddress (172,16,20,2);
 
 // Timers
-const unsigned long msgTxPeriod  = 1000;  // 1 seconds
-const unsigned long analogPeriod = 60000; // 1 minute
+const unsigned long msgTxPeriod   = 1000;  // 1 seconds
+const unsigned long analogPeriod  = 60000; // 1 minute
+const unsigned long digitalPeriod = 60000; // 1 minute
 
 // Outputs
 unsigned int OutputCount       = 3;
@@ -34,9 +35,10 @@ const char * TempTopic = "/state/east_sprinklers/temp";
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Variables
-unsigned int lastMsgRx  = 0;
-unsigned int lastMsgTx  = millis();
-unsigned int lastAnalog = millis();
+unsigned int lastMsgRx   = 0;
+unsigned int lastMsgTx   = millis();
+unsigned int lastAnalog  = millis();
+unsigned int lastDigital = millis();
 unsigned int x;
 unsigned int currTime;
 
@@ -50,7 +52,7 @@ WiFiUDP logUdp;
 String txBuffer;
 String rxBuffer;
 char   mark[10];
-int    ret;
+int    tmp;
 
 unsigned int outputRelays[6];
 unsigned int outputTime[6];
@@ -65,7 +67,11 @@ unsigned int tempValue;
 // Send message to arduino
 void sendMsg() {
    txBuffer  = "STATE";
-   for (x=0; x < 6; x++) txBuffer += " " + String(outputRelays[x]);
+
+   for (x=0; x < 6; x++) {
+      txBuffer += " " + String(outputRelays[x]);
+      if ( outputRelays[x] == 50 ) outputRelays[x] == 0;
+   }
 
    //Serial.println(txBuffer);
    logPrintf("Sending message to arduino: %s",txBuffer.c_str())
@@ -81,12 +87,12 @@ void recvMsg() {
    if ( rxBuffer.length() > 7 && rxBuffer.endsWith("\n") ) {
 
       // Parse string
-      ret = sscanf(rxBuffer.c_str(),"%s %i %i %i %i %i", 
+      tmp = sscanf(rxBuffer.c_str(),"%s %i %i %i %i %i", 
                    mark, &(inputValues[0]), &(inputValues[1]), &(inputValues[2]),
                    &(inputValues[3]), &(tempValue));
 
       // Check marker
-      if ( ret == 6 && strcmp(mark,"STATUS") == 0 ) {
+      if ( tmp == 6 && strcmp(mark,"STATUS") == 0 ) {
          logPrintf("Got arduino message: %s",rxBuffer.c_str())
          lastMsgRx = millis();
       }
@@ -127,6 +133,11 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
 // Initialize
 void setup() {
+
+   lastMsgRx   = 0;
+   lastMsgTx   = millis();
+   lastAnalog  = millis();
+   lastDigital = millis();
 
    // Start and connect to WIFI
    WiFi.mode(WIFI_STA);
@@ -187,6 +198,7 @@ void setup() {
       outputRelays[x] = 0;
       outputTime[x] = millis();
    }
+
    sendMsg();
 }
 
@@ -206,13 +218,9 @@ void reconnect() {
       if (client.connect(clientId.c_str())) {
          logPrintf("Connected to MQTT Server");
 
-         // Subscribe and publish current states
+         // Subscribe
          for (x=0; x < OutputCount; x++) {
             client.subscribe(OutputCmndTopic[x]);
-            if ( outputRelays[x] == 100 )
-               client.publish(OutputStatTopic[x],"ON");
-            else
-               client.publish(OutputStatTopic[x],"OFF");
          }
       } else {
          logPrintf("Failed to connect to MQTT, waiting 5 seconds.")
@@ -254,8 +262,21 @@ void loop() {
       lastAnalog = currTime;
    }
 
-   if (( currTime - lastMsgTx ) > msgTxPeriod) ret = 1;
-   else ret = 0;
+   // Refresh digital values
+   if ( (currTime - lastDigital) > digitalPeriod) {
+      logPrintf("Updating digital values.");
+
+      for (x=0; x < OutputCount; x++) {
+         if (outputRelays[OutputChannel[x]] == 100 ) 
+            client.publish(OutputStatTopic[x],"ON");
+         else
+            client.publish(OutputStatTopic[x],"OFF");
+      }
+      lastDigital = currTime;
+   }
+
+   if (( currTime - lastMsgTx ) > msgTxPeriod) tmp = 1;
+   else tmp = 0;
 
    // Max On state timeout
    for (x=0; x < OutputCount; x++) {
@@ -264,12 +285,11 @@ void loop() {
             outputRelays[OutputChannel[x]] = 0;
             client.publish(OutputStatTopic[x],"OFF");
             logPrintf("Turning off relay %i due to timeout",OutputChannel[x])
-            ret = 1;
+            tmp = 1;
          }
       }
    }
 
-   if ( ret == 1 ) sendMsg();
+   if ( tmp == 1 ) sendMsg();
 }
-
 
