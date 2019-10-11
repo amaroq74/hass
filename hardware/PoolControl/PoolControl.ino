@@ -3,6 +3,7 @@
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 #include <PubSubClient.h>
+#include "SolarTemps.h"
 
 // Configuration
 const char * ssid        = "amaroq";
@@ -20,7 +21,8 @@ const unsigned long analogPeriod = 60000; // 1 minute
 unsigned int OutputCount = 3;
 const char * OutputCmndTopic[] = {"/cmnd/pool_control/main", "/cmnd/pool_control/sweep", "/cmnd/pool_control/heat"};
 const char * OutputStatTopic[] = {"/stat/pool_control/main", "/stat/pool_control/sweep", "/stat/pool_control/heat"};
-unsigned int OutputChannel[]   = {0,1,2};
+unsigned int OutputChannel[]   = {0, 1, 2};
+unsigned int OutputMaxTime[]   = {36000000, 36000000, 36000000}; // 10 Hours
 
 // Analog Inputs
 unsigned int InAnalogCount     = 2;
@@ -52,6 +54,7 @@ char   mark[10];
 int    ret;
 
 unsigned int outputRelays[6];
+unsigned int outputTime[6];
 unsigned int inputValues[6];
 unsigned int tempValue;
 
@@ -79,8 +82,9 @@ void recvMsg() {
    if ( rxBuffer.length() > 7 && rxBuffer.endsWith("\n") ) {
 
       // Parse string
-      ret = sscanf(rxBuffer.c_str(),"%s %i %i %i %i %i", mark, &(inputValues[0]), &(inputValues[1]), &(inputValues[2]),
-                                                         &(inputValues[3]), &(tempValue));
+      ret = sscanf(rxBuffer.c_str(),"%s %i %i %i %i %i", 
+                   mark, &(inputValues[0]), &(inputValues[1]), &(inputValues[2]),
+                   &(inputValues[3]), &(tempValue));
 
       // Check marker
       if ( ret == 6 && strcmp(mark,"STATUS") == 0 ) {
@@ -105,14 +109,15 @@ void callback(char* topic, byte* payload, unsigned int length) {
          if ( length == 2 && strncmp((char *)payload,"ON",2) == 0 ) {
             outputRelays[OutputChannel[x]] = 100;
             client.publish(OutputStatTopic[x],"ON");
-            logPrintf("Turning on relay %i",x)
+            outputTime[x] = millis();
+            logPrintf("Turning on relay %i",OutputChannel[x])
          }
 
          // Turn Off
          else if ( length == 3 && strncmp((char *)payload,"OFF",3) == 0 ) {
             outputRelays[OutputChannel[x]] = 0;
             client.publish(OutputStatTopic[x],"OFF");
-            logPrintf("Turning off relay %i",x)
+            logPrintf("Turning off relay %i",OutputChannel[x])
          }
       }
    }
@@ -179,7 +184,10 @@ void setup() {
    rxBuffer = "";
 
    // Init relays
-   for (x=0; x < 6; x++) outputRelays[x] = 0;
+   for (x=0; x < 6; x++) {
+      outputRelays[x] = 0;
+      outputTime[x] = millis();
+   }
    sendMsg();
 }
 
@@ -234,7 +242,7 @@ void loop() {
       logPrintf("Updating analog values.");
 
       for (x=0; x < InAnalogCount; x++) {
-         value = float(inputValues[InAnalogChannel[x]]) * 1.0;
+         value = SolarTempTable[inputValues[InAnalogChannel[x]]];
          sprintf(valueStr,"%0.2f",value);
          client.publish(InAnalogTopic[x],valueStr);
       }   
@@ -245,5 +253,21 @@ void loop() {
 
       lastAnalog = currTime;
    }
+
+   // Max output time
+   ret = 0;
+   for (x=0; x < OutputCount; x++) {
+      if (outputRelays[OutputChannel[x]] == 100 ) {
+         if ((currTime - outputTime[OutputChannel[x]]) > OutputMaxTime[x] ) {
+            outputRelays[OutputChannel[x]] = 0;
+            client.publish(OutputStatTopic[x],"OFF");
+            logPrintf("Turning off relay %i due to timeout",OutputChannel[x])
+            ret = 1;
+         }
+      }
+   }
+
+   if ( ret == 1 ) sendMsg();
 }
+
 
