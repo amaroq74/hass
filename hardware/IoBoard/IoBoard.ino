@@ -24,15 +24,18 @@ const unsigned int txLedPin = 12;
 const unsigned int rxLedPin = 13;
 
 // Setup constants
-const unsigned int  relayPulse   = 50;
-const unsigned int  relayOff     = 0;
-const unsigned int  relayOn      = 100;
-const unsigned long ledBlinkTime = 100;     // 0.1  second
-const unsigned long relayPulseTime = 500;     // 0.5  seconds
-const unsigned long msgRxTimeout = 300000;  // 5    minutes
-const unsigned long minMsgPeriod = 1000;    // 1    second
-const unsigned long debounceTime = 250;     // 0.25 second
-const unsigned long averageCount = 200;     // 200 samples
+const unsigned int  relayPulse     = 50;
+const unsigned int  relayOff       = 0;
+const unsigned int  relayOn        = 100;
+const unsigned long ledBlinkTime   = 100;    // 0.1  second
+const unsigned long relayPulseTime = 500;    // 0.5  seconds
+const unsigned long msgRxTimeout   = 300000; // 5    minutes
+const unsigned long minMsgPeriod   = 1000;   // 1    second
+const unsigned long debounceTime   = 250;    // 0.25 second
+const unsigned long analogPeriod   = 10;     // 10   msec
+const unsigned long averagePeriod  = 10000;  // 10   seconds
+
+///////////////////////////////////////////////////////////////////////////
 
 // TX/RX Buffer
 String txBuffer;
@@ -53,7 +56,9 @@ unsigned long msgRxTime;
 unsigned long txLedTime;
 unsigned long rxLedTime;
 
-unsigned long analogCount;
+unsigned long analogTime;
+unsigned long averageTime;
+unsigned long averageCount;
 unsigned long rawTemp;
 unsigned int  curTemp;
 
@@ -102,11 +107,13 @@ void setup() {
    txLedTime = millis();
 
    // Init variables
-   txBuffer    = "";
-   rxBuffer    = "";
-   minMsgTime  = 0;
-   msgRxTime   = 0;
-   analogCount = 0;
+   txBuffer     = "";
+   rxBuffer     = "";
+   minMsgTime   = 0;
+   msgRxTime    = 0;
+   averageCount = 0;
+   analogTime   = millis();
+   averageTime  = millis();
 
    rawTemp = 0;
    curTemp = 0;
@@ -129,17 +136,6 @@ void loop() {
    if ( (currTime - rxLedTime) > ledBlinkTime ) digitalWrite(rxLedPin,HIGH);
    if ( (currTime - txLedTime) > ledBlinkTime ) digitalWrite(txLedPin,HIGH);
 
-   // Pulsed relay output to off state
-   for (x=0; x < relayCount; x++) {
-      if ( curRelState[x] == relayPulse && ((currTime - curRelTime[x]) > relayPulseTime) ) curRelState[x] = relayOff;
-   }
-
-   // Receiver timeout, turn off all outputs
-   if ( (currTime - msgRxTime ) > msgRxTimeout ) {
-      for (x=0; x < relayCount; x++) curRelState[x] = relayOff;
-      msgRxTime = currTime;
-   }
-
    // Poll timer
    if ( (currTime - minMsgTime) > minMsgPeriod ) txReq = 1;
 
@@ -147,11 +143,12 @@ void loop() {
    while (Serial.available()) rxBuffer += Serial.read();
 
    // Check for incoming message
-   if ( rxBuffer.length() > 5 && rxBuffer.endsWith("\n") ) {
+   if ( rxBuffer.length() > 6 && rxBuffer.endsWith("\n") ) {
 
       // Parse string
-      ret = sscanf(rxBuffer.c_str(),"%s %i %i %i %i %i %i", mark, &(reqRelState[0]), &(reqRelState[1]), &(reqRelState[2]),
-                                                            &(reqRelState[3]), &(reqRelState[4]), &(reqRelState[5]));
+      ret = sscanf(rxBuffer.c_str(),"%s %i %i %i %i %i %i", 
+                   mark, &(reqRelState[0]), &(reqRelState[1]), &(reqRelState[2]),
+                   &(reqRelState[3]), &(reqRelState[4]), &(reqRelState[5]));
       rxBuffer = "";
 
       // Check marker
@@ -180,6 +177,15 @@ void loop() {
 
    // Update relay states
    for (x=0; x < relayCount; x++) {
+
+      // Receiver timeout, turn off all outputs
+      if ( (currTime - msgRxTime ) > msgRxTimeout ) 
+         curRelState[x] = relayOff;
+
+      // Turn off pulsed outputs
+      if ( (curRelState[x] == relayPulse) && ((currTime - curRelTime[x]) > relayPulseTime) ) 
+         curRelState[x] = relayOff;
+
       if ( curRelState[x] == relayOn || curRelState[x] == relayPulse ) digitalWrite(relayPin[x],HIGH);
       else digitalWrite(relayPin[x],LOW);
    }
@@ -206,29 +212,36 @@ void loop() {
       txReq = 1;
    }
 
-   // Read raw analog input states
-   for (x=digitalCount; x < inputCount; x++) {
-      analogRead(inputPin[x]);
+   // Analog sample period
+   if ((currTime - analogTime) > analogPeriod ) {
+      analogTime = currTime;
+      averageCount += 1;
+
+      // Read raw analog input states
+      for (x=digitalCount; x < inputCount; x++) {
+         analogRead(inputPin[x]);
+         delay(10);
+         rawInState[x] += analogRead(inputPin[x]);
+      }
+
+      // Read Temperature value
+      analogRead(tempPin);
       delay(10);
-      rawInState[x] += analogRead(inputPin[x]);
+      rawTemp += analogRead(tempPin);
    }
 
-   // Read Temperature value
-   analogRead(tempPin);
-   delay(10);
-   rawTemp += analogRead(tempPin);
-
    // Analog input average
-   if ( analogCount == averageCount ) {
+   if ( (currTime - averageTime) > averagePeriod ) {
       for (x=digitalCount; x < inputCount; x++) {
-         curInState[x] = rawInState[x] / analogCount;
+         curInState[x] = rawInState[x] / averageCount; 
          rawInState[x] = 0;
       }
 
-      curTemp = rawTemp / analogCount;
+      curTemp = rawTemp / averageCount;
       rawTemp = 0;
 
-      analogCount = 0;
+      averageCount = 0;
+      averageTime = currTime;
    }
 
    // Transmit if requested
