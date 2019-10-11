@@ -35,7 +35,7 @@ const char * TempTopic = "/state/pool_control/temp";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Variables
-unsigned int lastMsgRx  = 0xFFFF;
+unsigned int lastMsgRx  = 0;
 unsigned int lastMsgTx  = millis();
 unsigned int lastAnalog = millis();
 unsigned int x;
@@ -236,7 +236,10 @@ void loop() {
    recvMsg();
 
    // Process analog and Temperature values
-   if ( (( currTime - lastMsgRx) < analogPeriod) && (( currTime - lastAnalog ) > analogPeriod) ) {
+   if ( (lastMsgRx != 0) && 
+        ((currTime - lastMsgRx)  < analogPeriod) && 
+        ((currTime - lastAnalog) > analogPeriod) ) {
+
       logPrintf("Updating analog values.");
 
       for (x=0; x < InAnalogCount; x++) {
