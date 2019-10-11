@@ -254,7 +254,7 @@ void loop() {
       lastAnalog = currTime;
    }
 
-   // Max output time
+   // Max On state timeout
    ret = 0;
    for (x=0; x < OutputCount; x++) {
       if (outputRelays[OutputChannel[x]] == 100 ) {
