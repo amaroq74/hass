@@ -24,9 +24,9 @@ unsigned int OutputChannel[]   = {0, 1, 3};
 unsigned int OutputMaxTime[]   = {3600000, 3600000, 3600000}; // 1 Hour
 
 // Analog Inputs
-//unsigned int InAnalogCount     = 0;
-//const char * InAnalogTopic[]   = {};
-//unsigned int InAnalogChannel[] = {};
+unsigned int InAnalogCount     = 0;
+const char * InAnalogTopic[]   = {};
+unsigned int InAnalogChannel[] = {};
 
 // Temperature
 const char * TempTopic = "/state/east_sprinklers/temp";
@@ -241,11 +241,11 @@ void loop() {
 
       logPrintf("Updating analog values.");
 
-      //for (x=0; x < InAnalogCount; x++) {
-      //   value = SolarTempTable[inputValues[InAnalogChannel[x]]];
-      //   sprintf(valueStr,"%0.2f",value);
-      //   client.publish(InAnalogTopic[x],valueStr);
-      //}   
+      for (x=0; x < InAnalogCount; x++) {
+         value = float(inputValues[InAnalogChannel[x]]);
+         sprintf(valueStr,"%0.2f",value);
+         client.publish(InAnalogTopic[x],valueStr);
+      }   
 
       value = (float(tempValue) / 1023.0) * 500.0;
       sprintf(valueStr,"%0.2f",value);
