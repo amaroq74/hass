@@ -18,7 +18,7 @@ const unsigned long msgTxPeriod  = 1000;  // 1 seconds
 const unsigned long analogPeriod = 60000; // 1 minute
 
 // Outputs
-unsigned int OutputCount = 3;
+unsigned int OutputCount       = 3;
 const char * OutputCmndTopic[] = {"/cmnd/pool_control/main", "/cmnd/pool_control/sweep", "/cmnd/pool_control/heat"};
 const char * OutputStatTopic[] = {"/stat/pool_control/main", "/stat/pool_control/sweep", "/stat/pool_control/heat"};
 unsigned int OutputChannel[]   = {0, 1, 2};
