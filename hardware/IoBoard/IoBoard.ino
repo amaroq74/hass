@@ -175,7 +175,7 @@ void loop() {
    // Bad message
    else if ( rxBuffer.length() > 40 ) rxBuffer = "";
 
-   // Update relay states
+   // Update relay output states
    for (x=0; x < relayCount; x++) {
 
       // Receiver timeout, turn off all outputs
