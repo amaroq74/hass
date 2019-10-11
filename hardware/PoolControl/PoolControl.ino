@@ -232,8 +232,6 @@ void loop() {
 
    currTime = millis();
 
-   if (( currTime - lastMsgTx ) > msgTxPeriod) sendMsg();
-
    // Attempt to receive input message
    recvMsg();
 
@@ -254,8 +252,10 @@ void loop() {
       lastAnalog = currTime;
    }
 
+   if (( currTime - lastMsgTx ) > msgTxPeriod) ret = 1;
+   else ret = 0;
+
    // Max On state timeout
-   ret = 0;
    for (x=0; x < OutputCount; x++) {
       if (outputRelays[OutputChannel[x]] == 100 ) {
          if ((currTime - outputTime[OutputChannel[x]]) > OutputMaxTime[x] ) {
