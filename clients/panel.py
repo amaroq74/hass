@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 
-#ferr = open("/amaroq/home/media-family/panel.log","a")
+ferr = open("/amaroq/home/media-family/panel.log","a")
 
 def eprint(*args, **kwargs):
-    pass
-    #global ferr
-    #print(*args, file=ferr, **kwargs)
-    #ferr.flush()
+    global ferr
+    print(*args, file=ferr, **kwargs)
+    ferr.flush()
 
-eprint("----------------------- Starting ----------------------------")
+import datetime
+now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+eprint("------- Starting {} --------".format(now))
 
 # Add relative path
 import sys,datetime
@@ -71,6 +73,9 @@ def disp_power(val, box):
 def disp_door(val, box):
     box.setText('Closed' if val == 'off' else 'Open')
 
+def disp_text(val,box):
+    box.setText(val)
+
 # Status List
 StatusList = [ {'label':'Out Temp',     'key':'sensor.outdoor_temperature',  'conv':disp_temp,      'box':None },
                {'label':'Out Humid',    'key':'sensor.outdoor_humidity',     'conv':disp_humid,     'box':None },
@@ -97,7 +102,9 @@ StatusList = [ {'label':'Out Temp',     'key':'sensor.outdoor_temperature',  'co
                {'label':'Shed Humid',   'key':'sensor.shed_humidity',        'conv':disp_humid,     'box':None },
                {'label':'Camper Temp',  'key':'sensor.camper_temperature',   'conv':disp_temp,      'box':None },
                {'label':'Chicken Temp', 'key':'sensor.chickens_temperature', 'conv':disp_temp,      'box':None },
-               {'label':'Pool Temp',    'key':'sensor.pool_temperature',     'conv':disp_temp,      'box':None } ]
+               {'label':'Pool Temp',    'key':'sensor.pool_temperature',     'conv':disp_temp,      'box':None },
+               {'label':None,           'key':'sensor.time',                 'conv':disp_text,      'box':None },
+               {'label':None,           'key':'sensor.date',                 'conv':disp_text,      'box':None } ]
 
 DoorList = [{'label':'Ped<br/>Gate',      'key':'binary_sensor.ped_gate',      'color':Qt.red,    'box':None },
             {'label':'Car<br/>Gate',      'key':'switch.car_gate',             'color':Qt.red,    'box':None },
@@ -277,29 +284,26 @@ class StatusWindow(QWidget):
         vfont.setBold(True)
 
         for sen in StatusList:
-            lab = QLabel(sen['label'] + ':')
-            lab.setFont(lfont)
-            gl.addWidget(lab,idx,0,1,1,Qt.AlignRight)
-            sen['box'] = QLabel('')
-            sen['box'].setFont(vfont)
-            gl.addWidget(sen['box'],idx,1,1,1,Qt.AlignLeft)
+            if sen['label'] is not None:
+                lab = QLabel(sen['label'] + ':')
+                lab.setFont(lfont)
+                gl.addWidget(lab,idx,0,1,1,Qt.AlignRight)
+                sen['box'] = QLabel('')
+                sen['box'].setFont(vfont)
+                gl.addWidget(sen['box'],idx,1,1,1,Qt.AlignLeft)
+            else:
+                sen['box'] = QLabel('')
+                sen['box'].setFont(lfont)
+                gl.addWidget(sen['box'],idx,0,1,2,Qt.AlignCenter)
+
             idx += 1
 
-        self.dateBox = QLabel('Date')
-        self.timeBox = QLabel('Time')
-        self.dateBox.setFont(lfont)
-        self.timeBox.setFont(lfont)
-        gl.addWidget(self.dateBox,idx,0,1,2,Qt.AlignCenter)
-        gl.addWidget(self.timeBox,idx+1,0,1,2,Qt.AlignCenter)
         self.setLayout(gl)
 
     def stateUpdate (self, key, value ):
         for sen in StatusList:
             if sen['key'] == key and value != 'unknown' and value is not None:
                 sen['conv'](value,sen['box'])
-
-        self.dateBox.setText(datetime.datetime.now().strftime("%m/%d/%y"))
-        self.timeBox.setText(datetime.datetime.now().strftime("%H:%M:%S"))
 
 
 class ForecastWindow(QWidget):
@@ -386,6 +390,9 @@ class ForecastWindow(QWidget):
 
 
 class CamImage(QWidget):
+
+    imageUpdate = pyqtSignal(QPixmap)
+
     def __init__(self, width, height, addr, parent=None):
         super(CamImage, self).__init__(parent)
 
@@ -403,25 +410,47 @@ class CamImage(QWidget):
         self.label.setFixedSize(width,height)
         self.label.setSizePolicy(QSizePolicy.Fixed,QSizePolicy.Fixed)
 
+        self.imageUpdate.connect(self.label.setPixmap)
+
         vb.addWidget(self.label)
 
+        self.time = time.time()
         self.thread=threading.Thread(target=self.refresh)
         self.thread.start()
 
     def refresh(self):
-        ctx = zmq.Context()
-        sub = ctx.socket(zmq.SUB)
-        sub.connect(self.addr)
-        sub.setsockopt(zmq.SUBSCRIBE,''.encode('utf-8'))
+        count = 0
 
         while True:
+            eprint("Entering outer loop")
             try:
-                img = QPixmap.fromImage(QImage.fromData(base64.b64decode(sub.recv())))
-                self.label.setPixmap(img)
-                self.label.update()
+                eprint("Opening camera link")
+                count = 0
+                ctx = zmq.Context()
+                sub = ctx.socket(zmq.SUB)
+                sub.connect(self.addr)
+                sub.setsockopt(zmq.SUBSCRIBE,''.encode('utf-8'))
+                sub.setsockopt(zmq.RCVTIMEO, 2000)
+                self.time = time.time()
+
+                eprint("Entering inner loop")
+                try:
+                    while ((time.time() - self.time) < 300):
+                        img = QPixmap.fromImage(QImage.fromData(base64.b64decode(sub.recv())))
+                        self.imageUpdate.emit(img)
+                        count += 1
+                    eprint("Restarting camera after 5 min. Count={}".format(count))
+                except Exception as e:
+                    eprint("got inner camera exception: {}".format(e))
+                eprint("Exiting inner loop")
+
+                eprint("Closing camera link. Count={}".format(count))
+                sub.close(linger=0)
+                ctx.destroy(linger=0)
             except Exception as e:
-                print("got camera exception: {}".format(e))
-                time.sleep(1)
+                eprint("got outer camera exception: {}".format(e))
+            eprint("Exiting outer loop")
+            time.sleep(1)
 
 class HassListener(QThread):
 

@@ -32,24 +32,6 @@
                 "config_entry_id": null,
                 "device_id": null,
                 "disabled_by": null,
-                "entity_id": "sensor.pool_solar_out",
-                "name": null,
-                "platform": "arduino_relay",
-                "unique_id": "pool_solar_out"
-            },
-            {
-                "config_entry_id": null,
-                "device_id": null,
-                "disabled_by": null,
-                "entity_id": "sensor.pool_solar_in",
-                "name": null,
-                "platform": "arduino_relay",
-                "unique_id": "pool_solar_in"
-            },
-            {
-                "config_entry_id": null,
-                "device_id": null,
-                "disabled_by": null,
                 "entity_id": "sensor.smartmeter_total",
                 "name": null,
                 "platform": "rainforest_usb",
@@ -293,15 +275,6 @@
                 "config_entry_id": null,
                 "device_id": null,
                 "disabled_by": null,
-                "entity_id": "switch.pool_main",
-                "name": null,
-                "platform": "arduino_relay",
-                "unique_id": "pool_main"
-            },
-            {
-                "config_entry_id": null,
-                "device_id": null,
-                "disabled_by": null,
                 "entity_id": "switch.east_lawn_2",
                 "name": null,
                 "platform": "arduino_relay",
@@ -338,28 +311,10 @@
                 "config_entry_id": null,
                 "device_id": null,
                 "disabled_by": null,
-                "entity_id": "switch.pool_sweep",
-                "name": null,
-                "platform": "arduino_relay",
-                "unique_id": "pool_sweep"
-            },
-            {
-                "config_entry_id": null,
-                "device_id": null,
-                "disabled_by": null,
                 "entity_id": "switch.house_heat",
                 "name": null,
                 "platform": "arduino_relay",
                 "unique_id": "house_heat"
-            },
-            {
-                "config_entry_id": null,
-                "device_id": null,
-                "disabled_by": null,
-                "entity_id": "switch.pool_heat",
-                "name": null,
-                "platform": "arduino_relay",
-                "unique_id": "pool_heat"
             },
             {
                 "config_entry_id": null,
@@ -3312,6 +3267,33 @@
                 "name": null,
                 "platform": "zwave",
                 "unique_id": "node-58"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.pool_control_temp",
+                "name": null,
+                "platform": "mqtt",
+                "unique_id": "pool_control_temp"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.pool_solar_out",
+                "name": null,
+                "platform": "mqtt",
+                "unique_id": "pool_solar_out"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.pool_solar_in",
+                "name": null,
+                "platform": "mqtt",
+                "unique_id": "pool_solar_in"
             }
         ]
     },
