@@ -114,7 +114,6 @@ arduino_relay:
         front_sprinklers: '00.13.A2.00.40.8B.2D.43'
         garage_control: '00.13.A2.00.40.69.4E.CD'
         east_sprinklers: '00.13.A2.00.40.79.C1.A8'
-        pool_control: '00.13.A2.00.40.6F.DC.78'
 
 # Boolean inputs
 input_boolean:
@@ -320,20 +319,27 @@ sensor:
       - total
   - platform: rfxcom_rx
     pressure_adjust: 6.0
-  - platform: arduino_relay
-    sources:
-      pool_solar_in:
-        board: pool_control
-        input: 2
-        name: Pool Solar In
-        avgPeriod: 60
-        icon: 'mdi:thermometer'
-      pool_solar_out:
-        board: pool_control
-        input: 3
-        name: Pool Solar Out
-        avgPeriod: 60
-        icon: 'mdi:thermometer'
+  - platform: mqtt
+    state_topic: "stat/pool_control/solar_in"
+    name: Pool Solar In
+    unit_of_measurement: metric
+    unique_id: pool_solar_in
+    device_class: temperature
+    icon: 'mdi:thermometer'
+  - platform: mqtt
+    state_topic: "stat/pool_control/solar_out"
+    name: Pool Solar Out 
+    unit_of_measurement: metric
+    unique_id: pool_solar_out
+    device_class: temperature
+    icon: 'mdi:thermometer'
+  - platform: mqtt
+    state_topic: "stat/pool_control/temp"
+    name: Pool Control Temp
+    unit_of_measurement: metric
+    unique_id: pool_control_temp
+    device_class: temperature
+    icon: 'mdi:thermometer'
   - platform: template    # determine if today is selected as a watering day for program 1
     sensors:
       rear_patio_watering_day:
@@ -810,30 +816,21 @@ switch:
         timeout: 3600
         iconon: 'mdi:water'
         iconoff: 'mdi:water-off'
-      pool_main:
-        board: pool_control
-        output: 0
-        name: Pool Main
-        door: false
-        timeout: 36000
-        iconon: 'mdi:pool'
-        iconoff: 'mdi:pool'
-      pool_sweep:
-        board: pool_control
-        output: 1
-        name: Pool Sweep
-        door: false
-        timeout: 36000
-        iconon: 'mdi:pool'
-        iconoff: 'mdi:pool'
-      pool_heat:
-        board: pool_control
-        output: 2
-        name: Pool Heat
-        door: false
-        timeout: 36000
-        iconon: 'mdi:pool'
-        iconoff: 'mdi:pool'
+  - platform: mqtt
+    name: "Pool Main"
+    state_topic: stat/pool_control/main
+    command_topic: cmnd/pool_control/main
+    icon: 'mdi:pool'
+  - platform: mqtt
+    name: "Pool Sweep"
+    state_topic: stat/pool_control/sweep
+    command_topic: cmnd/pool_control/sweep
+    icon: 'mdi:pool'
+  - platform: mqtt
+    name: "Pool Heat"
+    state_topic: stat/pool_control/heat
+    command_topic: cmnd/pool_control/heat
+    icon: 'mdi:pool'
   - platform: mqtt
     name: "Test Switch"
     state_topic: stat/testswitch/POWER
