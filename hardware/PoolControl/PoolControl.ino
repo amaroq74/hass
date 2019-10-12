@@ -20,18 +20,18 @@ const unsigned long digitalPeriod = 60000; // 1 minute
 
 // Outputs
 unsigned int OutputCount       = 3;
-const char * OutputCmndTopic[] = {"/cmnd/pool_control/main", "/cmnd/pool_control/sweep", "/cmnd/pool_control/heat"};
-const char * OutputStatTopic[] = {"/stat/pool_control/main", "/stat/pool_control/sweep", "/stat/pool_control/heat"};
+const char * OutputCmndTopic[] = {"cmnd/pool_control/main", "cmnd/pool_control/sweep", "cmnd/pool_control/heat"};
+const char * OutputStatTopic[] = {"stat/pool_control/main", "stat/pool_control/sweep", "stat/pool_control/heat"};
 unsigned int OutputChannel[]   = {0, 1, 2};
 unsigned int OutputMaxTime[]   = {36000000, 36000000, 36000000}; // 10 Hours
 
 // Analog Inputs
 unsigned int InAnalogCount     = 2;
-const char * InAnalogTopic[]   = {"/stat/pool_control/solar_in", "/stat/pool_control/solar_out"};
+const char * InAnalogTopic[]   = {"stat/pool_control/solar_in", "stat/pool_control/solar_out"};
 unsigned int InAnalogChannel[] = {2, 3};
 
 // Temperature
-const char * TempTopic = "/state/pool_control/temp";
+const char * TempTopic = "stat/pool_control/temp";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -50,10 +50,13 @@ WiFiClient espClient;
 PubSubClient client(espClient);
 WiFiUDP logUdp;
 
-String txBuffer;
-String rxBuffer;
-char   mark[10];
-int    tmp;
+unsigned int rxCount;
+
+char txBuffer[50];
+char rxBuffer[50];
+char mark[10];
+int  tmp;
+char c;
 
 unsigned int outputRelays[6];
 unsigned int outputTime[6];
@@ -67,38 +70,42 @@ unsigned int tempValue;
 
 // Send message to arduino
 void sendMsg() {
-   txBuffer  = "STATE";
 
-   for (x=0; x < 6; x++) {
-      txBuffer += " " + String(outputRelays[x]);
-      if ( outputRelays[x] == 50 ) outputRelays[x] == 0;
-   }
+   sprintf(txBuffer,"STATE %i %i %i %i %i %i\n",
+                    outputRelays[0], outputRelays[1], outputRelays[2],
+                    outputRelays[3], outputRelays[4], outputRelays[5]);
 
-   //Serial.println(txBuffer);
-   logPrintf("Sending message to arduino: %s",txBuffer.c_str())
+   Serial.write(txBuffer);
+   logPrintf("Sending message to arduino: %s",txBuffer)
    lastMsgTx = millis();
 }
 
 void recvMsg() {
 
    // Get serial data
-   while (Serial.available()) rxBuffer += Serial.read();
+   while (Serial.available()) {
+      if ( rxCount == 50 ) rxCount = 0;
+
+      c = Serial.read();
+      rxBuffer[rxCount++] = c;
+      rxBuffer[rxCount] = '\0';
+   }
 
    // Check for incoming message
-   if ( rxBuffer.length() > 7 && rxBuffer.endsWith("\n") ) {
+   if ( rxCount > 7 && rxBuffer[rxCount-1] == '\n' ) {
 
       // Parse string
-      tmp = sscanf(rxBuffer.c_str(),"%s %i %i %i %i %i", 
+      tmp = sscanf(rxBuffer,"%s %i %i %i %i %i", 
                    mark, &(inputValues[0]), &(inputValues[1]), &(inputValues[2]),
                    &(inputValues[3]), &(tempValue));
 
       // Check marker
       if ( tmp == 6 && strcmp(mark,"STATUS") == 0 ) {
-         logPrintf("Got arduino message: %s",rxBuffer.c_str())
+         logPrintf("Got arduino message: %s",rxBuffer)
          lastMsgRx = millis();
       }
-
-      rxBuffer = "";
+    
+      rxCount = 0;
    }
 }
 
@@ -146,7 +153,7 @@ void setup() {
    WiFi.begin(ssid, password);
 
    // Connection to arduino
-   //Serial.begin(115200);
+   Serial.begin(9600);
 
    while (WiFi.waitForConnectResult() != WL_CONNECTED) {
       delay(5000);
@@ -192,7 +199,7 @@ void setup() {
    client.setServer(mqtt_server, 1883);
    client.setCallback(callback);
 
-   rxBuffer = "";
+   rxCount = 0;
 
    // Init relays
    for (x=0; x < 6; x++) {
@@ -254,11 +261,15 @@ void loop() {
          value = SolarTempTable[inputValues[InAnalogChannel[x]]];
          sprintf(valueStr,"%0.2f",value);
          client.publish(InAnalogTopic[x],valueStr);
+         logPrintf("Topic %s = %s",InAnalogTopic[x],valueStr);
+         delay(10);
       }   
 
       value = (float(tempValue) / 1023.0) * 500.0;
       sprintf(valueStr,"%0.2f",value);
       client.publish(TempTopic,valueStr);
+      logPrintf("Topic %s = %s",TempTopic,valueStr);
+      delay(10);
 
       lastAnalog = currTime;
    }
@@ -272,6 +283,7 @@ void loop() {
             client.publish(OutputStatTopic[x],"ON");
          else
             client.publish(OutputStatTopic[x],"OFF");
+         delay(10);
       }
       lastDigital = currTime;
    }

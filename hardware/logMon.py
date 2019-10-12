@@ -9,5 +9,7 @@ sock.bind(('',8111))
 while True:
     data, address = sock.recvfrom(4096)
     now = datetime.datetime.now()
-    print("{} - {}: {}".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),address[0],data.decode('utf-8')))
+    print("{} - {}: {}".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                               address[0],
+                               data.decode('utf-8').rstrip()))
 

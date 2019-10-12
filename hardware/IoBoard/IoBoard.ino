@@ -3,8 +3,7 @@
 #include <avr/wdt.h>
 
 // Define for revsion 1 board
-// Comment out for revision 2 board
-#define REV1
+#define REV2
 
 // Setup pins
 const unsigned int relayCount           = 6;
@@ -37,9 +36,11 @@ const unsigned long averagePeriod  = 10000;  // 10   seconds
 
 ///////////////////////////////////////////////////////////////////////////
 
-// TX/RX Buffer
-String txBuffer;
-String rxBuffer;
+unsigned int rxCount;
+
+char txBuffer[50];
+char rxBuffer[50];
+char c;
 
 // Variables
 unsigned int  reqRelState[relayCount];
@@ -107,8 +108,7 @@ void setup() {
    txLedTime = millis();
 
    // Init variables
-   txBuffer     = "";
-   rxBuffer     = "";
+   rxCount      = 0;
    minMsgTime   = 0;
    msgRxTime    = 0;
    averageCount = 0;
@@ -119,7 +119,7 @@ void setup() {
    curTemp = 0;
 
    // start serial
-   Serial.begin(115200);
+   Serial.begin(9600);
 
    // Enable watchdog timer
    wdt_enable(WDTO_8S);
@@ -140,16 +140,21 @@ void loop() {
    if ( (currTime - minMsgTime) > minMsgPeriod ) txReq = 1;
 
    // Get serial data
-   while (Serial.available()) rxBuffer += Serial.read();
+   while (Serial.available()) {
+      if ( rxCount == 50 ) rxCount = 0;
+
+      c = Serial.read();
+      rxBuffer[rxCount++] = c;
+      rxBuffer[rxCount] = '\0';
+   }
 
    // Check for incoming message
-   if ( rxBuffer.length() > 6 && rxBuffer.endsWith("\n") ) {
+   if ( rxCount > 6 && rxBuffer[rxCount-1] == '\n') {
 
       // Parse string
-      ret = sscanf(rxBuffer.c_str(),"%s %i %i %i %i %i %i", 
+      ret = sscanf(rxBuffer,"%s %i %i %i %i %i %i", 
                    mark, &(reqRelState[0]), &(reqRelState[1]), &(reqRelState[2]),
                    &(reqRelState[3]), &(reqRelState[4]), &(reqRelState[5]));
-      rxBuffer = "";
 
       // Check marker
       if ( ret == 7 && strcmp(mark,"STATE") == 0 ) {
@@ -170,10 +175,8 @@ void loop() {
          // Immediate reply
          txReq = 1;
       }
+      rxCount = 0;
    }
-
-   // Bad message
-   else if ( rxBuffer.length() > 40 ) rxBuffer = "";
 
    // Update relay output states
    for (x=0; x < relayCount; x++) {
@@ -209,7 +212,6 @@ void loop() {
       }
    
       rawInState[x] = tmp;
-      txReq = 1;
    }
 
    // Analog sample period
@@ -247,13 +249,12 @@ void loop() {
    // Transmit if requested
    if ( txReq == 1 ) {
 
-      // Setup message
-      txBuffer  = "STATUS";
-      for (x=0; x < 4; x++) txBuffer += " " + String(curInState[x]);
-      txBuffer += " " + String(curTemp) + "\n";
+      sprintf(txBuffer,"STATUS %i %i %i %i %i\n",
+                       curInState[0], curInState[1],
+                       curInState[2], curInState[3],
+                       curTemp);
 
-      // Send message
-      Serial.write(txBuffer.c_str());
+      Serial.write(txBuffer);
 
       // Turn on TX LED
       digitalWrite(txLedPin,LOW);
