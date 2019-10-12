@@ -3249,6 +3249,24 @@
                 "name": null,
                 "platform": "mqtt",
                 "unique_id": "pool_solar_in"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.garage_control_temp",
+                "name": null,
+                "platform": "mqtt",
+                "unique_id": "garage_control_temp"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "switch.east_lawn_1_2",
+                "name": null,
+                "platform": "arduino_relay",
+                "unique_id": "east_lawn_0"
             }
         ]
     },

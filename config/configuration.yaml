@@ -825,6 +825,7 @@ switch:
     name: "Coop Door"
     state_topic: stat/coop/POWER
     command_topic: cmnd/coop/POWER
+    iconon: 'mdi:garage'
 
 climate:
   - platform: generic_thermostat
