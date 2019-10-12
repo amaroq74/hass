@@ -13,9 +13,9 @@ unsigned int logPort     = 8111;
 IPAddress    logAddress (172,16,20,1);
 
 // Timers
-const unsigned long msgTxPeriod   = 1000;  // 1 seconds
-const unsigned long analogPeriod  = 60000; // 1 minute
-const unsigned long digitalPeriod = 60000; // 1 minute
+const unsigned long MsgTxPeriod   = 1000;  // 1 seconds
+const unsigned long AnalogPeriod  = 60000; // 1 minute
+const unsigned long DigitalPeriod = 60000; // 1 minute
 
 // Outputs
 unsigned int OutputCount       = 3;
@@ -279,7 +279,7 @@ void loop() {
    recvMsg();
 
    // tmp hold current gate state, depends on input and inverted flag
-   tmp = (inputValues[GateInChannel] == 0)?GateInverted:!GateInverted;
+   tmp = (inputValues[GateInChannel] == 0)?GateInvert:!GateInvert;
 
    // Test for gate change
    if ( tmp != currGate ) {
@@ -291,8 +291,8 @@ void loop() {
 
    // Process analog and Temperature values
    if ( (lastMsgRx != 0) && 
-        ((currTime - lastMsgRx)  < analogPeriod) && 
-        ((currTime - lastAnalog) > analogPeriod) ) {
+        ((currTime - lastMsgRx)  < AnalogPeriod) && 
+        ((currTime - lastAnalog) > AnalogPeriod) ) {
 
       logPrintf("Updating analog values.");
 
@@ -314,7 +314,7 @@ void loop() {
    }
 
    // Refresh digital values
-   if ( (currTime - lastDigital) > digitalPeriod) {
+   if ( (currTime - lastDigital) > DigitalPeriod) {
       logPrintf("Updating digital values.");
 
       for (x=0; x < OutputCount; x++) {
@@ -331,7 +331,7 @@ void loop() {
       lastDigital = currTime;
    }
 
-   if (( currTime - lastMsgTx ) > msgTxPeriod) tmp = 1;
+   if (( currTime - lastMsgTx ) > MsgTxPeriod) tmp = 1;
    else tmp = 0;
 
    // Max On state timeout

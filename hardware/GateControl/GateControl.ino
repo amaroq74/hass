@@ -279,7 +279,7 @@ void loop() {
    recvMsg();
 
    // tmp hold current gate state, depends on input and inverted flag
-   tmp = (inputValues[GateInChannel] == 0)?GateInverted:!GateInverted;
+   tmp = (inputValues[GateInChannel] == 0)?GateInvert:!GateInvert;
 
    // Test for gate change
    if ( tmp != currGate ) {
