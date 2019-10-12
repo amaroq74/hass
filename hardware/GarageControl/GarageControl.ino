@@ -18,7 +18,7 @@ const unsigned long AnalogPeriod  = 60000; // 1 minute
 const unsigned long DigitalPeriod = 60000; // 1 minute
 
 // Outputs
-unsigned int OutputCount       = 3;
+unsigned int OutputCount       = 4;
 const char * OutputCmndTopic[] = {"cmnd/garage_control/rear_patio_1", "cmnd/garage_control/rear_patio_2", 
                                   "cmnd/garage_control/rear_patio_3", "cmnd/garage_control/front_flowers"};
 const char * OutputStatTopic[] = {"stat/garage_control/rear_patio_1", "stat/garage_control/rear_patio_2", 
@@ -159,6 +159,9 @@ void callback(char* topic, byte* payload, unsigned int length) {
       }
    }
 
+   // Clear Gate relay
+   sendMsg();
+   outputRelays[GateOutChannel] = 0;
    sendMsg();
 }
 
