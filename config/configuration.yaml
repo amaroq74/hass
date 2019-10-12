@@ -112,7 +112,6 @@ arduino_relay:
       xbee: true
       boards:
         front_sprinklers: '00.13.A2.00.40.8B.2D.43'
-        east_sprinklers: '00.13.A2.00.40.79.C1.A8'
 
 # Boolean inputs
 input_boolean:
@@ -757,30 +756,6 @@ switch:
         inverted: true
         iconon: 'mdi:garage-open'
         iconoff: 'mdi:garage'
-      east_lawn_0:
-        board: east_sprinklers
-        output: 0
-        name: East Lawn 1
-        door: false
-        timeout: 3600
-        iconon: 'mdi:water'
-        iconoff: 'mdi:water-off'
-      east_lawn_2:
-        board: east_sprinklers
-        output: 1
-        name: East Lawn 2
-        door: false
-        timeout: 3600
-        iconon: 'mdi:water'
-        iconoff: 'mdi:water-off'
-      east_lemon:
-        board: east_sprinklers
-        output: 3
-        name: East Lemon
-        door: false
-        timeout: 3600
-        iconon: 'mdi:water'
-        iconoff: 'mdi:water-off'
   - platform: mqtt
     name: "Pool Main"
     state_topic: stat/pool_control/main
@@ -826,6 +801,21 @@ switch:
     state_topic: stat/coop/POWER
     command_topic: cmnd/coop/POWER
     iconon: 'mdi:garage'
+  - platform: mqtt
+    name: "East Lawn 1"
+    state_topic: stat/east_sprinklers/east_lawn_1
+    command_topic: cmnd/east_sprinklers/east_lawn_1
+    iconon: 'mdi:water'
+  - platform: mqtt
+    name: "East Lawn 2"
+    state_topic: stat/east_sprinklers/east_lawn_2
+    command_topic: cmnd/east_sprinklers/east_lawn_2
+    iconon: 'mdi:water'
+  - platform: mqtt
+    name: "East Lemon"
+    state_topic: stat/east_sprinklers/east_lemon
+    command_topic: cmnd/east_sprinklers/east_lemon
+    iconon: 'mdi:water'
 
 climate:
   - platform: generic_thermostat
