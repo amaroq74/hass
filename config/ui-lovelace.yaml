@@ -399,6 +399,11 @@ views:
           - group.all_lights
           - group.all_fans
       - type: entities
+        title: IO Boards
+        show_header_toggle: false
+        entities:
+          - sensor.pool_control_temp
+      - type: entities
         title: ZWave
         show_header_toggle: false
         entities:

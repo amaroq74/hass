@@ -3267,6 +3267,33 @@
                 "name": null,
                 "platform": "zwave",
                 "unique_id": "node-58"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.pool_control_temp",
+                "name": null,
+                "platform": "mqtt",
+                "unique_id": "pool_control_temp"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.pool_solar_out",
+                "name": null,
+                "platform": "mqtt",
+                "unique_id": "pool_solar_out"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.pool_solar_in",
+                "name": null,
+                "platform": "mqtt",
+                "unique_id": "pool_solar_in"
             }
         ]
     },
