@@ -104,7 +104,7 @@ void recvMsg() {
          logPrintf("Got arduino message: %s",rxBuffer)
          lastMsgRx = millis();
       }
-    
+
       rxCount = 0;
    }
 }

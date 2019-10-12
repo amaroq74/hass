@@ -10,7 +10,7 @@ const char * password    = "1er4idnfu345os3o283";
 const char * mqtt_server = "aliska.amaroq.net";
 unsigned int locPort     = 8112;
 unsigned int logPort     = 8111;
-IPAddress    logAddress (172,16,20,2);
+IPAddress    logAddress (172,16,20,1);
 
 // Timers
 const unsigned long msgTxPeriod   = 1000;  // 1 seconds
@@ -19,10 +19,10 @@ const unsigned long digitalPeriod = 60000; // 1 minute
 
 // Outputs
 unsigned int OutputCount       = 3;
-const char * OutputCmndTopic[] = {"/cmnd/garage_control/rear_patio_1", "/cmnd/garage_control/rear_patio_2", 
-                                  "/cmnd/garage_control/rear_patio_3", "/cmnd/garage_control/front_flowers"};
-const char * OutputStatTopic[] = {"/stat/garage_control/rear_patio_1", "/stat/garage_control/rear_patio_2", 
-                                  "/stat/garage_control/rear_patio_3", "/stat/garage_control/front_flowers"};
+const char * OutputCmndTopic[] = {"cmnd/garage_control/rear_patio_1", "cmnd/garage_control/rear_patio_2", 
+                                  "cmnd/garage_control/rear_patio_3", "cmnd/garage_control/front_flowers"};
+const char * OutputStatTopic[] = {"stat/garage_control/rear_patio_1", "stat/garage_control/rear_patio_2", 
+                                  "stat/garage_control/rear_patio_3", "stat/garage_control/front_flowers"};
 unsigned int OutputChannel[]   = {0, 1, 2, 3};
 unsigned int OutputMaxTime[]   = {3600000, 3600000, 3600000, 3600000}; // 1 Hour
 
@@ -32,14 +32,14 @@ const char * InAnalogTopic[]   = {};
 unsigned int InAnalogChannel[] = {};
 
 // Gate IO
-const char * GateCmndTopic  = "/cmnd/garage_control/garage";
-const char * GateStatTopic  = "/stat/garage_control/garage";
+const char * GateCmndTopic  = "cmnd/garage_control/garage";
+const char * GateStatTopic  = "stat/garage_control/garage";
 unsigned int GateOutChannel = 5;
 unsigned int GateInChannel  = 0;
 unsigned int GateInvert     = 0;
 
 // Temperature
-const char * TempTopic = "/state/garage_control/temp";
+const char * TempTopic = "stat/garage_control/temp";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -58,10 +58,13 @@ WiFiClient espClient;
 PubSubClient client(espClient);
 WiFiUDP logUdp;
 
-String txBuffer;
-String rxBuffer;
-char   mark[10];
-int    tmp;
+unsigned int rxCount;
+
+char txBuffer[50];
+char rxBuffer[50];
+char mark[10];
+int  tmp;
+char c;
 
 unsigned int outputRelays[6];
 unsigned int outputTime[6];
@@ -75,38 +78,42 @@ unsigned int currGate;
 
 // Send message to arduino
 void sendMsg() {
-   txBuffer  = "STATE";
 
-   for (x=0; x < 6; x++) {
-      txBuffer += " " + String(outputRelays[x]);
-      if ( outputRelays[x] == 50 ) outputRelays[x] == 0;
-   }
+   sprintf(txBuffer,"STATE %i %i %i %i %i %i\n",
+                    outputRelays[0], outputRelays[1], outputRelays[2],
+                    outputRelays[3], outputRelays[4], outputRelays[5]);
 
-   //Serial.println(txBuffer);
-   logPrintf("Sending message to arduino: %s",txBuffer.c_str())
+   Serial.write(txBuffer);
+   logPrintf("Sending message to arduino: %s",txBuffer)
    lastMsgTx = millis();
 }
 
 void recvMsg() {
 
    // Get serial data
-   while (Serial.available()) rxBuffer += Serial.read();
+   while (Serial.available()) {
+      if ( rxCount == 50 ) rxCount = 0;
+
+      c = Serial.read();
+      rxBuffer[rxCount++] = c;
+      rxBuffer[rxCount] = '\0';
+   }
 
    // Check for incoming message
-   if ( rxBuffer.length() > 7 && rxBuffer.endsWith("\n") ) {
+   if ( rxCount > 7 && rxBuffer[rxCount-1] == '\n' ) {
 
       // Parse string
-      tmp = sscanf(rxBuffer.c_str(),"%s %i %i %i %i %i", 
+      tmp = sscanf(rxBuffer,"%s %i %i %i %i %i", 
                    mark, &(inputValues[0]), &(inputValues[1]), &(inputValues[2]),
                    &(inputValues[3]), &(tempValue));
 
       // Check marker
       if ( tmp == 6 && strcmp(mark,"STATUS") == 0 ) {
-         logPrintf("Got arduino message: %s",rxBuffer.c_str())
+         logPrintf("Got arduino message: %s",rxBuffer)
          lastMsgRx = millis();
       }
 
-      rxBuffer = "";
+      rxCount = 0;
    }
 }
 
@@ -170,7 +177,7 @@ void setup() {
    WiFi.begin(ssid, password);
 
    // Connection to arduino
-   Serial.begin(115200);
+   Serial.begin(9600);
 
    while (WiFi.waitForConnectResult() != WL_CONNECTED) {
       delay(5000);
@@ -216,7 +223,7 @@ void setup() {
    client.setServer(mqtt_server, 1883);
    client.setCallback(callback);
 
-   rxBuffer = "";
+   rxCount = 0;
 
    // Init relays
    for (x=0; x < 6; x++) {
@@ -293,11 +300,15 @@ void loop() {
          value = float(inputValues[InAnalogChannel[x]]);
          sprintf(valueStr,"%0.2f",value);
          client.publish(InAnalogTopic[x],valueStr);
+         logPrintf("Topic %s = %s",InAnalogTopic[x],valueStr);
+         delay(10);
       }   
 
       value = (float(tempValue) / 1023.0) * 500.0;
       sprintf(valueStr,"%0.2f",value);
       client.publish(TempTopic,valueStr);
+      logPrintf("Topic %s = %s",TempTopic,valueStr);
+      delay(10);
 
       lastAnalog = currTime;
    }
@@ -311,6 +322,7 @@ void loop() {
             client.publish(OutputStatTopic[x],"ON");
          else
             client.publish(OutputStatTopic[x],"OFF");
+         delay(10);
       }
 
       if ( currGate ) client.publish(GateStatTopic,"ON");
@@ -336,5 +348,4 @@ void loop() {
 
    if ( tmp == 1 ) sendMsg();
 }
-
 
