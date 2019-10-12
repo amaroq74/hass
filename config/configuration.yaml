@@ -112,7 +112,6 @@ arduino_relay:
       xbee: true
       boards:
         front_sprinklers: '00.13.A2.00.40.8B.2D.43'
-        garage_control: '00.13.A2.00.40.69.4E.CD'
         east_sprinklers: '00.13.A2.00.40.79.C1.A8'
 
 # Boolean inputs
@@ -338,6 +337,13 @@ sensor:
     name: Pool Control Temp
     unit_of_measurement: "°C"
     unique_id: pool_control_temp
+    device_class: temperature
+    icon: 'mdi:thermometer'
+  - platform: mqtt
+    state_topic: "stat/garage_control/temp"
+    name: Garage Control Temp
+    unit_of_measurement: "°C"
+    unique_id: garage_control_temp
     device_class: temperature
     icon: 'mdi:thermometer'
   - platform: template    # determine if today is selected as a watering day for program 1
@@ -751,48 +757,7 @@ switch:
         inverted: true
         iconon: 'mdi:garage-open'
         iconoff: 'mdi:garage'
-      rear_patio_1:
-        board: garage_control
-        output: 0
-        name: Rear Patio 1
-        door: false
-        timeout: 3600
-        iconon: 'mdi:water'
-        iconoff: 'mdi:water-off'
-      rear_patio_2:
-        board: garage_control
-        output: 1
-        name: Rear Patio 2
-        door: false
-        timeout: 3600
-        iconon: 'mdi:water'
-        iconoff: 'mdi:water-off'
-      rear_patio_3:
-        board: garage_control
-        output: 2
-        name: Rear Patio 3
-        door: false
-        timeout: 3600
-        iconon: 'mdi:water'
-        iconoff: 'mdi:water-off'
-      front_flowers:
-        board: garage_control
-        output: 3
-        name: Front Flowers
-        door: false
-        timeout: 3600
-        iconon: 'mdi:water'
-        iconoff: 'mdi:water-off'
-      garage_door:
-        board: garage_control
-        output: 5
-        input: 0
-        name: Garage Door
-        door: true
-        inverted: false
-        iconon: 'mdi:garage-open'
-        iconoff: 'mdi:garage'
-      east_lawn_1:
+      east_lawn_0:
         board: east_sprinklers
         output: 0
         name: East Lawn 1
@@ -832,9 +797,30 @@ switch:
     command_topic: cmnd/pool_control/heat
     icon: 'mdi:pool'
   - platform: mqtt
-    name: "Test Switch"
-    state_topic: stat/testswitch/POWER
-    command_topic: cmnd/testswitch/POWER
+    name: "Rear Patio 1"
+    state_topic: stat/garage_control/rear_patio_1
+    command_topic: cmnd/garage_control/rear_patio_1
+    iconon: 'mdi:water'
+  - platform: mqtt
+    name: "Rear Patio 2"
+    state_topic: stat/garage_control/rear_patio_2
+    command_topic: cmnd/garage_control/rear_patio_2
+    iconon: 'mdi:water'
+  - platform: mqtt
+    name: "Rear Patio 3"
+    state_topic: stat/garage_control/rear_patio_3
+    command_topic: cmnd/garage_control/rear_patio_3
+    iconon: 'mdi:water'
+  - platform: mqtt
+    name: "Front Flowers"
+    state_topic: stat/garage_control/front_flowers
+    command_topic: cmnd/garage_control/front_flowers
+    iconon: 'mdi:water'
+  - platform: mqtt
+    name: "Garage Door"
+    state_topic: stat/garage_control/garage
+    command_topic: cmnd/garage_control/garage
+    iconon: 'mdi:garage'
   - platform: mqtt
     name: "Coop Door"
     state_topic: stat/coop/POWER
