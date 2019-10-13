@@ -100,14 +100,6 @@ rainforest_usb:
 rfxcom_rx:
   device: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A6003Q5Y-if00-port0 
 
-arduino_relay:
-  hosts:
-    serial_host:
-      device: /dev/serial/by-id/usb-FTDI_UB232R_FTDCJ7LC-if00-port0
-      xbee: false
-      boards:
-        pantry: 
-
 # Boolean inputs
 input_boolean:
   dcare_bell:
@@ -471,29 +463,18 @@ binary_sensor:
         friendly_name: "Camper Motion"
         device_class: motion
         value_template: "{{ states('sensor.camper_motion')|int == 8 }}"
-  - platform: arduino_relay
-    sources:
-      gate_bell:
-        board: pantry
-        input: 0
-        name: Gate Bell
-        inverted: false
-        pushbutton: true
-        icon: 'mdi:bell'
-      door_bell:
-        board: pantry
-        input: 1
-        name: Door Bell
-        inverted: false
-        pushbutton: true
-        icon: 'mdi:bell'
-      car_gate_btn:
-        board: pantry
-        input: 3
-        name: Car Gate Btn
-        inverted: false
-        pushbutton: true
-        icon: 'mdi:garage'
+  - platform: mqtt
+    name: "Gate Bell"
+    state_topic: stat/pantry_control/gate_bell
+    icon: 'mdi:bell'
+  - platform: mqtt
+    name: "Door Bell"
+    state_topic: stat/pantry_control/door_bell
+    icon: 'mdi:bell'
+  - platform: mqtt
+    name: "Car Gate Btn"
+    state_topic: stat/pantry_control/gate_toggle
+    icon: 'mdi:garage'
 
 light:
   - platform: template
@@ -726,24 +707,16 @@ light:
 
 
 switch:
-  - platform: arduino_relay
-    outputs:
-      house_heat:
-        board: pantry
-        output: 0
-        name: House Heat
-        door: false
-        timeout: 2100
-        iconon: 'mdi:radiator'
-        iconoff: 'mdi:radiator-disabled'
-      house_fan:
-        board: pantry
-        output: 1
-        name: House Fan
-        door: false
-        timeout: 36000
-        iconon: 'mdi:fan'
-        iconoff: 'mdi:fan-off'
+  - platform: mqtt
+    name: "House Heat"
+    state_topic: stat/pantry_control/house_heat
+    command_topic: cmnd/pantry_control/house_heat
+    icon: 'mdi:radiator'
+  - platform: mqtt
+    name: "House Fan"
+    state_topic: stat/pantry_control/house_fan
+    command_topic: cmnd/pantry_control/house_fan
+    icon: 'mdi:fan'
   - platform: mqtt
     name: "Pool Main"
     state_topic: stat/pool_control/main
