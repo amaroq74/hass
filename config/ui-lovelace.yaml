@@ -402,6 +402,11 @@ views:
         title: IO Boards
         show_header_toggle: false
         entities:
+          - sensor.pool_control_wifi
+          - sensor.garage_control_wifi
+          - sensor.east_sprinklers_wifi
+          - sensor.gate_control_wifi
+          - sensor.pantry_control_wifi
           - sensor.pool_control_temp
           - sensor.garage_control_temp
           - sensor.east_sprinklers_temp
