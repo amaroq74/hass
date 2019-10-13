@@ -21,8 +21,8 @@ lovelace:
 device_tracker:
    - platform: nmap_tracker
      hosts: 
-       - 172.16.20.0/24 
-       - 172.16.30.0/24 
+       - 172.16.20.18/32 
+       - 172.16.20.19/32 
      home_interval: 10
 
 vacuum:

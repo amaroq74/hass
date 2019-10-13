@@ -3195,6 +3195,15 @@
                 "name": null,
                 "platform": "mqtt",
                 "unique_id": "east_sprinklers_temp"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.gate_control_temp",
+                "name": null,
+                "platform": "mqtt",
+                "unique_id": "gate_control_temp"
             }
         ]
     },
