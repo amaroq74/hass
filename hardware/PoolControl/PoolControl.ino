@@ -20,18 +20,24 @@ const unsigned long DigitalPeriod = 60000; // 1 minute
 
 // Outputs
 unsigned int OutputCount       = 3;
-const char * OutputCmndTopic[] = {"cmnd/pool_control/main", "cmnd/pool_control/sweep", "cmnd/pool_control/heat"};
-const char * OutputStatTopic[] = {"stat/pool_control/main", "stat/pool_control/sweep", "stat/pool_control/heat"};
+const char * OutputCmndTopic[] = {"cmnd/pool_control/main", 
+                                  "cmnd/pool_control/sweep", 
+                                  "cmnd/pool_control/heat"};
+const char * OutputStatTopic[] = {"stat/pool_control/main", 
+                                  "stat/pool_control/sweep", 
+                                  "stat/pool_control/heat"};
 unsigned int OutputChannel[]   = {0, 1, 2};
 unsigned int OutputMaxTime[]   = {36000000, 36000000, 36000000}; // 10 Hours
 
 // Analog Inputs
 unsigned int InAnalogCount     = 2;
-const char * InAnalogTopic[]   = {"stat/pool_control/solar_in", "stat/pool_control/solar_out"};
+const char * InAnalogTopic[]   = {"stat/pool_control/solar_in", 
+                                  "stat/pool_control/solar_out"};
 unsigned int InAnalogChannel[] = {2, 3};
 
 // Temperature
 const char * TempTopic = "stat/pool_control/temp";
+const char * WifiTopic = "stat/pool_control/wifi";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -286,7 +292,9 @@ void loop() {
          delay(10);
       }
       lastDigital = currTime;
-      logPrintf("Wifi strenth = %i",WiFi.RSSI());
+      sprintf(valueStr,"%i",WiFi.RSSI());
+      logPrintf("Wifi strenth = %s",valueStr);
+      client.publish(WifiTopic,valueStr);
    }
 
    if (( currTime - lastMsgTx ) > MsgTxPeriod) tmp = 1;

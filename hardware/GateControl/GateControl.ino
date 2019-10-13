@@ -19,10 +19,14 @@ const unsigned long DigitalPeriod = 60000; // 1 minute
 
 // Outputs
 unsigned int OutputCount       = 4;
-const char * OutputCmndTopic[] = {"cmnd/gate_control/front_lawn_1", "cmnd/gate_control/front_lawn_2", 
-                                  "cmnd/gate_control/front_lawn_3", "cmnd/gate_control/west_trees"};
-const char * OutputStatTopic[] = {"stat/gate_control/front_lawn_1", "stat/gate_control/front_lawn_2", 
-                                  "stat/gate_control/front_lawn_3", "stat/gate_control/west_trees"};
+const char * OutputCmndTopic[] = {"cmnd/gate_control/front_lawn_1", 
+                                  "cmnd/gate_control/front_lawn_2", 
+                                  "cmnd/gate_control/front_lawn_3", 
+                                  "cmnd/gate_control/west_trees"};
+const char * OutputStatTopic[] = {"stat/gate_control/front_lawn_1", 
+                                  "stat/gate_control/front_lawn_2", 
+                                  "stat/gate_control/front_lawn_3", 
+                                  "stat/gate_control/west_trees"};
 unsigned int OutputChannel[]   = {0, 1, 2, 3};
 unsigned int OutputMaxTime[]   = {3600000, 3600000, 3600000, 3600000}; // 1 Hour
 
@@ -40,6 +44,7 @@ unsigned int GateInvert     = 1;
 
 // Temperature
 const char * TempTopic = "stat/gate_control/temp";
+const char * WifiTopic = "stat/gate_control/wifi";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -332,7 +337,9 @@ void loop() {
       else client.publish(GateStatTopic,"OFF");
 
       lastDigital = currTime;
-      logPrintf("Wifi strenth = %i",WiFi.RSSI());
+      sprintf(valueStr,"%i",WiFi.RSSI());
+      logPrintf("Wifi strenth = %s",valueStr);
+      client.publish(WifiTopic,valueStr);
    }
 
    if (( currTime - lastMsgTx ) > MsgTxPeriod) tmp = 1;

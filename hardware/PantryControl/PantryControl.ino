@@ -22,15 +22,21 @@ const unsigned int LedPeriod = 100;
 
 // Outputs
 const unsigned int OutputCount = 2;
-const char * OutputCmndTopic[] = {"cmnd/pantry_control/house_heat", "cmnd/pantry_control/house_fan" };
-const char * OutputStatTopic[] = {"stat/pantry_control/house_heat", "stat/pantry_control/house_fan" };
+const char * OutputCmndTopic[] = {"cmnd/pantry_control/house_heat", 
+                                  "cmnd/pantry_control/house_fan" };
+const char * OutputStatTopic[] = {"stat/pantry_control/house_heat", 
+                                  "stat/pantry_control/house_fan" };
 unsigned int OutputPin[]       = {12, 5};
 unsigned int OutputMaxTime[]   = {2100000, 36000000}; // 35 Min, 10 Hours
 
 // Analog Inputs
 const unsigned int InputCount = 3;
-const char * InputStatTopic[] = {"stat/pantry_control/gate_bell", "stat/pantry_control/door_bell", "stat/pantry_control/gate_toggle"};
+const char * InputStatTopic[] = {"stat/pantry_control/gate_bell", 
+                                 "stat/pantry_control/door_bell", 
+                                 "stat/pantry_control/gate_toggle"};
 unsigned int InputPin[]       = {9, 10, 14};
+
+const char * WifiTopic = "stat/pantry_control/wifi";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -41,6 +47,8 @@ unsigned int currTime;
 
 unsigned int outputLevel[OutputCount];
 unsigned int outputTime[OutputCount];
+
+char  valueStr[50];
 
 unsigned int inputLevel[InputCount];
 unsigned int inputRaw[InputCount];
@@ -260,7 +268,9 @@ void loop() {
       digitalWrite(LedPin,LOW);
       ledTime = millis();
       lastDigital = currTime;
-      logPrintf("Wifi strenth = %i",WiFi.RSSI());
+      sprintf(valueStr,"%i",WiFi.RSSI());
+      logPrintf("Wifi strenth = %s",valueStr);
+      client.publish(WifiTopic,valueStr);
    }
 
    // Max On state timeout

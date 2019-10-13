@@ -19,8 +19,12 @@ const unsigned long DigitalPeriod = 60000; // 1 minute
 
 // Outputs
 unsigned int OutputCount       = 3;
-const char * OutputCmndTopic[] = {"cmnd/east_sprinklers/east_lawn_1", "cmnd/east_sprinklers/east_lawn_2", "cmnd/east_sprinklers/east_lemon"};
-const char * OutputStatTopic[] = {"stat/east_sprinklers/east_lawn_1", "stat/east_sprinklers/east_lawn_2", "stat/east_sprinklers/east_lemon"};
+const char * OutputCmndTopic[] = {"cmnd/east_sprinklers/east_lawn_1", 
+                                  "cmnd/east_sprinklers/east_lawn_2", 
+                                  "cmnd/east_sprinklers/east_lemon"};
+const char * OutputStatTopic[] = {"stat/east_sprinklers/east_lawn_1", 
+                                  "stat/east_sprinklers/east_lawn_2", 
+                                  "stat/east_sprinklers/east_lemon"};
 unsigned int OutputChannel[]   = {0, 1, 3};
 unsigned int OutputMaxTime[]   = {3600000, 3600000, 3600000}; // 1 Hour
 
@@ -31,6 +35,7 @@ unsigned int InAnalogChannel[] = {};
 
 // Temperature
 const char * TempTopic = "stat/east_sprinklers/temp";
+const char * WifiTopic = "stat/east_sprinklers/wifi";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -271,8 +276,6 @@ void loop() {
       delay(10);
 
       lastAnalog = currTime;
-
-      logPrintf("Signal Strength = %l",WiFi.RSSI());
    }
 
    // Refresh digital values
@@ -287,7 +290,9 @@ void loop() {
          delay(10);
       }
       lastDigital = currTime;
-      logPrintf("Wifi strenth = %i",WiFi.RSSI());
+      sprintf(valueStr,"%i",WiFi.RSSI());
+      logPrintf("Wifi strenth = %s",valueStr);
+      client.publish(WifiTopic,valueStr);
    }
 
    if (( currTime - lastMsgTx ) > MsgTxPeriod) tmp = 1;
