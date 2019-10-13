@@ -271,6 +271,8 @@ void loop() {
       delay(10);
 
       lastAnalog = currTime;
+
+      logPrintf("Signal Strength = %l",WiFi.RSSI());
    }
 
    // Refresh digital values
@@ -285,6 +287,7 @@ void loop() {
          delay(10);
       }
       lastDigital = currTime;
+      logPrintf("Wifi strenth = %i",WiFi.RSSI());
    }
 
    if (( currTime - lastMsgTx ) > MsgTxPeriod) tmp = 1;

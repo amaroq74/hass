@@ -332,6 +332,7 @@ void loop() {
       else client.publish(GateStatTopic,"OFF");
 
       lastDigital = currTime;
+      logPrintf("Wifi strenth = %i",WiFi.RSSI());
    }
 
    if (( currTime - lastMsgTx ) > MsgTxPeriod) tmp = 1;

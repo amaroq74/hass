@@ -286,6 +286,7 @@ void loop() {
          delay(10);
       }
       lastDigital = currTime;
+      logPrintf("Wifi strenth = %i",WiFi.RSSI());
    }
 
    if (( currTime - lastMsgTx ) > MsgTxPeriod) tmp = 1;
