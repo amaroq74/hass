@@ -466,15 +466,12 @@ binary_sensor:
   - platform: mqtt
     name: "Gate Bell"
     state_topic: stat/pantry_control/gate_bell
-    icon: 'mdi:bell'
   - platform: mqtt
     name: "Door Bell"
     state_topic: stat/pantry_control/door_bell
-    icon: 'mdi:bell'
   - platform: mqtt
     name: "Car Gate Btn"
     state_topic: stat/pantry_control/gate_toggle
-    icon: 'mdi:garage'
 
 light:
   - platform: template
