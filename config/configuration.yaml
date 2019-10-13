@@ -107,11 +107,6 @@ arduino_relay:
       xbee: false
       boards:
         pantry: 
-    xbee_host:
-      device: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A40084Bj-if00-port0
-      xbee: true
-      boards:
-        front_sprinklers: '00.13.A2.00.40.8B.2D.43'
 
 # Boolean inputs
 input_boolean:
@@ -343,6 +338,20 @@ sensor:
     name: Garage Control Temp
     unit_of_measurement: "°C"
     unique_id: garage_control_temp
+    device_class: temperature
+    icon: 'mdi:thermometer'
+  - platform: mqtt
+    state_topic: "stat/east_sprinklers/temp"
+    name: East Sprinklers Temp
+    unit_of_measurement: "°C"
+    unique_id: east_sprinklers_temp
+    device_class: temperature
+    icon: 'mdi:thermometer'
+  - platform: mqtt
+    state_topic: "stat/gate_control/temp"
+    name: Gate Control Temp
+    unit_of_measurement: "°C"
+    unique_id: gate_control_temp
     device_class: temperature
     icon: 'mdi:thermometer'
   - platform: template    # determine if today is selected as a watering day for program 1
@@ -715,47 +724,6 @@ switch:
         timeout: 36000
         iconon: 'mdi:fan'
         iconoff: 'mdi:fan-off'
-      front_lawn_1:
-        board: front_sprinklers
-        output: 0
-        name: Front Lawn 1
-        door: false
-        timeout: 3600
-        iconon: 'mdi:water'
-        iconoff: 'mdi:water-off'
-      front_lawn_2:
-        board: front_sprinklers
-        output: 1
-        name: Front Lawn 2
-        door: false
-        timeout: 3600
-        iconon: 'mdi:water'
-        iconoff: 'mdi:water-off'
-      front_lawn_3:
-        board: front_sprinklers
-        output: 2
-        name: Front Lawn 3
-        door: false
-        timeout: 3600
-        iconon: 'mdi:water'
-        iconoff: 'mdi:water-off'
-      west_trees:
-        board: front_sprinklers
-        output: 3
-        name: West Trees
-        door: false
-        timeout: 3600
-        iconon: 'mdi:water'
-        iconoff: 'mdi:water-off'
-      car_gate:
-        board: front_sprinklers
-        output: 5
-        input: 0
-        name: Car Gate
-        door: true
-        inverted: true
-        iconon: 'mdi:garage-open'
-        iconoff: 'mdi:garage'
   - platform: mqtt
     name: "Pool Main"
     state_topic: stat/pool_control/main
@@ -775,47 +743,72 @@ switch:
     name: "Rear Patio 1"
     state_topic: stat/garage_control/rear_patio_1
     command_topic: cmnd/garage_control/rear_patio_1
-    iconon: 'mdi:water'
+    icon: 'mdi:water'
   - platform: mqtt
     name: "Rear Patio 2"
     state_topic: stat/garage_control/rear_patio_2
     command_topic: cmnd/garage_control/rear_patio_2
-    iconon: 'mdi:water'
+    icon: 'mdi:water'
   - platform: mqtt
     name: "Rear Patio 3"
     state_topic: stat/garage_control/rear_patio_3
     command_topic: cmnd/garage_control/rear_patio_3
-    iconon: 'mdi:water'
+    icon: 'mdi:water'
   - platform: mqtt
     name: "Front Flowers"
     state_topic: stat/garage_control/front_flowers
     command_topic: cmnd/garage_control/front_flowers
-    iconon: 'mdi:water'
+    icon: 'mdi:water'
   - platform: mqtt
     name: "Garage Door"
     state_topic: stat/garage_control/garage
     command_topic: cmnd/garage_control/garage
-    iconon: 'mdi:garage'
+    icon: 'mdi:garage'
   - platform: mqtt
     name: "Coop Door"
     state_topic: stat/coop/POWER
     command_topic: cmnd/coop/POWER
-    iconon: 'mdi:garage'
+    icon: 'mdi:garage'
   - platform: mqtt
     name: "East Lawn 1"
     state_topic: stat/east_sprinklers/east_lawn_1
     command_topic: cmnd/east_sprinklers/east_lawn_1
-    iconon: 'mdi:water'
+    icon: 'mdi:water'
   - platform: mqtt
     name: "East Lawn 2"
     state_topic: stat/east_sprinklers/east_lawn_2
     command_topic: cmnd/east_sprinklers/east_lawn_2
-    iconon: 'mdi:water'
+    icon: 'mdi:water'
   - platform: mqtt
     name: "East Lemon"
     state_topic: stat/east_sprinklers/east_lemon
     command_topic: cmnd/east_sprinklers/east_lemon
-    iconon: 'mdi:water'
+    icon: 'mdi:water'
+  - platform: mqtt
+    name: "Front Lawn 1"
+    state_topic: stat/gate_control/front_lawn_1
+    command_topic: cmnd/gate_control/front_lawn_1
+    icon: 'mdi:water'
+  - platform: mqtt
+    name: "Front Lawn 2"
+    state_topic: stat/gate_control/front_lawn_2
+    command_topic: cmnd/gate_control/front_lawn_2
+    icon: 'mdi:water'
+  - platform: mqtt
+    name: "Front Lawn 3"
+    state_topic: stat/gate_control/front_lawn_3
+    command_topic: cmnd/gate_control/front_lawn_3
+    icon: 'mdi:water'
+  - platform: mqtt
+    name: "West Trees"
+    state_topic: stat/gate_control/west_trees
+    command_topic: cmnd/gate_control/west_trees
+    icon: 'mdi:water'
+  - platform: mqtt
+    name: "Car Gate"
+    state_topic: stat/gate_control/car_gate
+    command_topic: cmnd/gate_control/car_gate
+    icon: 'mdi:garage'
 
 climate:
   - platform: generic_thermostat

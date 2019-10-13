@@ -194,51 +194,6 @@
                 "config_entry_id": null,
                 "device_id": null,
                 "disabled_by": null,
-                "entity_id": "switch.west_trees",
-                "name": null,
-                "platform": "arduino_relay",
-                "unique_id": "west_trees"
-            },
-            {
-                "config_entry_id": null,
-                "device_id": null,
-                "disabled_by": null,
-                "entity_id": "switch.front_lawn_1",
-                "name": null,
-                "platform": "arduino_relay",
-                "unique_id": "front_lawn_1"
-            },
-            {
-                "config_entry_id": null,
-                "device_id": null,
-                "disabled_by": null,
-                "entity_id": "switch.car_gate",
-                "name": null,
-                "platform": "arduino_relay",
-                "unique_id": "car_gate"
-            },
-            {
-                "config_entry_id": null,
-                "device_id": null,
-                "disabled_by": null,
-                "entity_id": "switch.front_lawn_3",
-                "name": null,
-                "platform": "arduino_relay",
-                "unique_id": "front_lawn_3"
-            },
-            {
-                "config_entry_id": null,
-                "device_id": null,
-                "disabled_by": null,
-                "entity_id": "switch.front_lawn_2",
-                "name": null,
-                "platform": "arduino_relay",
-                "unique_id": "front_lawn_2"
-            },
-            {
-                "config_entry_id": null,
-                "device_id": null,
-                "disabled_by": null,
                 "entity_id": "switch.house_heat",
                 "name": null,
                 "platform": "arduino_relay",
@@ -3232,6 +3187,15 @@
                 "platform": "mqtt",
                 "unique_id": "garage_control_temp"
             },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.east_sprinklers_temp",
+                "name": null,
+                "platform": "mqtt",
+                "unique_id": "east_sprinklers_temp"
+            }
         ]
     },
     "key": "core.entity_registry",

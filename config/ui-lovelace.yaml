@@ -405,6 +405,7 @@ views:
           - sensor.pool_control_temp
           - sensor.garage_control_temp
           - sensor.east_sprinklers_temp
+          - sensor.gate_control_temp
       - type: entities
         title: ZWave
         show_header_toggle: false

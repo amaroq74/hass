@@ -9,7 +9,7 @@ hosts = { '172.16.20.50' :  'pool_control',
           '172.16.20.53' :  'coop_control',
           '172.16.20.81' :  'test_switch2' }
 
-filt = "east_sprinklers"
+filt = "gate_control"
 #filt = None
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
