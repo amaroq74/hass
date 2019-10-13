@@ -349,23 +349,23 @@ sensor:
   - platform: mqtt
     state_topic: "stat/pool_control/wifi"
     name: Pool Control Wifi
-    unit_of_measurement: "Dbm"
+    unit_of_measurement: "%"
   - platform: mqtt
     state_topic: "stat/garage_control/wifi"
     name: Garage Control Wifi
-    unit_of_measurement: "Dbm"
+    unit_of_measurement: "%"
   - platform: mqtt
     state_topic: "stat/gate_control/wifi"
     name: Gate Control Wifi
-    unit_of_measurement: "Dbm"
+    unit_of_measurement: "%"
   - platform: mqtt
     state_topic: "stat/east_sprinklers/wifi"
     name: East Sprinklers Wifi
-    unit_of_measurement: "Dbm"
+    unit_of_measurement: "%"
   - platform: mqtt
     state_topic: "stat/pantry_control/wifi"
     name: Pantry Control Wifi
-    unit_of_measurement: "Dbm"
+    unit_of_measurement: "%"
   - platform: template    # determine if today is selected as a watering day for program 1
     sensors:
       rear_patio_watering_day:

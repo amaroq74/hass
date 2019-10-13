@@ -64,6 +64,15 @@ unsigned int  tmp;
 // Macro for logging
 #define logPrintf(...) logUdp.beginPacket(logAddress,logPort); logUdp.printf(__VA_ARGS__); logUdp.endPacket();
 
+int wifiPct() {
+   long rssi = WiFi.RSSI();
+
+   if ( rssi >= -50 ) return 100;
+   else if ( rssi <= -100 ) return 0;
+   else return (int(2 * (rssi + 100)));
+}
+
+
 // MQTT Message Received
 void callback(char* topic, byte* payload, unsigned int length) {
    digitalWrite(LedPin,LOW);
@@ -268,7 +277,7 @@ void loop() {
       digitalWrite(LedPin,LOW);
       ledTime = millis();
       lastDigital = currTime;
-      sprintf(valueStr,"%i",WiFi.RSSI());
+      sprintf(valueStr,"%i",wifiPct());
       logPrintf("Wifi strenth = %s",valueStr);
       client.publish(WifiTopic,valueStr);
    }
