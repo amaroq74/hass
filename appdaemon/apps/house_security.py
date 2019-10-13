@@ -29,10 +29,11 @@ Sounds = { 'gate_bell':  'doorbell.wav',
            'dcare_bell': 'short_beep.wav' }
 
 CamTime = 120
-Cameras = { 'gate_cam'    : zm_camera.ZmCamera('16'),
-            'front_cam'   : zm_camera.ZmCamera('7'),
-            'garage_cam'  : zm_camera.ZmCamera('18'),
-            'side_cam'    : zm_camera.ZmCamera('12') }
+Cameras = { }
+#Cameras = { 'gate_cam'    : zm_camera.ZmCamera('16'),
+#            'front_cam'   : zm_camera.ZmCamera('7'),
+#            'garage_cam'  : zm_camera.ZmCamera('18'),
+#            'side_cam'    : zm_camera.ZmCamera('12') }
 
 Lights = { 'auto_light' : ['switch.gate_light', 
                            #'switch.xmas_lights', 
@@ -111,6 +112,10 @@ class HouseSecurity(hass.Hass):
             self._lastEmail[k] = 0
             self.listen_state(self.sec_update,k)
 
+        # Button Toggles
+        for k in GateToggle:
+            self.listen_state(self.gate_toggle,k)
+
         # Stop cameras
         for k,v in Cameras.items():
             try:
@@ -118,29 +123,19 @@ class HouseSecurity(hass.Hass):
             except Exception as msg:
                 self.error("Error cancelling camera {}: {}".format(k,msg)) # ERROR
 
-        # Pushbutton events
-        self.listen_event(self.button_pressed,'button_pressed')
-
-
-    # Pushbutton listener
-    def button_pressed(self, name, data, *arg, **kwargs):
-        if data['entity_id'] in SecSensors:
-            self.sec_update(data['entity_id'], None, 'off', 'on')
-        elif data['entity_id'] in GateToggle:
-            self.gate_toggle(data['entity_id'], None, 'off', 'on')
-
-
     # Gate toggle
     def gate_toggle(self, entity, attribute, old, new, *args, **kwargs):
-        self.log("Got gate toggle {} {} {} {}".format(entity,attribute,old,new))
-        if new == 'on':
-            sw = GateToggle[entity]
-            cur = self.get_state(sw)
+        if entity in GateToggle:
 
-            if cur == 'on':
-                self.turn_off(sw)
-            else:
-                self.turn_on(sw)
+            self.log("Got gate toggle {} {} {} {}".format(entity,attribute,old,new))
+            if new == 'on':
+                sw = GateToggle[entity]
+                cur = self.get_state(sw)
+
+                if cur == 'on':
+                    self.turn_off(sw)
+                else:
+                    self.turn_on(sw)
 
 
     # Day care alarm, 5 second intervals

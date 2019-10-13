@@ -71,6 +71,14 @@ unsigned int tempValue;
 // Macro for logging
 #define logPrintf(...) logUdp.beginPacket(logAddress,logPort); logUdp.printf(__VA_ARGS__); logUdp.endPacket();
 
+unsigned int wifiPct() {
+   long rssi = WiFi.RSSI();
+
+   if ( rssi >= -50 ) return 100
+   else if ( rss <= -100 ) return 0;
+   else return (unsigned int(2 * (rssi + 100)))
+}
+
 
 // Send message to arduino
 void sendMsg() {
