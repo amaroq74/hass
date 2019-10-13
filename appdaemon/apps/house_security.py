@@ -3,7 +3,6 @@
 import sys
 sys.path.append('/amaroq/hass/pylib')
 import hass_secrets as secrets
-import zm_camera
 
 import appdaemon.plugins.hass.hassapi as hass
 import time
@@ -28,13 +27,6 @@ Sounds = { 'gate_bell':  'doorbell.wav',
            'door_bell':  'front_door_and_gate_bell.wav',
            'dcare_bell': 'short_beep.wav' }
 
-CamTime = 120
-Cameras = { }
-#Cameras = { 'gate_cam'    : zm_camera.ZmCamera('16'),
-#            'front_cam'   : zm_camera.ZmCamera('7'),
-#            'garage_cam'  : zm_camera.ZmCamera('18'),
-#            'side_cam'    : zm_camera.ZmCamera('12') }
-
 Lights = { 'auto_light' : ['switch.gate_light', 
                            #'switch.xmas_lights', 
                            'switch.entry_light', 
@@ -49,7 +41,6 @@ EmailLevels = {'night_alarm' : 'Alarm',
                'house_alarm' : 'Alarm'}
 
 EmailAddrs = 'ryan@amaroq.com'
-#EmailAddrs = 'ryan@amaroq.com,steph@amaroq.com'
 
 ##################################
 # Sensor Setup
@@ -116,12 +107,6 @@ class HouseSecurity(hass.Hass):
         for k in GateToggle:
             self.listen_state(self.gate_toggle,k)
 
-        # Stop cameras
-        for k,v in Cameras.items():
-            try:
-                v.cancelCamera()
-            except Exception as msg:
-                self.error("Error cancelling camera {}: {}".format(k,msg)) # ERROR
 
     # Gate toggle
     def gate_toggle(self, entity, attribute, old, new, *args, **kwargs):
@@ -179,14 +164,6 @@ class HouseSecurity(hass.Hass):
                                       media_content_id='http://172.16.20.1:8123/local/sounds/' + Sounds[action],
                                       media_content_type='music')
 
-                # Check for camera
-                if action in Cameras:
-                    try:
-                        Cameras[action].triggerCamera(entity,'HASS',CamTime)
-                        self.debug("Triggering camera: {}".format(action))
-                    except Exception as msg:
-                        self.error("Error triggering camera {}: {}".format(action,msg))
-
                 # Check for lights
                 if self.sun_down() and action in Lights:
                     for light in Lights[action]:
@@ -213,69 +190,6 @@ class HouseSecurity(hass.Hass):
 
             text  = '<center>\n'
             text += '<b>{} triggered by sensor {}</b><br><p>\n'.format(level,entity)
-
-            urlData = { 'view' : 'events',
-                        'filter[Query][terms][0][attr]' : 'Notes',
-                        'filter[Query][terms][0][op]'   : '=~',
-                        'filter[Query][terms][0][val]'  : 'HASS',
-                        'filter[Query][terms][1][cnj]'  : 'and',
-                        'filter[Query][terms][1][attr]' : 'StartDateTime',
-                        'filter[Query][terms][1][op]'   : '>=',
-                        'filter[Query][terms][1][val]'  : '{0:%Y-%m-%d %H:%M:%S}'.format(datetime.now()+timedelta(minutes=-15)),
-                        'filter[Query][terms][2][cnj]'  : 'and',
-                        'filter[Query][terms][2][attr]' : 'StartDateTime',
-                        'filter[Query][terms][2][op]'   : '<=',
-                        'filter[Query][terms][2][val]'  : '{0:%Y-%m-%d %H:%M:%S}'.format(datetime.now()+timedelta(minutes=+15)),
-                        'sort_field' : 'StartDateTime',
-                        'sort_asc'   : '0',
-                        'limit'      : '100',
-                        'page'       : '0'}
-
-
-            text += '<a href=https://www.amaroq.net/zm/index.php?{}>Relative Events</a><br><p>\n'.format(urlencode(urlData))
-
-            urlData = { 'view' : 'events',
-                        'filter[Query][terms][0][attr]' : 'Notes',
-                        'filter[Query][terms][0][op]'   : '=~',
-                        'filter[Query][terms][0][val]'  : 'HASS',
-                        'filter[Query][terms][1][cnj]'  : 'and',
-                        'filter[Query][terms][1][attr]' : 'StartDateTime',
-                        'filter[Query][terms][1][op]'   : '>=',
-                        'filter[Query][terms][2][val]'  : '-1+day',
-                        'sort_field' : 'StartDateTime',
-                        'sort_asc'   : '0',
-                        'limit'      : '100',
-                        'page'       : '0'}
-
-            text += '<a href=https://www.amaroq.net/zm/index.php?{}>24 Hour Events</a><br><p>\n'.format(urlencode(urlData))
-
-            urlData = { 'view'         : 'montage',
-                        'filtering'    : '',
-                        'MonitorName'  : '',
-                        'Source'       : '',
-                        'MonitorId[0]' : '13',
-                        'MonitorId[1]' : '8',
-                        'MonitorId[2]' : '15' }
-
-            text += '<a href=https://www.amaroq.net/zm/index.php?{}>Front Yard</a><br><p>\n'.format(urlencode(urlData))
-
-            urlData = { 'view'         : 'montage',
-                        'filtering'    : '',
-                        'MonitorName'  : '',
-                        'Source'       : '',
-                        'MonitorId[0]' : '11',
-                        'MonitorId[1]' : '14' }
-
-            text += '<a href=https://www.amaroq.net/zm/index.php?{}>Back Yard</a><br><p>\n'.format(urlencode(urlData))
-
-            urlData = { 'view'         : 'console',
-                        'action'       : '',
-                        'filtering'    : '',
-                        'MonitorName'  : '',
-                        'Source'       : ''}
-
-            text += '<a href=https://www.amaroq.net/zm/index.php?{}>Zoneminder</a><br><p>\n'.format(urlencode(urlData))
-            text += '</center>\n'
 
             msg.attach(MIMEText(text, 'html'))
 
