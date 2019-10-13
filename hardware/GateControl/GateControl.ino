@@ -18,7 +18,7 @@ const unsigned long AnalogPeriod  = 60000; // 1 minute
 const unsigned long DigitalPeriod = 60000; // 1 minute
 
 // Outputs
-unsigned int OutputCount       = 3;
+unsigned int OutputCount       = 4;
 const char * OutputCmndTopic[] = {"cmnd/gate_control/front_lawn_1", "cmnd/gate_control/front_lawn_2", 
                                   "cmnd/gate_control/front_lawn_3", "cmnd/gate_control/west_trees"};
 const char * OutputStatTopic[] = {"stat/gate_control/front_lawn_1", "stat/gate_control/front_lawn_2", 
