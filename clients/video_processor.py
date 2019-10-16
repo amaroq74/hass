@@ -76,6 +76,7 @@ class ImgReceiver(object):
         self.cnt   = 0
         self.time  = 0
         self.itime = 0
+        self.rtime = 0
         self.i     = i
         self.sess  = None
 
@@ -100,7 +101,9 @@ class ImgReceiver(object):
     def worker(self):
         while True:
             self.cap = cv2.VideoCapture(self.url)
-            self.time = time.time()
+            self.time  = time.time()
+            self.itime = time.time()
+            self.rtime = time.time()
             print("Opened {}".format(self.url))
 
             ret, frame = self.cap.read()
@@ -123,10 +126,10 @@ class ImgReceiver(object):
                     self.cnt += 1
                     self.itime = time.time()
 
-                if (time.time() - self.time) > 30.0:
+                if (time.time() - self.rtime) > 30.0:
                     print("Frame rate from {} = {}".format(self.url,self.cnt/(time.time()-self.time)))
                     self.cnt = 0
-                    self.time = time.time()
+                    self.rtime = time.time()
 
                 ret, frame = self.cap.read()
 
