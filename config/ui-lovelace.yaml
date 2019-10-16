@@ -16,15 +16,14 @@ views:
         show_header_toggle: false
         entities:
           - sensor.pws_weather
-          - sensor.wind_compass
-          - sensor.wind_direction
-          - sensor.wind_average
-          - sensor.wind_gust
           - sensor.outdoor_temperature
           - sensor.outdoor_humidity
-          - sensor.outdoor_dewpoint
+          - sensor.wind_compass
+          - sensor.wind_average
+          - sensor.wind_gust
           - sensor.indoor_pressure
           - sensor.indoor_trend
+          - sensor.outdoor_dewpoint
           - sensor.pws_uv
           - sensor.pws_solarradiation
           - sensor.rain_day
