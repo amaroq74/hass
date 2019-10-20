@@ -1875,15 +1875,6 @@
             },
             {
                 "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
-                "device_id": "38c08f33bb5e45c195898cd1a9c9f94e",
-                "disabled_by": null,
-                "entity_id": "binary_sensor.bedta_motiion",
-                "name": "BedTA Motion",
-                "platform": "zwave",
-                "unique_id": "6-105644048"
-            },
-            {
-                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
                 "device_id": "2ee78ae089b24a09b6194592f95752df",
                 "disabled_by": null,
                 "entity_id": "light.bookcases",
@@ -2331,6 +2322,42 @@
                 "name": "Patio Security 1",
                 "platform": "zwave",
                 "unique_id": "80-1346977808"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "38c08f33bb5e45c195898cd1a9c9f94e",
+                "disabled_by": null,
+                "entity_id": "binary_sensor.bedta_motion",
+                "name": "BedTA Motion",
+                "platform": "zwave",
+                "unique_id": "6-105644048"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "651ca4dcd07e44b9b730068e97d1b2cf",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_alarm_type",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "51-144115188937539601"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "651ca4dcd07e44b9b730068e97d1b2cf",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_alarm_level",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "51-144396663914250257"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "651ca4dcd07e44b9b730068e97d1b2cf",
+                "disabled_by": null,
+                "entity_id": "binary_sensor.shed_door",
+                "name": "Shed Door",
+                "platform": "zwave",
+                "unique_id": "51-860618768"
             }
         ]
     },
