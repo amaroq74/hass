@@ -677,8 +677,8 @@
                 "unique_id": "node-73"
             },
             {
-                "config_entry_id": null,
-                "device_id": null,
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "7f78f0104e1d41478912773c9bb59698",
                 "disabled_by": null,
                 "entity_id": "zwave.ped_gate",
                 "name": "Ped Gate",
@@ -1008,15 +1008,6 @@
                 "name": "Pool Temperature",
                 "platform": "rfxcom_rx",
                 "unique_id": "temp_temp_f007pf_02"
-            },
-            {
-                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
-                "device_id": "ebcde5fbd91e4b8883008e2e3aeca825",
-                "disabled_by": null,
-                "entity_id": "zwave.ecolink_door_window_sensor",
-                "name": null,
-                "platform": "zwave",
-                "unique_id": "node-116"
             },
             {
                 "config_entry_id": null,
@@ -2358,6 +2349,249 @@
                 "name": "Shed Door",
                 "platform": "zwave",
                 "unique_id": "51-860618768"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "7f78f0104e1d41478912773c9bb59698",
+                "disabled_by": null,
+                "entity_id": "sensor.aeon_labs_zw097_dry_contact_sensor_gen5_previous_event_cleared",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "59-72057595033829393"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "7f78f0104e1d41478912773c9bb59698",
+                "disabled_by": null,
+                "entity_id": "sensor.aeon_labs_zw097_dry_contact_sensor_gen5_access_control",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "59-1688850856165396"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "7f78f0104e1d41478912773c9bb59698",
+                "disabled_by": null,
+                "entity_id": "binary_sensor.ped_gate",
+                "name": "Ped Gate",
+                "platform": "zwave",
+                "unique_id": "59-994836496"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "bb0ad638f86e402ca2e87c6a55a22fcc",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_previous_event_cleared_9",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "53-72057594933166097"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "bb0ad638f86e402ca2e87c6a55a22fcc",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_access_control_3",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "53-1688850755502100"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "bb0ad638f86e402ca2e87c6a55a22fcc",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_home_security_9",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "53-1970325732212756"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "bb0ad638f86e402ca2e87c6a55a22fcc",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_power_management_3",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "53-2251800708923412"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "e6c965cb235542a4b9f08d4f41bb0b9a",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_previous_event_cleared_10",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "100-72057595721695249"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "e6c965cb235542a4b9f08d4f41bb0b9a",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_access_control_4",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "100-1688851544031252"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "e6c965cb235542a4b9f08d4f41bb0b9a",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_home_security_10",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "100-1970326520741908"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "e6c965cb235542a4b9f08d4f41bb0b9a",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_power_management_4",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "100-2251801497452564"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "ebcde5fbd91e4b8883008e2e3aeca825",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_previous_event_cleared_11",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "116-72057595990130705"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "ebcde5fbd91e4b8883008e2e3aeca825",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_access_control_5",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "116-1688851812466708"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "ebcde5fbd91e4b8883008e2e3aeca825",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_home_security_11",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "116-1970326789177364"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "ebcde5fbd91e4b8883008e2e3aeca825",
+                "disabled_by": null,
+                "entity_id": "sensor.ecolink_door_window_sensor_power_management_5",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "116-2251801765888020"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "bb0ad638f86e402ca2e87c6a55a22fcc",
+                "disabled_by": null,
+                "entity_id": "binary_sensor.garbage_gate",
+                "name": "Garbage Gate",
+                "platform": "zwave",
+                "unique_id": "53-894173200"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "ebcde5fbd91e4b8883008e2e3aeca825",
+                "disabled_by": null,
+                "entity_id": "zwave.patio_gate",
+                "name": "Patio Gate",
+                "platform": "zwave",
+                "unique_id": "node-116"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "ebcde5fbd91e4b8883008e2e3aeca825",
+                "disabled_by": null,
+                "entity_id": "binary_sensor.patio_gate",
+                "name": "Patio Gate",
+                "platform": "zwave",
+                "unique_id": "116-1951137808"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "c55fc03698dc489eb4463b02cc5d7696",
+                "disabled_by": null,
+                "entity_id": "sensor.elexa_consumer_products_inc_dome_leak_sensor_previous_event_cleared",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "105-72057595805581329"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "c55fc03698dc489eb4463b02cc5d7696",
+                "disabled_by": null,
+                "entity_id": "sensor.elexa_consumer_products_inc_dome_leak_sensor_water",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "105-1407376651206676"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "1f53e0344ac6428c90245404af94ef45",
+                "disabled_by": null,
+                "entity_id": "binary_sensor.vision_security_zp3111_multisensor_4in1_sensor",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "106-1783365648"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "2a964bb91ea8482d98d51201f4865bf1",
+                "disabled_by": null,
+                "entity_id": "sensor.camper_illuminance",
+                "name": "Camper Illuminence",
+                "platform": "zwave",
+                "unique_id": "108-844426747068434"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "2a964bb91ea8482d98d51201f4865bf1",
+                "disabled_by": null,
+                "entity_id": "binary_sensor.camper_motion2",
+                "name": "Camper Motion",
+                "platform": "zwave",
+                "unique_id": "108-1816920080"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "2a964bb91ea8482d98d51201f4865bf1",
+                "disabled_by": null,
+                "entity_id": "sensor.vision_security_zp3111_multisensor_4in1_air_temperature",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "108-281476793647122"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "2a964bb91ea8482d98d51201f4865bf1",
+                "disabled_by": null,
+                "entity_id": "sensor.vision_security_zp3111_multisensor_4in1_humidity",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "108-1407376700489746"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "1f53e0344ac6428c90245404af94ef45",
+                "disabled_by": null,
+                "entity_id": "sensor.shed_illuminence",
+                "name": "Shed Illuminence",
+                "platform": "zwave",
+                "unique_id": "106-844426713514002"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "c55fc03698dc489eb4463b02cc5d7696",
+                "disabled_by": null,
+                "entity_id": "binary_sensor.sump_alarm",
+                "name": "Sump Alarm",
+                "platform": "zwave",
+                "unique_id": "105-1766588432"
             }
         ]
     },
