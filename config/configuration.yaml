@@ -453,16 +453,16 @@ zwave:
   device_config: !include zwave_device_config.yaml
 
 binary_sensor:
-  - platform: template
-    sensors:
-      shed_motion:
-        friendly_name: "Shed Motion"
-        device_class: motion
-        value_template: "{{ states('sensor.shed_motion')|int == 8 }}"
-      camper_motion:
-        friendly_name: "Camper Motion"
-        device_class: motion
-        value_template: "{{ states('sensor.camper_motion')|int == 8 }}"
+   #  - platform: template
+   # sensors:
+   #   shed_motion:
+   #     friendly_name: "Shed Motion"
+   #     device_class: motion
+   #     value_template: "{{ states('sensor.shed_motion')|int == 8 }}"
+   #   camper_motion:
+   #     friendly_name: "Camper Motion"
+   #     device_class: motion
+   #     value_template: "{{ states('sensor.camper_motion')|int == 8 }}"
   - platform: mqtt
     name: "Gate Bell"
     state_topic: stat/pantry_control/gate_bell

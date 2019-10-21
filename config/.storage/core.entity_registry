@@ -831,15 +831,6 @@
             },
             {
                 "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
-                "device_id": "1f53e0344ac6428c90245404af94ef45",
-                "disabled_by": null,
-                "entity_id": "zwave.shed_sensor",
-                "name": "Shed Sensor",
-                "platform": "zwave",
-                "unique_id": "node-106"
-            },
-            {
-                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
                 "device_id": "9ba01b6e23054793996cd6bd4b58cc2f",
                 "disabled_by": null,
                 "entity_id": "zwave.kitchen_door",
@@ -2514,30 +2505,12 @@
             },
             {
                 "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
-                "device_id": "1f53e0344ac6428c90245404af94ef45",
-                "disabled_by": null,
-                "entity_id": "sensor.shed_illuminence",
-                "name": "Shed Illuminence",
-                "platform": "zwave",
-                "unique_id": "106-844426713514002"
-            },
-            {
-                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
                 "device_id": "c55fc03698dc489eb4463b02cc5d7696",
                 "disabled_by": null,
                 "entity_id": "binary_sensor.sump_alarm",
                 "name": "Sump Alarm",
                 "platform": "zwave",
                 "unique_id": "105-1766588432"
-            },
-            {
-                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
-                "device_id": "2a964bb91ea8482d98d51201f4865bf1",
-                "disabled_by": null,
-                "entity_id": "binary_sensor.vision_security_zp3111_multisensor_4in1_sensor",
-                "name": null,
-                "platform": "zwave",
-                "unique_id": "108-1816920080"
             },
             {
                 "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
@@ -2579,8 +2552,8 @@
                 "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
                 "device_id": "e07b44fd46fa4ab8a0477abc699704ef",
                 "disabled_by": null,
-                "entity_id": "zwave.ge_jasco_products_12722_on_off_relay_switch",
-                "name": null,
+                "entity_id": "zwave.yard_lights2",
+                "name": "Yard Lights 2",
                 "platform": "zwave",
                 "unique_id": "node-57"
             },
@@ -2588,10 +2561,19 @@
                 "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
                 "device_id": "e07b44fd46fa4ab8a0477abc699704ef",
                 "disabled_by": null,
-                "entity_id": "switch.ge_jasco_products_12722_on_off_relay_switch_switch",
-                "name": null,
+                "entity_id": "switch.yard_lights2",
+                "name": "Yard Lights 2",
                 "platform": "zwave",
                 "unique_id": "57-961101840"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "2a964bb91ea8482d98d51201f4865bf1",
+                "disabled_by": null,
+                "entity_id": "binary_sensor.camper_motion",
+                "name": "Camper Motion",
+                "platform": "zwave",
+                "unique_id": "108-1816920080"
             }
         ]
     },
