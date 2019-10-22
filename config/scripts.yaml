@@ -155,7 +155,7 @@ movie_lights:
   - alias: step2
     data:
       entity_id: light.bookcases
-      brightness_pct: 50
+      brightness_pct: 30
     service: light.turn_on
 
 house_lights_off:

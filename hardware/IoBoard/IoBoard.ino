@@ -125,6 +125,8 @@ void setup() {
    wdt_enable(WDTO_8S);
 }
 
+void (* resetFunc)(void) = 0;
+
 // Main loop
 void loop() {
    txReq = 0;
@@ -156,8 +158,11 @@ void loop() {
                    mark, &(reqRelState[0]), &(reqRelState[1]), &(reqRelState[2]),
                    &(reqRelState[3]), &(reqRelState[4]), &(reqRelState[5]));
 
+      // Check for reset
+      if ( strcmp(mark,"RESET") == 0 ) resetFunc();
+
       // Check marker
-      if ( ret == 7 && strcmp(mark,"STATE") == 0 ) {
+      else if ( ret == 7 && strcmp(mark,"STATE") == 0 ) {
 
          // Update state
          for (x=0; x < relayCount; x++) {

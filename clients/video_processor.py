@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 import sys
-sys.path.append('/usr/local/lib/video_ai')
+
+basePath = '/usr/local/lib/video_ai/models/research/'
+
+sys.path.append(basePath)
 
 import os
 import time
@@ -16,17 +19,24 @@ from object_detection.utils import visualization_utils as vis_util
 
 MODEL_NAME = 'ssd_mobilenet_v1_coco_11_06_2017'
 LABEL_NAME = 'mscoco_label_map.pbtxt'
+NUM_CLASSES = 90
 
 #MODEL_NAME = 'ssd_mobilenet_v2_oid_v4_2018_12_12'
 #LABEL_NAME = 'oid_v4_label_map.pbtxt'
+#NUM_CLASSES = 600
 
 # Path to frozen detection graph. This is the actual model that is used for the object detection.
-PATH_TO_CKPT = os.path.join('/usr/local/lib/video_ai', 'object_detection', MODEL_NAME, 'frozen_inference_graph.pb')
+PATH_TO_CKPT = os.path.join(basePath, 
+                            'object_detection', 
+                            'pre-trained', 
+                            MODEL_NAME, 
+                            'frozen_inference_graph.pb')
 
 # List of the strings that is used to add correct label for each box.
-PATH_TO_LABELS = os.path.join('/usr/local/lib/video_ai', 'object_detection', 'data', LABEL_NAME)
-
-NUM_CLASSES = 90
+PATH_TO_LABELS = os.path.join(basePath, 
+                              'object_detection', 
+                              'data', 
+                              LABEL_NAME)
 
 # Loading label map
 label_map = label_map_util.load_labelmap(PATH_TO_LABELS)

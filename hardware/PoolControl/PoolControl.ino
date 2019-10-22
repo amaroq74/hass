@@ -35,9 +35,8 @@ const char * InAnalogTopic[]   = {"stat/pool_control/solar_in",
                                   "stat/pool_control/solar_out"};
 unsigned int InAnalogChannel[] = {2, 3};
 
-// Temperature
-const char * TempTopic = "stat/pool_control/temp";
-const char * WifiTopic = "stat/pool_control/wifi";
+const char * TempTopic  = "stat/pool_control/temp";
+const char * WifiTopic  = "stat/pool_control/wifi";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -148,8 +147,8 @@ void callback(char* topic, byte* payload, unsigned int length) {
          }
       }
    }
-
    sendMsg();
+
 }
 
 
@@ -244,6 +243,7 @@ void reconnect() {
          for (x=0; x < OutputCount; x++) {
             client.subscribe(OutputCmndTopic[x]);
          }
+
       } else {
          logPrintf("Failed to connect to MQTT, waiting 5 seconds.")
          delay(5000);

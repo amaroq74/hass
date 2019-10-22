@@ -371,6 +371,11 @@ views:
   - title: Monitor
     cards:
       - type: entities
+        title: Misc
+        show_header_toggle: false
+        entities:
+          - sensor.time_online
+      - type: entities
         title: Roomba1
         show_header_toggle: false
         entities:

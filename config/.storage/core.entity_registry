@@ -1812,15 +1812,6 @@
             },
             {
                 "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
-                "device_id": "86d6db3c2aa740eba501a0fbed4585b8",
-                "disabled_by": null,
-                "entity_id": "switch.bedr_light",
-                "name": "BedR Light",
-                "platform": "zwave",
-                "unique_id": "67-1128874000"
-            },
-            {
-                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
                 "device_id": "457765cd14dd45b18814466f0dc84df6",
                 "disabled_by": null,
                 "entity_id": "binary_sensor.bedr_motion",
@@ -2124,15 +2115,6 @@
                 "name": "Long Hall",
                 "platform": "zwave",
                 "unique_id": "98-1648967696"
-            },
-            {
-                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
-                "device_id": "7deef4b0341844f6a42ac69836a2a433",
-                "disabled_by": null,
-                "entity_id": "fan.master_fan",
-                "name": "Master Fan",
-                "platform": "zwave",
-                "unique_id": "69-1162444817"
             },
             {
                 "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
@@ -2574,6 +2556,24 @@
                 "name": "Camper Motion",
                 "platform": "zwave",
                 "unique_id": "108-1816920080"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "1f53e0344ac6428c90245404af94ef45",
+                "disabled_by": null,
+                "entity_id": "zwave.unknown_node_106",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "node-106"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "86d6db3c2aa740eba501a0fbed4585b8",
+                "disabled_by": null,
+                "entity_id": "switch.ge_jasco_products_12722_on_off_relay_switch_switch",
+                "name": null,
+                "platform": "zwave",
+                "unique_id": "67-1128874000"
             }
         ]
     },

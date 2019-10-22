@@ -268,6 +268,9 @@ input_number:
 
 # Sensors
 sensor:
+  - platform: uptime
+    name: Time Online
+    unit_of_measurement: hours
   - platform: wunderground
     api_key: !secret wunder_api
     pws_id: KCAREDWO4

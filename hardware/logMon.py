@@ -14,12 +14,12 @@ hosts = { '172.16.20.50' :  'pool_control',
 
 #filt = "pool_control"
 #filt = "garage_control"
-#filt = "gate_control"
+filt = "gate_control"
 #filt = "east_sprinklers"
 #filt = "test_node1"
 #filt = "pantry_control"
 #filt = "test_shield1"
-filt = None
+#filt = None
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 

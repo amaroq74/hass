@@ -38,13 +38,15 @@ unsigned int InAnalogChannel[] = {};
 // Gate IO
 const char * GateCmndTopic  = "cmnd/gate_control/car_gate";
 const char * GateStatTopic  = "stat/gate_control/car_gate";
+
 unsigned int GateOutChannel = 5;
 unsigned int GateInChannel  = 0;
 unsigned int GateInvert     = 1;
 
 // Temperature
-const char * TempTopic = "stat/gate_control/temp";
-const char * WifiTopic = "stat/gate_control/wifi";
+const char * TempTopic  = "stat/gate_control/temp";
+const char * WifiTopic  = "stat/gate_control/wifi";
+const char * ResetTopic = "cmnd/gate_control/reset";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -176,6 +178,14 @@ void callback(char* topic, byte* payload, unsigned int length) {
    sendMsg();
    outputRelays[GateOutChannel] = 0;
    sendMsg();
+
+   if ( strcmp(ResetTopic,topic) == 0 && strncmp((char *)payload,"ON",2) == 0 ) {
+      delay(100);
+      sprintf(txBuffer,"RESET \n");
+      Serial.write(txBuffer);
+      logPrintf("Sending reset to arduino")
+      delay(100);
+   }
 }
 
 
@@ -273,6 +283,7 @@ void reconnect() {
          }
 
          client.subscribe(GateCmndTopic);
+         client.subscribe(ResetTopic);
 
       } else {
          logPrintf("Failed to connect to MQTT, waiting 5 seconds.")
