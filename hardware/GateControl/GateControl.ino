@@ -55,8 +55,9 @@ unsigned int lastMsgRx   = 0;
 unsigned int lastMsgTx   = millis();
 unsigned int lastAnalog  = millis();
 unsigned int lastDigital = millis();
-unsigned int x;
+unsigned int lastReset   = millis();
 unsigned int currTime;
+unsigned int x;
 
 float value;
 char  valueStr[50];
@@ -90,6 +91,15 @@ int wifiPct() {
    else return (int(2 * (rssi + 100)));
 }
 
+// Reset io board
+void resetIoBoard() {
+   delay(200);
+   sprintf(txBuffer,"RESET \n");
+   Serial.write(txBuffer);
+   logPrintf("Sending reset to arduino")
+   delay(200);
+   lastReset = millis();
+}
 
 // Send message to arduino
 void sendMsg() {
@@ -179,13 +189,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
    outputRelays[GateOutChannel] = 0;
    sendMsg();
 
-   if ( strcmp(ResetTopic,topic) == 0 && strncmp((char *)payload,"ON",2) == 0 ) {
-      delay(100);
-      sprintf(txBuffer,"RESET \n");
-      Serial.write(txBuffer);
-      logPrintf("Sending reset to arduino")
-      delay(100);
-   }
+   if ( strcmp(ResetTopic,topic) == 0 && strncmp((char *)payload,"ON",2) == 0 ) resetIoBoard();
 }
 
 
@@ -339,6 +343,10 @@ void loop() {
 
       lastAnalog = currTime;
    }
+
+   // 1 Minute has passed without receiving a message
+   //if ( ((currTime - lastMsgRx) > AnalogPeriod ) &&
+        //((currTime - lastReset) > AnalogPeriod ) ) resetIoBoard();
 
    // Refresh digital values
    if ( (currTime - lastDigital) > DigitalPeriod) {

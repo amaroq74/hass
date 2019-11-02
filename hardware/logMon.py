@@ -10,15 +10,20 @@ hosts = { '172.16.20.50' :  'pool_control',
           '172.16.20.81' :  'test_switch2',
           '172.16.20.83' :  'test_node1',
           '172.16.20.55' :  'pantry_control',
-          '172.16.20.82' :  'test_shield1'}
+          '172.16.20.82' :  'test_shield1',
+          '172.16.20.56' :  'sonoff1',
+          '172.16.20.57' :  'sonoff2',
+          '172.16.20.58' :  'sonoff3',
+          '172.16.20.59' :  'sonoff4'}
 
 #filt = "pool_control"
 #filt = "garage_control"
-filt = "gate_control"
+#filt = "gate_control"
 #filt = "east_sprinklers"
 #filt = "test_node1"
 #filt = "pantry_control"
 #filt = "test_shield1"
+filt = "sonoff1"
 #filt = None
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

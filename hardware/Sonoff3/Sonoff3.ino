@@ -16,7 +16,9 @@ IPAddress    logAddress (172,16,20,1);
 const char *  OutputCmndTopic = "cmnd/sonoff3/switch";
 const char *  OutputStatTopic = "stat/sonoff3/switch";
 unsigned int  OutputPin       = 12;
+unsigned int  LedPin          = 13;
 unsigned long DigitalPeriod   = 30000;
+unsigned long LedPeriod       = 500;
 
 const char * WifiTopic = "stat/sonoff3/wifi";
 
@@ -34,6 +36,7 @@ char  valueStr[50];
 
 unsigned int outputLevel;
 unsigned int outputTime;
+unsigned int ledTime;
 
 // Macro for logging
 #define logPrintf(...) logUdp.beginPacket(logAddress,logPort); logUdp.printf(__VA_ARGS__); logUdp.endPacket();
@@ -48,6 +51,8 @@ int wifiPct() {
 
 // MQTT Message Received
 void callback(char* topic, byte* payload, unsigned int length) {
+   ledTime = millis();
+   digitalWrite(LedPin,LOW);
 
    // Topic match
    if ( strcmp(OutputCmndTopic,topic) == 0 ) {
@@ -128,8 +133,15 @@ void setup() {
    client.setServer(mqtt_server, 1883);
    client.setCallback(callback);
 
+   pinMode(OutputPin,OUTPUT);
+   pinMode(LedPin,OUTPUT);
+
+   digitalWrite(LedPin,HIGH);
+   digitalWrite(OutputPin,LOW);
+
    outputLevel = 0;
-   outputTime  = millis();
+   outputTime = millis();
+   ledTime = millis();
 }
 
 
@@ -178,6 +190,11 @@ void loop() {
       sprintf(valueStr,"%i",wifiPct());
       logPrintf("Wifi strenth = %s",valueStr);
       client.publish(WifiTopic,valueStr);
+   }
+
+   if ( (currTime - ledTime) > LedPeriod ) {
+      ledTime = millis();
+      digitalWrite(LedPin,HIGH);
    }
 }
 
