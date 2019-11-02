@@ -51,8 +51,16 @@ urls = ['rtsp://view:lolhak@172.16.20.5:554/h264Preview_01_sub', # 0 Front
         'rtsp://view:lolhak@172.16.20.5:554/h264Preview_06_sub', # 5 Roses
         'http://coopcam.amaroq.net/video.cgi']                   # 6
 
+def list_hits(classes, scores, category_index, i):
+    for x in range(len(classes)):
+        score = scores[x]
+        cls = category_index[classes[x]]
 
-def detect_objects(image_np, sess, detection_graph):
+        if score > 0.55:
+            print(f"Index={i}, Class={cls}, Score={score}")
+
+
+def detect_objects(image_np, sess, detection_graph, i):
     if True:
 
         # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
@@ -80,8 +88,11 @@ def detect_objects(image_np, sess, detection_graph):
             np.squeeze(classes).astype(np.int32),
             np.squeeze(scores),
             category_index,
+            min_score_thresh=.55,
             use_normalized_coordinates=True,
             line_thickness=4)
+
+        list_hits(np.squeeze(classes), np.squeeze(scores), category_index, i)
 
     return image_np
 
@@ -101,6 +112,9 @@ class ImgReceiver(object):
         self.thread.start()
 
     def worker(self):
+        null_fd = os.open(os.devnull, os.O_RDWR)
+        os.dup2(null_fd, 2)
+
         while True:
             self.cap = cv2.VideoCapture(self.url)
             self.time  = time.time()
@@ -170,32 +184,32 @@ while True:
             # Large upper left, gate
             if imgRx[1].img is not None:
                 #newImg[0:480,0:640] = imgRx[1].img
-                newImg[0:480,0:640] = detect_objects(imgRx[1].img, sess, detection_graph)
+                newImg[0:480,0:640] = detect_objects(imgRx[1].img, sess, detection_graph, 1)
 
             # Lower left, garage
             if imgRx[0].img is not None:
                 #newImg[480:720,0:320] = imgRx[0].img
-                newImg[480:720,0:320] = detect_objects(imgRx[0].img, sess, detection_graph)
+                newImg[480:720,0:320] = detect_objects(imgRx[0].img, sess, detection_graph, 0)
 
             # Lower middle, front
             if imgRx[2].img is not None:
                 #newImg[480:720,320:640] = imgRx[2].img
-                newImg[480:720,320:640] = detect_objects(imgRx[2].img, sess, detection_graph)
+                newImg[480:720,320:640] = detect_objects(imgRx[2].img, sess, detection_graph, 2)
 
             # Upper right, rear
             if imgRx[3].img is not None:
                 #newImg[0:240,640:960] = imgRx[3].img
-                newImg[0:240,640:960] = detect_objects(imgRx[3].img, sess, detection_graph)
+                newImg[0:240,640:960] = detect_objects(imgRx[3].img, sess, detection_graph, 3)
 
             # Middle right, Roses
             if imgRx[5].img is not None:
                 #newImg[240:480,640:960] = imgRx[5].img
-                newImg[240:480,640:960] =detect_objects(imgRx[5].img, sess, detection_graph)
+                newImg[240:480,640:960] =detect_objects(imgRx[5].img, sess, detection_graph, 5)
 
             # Lower right, Side
             if imgRx[4].img is not None:
                 #newImg[480:720,640:960] = imgRx[4].img
-                newImg[480:720,640:960] = detect_objects(imgRx[4].img, sess, detection_graph)
+                newImg[480:720,640:960] = detect_objects(imgRx[4].img, sess, detection_graph, 4)
 
             # Overlay, Coop
             if imgRx[6].img is not None:
