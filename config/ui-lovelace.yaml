@@ -163,6 +163,11 @@ views:
         entities:
           - light.office_light
       - type: entities
+        title: Garage
+        show_header_toggle: false
+        entities:
+          - light.garage_light
+      - type: entities
         title: Dining Room
         show_header_toggle: false
         entities:
@@ -444,6 +449,7 @@ views:
           - zwave.family_tree
           - zwave.front_door
           - zwave.garage_heat
+          - zwave.garage_light
           - zwave.garage_motion
           - zwave.garage_rdoor
           - zwave.garbage_gate

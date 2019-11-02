@@ -420,37 +420,6 @@ cloud:
         - script.house_lights_off
         - script.welcome_lights
 
-#camera:    
-#  - platform: generic
-#    name: Garage
-#    still_image_url: "http://nvr.amaroq.net/cgi-bin/api.cgi?cmd=Snap&channel=0&rs=<random_string_of_characters_and_numbers>&user=view&password=lolhak"
-#    stream_source: "rtsp://view:lolhak@nvr.amaroq.net:554/hh264Preview_1_sub"
-#
-#  - platform: generic
-#    name: Gate
-#    still_image_url: "http://nvr.amaroq.net/cgi-bin/api.cgi?cmd=Snap&channel=1&rs=<random_string_of_characters_and_numbers>&user=view&password=lolhak"
-#    stream_source: "rtsp://view:lolhak@nvr.amaroq.net:554/hh264Preview_2_sub"
-#
-#  - platform: generic
-#    name: Front
-#    still_image_url: "http://nvr.amaroq.net/cgi-bin/api.cgi?cmd=Snap&channel=2&rs=<random_string_of_characters_and_numbers>&user=view&password=lolhak"
-#    stream_source: "rtsp://view:lolhak@nvr.amaroq.net:554/hh264Preview_3_sub"
-#
-#  - platform: generic
-#    name: Rear
-#    still_image_url: "http://nvr.amaroq.net/cgi-bin/api.cgi?cmd=Snap&channel=3&rs=<random_string_of_characters_and_numbers>&user=view&password=lolhak"
-#    stream_source: "rtsp://view:lolhak@nvr.amaroq.net:554/hh264Preview_4_sub"
-#
-#  - platform: generic
-#    name: Side
-#    still_image_url: "http://nvr.amaroq.net/cgi-bin/api.cgi?cmd=Snap&channel=4&rs=<random_string_of_characters_and_numbers>&user=view&password=lolhak"
-#    stream_source: "rtsp://view:lolhak@nvr.amaroq.net:554/hh264Preview_5_sub"
-#
-#  - platform: generic
-#    name: Chickens
-#    still_image_url: "http:/view:view@seccam6.amaroq.net/image.cgi"
-#    stream_source: "http:/view:view@seccam6.amaroq.net/video.cgi"
-
 zwave:
   usb_path: /dev/serial/by-id/usb-0658_0200-if00
   device_config: !include zwave_device_config.yaml
@@ -704,7 +673,15 @@ light:
         turn_off:
           service: switch.turn_off
           entity_id: switch.shed_porch
-
+      garage_light:
+        friendly_name: "Garage Light"
+        value_template: "{{ states('switch.garage_light') }}"
+        turn_on:
+          service: switch.turn_on
+          entity_id: switch.garage_light
+        turn_off:
+          service: switch.turn_off
+          entity_id: switch.garage_light
 
 switch:
   - platform: mqtt
