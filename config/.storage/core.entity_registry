@@ -2381,15 +2381,6 @@
                 "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
                 "device_id": "7deef4b0341844f6a42ac69836a2a433",
                 "disabled_by": null,
-                "entity_id": "light.unknown_id_0000_unknown_type_0000_id_0000_level",
-                "name": null,
-                "platform": "zwave",
-                "unique_id": "69-1162444817"
-            },
-            {
-                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
-                "device_id": "7deef4b0341844f6a42ac69836a2a433",
-                "disabled_by": null,
                 "entity_id": "fan.ge_jasco_products_12730_fan_control_switch_level",
                 "name": null,
                 "platform": "zwave",
@@ -2583,6 +2574,15 @@
                 "name": "Camper Heat",
                 "platform": "zwave",
                 "unique_id": "4-71909392"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "7deef4b0341844f6a42ac69836a2a433",
+                "disabled_by": null,
+                "entity_id": "light.master_fan",
+                "name": "Master Fan",
+                "platform": "zwave",
+                "unique_id": "69-1162444817"
             }
         ]
     },
