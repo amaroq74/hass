@@ -2478,15 +2478,6 @@
             },
             {
                 "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
-                "device_id": "22f729dabdc84aee88c57ce4c1000022",
-                "disabled_by": null,
-                "entity_id": "light.unknown_id_0000_unknown_type_0000_id_0000_level_2",
-                "name": null,
-                "platform": "zwave",
-                "unique_id": "72-1212776465"
-            },
-            {
-                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
                 "device_id": "fd86e86583644cbca486ecad447da2f0",
                 "disabled_by": null,
                 "entity_id": "switch.family_tree",
@@ -2568,21 +2559,30 @@
             },
             {
                 "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
-                "device_id": "b2085631a8f64e74b08bd1c9aa31239a",
-                "disabled_by": null,
-                "entity_id": "switch.unknown_id_0000_unknown_type_0000_id_0000_switch",
-                "name": null,
-                "platform": "zwave",
-                "unique_id": "68-1145651216"
-            },
-            {
-                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
                 "device_id": "86d6db3c2aa740eba501a0fbed4585b8",
                 "disabled_by": null,
                 "entity_id": "switch.bedr_light",
                 "name": "BedR Light",
                 "platform": "zwave",
                 "unique_id": "67-1128874000"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "b2085631a8f64e74b08bd1c9aa31239a",
+                "disabled_by": null,
+                "entity_id": "light.bedr_fan",
+                "name": "BedR Fan",
+                "platform": "zwave",
+                "unique_id": "68-1145667601"
+            },
+            {
+                "config_entry_id": "1732fe15e37b4ec5a9daf941b92e0be6",
+                "device_id": "22f729dabdc84aee88c57ce4c1000022",
+                "disabled_by": null,
+                "entity_id": "light.bedta_fan",
+                "name": "BedTA Fan",
+                "platform": "zwave",
+                "unique_id": "72-1212776465"
             }
         ]
     },
