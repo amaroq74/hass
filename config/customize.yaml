@@ -20,16 +20,34 @@ binary_sensor.bedta_motion:
 binary_sensor.garage_motion:
    device_class: motion
 
+binary_sensor.camper_motion:
+   device_class: motion
+
+binary_sensor.shed_motion:
+   device_class: motion
+
 sensor.shed_humidity:
    device_class: humidity
 
 sensor.camper_humidity:
    device_class: humidity
 
-group.all_automations:
-   hidden: false
+light.bedta_fan:
+   device_class: fan
 
-group.all_fans:
+light.master_fan:
+   device_class: fan
+
+light.bedr_fan:
+   device_class: fan
+
+light.family_fan:
+   device_class: fan
+
+light.shed_fan:
+   device_class: fan
+
+group.all_automations:
    hidden: false
 
 group.all_lights:
@@ -45,41 +63,41 @@ group.all_switches:
    hidden: false
 
 binary_sensor.ped_gate:
-   icon: mdi:door
+   device_class: door
 
 binary_sensor.garbage_gate:
-   icon: mdi:door
+   device_class: door
 
 binary_sensor.chickens_gate:
-   icon: mdi:door
+   device_class: door
 
 binary_sensor.patio_gate:
-   icon: mdi:door
+   device_class: door
 
 binary_sensor.ivy_gate:
-   icon: mdi:door
+   device_class: door
 
 binary_sensor.family_door:
-   icon: mdi:door
+   device_class: door
 
 binary_sensor.front_door:
-   icon: mdi:door
+   device_class: door
 
 binary_sensor.office_door:
-   icon: mdi:door
+   device_class: door
 
 binary_sensor.dining_door:
-   icon: mdi:door
+   device_class: door
 
 binary_sensor.kitchen_door:
-   icon: mdi:door
+   device_class: door
 
 binary_sensor.pbath_door:
-   icon: mdi:door
+   device_class: door
 
 binary_sensor.shed_door:
-   icon: mdi:door
+   device_class: door
 
 binary_sensor.garage_rdoor:
-   icon: mdi:door
+   device_class: door
 

@@ -228,11 +228,11 @@ views:
         title: Fans
         show_header_toggle: false
         entities:
-          - fan.family_fan
-          - fan.master_fan
-          - fan.bedr_fan
-          - fan.bedta_fan
-          - fan.shed_fan
+          - light.family_fan
+          - light.master_fan
+          - light.bedr_fan
+          - light.bedta_fan
+          - light.shed_fan
           - switch.house_fan
 
   - title: Yard
@@ -406,7 +406,6 @@ views:
           - group.all_scripts
           - group.all_switches
           - group.all_lights
-          - group.all_fans
       - type: entities
         title: IO Boards
         show_header_toggle: false
@@ -420,76 +419,4 @@ views:
           - sensor.garage_control_temp
           - sensor.east_sprinklers_temp
           - sensor.gate_control_temp
-      - type: entities
-        title: ZWave
-        show_header_toggle: false
-        entities:
-          - zwave.aeotec_zw090_z_stick_gen5_us
-          - zwave.bar_light
-          - zwave.bar_plug
-          - zwave.bedr_fan
-          - zwave.bedr_light
-          - zwave.bedr_motion
-          - zwave.bedta_fan
-          - zwave.bedta_light
-          - zwave.bedta_motion
-          - zwave.bookcases
-          - zwave.camper_heat
-          - zwave.camper_sensor
-          - zwave.chickens_gate
-          - zwave.chicken_heat
-          - zwave.couch_light
-          - zwave.dining_door
-          - zwave.dining_entry
-          - zwave.dining_room
-          - zwave.entry_light
-          - zwave.family_door
-          - zwave.family_fan
-          - zwave.family_motion
-          - zwave.family_tree
-          - zwave.front_door
-          - zwave.garage_heat
-          - zwave.garage_light
-          - zwave.garage_motion
-          - zwave.garage_rdoor
-          - zwave.garbage_gate
-          - zwave.gate_light
-          - zwave.ivy_gate
-          - zwave.kitchen_door
-          - zwave.kitchen_entry
-          - zwave.kitchen_island
-          - zwave.kitchen_light
-          - zwave.kitchen_table
-          - zwave.living_chandelier
-          - zwave.living_entry
-          - zwave.living_floor
-          - zwave.living_lights
-          - zwave.living_mantel
-          - zwave.living_motion
-          - zwave.living_tree
-          - zwave.long_hall
-          - zwave.master_fan
-          - zwave.master_light
-          - zwave.master_motion
-          - zwave.office_door
-          - zwave.office_light
-          - zwave.office_motion
-          - zwave.patio_fountain
-          - zwave.patio_lights
-          - zwave.patio_sec1
-          - zwave.pbath_door
-          - zwave.pbath_entry
-          - zwave.ped_gate
-          - zwave.pool_light
-          - zwave.shed_door
-          - zwave.shed_fan
-          - zwave.shed_light
-          - zwave.shed_porch
-          - zwave.shed_sensor
-          - zwave.short_hall
-          - zwave.speakers
-          - zwave.sump_alarm
-          - zwave.xmas_lights
-          - zwave.yard_lights1
-          - zwave.yard_lights2
 

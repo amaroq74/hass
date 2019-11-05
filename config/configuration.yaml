@@ -420,21 +420,15 @@ cloud:
         - script.house_lights_off
         - script.welcome_lights
 
-zwave:
-  usb_path: /dev/serial/by-id/usb-0658_0200-if00
-  device_config: !include zwave_device_config.yaml
+vera:
+   vera_controller_url: http://172.16.20.22:3480
+   lights: [23, 6, 72, 38, 36, 34, 32, 31, 7, 46, 71, 53, 49, 30, 52, 18, 16, 14, 15, 33, 8]
+
+#zwave:
+  #usb_path: /dev/serial/by-id/usb-0658_0200-if00
+  #device_config: !include zwave_device_config.yaml
 
 binary_sensor:
-   #  - platform: template
-   # sensors:
-   #   shed_motion:
-   #     friendly_name: "Shed Motion"
-   #     device_class: motion
-   #     value_template: "{{ states('sensor.shed_motion')|int == 8 }}"
-   #   camper_motion:
-   #     friendly_name: "Camper Motion"
-   #     device_class: motion
-   #     value_template: "{{ states('sensor.camper_motion')|int == 8 }}"
   - platform: mqtt
     name: "Gate Bell"
     state_topic: stat/pantry_control/gate_bell
@@ -444,244 +438,251 @@ binary_sensor:
   - platform: mqtt
     name: "Car Gate Btn"
     state_topic: stat/pantry_control/gate_toggle
+  - platform: template
+    sensors:
+      ped_gate:
+        value_template: >-
+           {{ is_state('binary_sensor.ped_gate_raw', 'off') }}
+        friendly_name: Ped Gate
+        device_class: door
 
 light:
-  - platform: template
-    lights:
-      bedr_light:
-        friendly_name: "BedR Light"
-        value_template: "{{ states('switch.bedr_light') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.bedr_light
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.bedr_light
-      bedta_light:
-        friendly_name: "BedTA Light"
-        value_template: "{{ states('switch.bedta_light') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.bedta_light
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.bedta_light
-      xmas_lights:
-        friendly_name: "Christmas Lights"
-        value_template: "{{ states('switch.xmas_lights') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.xmas_lights
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.xmas_lights
-      dining_entry:
-        friendly_name: "Dining Entry"
-        value_template: "{{ states('switch.dining_entry') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.dining_entry
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.dining_entry
-      kitchen_entry:
-        friendly_name: "Kitchen Entry"
-        value_template: "{{ states('switch.kitchen_entry') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.kitchen_entry
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.kitchen_entry
-      pbath_entry:
-        friendly_name: "PBath Entry"
-        value_template: "{{ states('switch.pbath_entry') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.pbath_entry
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.pbath_entry
-      entry_light:
-        friendly_name: "Entry Light"
-        value_template: "{{ states('switch.entry_light') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.entry_light
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.entry_light
-      family_tree:
-        friendly_name: "Family Tree"
-        value_template: "{{ states('switch.family_tree') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.family_tree
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.family_tree
-      gate_light:
-        friendly_name: "Gate Light"
-        value_template: "{{ states('switch.gate_light') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.gate_light
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.gate_light
-      master_light:
-        friendly_name: "Master Light"
-        value_template: "{{ states('switch.master_light') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.master_light
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.master_light
-      office_light:
-        friendly_name: "Office Light"
-        value_template: "{{ states('switch.office_light') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.office_light
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.office_light
-      patio_lights:
-        friendly_name: "Patio Lights"
-        value_template: "{{ states('switch.patio_lights') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.patio_lights
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.patio_lights
-      pool_light:
-        friendly_name: "Pool Light"
-        value_template: "{{ states('switch.pool_light') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.pool_light
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.pool_light
-      yard_lights1:
-        friendly_name: "Yard Lights1"
-        value_template: "{{ states('switch.yard_lights1') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.yard_lights1
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.yard_lights1
-      yard_lights2:
-        friendly_name: "Yard Lights2"
-        value_template: "{{ states('switch.yard_lights2') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.yard_lights2
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.yard_lights2
-      kitchen_island:
-        friendly_name: "Kitchen Island"
-        value_template: "{{ states('switch.kitchen_island') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.kitchen_island
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.kitchen_island
-      kitchen_light:
-        friendly_name: "Kitchen Light"
-        value_template: "{{ states('switch.kitchen_light') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.kitchen_light
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.kitchen_light
-      living_entry:
-        friendly_name: "Living Entry"
-        value_template: "{{ states('switch.living_entry') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.living_entry
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.living_entry
-      living_tree:
-        friendly_name: "Living Tree"
-        value_template: "{{ states('switch.living_tree') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.living_tree
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.living_tree
-      living_floor:
-        friendly_name: "Living Floor"
-        value_template: "{{ states('switch.living_floor') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.living_floor
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.living_floor
-      living_lights:
-        friendly_name: "Living Lights"
-        value_template: "{{ states('switch.living_lights') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.living_lights
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.living_lights
-      long_hall:
-        friendly_name: "Long Hall"
-        value_template: "{{ states('switch.long_hall') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.long_hall
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.long_hall
-      short_hall:
-        friendly_name: "Short Hall"
-        value_template: "{{ states('switch.short_hall') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.short_hall
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.short_hall
-      shed_light:
-        friendly_name: "Shed Light"
-        value_template: "{{ states('switch.shed_light') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.shed_light
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.shed_light
-      shed_porch:
-        friendly_name: "Shed Porch"
-        value_template: "{{ states('switch.shed_porch') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.shed_porch
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.shed_porch
-      garage_light:
-        friendly_name: "Garage Light"
-        value_template: "{{ states('switch.garage_light') }}"
-        turn_on:
-          service: switch.turn_on
-          entity_id: switch.garage_light
-        turn_off:
-          service: switch.turn_off
-          entity_id: switch.garage_light
+   #  - platform: template
+   #    lights:
+   #      bedr_light:
+   #        friendly_name: "BedR Light"
+   #        value_template: "{{ states('switch.bedr_light') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.bedr_light
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.bedr_light
+   #      bedta_light:
+   #        friendly_name: "BedTA Light"
+   #        value_template: "{{ states('switch.bedta_light') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.bedta_light
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.bedta_light
+   #      xmas_lights:
+   #        friendly_name: "Christmas Lights"
+   #        value_template: "{{ states('switch.xmas_lights') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.xmas_lights
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.xmas_lights
+   #      dining_entry:
+   #        friendly_name: "Dining Entry"
+   #        value_template: "{{ states('switch.dining_entry') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.dining_entry
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.dining_entry
+   #      kitchen_entry:
+   #        friendly_name: "Kitchen Entry"
+   #        value_template: "{{ states('switch.kitchen_entry') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.kitchen_entry
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.kitchen_entry
+   #      pbath_entry:
+   #        friendly_name: "PBath Entry"
+   #        value_template: "{{ states('switch.pbath_entry') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.pbath_entry
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.pbath_entry
+   #      entry_light:
+   #        friendly_name: "Entry Light"
+   #        value_template: "{{ states('switch.entry_light') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.entry_light
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.entry_light
+   #      family_tree:
+   #        friendly_name: "Family Tree"
+   #        value_template: "{{ states('switch.family_tree') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.family_tree
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.family_tree
+   #      gate_light:
+   #        friendly_name: "Gate Light"
+   #        value_template: "{{ states('switch.gate_light') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.gate_light
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.gate_light
+   #      master_light:
+   #        friendly_name: "Master Light"
+   #        value_template: "{{ states('switch.master_light') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.master_light
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.master_light
+   #      office_light:
+   #        friendly_name: "Office Light"
+   #        value_template: "{{ states('switch.office_light') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.office_light
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.office_light
+   #      patio_lights:
+   #        friendly_name: "Patio Lights"
+   #        value_template: "{{ states('switch.patio_lights') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.patio_lights
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.patio_lights
+   #      pool_light:
+   #        friendly_name: "Pool Light"
+   #        value_template: "{{ states('switch.pool_light') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.pool_light
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.pool_light
+   #      yard_lights1:
+   #        friendly_name: "Yard Lights1"
+   #        value_template: "{{ states('switch.yard_lights1') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.yard_lights1
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.yard_lights1
+   #      yard_lights2:
+   #        friendly_name: "Yard Lights2"
+   #        value_template: "{{ states('switch.yard_lights2') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.yard_lights2
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.yard_lights2
+   #      kitchen_island:
+   #        friendly_name: "Kitchen Island"
+   #        value_template: "{{ states('switch.kitchen_island') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.kitchen_island
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.kitchen_island
+   #      kitchen_light:
+   #        friendly_name: "Kitchen Light"
+   #        value_template: "{{ states('switch.kitchen_light') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.kitchen_light
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.kitchen_light
+   #      living_entry:
+   #        friendly_name: "Living Entry"
+   #        value_template: "{{ states('switch.living_entry') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.living_entry
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.living_entry
+   #      living_tree:
+   #        friendly_name: "Living Tree"
+   #        value_template: "{{ states('switch.living_tree') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.living_tree
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.living_tree
+   #      living_floor:
+   #        friendly_name: "Living Floor"
+   #        value_template: "{{ states('switch.living_floor') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.living_floor
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.living_floor
+   #      living_lights:
+   #        friendly_name: "Living Lights"
+   #        value_template: "{{ states('switch.living_lights') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.living_lights
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.living_lights
+   #      long_hall:
+   #        friendly_name: "Long Hall"
+   #        value_template: "{{ states('switch.long_hall') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.long_hall
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.long_hall
+   #      short_hall:
+   #        friendly_name: "Short Hall"
+   #        value_template: "{{ states('switch.short_hall') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.short_hall
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.short_hall
+   #      shed_light:
+   #        friendly_name: "Shed Light"
+   #        value_template: "{{ states('switch.shed_light') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.shed_light
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.shed_light
+   #      shed_porch:
+   #        friendly_name: "Shed Porch"
+   #        value_template: "{{ states('switch.shed_porch') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.shed_porch
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.shed_porch
+   #      garage_light:
+   #        friendly_name: "Garage Light"
+   #        value_template: "{{ states('switch.garage_light') }}"
+   #        turn_on:
+   #          service: switch.turn_on
+   #          entity_id: switch.garage_light
+   #        turn_off:
+   #          service: switch.turn_off
+   #          entity_id: switch.garage_light
 
 switch:
   - platform: mqtt

@@ -104,8 +104,8 @@ lights_yard:
 auto_fans:
    name: Auto Fans
    entities:
-      - fan.bedr_fan
-      - fan.bedta_fan
-      - fan.family_fan
-      - fan.shed_fan
+      - light.bedr_fan
+      - light.bedta_fan
+      - light.family_fan
+      - light.shed_fan
 
