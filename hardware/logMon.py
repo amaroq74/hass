@@ -23,7 +23,8 @@ hosts = { '172.16.20.50' :  'pool_control',
 #filt = "test_node1"
 #filt = "pantry_control"
 #filt = "test_shield1"
-filt = "sonoff1"
+filt  = "test_switch2"
+#filt = "sonoff1"
 #filt = None
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
