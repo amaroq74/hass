@@ -58,6 +58,7 @@ views:
           - climate.garage
           - climate.chicken_coop
           - climate.camper
+
       - type: entities
         title: Humidity
         show_header_toggle: false
@@ -69,6 +70,7 @@ views:
           - sensor.garage_humidity
           - sensor.shed_humidity
           - sensor.camper_humidity
+
       - type: entities
         title: General
         show_header_toggle: false
@@ -88,6 +90,7 @@ views:
         entities:
           - device_tracker.rphone_amaroq_net
           - device_tracker.sphone_amaroq_net
+
       - type: entities
         title: Gates
         show_header_toggle: false
@@ -98,6 +101,7 @@ views:
           - binary_sensor.chickens_gate
           - binary_sensor.ivy_gate
           - binary_sensor.patio_gate
+
       - type: entities
         title: Doors
         show_header_toggle: false
@@ -111,6 +115,7 @@ views:
           - binary_sensor.pbath_door
           - binary_sensor.shed_door
           - binary_sensor.garage_rdoor
+
       - type: entities
         title: Motion Sensors
         show_header_toggle: false
@@ -124,6 +129,7 @@ views:
           - binary_sensor.garage_motion
           - binary_sensor.shed_motion
           - binary_sensor.camper_motion
+
       - type: entities
         title: Controls
         show_header_toggle: false
@@ -142,6 +148,7 @@ views:
           - script.house_lights_off
           - script.welcome_lights
           - script.movie_lights
+
       - type: entities
         title: Family Room
         show_header_toggle: true
@@ -150,6 +157,7 @@ views:
           - light.bookcases
           - light.bar_light
           - light.family_tree
+
       - type: entities
         title: Kitchen
         show_header_toggle: true
@@ -157,21 +165,25 @@ views:
           - light.kitchen_light
           - light.kitchen_island
           - light.kitchen_table
+
       - type: entities
         title: Office
         show_header_toggle: false
         entities:
           - light.office_light
+
       - type: entities
         title: Garage
         show_header_toggle: false
         entities:
           - light.garage_light
+
       - type: entities
         title: Dining Room
         show_header_toggle: false
         entities:
           - light.dining_room
+
       - type: entities
         title: Living Room
         show_header_toggle: true
@@ -182,32 +194,38 @@ views:
           - light.living_chandelier
           - light.living_entry
           - light.living_mantel
+
       - type: entities
         title: Master Bedroom
         show_header_toggle: false
         entities:
           - light.master_light
+
       - type: entities
         title: Rachel's Room
         show_header_toggle: false
         entities:
           - light.bedr_light
+
       - type: entities
         title: Amelia & Tessa's Room
         show_header_toggle: false
         entities:
           - light.bedta_light
+
       - type: entities
         title: Hallway
         show_header_toggle: true
         entities:
           - light.long_hall
           - light.short_hall
+
       - type: entities
         title: Shed Lights
         show_header_toggle: false
         entities:
           - light.shed_light
+
       - type: entities
         title: Yard
         show_header_toggle: true
@@ -223,6 +241,14 @@ views:
           - light.xmas_lights
           - light.pool_light
           - light.shed_porch
+
+      - type: entities
+        title: Yard Other
+        show_header_toggle: false
+        entities:
+          - light.yard_flood
+          - light.patio_flood
+          - light.patio_sec1
 
       - type: entities
         title: Fans
@@ -250,13 +276,14 @@ views:
           - input_datetime.pool_start_time
           - input_number.pool_pump_duration
           - input_number.pool_sweep_duration
+
       - type: entities
         title: Yard Other
         show_header_toggle: false
         entities:
           - switch.patio_fountain
-          - switch.patio_sec1
           - switch.coop_door
+
       - type: entities
         title: Front Yard Irrigation
         show_header_toggle: false
@@ -279,6 +306,7 @@ views:
           - input_boolean.front_yard_thursday
           - input_boolean.front_yard_friday
           - input_boolean.front_yard_saturday
+
       - type: entities
         title: Flower Boxes Irrigation
         show_header_toggle: false
@@ -296,6 +324,7 @@ views:
           - input_boolean.flower_box_thursday
           - input_boolean.flower_box_friday
           - input_boolean.flower_box_saturday
+
       - type: entities
         title: Rear Patio Irrigation
         show_header_toggle: false
@@ -312,6 +341,7 @@ views:
           - input_boolean.rear_patio_thursday
           - input_boolean.rear_patio_friday
           - input_boolean.rear_patio_saturday
+
       - type: entities
         title: Manual Control
         show_header_toggle: false
@@ -337,6 +367,7 @@ views:
           - script.movie_lights
           - switch.speakers
           - remote.family_room
+
       - type: custom:mini-media-player
         entity: media_player.chrome_family
         artwork: cover
@@ -350,6 +381,7 @@ views:
           hide_when_off: false
           list:
             !include media.yaml
+
       - type: custom:mini-media-player
         entity: media_player.chrome_master
         artwork: cover
@@ -363,6 +395,7 @@ views:
           hide_when_off: false
           list:
             !include media.yaml
+
       - type: media-control
         entity: media_player.kitchen_speaker
       - type: media-control
@@ -373,6 +406,7 @@ views:
         entity: media_player.rx_v677_b95979_zone_2
       - type: media-control
         entity: media_player.samsung_8_series_65_un65mu800d
+
   - title: Monitor
     cards:
       - type: entities
@@ -380,11 +414,13 @@ views:
         show_header_toggle: false
         entities:
           - sensor.time_online
+
       - type: entities
         title: Roomba1
         show_header_toggle: false
         entities:
           - vacuum.roomba1
+
       - type: entities
         title: Batteries
         show_header_toggle: false
@@ -398,6 +434,7 @@ views:
           - sensor.outdoor_battery
           - sensor.wind_battery
           - sensor.rain_battery
+
       - type: entities
         title: Groups
         show_header_toggle: false
@@ -406,6 +443,7 @@ views:
           - group.all_scripts
           - group.all_switches
           - group.all_lights
+
       - type: entities
         title: IO Boards
         show_header_toggle: false

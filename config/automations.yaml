@@ -10,7 +10,7 @@
       entity_id: group.lights_yard
     service: homeassistant.turn_on
   - data:
-      entity_id: switch.patio_sec1
+      entity_id: light.patio_sec1
     service: switch.turn_off
 
 - id: yard_lights_off
@@ -28,7 +28,7 @@
       entity_id: group.lights_yard
     service: homeassistant.turn_off
   - data:
-      entity_id: switch.patio_sec1
+      entity_id: light.patio_sec1
     service: switch.turn_on
 
 - id: coop_door_open
