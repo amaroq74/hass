@@ -1,0 +1,115 @@
+# Platform
+- platform: mqtt
+  name: "House Heat"
+  state_topic: stat/pantry_control/house_heat
+  command_topic: cmnd/pantry_control/house_heat
+  icon: 'mdi:radiator'
+
+- platform: mqtt
+  name: "House Fan"
+  state_topic: stat/pantry_control/house_fan
+  command_topic: cmnd/pantry_control/house_fan
+  icon: 'mdi:fan'
+
+- platform: mqtt
+  name: "Pool Main"
+  state_topic: stat/pool_control/main
+  command_topic: cmnd/pool_control/main
+  icon: 'mdi:pool'
+
+- platform: mqtt
+  name: "Pool Sweep"
+  state_topic: stat/pool_control/sweep
+  command_topic: cmnd/pool_control/sweep
+  icon: 'mdi:pool'
+
+- platform: mqtt
+  name: "Pool Heat"
+  state_topic: stat/pool_control/heat
+  command_topic: cmnd/pool_control/heat
+  icon: 'mdi:pool'
+
+- platform: mqtt
+  name: "Rear Patio 1"
+  state_topic: stat/garage_control/rear_patio_1
+  command_topic: cmnd/garage_control/rear_patio_1
+  icon: 'mdi:water'
+
+- platform: mqtt
+  name: "Rear Patio 2"
+  state_topic: stat/garage_control/rear_patio_2
+  command_topic: cmnd/garage_control/rear_patio_2
+  icon: 'mdi:water'
+
+- platform: mqtt
+  name: "Rear Patio 3"
+  state_topic: stat/garage_control/rear_patio_3
+  command_topic: cmnd/garage_control/rear_patio_3
+  icon: 'mdi:water'
+
+- platform: mqtt
+  name: "Front Flowers"
+  state_topic: stat/garage_control/front_flowers
+  command_topic: cmnd/garage_control/front_flowers
+  icon: 'mdi:water'
+
+- platform: mqtt
+  name: "Garage Door"
+  state_topic: stat/garage_control/garage
+  command_topic: cmnd/garage_control/garage
+  icon: 'mdi:garage'
+
+- platform: mqtt
+  name: "Coop Door"
+  state_topic: stat/coop/POWER
+  command_topic: cmnd/coop/POWER
+  icon: 'mdi:garage'
+
+- platform: mqtt
+  name: "East Lawn 1"
+  state_topic: stat/east_sprinklers/east_lawn_1
+  command_topic: cmnd/east_sprinklers/east_lawn_1
+  icon: 'mdi:water'
+
+- platform: mqtt
+  name: "East Lawn 2"
+  state_topic: stat/east_sprinklers/east_lawn_2
+  command_topic: cmnd/east_sprinklers/east_lawn_2
+  icon: 'mdi:water'
+
+- platform: mqtt
+  name: "East Lemon"
+  state_topic: stat/east_sprinklers/east_lemon
+  command_topic: cmnd/east_sprinklers/east_lemon
+  icon: 'mdi:water'
+
+- platform: mqtt
+  name: "Front Lawn 1"
+  state_topic: stat/gate_control/front_lawn_1
+  command_topic: cmnd/gate_control/front_lawn_1
+  icon: 'mdi:water'
+
+- platform: mqtt
+  name: "Front Lawn 2"
+  state_topic: stat/gate_control/front_lawn_2
+  command_topic: cmnd/gate_control/front_lawn_2
+  icon: 'mdi:water'
+
+- platform: mqtt
+  name: "Front Lawn 3"
+  state_topic: stat/gate_control/front_lawn_3
+  command_topic: cmnd/gate_control/front_lawn_3
+  icon: 'mdi:water'
+
+- platform: mqtt
+  name: "West Trees"
+  state_topic: stat/gate_control/west_trees
+  command_topic: cmnd/gate_control/west_trees
+  icon: 'mdi:water'
+
+- platform: mqtt
+  name: "Car Gate"
+  state_topic: stat/gate_control/car_gate
+  command_topic: cmnd/gate_control/car_gate
+  icon: 'mdi:garage'
+

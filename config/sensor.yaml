@@ -1,0 +1,146 @@
+# Sensors
+- platform: uptime
+  name: Time Online
+  unit_of_measurement: hours
+
+- platform: wunderground
+  api_key: !secret wunder_api
+  pws_id: KCAREDWO4
+  monitored_conditions:
+     - alerts
+     - weather
+     - solarradiation
+     - UV
+     - weather_1d
+     - weather_1n
+     - weather_2d
+     - weather_2n
+     - weather_3d
+     - weather_3n
+     - weather_4d
+     - weather_4n
+
+- platform: time_date
+  display_options:
+    - 'time'
+    - 'date'
+    - 'date_time'
+    - 'time_date'
+    - 'time_utc'
+    - 'beat'
+
+- platform: apcupsd
+  resources:
+    - bcharge
+    - linev
+    - loadpct
+    - timeleft
+
+- platform: rainforest_usb
+  resources:
+    - rate
+    - total
+
+- platform: rfxcom_rx
+  pressure_adjust: 6.0
+
+- platform: mqtt
+  state_topic: "stat/pool_control/solar_in"
+  name: Pool Solar In
+  unit_of_measurement: "°C"
+  unique_id: pool_solar_in
+  device_class: temperature
+  icon: 'mdi:thermometer'
+
+- platform: mqtt
+  state_topic: "stat/pool_control/solar_out"
+  name: Pool Solar Out 
+  unit_of_measurement: "°C"
+  unique_id: pool_solar_out
+  device_class: temperature
+  icon: 'mdi:thermometer'
+
+- platform: mqtt
+  state_topic: "stat/pool_control/temp"
+  name: Pool Control Temp
+  unit_of_measurement: "°C"
+  unique_id: pool_control_temp
+  device_class: temperature
+  icon: 'mdi:thermometer'
+
+- platform: mqtt
+  state_topic: "stat/garage_control/temp"
+  name: Garage Control Temp
+  unit_of_measurement: "°C"
+  unique_id: garage_control_temp
+  device_class: temperature
+  icon: 'mdi:thermometer'
+
+- platform: mqtt
+  state_topic: "stat/east_sprinklers/temp"
+  name: East Sprinklers Temp
+  unit_of_measurement: "°C"
+  unique_id: east_sprinklers_temp
+  device_class: temperature
+  icon: 'mdi:thermometer'
+
+- platform: mqtt
+  state_topic: "stat/gate_control/temp"
+  name: Gate Control Temp
+  unit_of_measurement: "°C"
+  unique_id: gate_control_temp
+  device_class: temperature
+  icon: 'mdi:thermometer'
+
+- platform: mqtt
+  state_topic: "stat/pool_control/wifi"
+  name: Pool Control Wifi
+  unit_of_measurement: "%"
+
+- platform: mqtt
+  state_topic: "stat/garage_control/wifi"
+  name: Garage Control Wifi
+  unit_of_measurement: "%"
+
+- platform: mqtt
+  state_topic: "stat/gate_control/wifi"
+  name: Gate Control Wifi
+  unit_of_measurement: "%"
+
+- platform: mqtt
+  state_topic: "stat/east_sprinklers/wifi"
+  name: East Sprinklers Wifi
+  unit_of_measurement: "%"
+
+- platform: mqtt
+  state_topic: "stat/pantry_control/wifi"
+  name: Pantry Control Wifi
+  unit_of_measurement: "%"
+
+- platform: template    # determine if today is selected as a watering day for program 1
+  sensors:
+    rear_patio_watering_day:
+      friendly_name: "Rear Patio Watering Day"
+      entity_id: sensor.time
+      value_template: >
+        {% set sensor_names = [ 'monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'] %}
+        {% set today_name = sensor_names[now().weekday()] %}
+        {% set entity_id = 'input_boolean.rear_patio_'+today_name %}
+        {{ is_state(entity_id, 'on') }}
+    flower_box_watering_day:
+      friendly_name: "Flower Box Watering Day"
+      entity_id: sensor.time
+      value_template: >
+        {% set sensor_names = [ 'monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'] %}
+        {% set today_name = sensor_names[now().weekday()] %}
+        {% set entity_id = 'input_boolean.flower_box_'+today_name %}
+        {{ is_state(entity_id, 'on') }}
+    front_yard_watering_day:
+      friendly_name: "Front Yard Watering Day"
+      entity_id: sensor.time
+      value_template: >
+        {% set sensor_names = [ 'monday', 'tuesday', 'wednesday','thursday','friday','saturday','sunday'] %}
+        {% set today_name = sensor_names[now().weekday()] %}
+        {% set entity_id = 'input_boolean.front_yard_'+today_name %}
+        {{ is_state(entity_id, 'on') }}
+

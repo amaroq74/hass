@@ -1,0 +1,20 @@
+- platform: mqtt
+  name: "Gate Bell"
+  state_topic: stat/pantry_control/gate_bell
+
+- platform: mqtt
+  name: "Door Bell"
+  state_topic: stat/pantry_control/door_bell
+
+- platform: mqtt
+  name: "Car Gate Btn"
+  state_topic: stat/pantry_control/gate_toggle
+
+- platform: template
+  sensors:
+    ped_gate:
+      value_template: >-
+         {{ is_state('binary_sensor.ped_gate_raw', 'off') }}
+      friendly_name: Ped Gate
+      device_class: door
+
