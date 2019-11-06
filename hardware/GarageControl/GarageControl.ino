@@ -3,11 +3,9 @@
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 #include <PubSubClient.h>
+#include "../secrets.h"
 
 // Configuration
-const char * ssid        = "amaroq";
-const char * password    = "1er4idnfu345os3o283";
-const char * mqtt_server = "aliska.amaroq.net";
 unsigned int locPort     = 8112;
 unsigned int logPort     = 8111;
 IPAddress    logAddress (172,16,20,1);
