@@ -12,6 +12,7 @@ lights_house:
       - group.lights_bedta
       - group.lights_hall
       - group.lights_shed
+      - group.lights_garage
 
 lights_welcome:
    name: Welcome Lights
@@ -61,6 +62,7 @@ lights_kitchen:
       - light.kitchen_light
       - light.kitchen_island
       - light.kitchen_table
+      - light.kitchen_sink
 
 lights_family:
    name: Family Room
@@ -86,6 +88,11 @@ lights_shed:
    entities:
       - light.shed_light
 
+lights_garage:
+   name: Garage Lights
+   entities:
+      - light.garage_light
+
 lights_yard:
    name: Yard
    entities:
@@ -100,6 +107,12 @@ lights_yard:
       - light.xmas_lights
       - light.pool_light
       - light.shed_porch
+
+lights_flood:
+   name: Flood
+   entities:
+      - light.yard_flood
+      - light.patio_flood
 
 auto_fans:
    name: Auto Fans

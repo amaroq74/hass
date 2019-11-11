@@ -34,18 +34,23 @@ sensor.camper_humidity:
 
 light.bedta_fan:
    device_class: fan
+   icon: 'mdi:fan'
 
 light.master_fan:
    device_class: fan
+   icon: 'mdi:fan'
 
 light.bedr_fan:
    device_class: fan
+   icon: 'mdi:fan'
 
 light.family_fan:
    device_class: fan
+   icon: 'mdi:fan'
 
 light.shed_fan:
    device_class: fan
+   icon: 'mdi:fan'
 
 group.all_automations:
    hidden: false

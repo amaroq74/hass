@@ -11,7 +11,7 @@
     service: homeassistant.turn_on
   - data:
       entity_id: light.patio_sec1
-    service: switch.turn_off
+    service: light.turn_off
 
 - id: yard_lights_off
   alias: Yard Lights Off Timer
@@ -29,7 +29,10 @@
     service: homeassistant.turn_off
   - data:
       entity_id: light.patio_sec1
-    service: switch.turn_on
+    service: light.turn_on
+  - data:
+      entity_id: group.lights_flood
+    service: homeassistant.turn_off
 
 - id: coop_door_open
   alias: Coop Door Open
