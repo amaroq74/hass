@@ -9,9 +9,10 @@ hosts = { '172.16.20.50' :  'pool_control',
           '172.16.20.54' :  'garage_control',
           '172.16.20.55' :  'pantry_control'}
 
+filt = None
 #filt = "pool_control"
 #filt = "east_sprinklers"
-#filt = "gate_control"
+filt = "gate_control"
 #filt = "coop_control"
 #filt = "garage_control"
 #filt = "pantry_control"

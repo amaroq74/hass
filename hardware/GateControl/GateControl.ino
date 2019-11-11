@@ -41,6 +41,8 @@ unsigned int GateOutChannel = 5;
 unsigned int GateInChannel  = 0;
 unsigned int GateInvert     = 1;
 
+unsigned int ResetPin = 2;
+
 // Temperature
 const char * TempTopic  = "stat/gate_control/temp";
 const char * WifiTopic  = "stat/gate_control/wifi";
@@ -49,12 +51,12 @@ const char * ResetTopic = "cmnd/gate_control/reset";
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Variables
-unsigned int lastMsgRx   = 0;
-unsigned int lastMsgTx   = millis();
-unsigned int lastAnalog  = millis();
-unsigned int lastDigital = millis();
-unsigned int lastReset   = millis();
-unsigned int currTime;
+unsigned long lastMsgRx   = 0;
+unsigned long lastMsgTx   = millis();
+unsigned long lastAnalog  = millis();
+unsigned long lastDigital = millis();
+unsigned long lastReset   = millis();
+unsigned long currTime;
 unsigned int x;
 
 float value;
@@ -91,11 +93,10 @@ int wifiPct() {
 
 // Reset io board
 void resetIoBoard() {
-   delay(200);
-   sprintf(txBuffer,"RESET \n");
-   Serial.write(txBuffer);
    logPrintf("Sending reset to arduino")
-   delay(200);
+   digitalWrite(ResetPin,LOW);
+   delay(500);
+   digitalWrite(ResetPin,HIGH);
    lastReset = millis();
 }
 
@@ -134,6 +135,7 @@ void recvMsg() {
       if ( tmp == 6 && strcmp(mark,"STATUS") == 0 ) {
          logPrintf("Got arduino message: %s",rxBuffer)
          lastMsgRx = millis();
+         lastReset = millis();
       }
 
       rxCount = 0;
@@ -261,6 +263,9 @@ void setup() {
    currGate = 0;
 
    sendMsg();
+
+   pinMode(ResetPin,OUTPUT);
+   digitalWrite(ResetPin,HIGH);
 }
 
 
@@ -302,10 +307,10 @@ void loop() {
    if (!client.connected()) reconnect();
    client.loop();
 
-   currTime = millis();
-
    // Attempt to receive input message
    recvMsg();
+
+   currTime = millis();
 
    // tmp hold current gate state, depends on input and inverted flag
    tmp = (inputValues[GateInChannel] == 0)?GateInvert:!GateInvert;
@@ -343,8 +348,7 @@ void loop() {
    }
 
    // 1 Minute has passed without receiving a message
-   //if ( ((currTime - lastMsgRx) > AnalogPeriod ) &&
-        //((currTime - lastReset) > AnalogPeriod ) ) resetIoBoard();
+   if ( ((currTime - lastReset) > AnalogPeriod) ) resetIoBoard();
 
    // Refresh digital values
    if ( (currTime - lastDigital) > DigitalPeriod) {
