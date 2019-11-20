@@ -145,9 +145,9 @@ views:
         title: Controls
         show_header_toggle: false
         entities:
-          - script.house_lights_off
-          - script.welcome_lights
-          - script.movie_lights
+          - scene.house_lights_off
+          - scene.welcome_lights
+          - scene.movie_lights
 
       - type: entities
         title: Family Room

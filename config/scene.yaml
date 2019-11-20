@@ -1,0 +1,22 @@
+
+- name: Movie Lights
+  entities:
+    light.kitchen_island: off
+    light.kitchen_light: off
+    light.kitchen_table: off
+    light.kitchen_sink: off
+    light.couch_light: off
+    light.bar_light: off
+    light.bookcases: 
+       state: on
+       brightness_pct: 30
+
+- name: House Lights Off
+  entities:
+    group.lights_house: off
+    remote.family_room: off
+
+- name: Welcome Lights
+  entities:
+    group.lights_welcome: on
+

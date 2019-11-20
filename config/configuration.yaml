@@ -88,6 +88,7 @@ cloud:
       include_domains:
         - light
         - fan
+        - scene
       include_entities:
         - climate.house
         - climate.pool
@@ -101,9 +102,6 @@ cloud:
         - input_boolean.dcare_bell
         - input_boolean.door_alarm
         - input_boolean.house_alarm
-        - script.movie_lights
-        - script.house_lights_off
-        - script.welcome_lights
 
 vera:
    vera_controller_url: http://172.16.20.22:3480
@@ -121,4 +119,5 @@ climate: !include climate.yaml
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
+scene: !include scene.yaml
 

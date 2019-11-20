@@ -2,7 +2,399 @@
     "data": {
         "alexa_enabled": false,
         "cloud_user": "07f38916132749a0820ba475bfd7d0b5",
-        "google_enabled": true
+        "google_enabled": true,
+        "google_entity_configs": {
+            "binary_sensor.chickens_gate": {
+                "should_expose": false
+            },
+            "binary_sensor.dining_door": {
+                "should_expose": false
+            },
+            "binary_sensor.family_door": {
+                "should_expose": false
+            },
+            "binary_sensor.front_door": {
+                "should_expose": false
+            },
+            "binary_sensor.garage_rdoor": {
+                "should_expose": false
+            },
+            "binary_sensor.garbage_gate": {
+                "should_expose": false
+            },
+            "binary_sensor.ivy_gate": {
+                "should_expose": false
+            },
+            "binary_sensor.kitchen_door": {
+                "should_expose": false
+            },
+            "binary_sensor.office_door": {
+                "should_expose": false
+            },
+            "binary_sensor.patio_gate": {
+                "should_expose": false
+            },
+            "binary_sensor.pbath_door": {
+                "should_expose": false
+            },
+            "binary_sensor.ped_gate": {
+                "should_expose": false
+            },
+            "binary_sensor.shed_door": {
+                "should_expose": false
+            },
+            "climate.camper": {
+                "should_expose": false
+            },
+            "climate.chicken_coop": {
+                "should_expose": false
+            },
+            "climate.garage": {
+                "should_expose": false
+            },
+            "group.all_automations": {
+                "should_expose": false
+            },
+            "group.all_devices": {
+                "should_expose": false
+            },
+            "group.all_lights": {
+                "should_expose": false
+            },
+            "group.all_remotes": {
+                "should_expose": false
+            },
+            "group.all_scripts": {
+                "should_expose": false
+            },
+            "group.all_switches": {
+                "should_expose": false
+            },
+            "group.all_vacuum_cleaners": {
+                "should_expose": false
+            },
+            "group.auto_fans": {
+                "should_expose": false
+            },
+            "group.lights_bedr": {
+                "should_expose": false
+            },
+            "group.lights_bedta": {
+                "should_expose": false
+            },
+            "group.lights_dining": {
+                "should_expose": false
+            },
+            "group.lights_family": {
+                "should_expose": false
+            },
+            "group.lights_flood": {
+                "should_expose": false
+            },
+            "group.lights_garage": {
+                "should_expose": false
+            },
+            "group.lights_hall": {
+                "should_expose": false
+            },
+            "group.lights_house": {
+                "should_expose": false
+            },
+            "group.lights_kitchen": {
+                "should_expose": false
+            },
+            "group.lights_living": {
+                "should_expose": false
+            },
+            "group.lights_master": {
+                "should_expose": false
+            },
+            "group.lights_office": {
+                "should_expose": false
+            },
+            "group.lights_shed": {
+                "should_expose": false
+            },
+            "group.lights_welcome": {
+                "should_expose": false
+            },
+            "group.lights_yard": {
+                "should_expose": false
+            },
+            "input_boolean.flower_box_friday": {
+                "should_expose": false
+            },
+            "input_boolean.flower_box_monday": {
+                "should_expose": false
+            },
+            "input_boolean.flower_box_saturday": {
+                "should_expose": false
+            },
+            "input_boolean.flower_box_sunday": {
+                "should_expose": false
+            },
+            "input_boolean.flower_box_thursday": {
+                "should_expose": false
+            },
+            "input_boolean.flower_box_tuesday": {
+                "should_expose": false
+            },
+            "input_boolean.flower_box_wednesday": {
+                "should_expose": false
+            },
+            "input_boolean.front_yard_friday": {
+                "should_expose": false
+            },
+            "input_boolean.front_yard_monday": {
+                "should_expose": false
+            },
+            "input_boolean.front_yard_saturday": {
+                "should_expose": false
+            },
+            "input_boolean.front_yard_sunday": {
+                "should_expose": false
+            },
+            "input_boolean.front_yard_thursday": {
+                "should_expose": false
+            },
+            "input_boolean.front_yard_tuesday": {
+                "should_expose": false
+            },
+            "input_boolean.front_yard_wednesday": {
+                "should_expose": false
+            },
+            "input_boolean.night_alarm": {
+                "should_expose": false
+            },
+            "input_boolean.rear_patio_friday": {
+                "should_expose": false
+            },
+            "input_boolean.rear_patio_monday": {
+                "should_expose": false
+            },
+            "input_boolean.rear_patio_saturday": {
+                "should_expose": false
+            },
+            "input_boolean.rear_patio_sunday": {
+                "should_expose": false
+            },
+            "input_boolean.rear_patio_thursday": {
+                "should_expose": false
+            },
+            "input_boolean.rear_patio_tuesday": {
+                "should_expose": false
+            },
+            "input_boolean.rear_patio_wednesday": {
+                "should_expose": false
+            },
+            "media_player.bedtr_speaker": {
+                "should_expose": false
+            },
+            "media_player.chrome_family": {
+                "should_expose": false
+            },
+            "media_player.chrome_master": {
+                "should_expose": false
+            },
+            "media_player.kitchen_speaker": {
+                "should_expose": false
+            },
+            "media_player.living": {
+                "should_expose": false
+            },
+            "media_player.master": {
+                "should_expose": false
+            },
+            "media_player.rx_v677_b95979": {
+                "should_expose": false
+            },
+            "media_player.rx_v677_b95979_zone_2": {
+                "should_expose": false
+            },
+            "media_player.samsung_8_series_65_un65mu800d": {
+                "should_expose": false
+            },
+            "scene.house_lights_off": {
+                "should_expose": false
+            },
+            "scene.movie_lights": {
+                "should_expose": false
+            },
+            "scene.welcome_lights": {
+                "should_expose": false
+            },
+            "script.flower_box_sprinklers": {
+                "should_expose": false
+            },
+            "script.front_yard_sprinklers": {
+                "should_expose": false
+            },
+            "script.movie_lights": {
+                "should_expose": true
+            },
+            "script.pool_pump_run": {
+                "should_expose": false
+            },
+            "script.pool_sweep_run": {
+                "should_expose": false
+            },
+            "script.rear_patio_sprinklers": {
+                "should_expose": false
+            },
+            "sensor.east_sprinklers_temp": {
+                "should_expose": false
+            },
+            "sensor.garage_control_temp": {
+                "should_expose": false
+            },
+            "sensor.gate_control_temp": {
+                "should_expose": false
+            },
+            "sensor.house_temperature": {
+                "should_expose": false
+            },
+            "sensor.outdoor_dewpoint": {
+                "should_expose": false
+            },
+            "sensor.pool_control_temp": {
+                "should_expose": false
+            },
+            "sensor.pool_solar_in": {
+                "should_expose": false
+            },
+            "sensor.pool_solar_out": {
+                "should_expose": false
+            },
+            "switch.bar_plug": {
+                "should_expose": false
+            },
+            "switch.bedr_motion_alarm": {
+                "should_expose": false
+            },
+            "switch.bedta_motion_alarm": {
+                "should_expose": false
+            },
+            "switch.camper_heat": {
+                "should_expose": false
+            },
+            "switch.camper_motion_alarm": {
+                "should_expose": false
+            },
+            "switch.chicken_heat": {
+                "should_expose": false
+            },
+            "switch.chickens_gate_alarm": {
+                "should_expose": false
+            },
+            "switch.dining_door_alarm": {
+                "should_expose": false
+            },
+            "switch.east_lawn_1": {
+                "should_expose": false
+            },
+            "switch.east_lawn_2": {
+                "should_expose": false
+            },
+            "switch.east_lemon": {
+                "should_expose": false
+            },
+            "switch.family_door_alarm": {
+                "should_expose": false
+            },
+            "switch.family_motion_alarm": {
+                "should_expose": false
+            },
+            "switch.front_door_alarm": {
+                "should_expose": false
+            },
+            "switch.front_flowers": {
+                "should_expose": false
+            },
+            "switch.front_lawn_1": {
+                "should_expose": false
+            },
+            "switch.front_lawn_2": {
+                "should_expose": false
+            },
+            "switch.front_lawn_3": {
+                "should_expose": false
+            },
+            "switch.garage_heat": {
+                "should_expose": false
+            },
+            "switch.garage_motion_alarm": {
+                "should_expose": false
+            },
+            "switch.garage_rdoor_alarm": {
+                "should_expose": false
+            },
+            "switch.garbage_gate_alarm": {
+                "should_expose": false
+            },
+            "switch.house_fan": {
+                "should_expose": false
+            },
+            "switch.house_heat": {
+                "should_expose": false
+            },
+            "switch.ivy_gate_alarm": {
+                "should_expose": false
+            },
+            "switch.kitchen_door_alarm": {
+                "should_expose": false
+            },
+            "switch.living_motion_alarm": {
+                "should_expose": false
+            },
+            "switch.master_motion_alarm": {
+                "should_expose": false
+            },
+            "switch.office_door_alarm": {
+                "should_expose": false
+            },
+            "switch.office_motion_alarm": {
+                "should_expose": false
+            },
+            "switch.patio_gate_alarm": {
+                "should_expose": false
+            },
+            "switch.patio_sec2_alarm": {
+                "should_expose": false
+            },
+            "switch.pbath_door_alarm": {
+                "should_expose": false
+            },
+            "switch.ped_gate_alarm": {
+                "should_expose": false
+            },
+            "switch.pool_heat": {
+                "should_expose": false
+            },
+            "switch.rear_patio_1": {
+                "should_expose": false
+            },
+            "switch.rear_patio_2": {
+                "should_expose": false
+            },
+            "switch.rear_patio_3": {
+                "should_expose": false
+            },
+            "switch.shed_door_alarm": {
+                "should_expose": false
+            },
+            "switch.shed_motion_alarm": {
+                "should_expose": false
+            },
+            "switch.sump_alarm_alarm": {
+                "should_expose": false
+            },
+            "switch.west_trees": {
+                "should_expose": false
+            },
+            "vacuum.roomba1": {
+                "should_expose": false
+            }
+        }
     },
     "key": "cloud",
     "version": 1
