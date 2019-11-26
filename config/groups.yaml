@@ -14,18 +14,6 @@ lights_house:
       - group.lights_shed
       - group.lights_garage
 
-lights_welcome:
-   name: Welcome Lights
-   entities:
-      - light.bookcases
-      - light.family_tree
-      - light.kitchen_island
-      - light.living_floor
-      - light.living_tree
-      - light.living_mantel
-      - light.short_hall
-      - light.bar_light
-
 lights_bedr:
    name: Rachel's Room
    entities:

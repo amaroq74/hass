@@ -142,12 +142,13 @@ views:
   - title: Lights
     cards:
       - type: entities
-        title: Controls
+        title: Scenes
         show_header_toggle: false
         entities:
           - scene.house_lights_off
           - scene.welcome_lights
           - scene.movie_lights
+          - scene.living_mood
 
       - type: entities
         title: Family Room
@@ -365,7 +366,7 @@ views:
         title: Controls
         show_header_toggle: false
         entities:
-          - script.movie_lights
+          - scene.movie_lights
           - switch.speakers
           - remote.family_room
 

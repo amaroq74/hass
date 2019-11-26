@@ -215,13 +215,13 @@
                 "should_expose": false
             },
             "scene.house_lights_off": {
-                "should_expose": false
+                "should_expose": true
             },
             "scene.movie_lights": {
-                "should_expose": false
+                "should_expose": true
             },
             "scene.welcome_lights": {
-                "should_expose": false
+                "should_expose": true
             },
             "script.flower_box_sprinklers": {
                 "should_expose": false
@@ -394,7 +394,8 @@
             "vacuum.roomba1": {
                 "should_expose": false
             }
-        }
+        },
+        "google_local_webhook_id": "c063ec77f7746c2cec3f196c021afdcb73298c30d04d76273ea5acaaa0f2ac09"
     },
     "key": "cloud",
     "version": 1

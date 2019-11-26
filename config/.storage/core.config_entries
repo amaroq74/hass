@@ -3,11 +3,16 @@
         "entries": [
             {
                 "connection_class": "local_push",
-                "data": {},
+                "data": {
+                    "user_id": "fc432629c722474f981800253d556bf5"
+                },
                 "domain": "cast",
                 "entry_id": "9b37e96487ff474b9b6a428619a5aa4c",
                 "options": {},
                 "source": "discovery",
+                "system_options": {
+                    "disable_new_entities": false
+                },
                 "title": "Google Cast",
                 "version": 1
             },
@@ -18,6 +23,9 @@
                 "entry_id": "0a0e890601f4461c813daa67f7316aa2",
                 "options": {},
                 "source": "import",
+                "system_options": {
+                    "disable_new_entities": false
+                },
                 "title": "configuration.yaml",
                 "version": 1
             }

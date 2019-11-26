@@ -1,0 +1,46 @@
+
+- name: Movie Lights
+  entities:
+    light.kitchen_island: off
+    light.kitchen_light: off
+    light.kitchen_table: off
+    light.kitchen_sink: off
+    light.couch_light: off
+    light.bar_light: off
+    light.bookcases: 
+       state: on
+       brightness_pct: 30
+
+- name: House Lights Off
+  entities:
+    group.lights_house: off
+    remote.family_room: off
+
+- name: Welcome Lights
+  entities:
+    light.bookcases: 
+       state: on
+       brightness_pct: 50
+    light.family_tree: on
+    light.kitchen_island: on
+    light.living_floor: on
+    light.living_tree: on
+    light.living_mantel:
+       state: on
+       brightness_pct: 30
+    light.short_hall: on
+    light.bar_light: on
+
+- name: Living Mood
+  entities:
+    light.living_floor: on
+    light.living_chandelier:
+       state: on
+       brightness_pct: 30
+    light.living_lights: off
+    light.living_entry: off
+    light.living_mantel:
+       state: on
+       brightness_pct: 30
+    light.living_tree: off
+

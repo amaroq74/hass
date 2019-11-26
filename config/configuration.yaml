@@ -33,6 +33,9 @@ frontend:
 # Enables configuration UI
 config:
 
+# Monitor system health
+system_health:
+
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 http:
   base_url: aliska.amaroq.net:8123
@@ -119,5 +122,5 @@ climate: !include climate.yaml
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
-scene: !include scene.yaml
+scene: !include scenes.yaml
 
