@@ -105,6 +105,12 @@ cloud:
         - input_boolean.dcare_bell
         - input_boolean.door_alarm
         - input_boolean.house_alarm
+      exclude_entities:
+        - light.family_fan
+        - light.shed_fan
+        - light.master_fan
+        - light.bedta_fan
+        - light.bedr_fan
 
 vera:
    vera_controller_url: http://172.16.20.22:3480
@@ -123,4 +129,6 @@ group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
+camera: !include cameras.yaml
+fan: !include fans.yaml
 

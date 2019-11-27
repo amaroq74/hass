@@ -1854,6 +1854,42 @@
                 "name": null,
                 "platform": "updater",
                 "unique_id": "updater"
+            },
+            {
+                "config_entry_id": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_temp_temp_temp_thgr228n_cb_temperature",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "unique_id": "temp_temp_thgr228n_cb"
+            },
+            {
+                "config_entry_id": "9b37e96487ff474b9b6a428619a5aa4c",
+                "device_id": "03574129b01b476c9b43eb36935998e2",
+                "disabled_by": null,
+                "entity_id": "media_player.master_speaker",
+                "name": "Master Speaker",
+                "platform": "cast",
+                "unique_id": "a6a3a661-2654-478c-f582-6dbe2e40c363"
+            },
+            {
+                "config_entry_id": "9b37e96487ff474b9b6a428619a5aa4c",
+                "device_id": "4cd6d362871742fd96b034ee7d62c1e0",
+                "disabled_by": null,
+                "entity_id": "media_player.shed_speaker",
+                "name": "Shed Speaker",
+                "platform": "cast",
+                "unique_id": "28513855-39f8-c20a-db65-11f9c461fb02"
+            },
+            {
+                "config_entry_id": "9b37e96487ff474b9b6a428619a5aa4c",
+                "device_id": "c7cf637ac6d94cce9d49f29e1a5d5776",
+                "disabled_by": null,
+                "entity_id": "media_player.bedr_speaker",
+                "name": "BedR Speaker",
+                "platform": "cast",
+                "unique_id": "0251d5c7-a533-49fe-0d3b-b8e022a84410"
             }
         ]
     },

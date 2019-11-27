@@ -1,0 +1,114 @@
+
+- platform: template
+  fans:
+
+    family_fan:
+      friendly_name: "Family Fan"
+      speeds:  ['low', 'medium', 'high']
+      value_template: "{{ states('light.family_fan') }}"
+      speed_template: >
+        {% if      (state_attr('light.family_fan', 'brightness')|int <  85) %} {{ "low" }}  
+        {% elif    (state_attr('light.family_fan', 'brightness')|int > 170) %} {{ "high" }} 
+        {% else %}    {{ "medium" }}   {% endif %}
+      turn_on:
+        service: light.turn_on
+        entity_id: light.family_fan
+      turn_off:
+        service: light.turn_off
+        entity_id: light.family_fan
+      set_speed:
+        service: light.turn_on
+        entity_id: light.family_fan
+        data_template:
+          brightness: >
+            {% set speedlist = { 'low':25, 'medium':125, 'high':255 } %}
+            {{ speedlist[speed] if speed in speedlist else 255 }}
+
+    master_fan:
+      friendly_name: "Master Fan"
+      speeds:  ['low', 'medium', 'high']
+      value_template: "{{ states('light.master_fan') }}"
+      speed_template: >
+        {% if      (state_attr('light.master_fan', 'brightness')|int <  85) %} {{ "low" }}  
+        {% elif    (state_attr('light.master_fan', 'brightness')|int > 170) %} {{ "high" }} 
+        {% else %}    {{ "medium" }}   {% endif %}
+      turn_on:
+        service: light.turn_on
+        entity_id: light.master_fan
+      turn_off:
+        service: light.turn_off
+        entity_id: light.master_fan
+      set_speed:
+        service: light.turn_on
+        entity_id: light.master_fan
+        data_template:
+          brightness: >
+            {% set speedlist = { 'low':25, 'medium':125, 'high':255 } %}
+            {{ speedlist[speed] if speed in speedlist else 255 }}
+
+    shed_fan:
+      friendly_name: "Shed Fan"
+      speeds:  ['low', 'medium', 'high']
+      value_template: "{{ states('light.shed_fan') }}"
+      speed_template: >
+        {% if      (state_attr('light.shed_fan', 'brightness')|int <  85) %} {{ "low" }}  
+        {% elif    (state_attr('light.shed_fan', 'brightness')|int > 170) %} {{ "high" }} 
+        {% else %}    {{ "medium" }}   {% endif %}
+      turn_on:
+        service: light.turn_on
+        entity_id: light.shed_fan
+      turn_off:
+        service: light.turn_off
+        entity_id: light.shed_fan
+      set_speed:
+        service: light.turn_on
+        entity_id: light.shed_fan
+        data_template:
+          brightness: >
+            {% set speedlist = { 'low':25, 'medium':125, 'high':255 } %}
+            {{ speedlist[speed] if speed in speedlist else 255 }}
+
+    bedr_fan:
+      friendly_name: "BedR Fan"
+      speeds:  ['low', 'medium', 'high']
+      value_template: "{{ states('light.bedr_fan') }}"
+      speed_template: >
+        {% if      (state_attr('light.bedr_fan', 'brightness')|int <  85) %} {{ "low" }}  
+        {% elif    (state_attr('light.bedr_fan', 'brightness')|int > 170) %} {{ "high" }} 
+        {% else %}    {{ "medium" }}   {% endif %}
+      turn_on:
+        service: light.turn_on
+        entity_id: light.bedr_fan
+      turn_off:
+        service: light.turn_off
+        entity_id: light.bedr_fan
+      set_speed:
+        service: light.turn_on
+        entity_id: light.bedr_fan
+        data_template:
+          brightness: >
+            {% set speedlist = { 'low':25, 'medium':125, 'high':255 } %}
+            {{ speedlist[speed] if speed in speedlist else 255 }}
+
+    bedta_fan:
+      friendly_name: "BedTA Fan"
+      speeds:  ['low', 'medium', 'high']
+      value_template: "{{ states('light.bedta_fan') }}"
+      speed_template: >
+        {% if      (state_attr('light.bedta_fan', 'brightness')|int <  85) %} {{ "low" }}  
+        {% elif    (state_attr('light.bedta_fan', 'brightness')|int > 170) %} {{ "high" }} 
+        {% else %}    {{ "medium" }}   {% endif %}
+      turn_on:
+        service: light.turn_on
+        entity_id: light.bedta_fan
+      turn_off:
+        service: light.turn_off
+        entity_id: light.bedta_fan
+      set_speed:
+        service: light.turn_on
+        entity_id: light.bedta_fan
+        data_template:
+          brightness: >
+            {% set speedlist = { 'low':25, 'medium':125, 'high':255 } %}
+            {{ speedlist[speed] if speed in speedlist else 255 }}
+

@@ -1,46 +1,45 @@
-
-- name: Movie Lights
+- id: movie_lights
+  name: Movie Lights
   entities:
-    light.kitchen_island: off
-    light.kitchen_light: off
-    light.kitchen_table: off
-    light.kitchen_sink: off
-    light.couch_light: off
-    light.bar_light: off
-    light.bookcases: 
-       state: on
-       brightness_pct: 30
-
-- name: House Lights Off
+    light.kitchen_island: false
+    light.kitchen_light: false
+    light.kitchen_table: false
+    light.kitchen_sink: false
+    light.couch_light: false
+    light.bar_light: false
+    light.bookcases:
+      state: true
+      brightness_pct: 30
+- id: house_lights_off
+  name: House Lights Off
   entities:
-    group.lights_house: off
-    remote.family_room: off
-
-- name: Welcome Lights
+    group.lights_house: false
+    remote.family_room: false
+- id: welcome_lights
+  name: Welcome Lights
   entities:
-    light.bookcases: 
-       state: on
-       brightness_pct: 50
-    light.family_tree: on
-    light.kitchen_island: on
-    light.living_floor: on
-    light.living_tree: on
+    light.bookcases:
+      state: true
+      brightness_pct: 50
+    light.family_tree: true
+    light.kitchen_island: true
+    light.living_floor: true
+    light.living_tree: true
     light.living_mantel:
-       state: on
-       brightness_pct: 30
-    light.short_hall: on
-    light.bar_light: on
-
-- name: Living Mood
+      state: true
+      brightness_pct: 30
+    light.short_hall: true
+    light.bar_light: true
+- id: living_mood
+  name: Living Mood
   entities:
-    light.living_floor: on
+    light.living_floor: true
     light.living_chandelier:
-       state: on
-       brightness_pct: 30
-    light.living_lights: off
-    light.living_entry: off
+      state: true
+      brightness_pct: 30
+    light.living_lights: false
+    light.living_entry: false
     light.living_mantel:
-       state: on
-       brightness_pct: 30
-    light.living_tree: off
-
+      state: true
+      brightness_pct: 30
+    light.living_tree: false

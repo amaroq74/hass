@@ -139,6 +139,19 @@ views:
           - input_boolean.door_alarm
           - input_boolean.house_alarm
 
+      - type: entities
+        title: Cameras
+        show_header_toggle: false
+        entities:
+          - camera.garage
+          - camera.gate
+          - camera.front
+          - camera.rear
+          - camera.side
+          - camera.roses
+          - camera.chickens
+          - camera.weather
+
   - title: Lights
     cards:
       - type: entities
@@ -256,11 +269,11 @@ views:
         title: Fans
         show_header_toggle: false
         entities:
-          - light.family_fan
-          - light.master_fan
-          - light.bedr_fan
-          - light.bedta_fan
-          - light.shed_fan
+          - fan.family_fan
+          - fan.master_fan
+          - fan.bedr_fan
+          - fan.bedta_fan
+          - fan.shed_fan
           - switch.house_fan
 
   - title: Yard
@@ -401,7 +414,13 @@ views:
       - type: media-control
         entity: media_player.kitchen_speaker
       - type: media-control
+        entity: media_player.master_speaker
+      - type: media-control
+        entity: media_player.bedr_speaker
+      - type: media-control
         entity: media_player.bedtr_speaker
+      - type: media-control
+        entity: media_player.shed_speaker
       - type: media-control
         entity: media_player.living
       - type: media-control
@@ -461,4 +480,7 @@ views:
           - sensor.garage_control_temp
           - sensor.east_sprinklers_temp
           - sensor.gate_control_temp
+
+
+
 

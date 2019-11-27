@@ -23,6 +23,10 @@ GateToggle = {'binary_sensor.car_gate_btn' : 'switch.car_gate'}
 ##################################
 Switches = [ 'dcare_bell', 'night_alarm', 'house_alarm', 'door_alarm']
 
+SoundDevices = [ 'media_player.kitchen_speaker', 'media_player.shed_speaker' ]
+
+DcareDevice = 'media_player.kitchen_speaker'
+
 Sounds = { 'gate_bell':  'doorbell.wav',
            'door_bell':  'front_door_and_gate_bell.wav',
            'dcare_bell': 'short_beep.wav' }
@@ -136,7 +140,7 @@ class HouseSecurity(hass.Hass):
             if count != 0:
                 self.log("Playing daycare alarm for: {}".format(lst))
                 self.call_service('media_player/play_media',
-                                  entity_id='media_player.kitchen_speaker',
+                                  entity_id=DcareDevice,
                                   media_content_id='http://172.16.20.1:8123/local/sounds/'+ Sounds['dcare_bell'],
                                   media_content_type='music')
 
@@ -159,10 +163,12 @@ class HouseSecurity(hass.Hass):
                 if (time.time() - self._lastSound[entity]) > 15 and action in Sounds:
                     self._lastSound[entity] = time.time()
                     self.log("Playing sound for: {}".format(entity))
-                    self.call_service('media_player/play_media',
-                                      entity_id='media_player.kitchen_speaker',
-                                      media_content_id='http://172.16.20.1:8123/local/sounds/' + Sounds[action],
-                                      media_content_type='music')
+
+                    for dev in SoundDevices:
+                        self.call_service('media_player/play_media',
+                                          entity_id=dev,
+                                          media_content_id='http://172.16.20.1:8123/local/sounds/' + Sounds[action],
+                                          media_content_type='music')
 
                 # Check for lights
                 if self.sun_down() and action in Lights:
