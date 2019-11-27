@@ -1,0 +1,41 @@
+
+-  platform: generic
+   name: Garage
+   still_image_url: "http://172.16.20.5/cgi-bin/api.cgi?cmd=Snap&channel=0&rs=xx11228899ddd&amp;user=view&;password=lolhak"
+   stream_source: "rtsp://view:lolhak@172.16.20.5:554/h264Preview_0_sub"
+
+-  platform: generic
+   name: Gate
+   still_image_url: "http://172.16.20.5/cgi-bin/api.cgi?cmd=Snap&channel=1&rs=xx11228899ddd&amp;user=view&;password=lolhak"
+   stream_source: "rtsp://view:lolhak@172.16.20.5:554/h264Preview_1_sub"
+
+-  platform: generic
+   name: Front
+   still_image_url: "http://172.16.20.5/cgi-bin/api.cgi?cmd=Snap&channel=2&rs=xx11228899ddd&amp;user=view&;password=lolhak"
+   stream_source: "rtsp://view:lolhak@172.16.20.5:554/h264Preview_2_sub"
+
+-  platform: generic
+   name: Rear
+   still_image_url: "http://172.16.20.5/cgi-bin/api.cgi?cmd=Snap&channel=3&rs=xx11228899ddd&amp;user=view&;password=lolhak"
+   stream_source: "rtsp://view:lolhak@172.16.20.5:554/h264Preview_3_sub"
+
+-  platform: generic
+   name: Side
+   still_image_url: "http://172.16.20.5/cgi-bin/api.cgi?cmd=Snap&channel=4&rs=xx11228899ddd&amp;user=view&;password=lolhak"
+   stream_source: "rtsp://view:lolhak@172.16.20.5:554/h264Preview_4_sub"
+
+-  platform: generic
+   name: Roses
+   still_image_url: "http://172.16.20.5/cgi-bin/api.cgi?cmd=Snap&channel=5&rs=xx11228899ddd&amp;user=view&;password=lolhak"
+   stream_source: "rtsp://view:lolhak@172.16.20.5:554/h264Preview_5_sub"
+
+-  platform: generic
+   name: Weather
+   still_image_url: "http://172.16.20.5/cgi-bin/api.cgi?cmd=Snap&channel=6&rs=xx11228899ddd&amp;user=view&;password=lolhak"
+   stream_source: "rtsp://view:lolhak@172.16.20.5:554/h264Preview_6_sub"
+
+-  platform: generic
+   name: Chickens
+   still_image_url: "http://172.16.20.6/image/jpeg.cgi"
+   stream_source: "http://172.16.20.6/video.cgi"
+
