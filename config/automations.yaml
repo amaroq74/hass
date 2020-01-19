@@ -10,8 +10,11 @@
       entity_id: group.lights_yard
     service: homeassistant.turn_on
   - data:
-      entity_id: light.patio_sec1
-    service: light.turn_off
+      entity_id: group.lights_sec
+    service: homeassistant.turn_off
+  - data:
+      entity_id: light.bar_lamp
+    service: light.turn_on
 
 - id: yard_lights_off
   alias: Yard Lights Off Timer
@@ -28,8 +31,8 @@
       entity_id: group.lights_yard
     service: homeassistant.turn_off
   - data:
-      entity_id: light.patio_sec1
-    service: light.turn_on
+      entity_id: group.lights_sec
+    service: homeassistant.turn_on
   - data:
       entity_id: group.lights_flood
     service: homeassistant.turn_off

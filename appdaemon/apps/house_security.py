@@ -23,7 +23,9 @@ GateToggle = {'binary_sensor.car_gate_btn' : 'switch.car_gate'}
 ##################################
 Switches = [ 'dcare_bell', 'night_alarm', 'house_alarm', 'door_alarm']
 
-SoundDevices = [ 'media_player.kitchen_speaker', 'media_player.shed_speaker' ]
+SoundDevices = [ 'media_player.kitchen_speaker', 
+                 'media_player.shed_speaker',
+                 'media_player.garage_speaker' ]
 
 DcareDevice = 'media_player.kitchen_speaker'
 
@@ -31,11 +33,11 @@ Sounds = { 'gate_bell':  'doorbell.wav',
            'door_bell':  'front_door_and_gate_bell.wav',
            'dcare_bell': 'short_beep.wav' }
 
-Lights = { 'auto_light' : ['switch.gate_light', 
-                           #'switch.xmas_lights', 
-                           'switch.entry_light', 
-                           'switch.yard_lights1',
-                           'switch.yard_lights2'] }
+Lights = { 'auto_light' : ['light.gate_light', 
+                           'light.xmas_lights', 
+                           'light.entry_light', 
+                           'light.yard_lights1',
+                           'light.yard_lights2'] }
 
 # Alarm group levels
 EmailLevels = {'night_alarm' : 'Alarm',
@@ -53,6 +55,7 @@ EmailAddrs = 'ryan@amaroq.com'
 SecSensors = { 'binary_sensor.ped_gate'      : [ 'gate_bell',   'dcare_bell',  'night_alarm', 'auto_light' ],
                'switch.car_gate'             : [ 'gate_bell',   'dcare_bell',  'night_alarm', 'auto_light' ],
                'switch.garage_door'          : [ 'dcare_bell',  'night_alarm', 'door_alarm'  ],
+               'switch.garage_door'          : [ 'night_alarm', 'door_alarm'  ],
                'binary_sensor.gate_bell'     : [ 'door_bell',   'auto_light'  ],
                'binary_sensor.door_bell'     : [ 'door_bell',   'auto_light'  ],
                'binary_sensor.family_door'   : [ 'night_alarm', 'door_alarm'  ],

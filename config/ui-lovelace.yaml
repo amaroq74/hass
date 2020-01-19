@@ -55,7 +55,7 @@ views:
           - sensor.bedr_temperature
           - sensor.bedta_temperature
           - sensor.shed_temperature
-          - climate.garage
+          - sensor.garage_temperature
           - climate.chicken_coop
           - climate.camper
 
@@ -170,6 +170,7 @@ views:
           - light.couch_light
           - light.bookcases
           - light.bar_light
+          - light.bar_lamp
           - light.family_tree
 
       - type: entities
@@ -189,9 +190,10 @@ views:
 
       - type: entities
         title: Garage
-        show_header_toggle: false
+        show_header_toggle: true
         entities:
           - light.garage_light
+          - light.pool_table
 
       - type: entities
         title: Dining Room
@@ -263,7 +265,9 @@ views:
         entities:
           - light.yard_flood
           - light.patio_flood
+          - light.shed_flood
           - light.patio_sec1
+          - light.patio_sec2
 
       - type: entities
         title: Fans
@@ -398,7 +402,35 @@ views:
             !include media.yaml
 
       - type: custom:mini-media-player
-        entity: media_player.chrome_master
+        entity: media_player.master_tv
+        artwork: cover
+        source: full
+        info: short
+        hide:
+          volume: true
+          source: false
+          power_state: false
+        shortcuts:
+          hide_when_off: false
+          list:
+            !include media.yaml
+
+      - type: custom:mini-media-player
+        entity: media_player.shed_tv
+        artwork: cover
+        source: full
+        info: short
+        hide:
+          volume: true
+          source: false
+          power_state: false
+        shortcuts:
+          hide_when_off: false
+          list:
+            !include media.yaml
+
+      - type: custom:mini-media-player
+        entity: media_player.garage_tv
         artwork: cover
         source: full
         info: short
@@ -422,11 +454,9 @@ views:
       - type: media-control
         entity: media_player.shed_speaker
       - type: media-control
-        entity: media_player.living
+        entity: media_player.garage_speaker
       - type: media-control
         entity: media_player.rx_v677_b95979
-      - type: media-control
-        entity: media_player.rx_v677_b95979_zone_2
       - type: media-control
         entity: media_player.samsung_8_series_65_un65mu800d
 
@@ -480,7 +510,4 @@ views:
           - sensor.garage_control_temp
           - sensor.east_sprinklers_temp
           - sensor.gate_control_temp
-
-
-
 

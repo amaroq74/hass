@@ -58,6 +58,7 @@ lights_family:
       - light.couch_light
       - light.bookcases
       - light.bar_light
+      - light.bar_lamp
       - light.family_tree
 
 lights_office:
@@ -80,6 +81,7 @@ lights_garage:
    name: Garage Lights
    entities:
       - light.garage_light
+      - light.pool_table
 
 lights_yard:
    name: Yard
@@ -101,6 +103,13 @@ lights_flood:
    entities:
       - light.yard_flood
       - light.patio_flood
+      - light.shed_flood
+
+lights_sec:
+   name: Security
+   entities:
+      - light.patio_sec1
+      - light.patio_sec2
 
 auto_fans:
    name: Auto Fans

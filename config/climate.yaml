@@ -24,16 +24,6 @@
      minutes: 3
 
 - platform: generic_thermostat
-  name: Garage
-  heater: switch.garage_heat
-  target_sensor: sensor.garage_temperature
-  min_temp: 32
-  ac_mode: false
-  precision: 0.1
-  keep_alive:
-     minutes: 3
-
-- platform: generic_thermostat
   name: Camper
   heater: switch.camper_heat
   target_sensor: sensor.camper_temperature
