@@ -36,6 +36,9 @@
   - data:
       entity_id: group.lights_flood
     service: homeassistant.turn_off
+  - data:
+      entity_id: light.bar_lamp
+    service: light.turn_off
 
 - id: coop_door_open
   alias: Coop Door Open

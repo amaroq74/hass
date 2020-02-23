@@ -1,5 +1,6 @@
 # To setup AppDaemon, take a look at the documentation:
 # https://appdaemon.readthedocs.io/en/latest/INSTALL.html#configuration
+#  disable_apps: 1
 
 appdaemon:
   threads: 10
@@ -8,3 +9,7 @@ appdaemon:
       type: hass
       ha_url: http://aliska.amaroq.net:8123
       token: !secret token
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: 20
+  time_zone: America/Los_Angeles

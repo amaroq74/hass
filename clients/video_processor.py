@@ -125,7 +125,7 @@ class ImgReceiver(object):
 
             while ret and ((time.time() - self.time) < 300):
                 if self.i == 6:
-                    self.img = cv2.resize(frame,(300,225))
+                    self.img = cv2.resize(frame,(256,192))
                 elif self.i != 1:
                     self.img = cv2.resize(frame,(320,240))
                 else:
@@ -211,9 +211,10 @@ while True:
                 #newImg[480:720,640:960] = imgRx[4].img
                 newImg[480:720,640:960] = detect_objects(imgRx[4].img, sess, detection_graph, 4)
 
-            # Overlay, Coop
+            # Overlay, Coop, upper left
             if imgRx[6].img is not None:
-                newImg[215:440,0:300] = imgRx[6].img
+                #newImg[215:440,0:300] = imgRx[6].img
+                newImg[0:192,0:256] = imgRx[6].img
 
             encoded, buf = cv2.imencode('.jpg',newImg)
             if encoded:
