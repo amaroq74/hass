@@ -26,16 +26,16 @@ NUM_CLASSES = 90
 #NUM_CLASSES = 600
 
 # Path to frozen detection graph. This is the actual model that is used for the object detection.
-PATH_TO_CKPT = os.path.join(basePath, 
-                            'object_detection', 
-                            'pre-trained', 
-                            MODEL_NAME, 
+PATH_TO_CKPT = os.path.join(basePath,
+                            'object_detection',
+                            'pre-trained',
+                            MODEL_NAME,
                             'frozen_inference_graph.pb')
 
 # List of the strings that is used to add correct label for each box.
-PATH_TO_LABELS = os.path.join(basePath, 
-                              'object_detection', 
-                              'data', 
+PATH_TO_LABELS = os.path.join(basePath,
+                              'object_detection',
+                              'data',
                               LABEL_NAME)
 
 # Loading label map
@@ -49,7 +49,7 @@ urls = ['rtsp://view:lolhak@172.16.20.5:554/h264Preview_01_sub', # 0 Front
         'rtsp://view:lolhak@172.16.20.5:554/h264Preview_04_sub', # 3 Rear
         'rtsp://view:lolhak@172.16.20.5:554/h264Preview_05_sub', # 4 Side
         'rtsp://view:lolhak@172.16.20.5:554/h264Preview_06_sub', # 5 Roses
-        'http://coopcam.amaroq.net/video.cgi']                   # 6
+        'rtsp://view:lolhak@172.16.20.5:554/h264Preview_08_sub'] # 6 Chickens
 
 def list_hits(classes, scores, category_index, i):
     for x in range(len(classes)):

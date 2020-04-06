@@ -302,7 +302,7 @@ class StatusWindow(QWidget):
 
     def stateUpdate (self, key, value ):
         for sen in StatusList:
-            if sen['key'] == key and value != 'unknown' and value is not None:
+            if sen['key'] == key and value != 'unknown' and value is not None and value != 'unavailable':
                 sen['conv'](value,sen['box'])
 
 

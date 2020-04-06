@@ -78,7 +78,7 @@
     platform: time
   action:
   - data:
-      entity_id: 
+      entity_id:
         - switch.pool_sweep
         - switch.pool_main
     service: switch.turn_off
@@ -101,9 +101,6 @@
         - condition: state
           entity_id: sensor.rear_patio_watering_day
           state: 'True'
-        - condition: state
-          entity_id: sensor.rain_72h
-          state: '0.0'
   action:
   - service: script.rear_patio_sprinklers
 

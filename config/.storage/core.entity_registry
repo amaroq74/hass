@@ -610,7 +610,7 @@
                 "platform": "rfxcom_rx",
                 "supported_features": 0,
                 "unique_id": "wind_dir_wtgr800_1f",
-                "unit_of_measurement": null
+                "unit_of_measurement": "Deg"
             },
             {
                 "capabilities": {},
@@ -623,7 +623,7 @@
                 "platform": "rfxcom_rx",
                 "supported_features": 0,
                 "unique_id": "wind_speed_wtgr800_1f",
-                "unit_of_measurement": null
+                "unit_of_measurement": "MPH"
             },
             {
                 "capabilities": {},
@@ -636,7 +636,7 @@
                 "platform": "rfxcom_rx",
                 "supported_features": 0,
                 "unique_id": "wind_avgspeed_wtgr800_1f",
-                "unit_of_measurement": null
+                "unit_of_measurement": "MPH"
             },
             {
                 "capabilities": {},
@@ -649,7 +649,7 @@
                 "platform": "rfxcom_rx",
                 "supported_features": 0,
                 "unique_id": "wind_battery_wtgr800_1f",
-                "unit_of_measurement": null
+                "unit_of_measurement": "%"
             },
             {
                 "capabilities": {},
@@ -662,7 +662,7 @@
                 "platform": "rfxcom_rx",
                 "supported_features": 0,
                 "unique_id": "rain_speed_pcr800_eb",
-                "unit_of_measurement": null
+                "unit_of_measurement": "INPH"
             },
             {
                 "capabilities": {},
@@ -675,7 +675,7 @@
                 "platform": "rfxcom_rx",
                 "supported_features": 0,
                 "unique_id": "rain_battery_pcr800_eb",
-                "unit_of_measurement": null
+                "unit_of_measurement": "%"
             },
             {
                 "capabilities": {},
@@ -688,7 +688,7 @@
                 "platform": "rfxcom_rx",
                 "supported_features": 0,
                 "unique_id": "temp_humidity_wtgr800_1f",
-                "unit_of_measurement": null
+                "unit_of_measurement": "%"
             },
             {
                 "capabilities": {},
@@ -701,7 +701,7 @@
                 "platform": "rfxcom_rx",
                 "supported_features": 0,
                 "unique_id": "temp_battery_wtgr800_1f",
-                "unit_of_measurement": null
+                "unit_of_measurement": "%"
             },
             {
                 "capabilities": {},
@@ -831,7 +831,7 @@
                 "platform": "rfxcom_rx",
                 "supported_features": 0,
                 "unique_id": "temp_temp_f007pf_01",
-                "unit_of_measurement": null
+                "unit_of_measurement": "\u00b0F"
             },
             {
                 "capabilities": {},
@@ -2313,7 +2313,7 @@
                 "platform": "rfxcom_rx",
                 "supported_features": 0,
                 "unique_id": "temp_temp_wtgr800_1f",
-                "unit_of_measurement": null
+                "unit_of_measurement": "\u00b0F"
             },
             {
                 "capabilities": {},
@@ -2456,7 +2456,7 @@
                 "platform": "rfxcom_rx",
                 "supported_features": 0,
                 "unique_id": "rain_total_pcr800_eb",
-                "unit_of_measurement": null
+                "unit_of_measurement": "IN"
             },
             {
                 "capabilities": {},
@@ -3366,7 +3366,7 @@
                 "platform": "rfxcom_rx",
                 "supported_features": 0,
                 "unique_id": "rain_speed_pcr800_33",
-                "unit_of_measurement": null
+                "unit_of_measurement": "INPH"
             },
             {
                 "capabilities": {},
@@ -3379,7 +3379,7 @@
                 "platform": "rfxcom_rx",
                 "supported_features": 0,
                 "unique_id": "rain_total_pcr800_33",
-                "unit_of_measurement": null
+                "unit_of_measurement": "IN"
             },
             {
                 "capabilities": {},
@@ -3392,7 +3392,7 @@
                 "platform": "rfxcom_rx",
                 "supported_features": 0,
                 "unique_id": "rain_battery_pcr800_33",
-                "unit_of_measurement": null
+                "unit_of_measurement": "%"
             },
             {
                 "capabilities": {},
@@ -3405,7 +3405,7 @@
                 "platform": "rfxcom_rx",
                 "supported_features": 0,
                 "unique_id": "temp_temp_thwr800_c2",
-                "unit_of_measurement": null
+                "unit_of_measurement": "\u00b0F"
             },
             {
                 "capabilities": {},
@@ -3418,7 +3418,7 @@
                 "platform": "rfxcom_rx",
                 "supported_features": 0,
                 "unique_id": "temp_battery_thwr800_c2",
-                "unit_of_measurement": null
+                "unit_of_measurement": "%"
             },
             {
                 "capabilities": {},
@@ -4914,6 +4914,201 @@
                 "supported_features": 0,
                 "unique_id": "100",
                 "unit_of_measurement": null
+            },
+            {
+                "capabilities": {},
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_address_homeeasy_address_2e20157g",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "supported_features": 0,
+                "unique_id": "homeeasy_address_2E20157G",
+                "unit_of_measurement": ""
+            },
+            {
+                "capabilities": {},
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_device_homeeasy_device_2e20157g",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "supported_features": 0,
+                "unique_id": "homeeasy_device_2E20157G",
+                "unit_of_measurement": ""
+            },
+            {
+                "capabilities": {},
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_level_homeeasy_level_2e20157g",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "supported_features": 0,
+                "unique_id": "homeeasy_level_2E20157G",
+                "unit_of_measurement": ""
+            },
+            {
+                "capabilities": {},
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_command_homeeasy_command_2e20157g",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "supported_features": 0,
+                "unique_id": "homeeasy_command_2E20157G",
+                "unit_of_measurement": ""
+            },
+            {
+                "capabilities": null,
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_address_homeeasy_address_2e20413g",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "supported_features": 0,
+                "unique_id": "homeeasy_address_2E20413G",
+                "unit_of_measurement": ""
+            },
+            {
+                "capabilities": null,
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_device_homeeasy_device_2e20413g",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "supported_features": 0,
+                "unique_id": "homeeasy_device_2E20413G",
+                "unit_of_measurement": ""
+            },
+            {
+                "capabilities": null,
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_level_homeeasy_level_2e20413g",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "supported_features": 0,
+                "unique_id": "homeeasy_level_2E20413G",
+                "unit_of_measurement": ""
+            },
+            {
+                "capabilities": null,
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_command_homeeasy_command_2e20413g",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "supported_features": 0,
+                "unique_id": "homeeasy_command_2E20413G",
+                "unit_of_measurement": ""
+            },
+            {
+                "capabilities": null,
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_address_homeeasy_address_2e204dbg",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "supported_features": 0,
+                "unique_id": "homeeasy_address_2E204DBG",
+                "unit_of_measurement": ""
+            },
+            {
+                "capabilities": null,
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_device_homeeasy_device_2e204dbg",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "supported_features": 0,
+                "unique_id": "homeeasy_device_2E204DBG",
+                "unit_of_measurement": ""
+            },
+            {
+                "capabilities": null,
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_level_homeeasy_level_2e204dbg",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "supported_features": 0,
+                "unique_id": "homeeasy_level_2E204DBG",
+                "unit_of_measurement": ""
+            },
+            {
+                "capabilities": null,
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_command_homeeasy_command_2e204dbg",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "supported_features": 0,
+                "unique_id": "homeeasy_command_2E204DBG",
+                "unit_of_measurement": ""
+            },
+            {
+                "capabilities": null,
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_temp_temp_temp_thgr228n_a6_temperature",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "supported_features": 0,
+                "unique_id": "temp_temp_thgr228n_a6",
+                "unit_of_measurement": "\u00b0F"
+            },
+            {
+                "capabilities": null,
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_humidity_temp_humidity_thgr228n_a6_humidity",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "supported_features": 0,
+                "unique_id": "temp_humidity_thgr228n_a6",
+                "unit_of_measurement": "%"
+            },
+            {
+                "capabilities": null,
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "sensor.unknown_battery_temp_battery_thgr228n_a6_battery",
+                "name": null,
+                "platform": "rfxcom_rx",
+                "supported_features": 0,
+                "unique_id": "temp_battery_thgr228n_a6",
+                "unit_of_measurement": "%"
             }
         ]
     },

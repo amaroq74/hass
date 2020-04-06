@@ -12,9 +12,9 @@ lovelace:
 
 device_tracker:
    - platform: nmap_tracker
-     hosts: 
-       - 172.16.20.18/32 
-       - 172.16.20.19/32 
+     hosts:
+       - 172.16.20.18/32
+       - 172.16.20.19/32
      home_interval: 10
 
 vacuum:
@@ -82,7 +82,7 @@ rainforest_usb:
   name: smartmeter
 
 rfxcom_rx:
-  device: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A6003Q5Y-if00-port0 
+  device: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A6003Q5Y-if00-port0
 
 # Cloud
 cloud:
@@ -94,7 +94,6 @@ cloud:
         - scene
       include_entities:
         - climate.house
-        - climate.pool
         - switch.speakers
         - switch.car_gate
         - switch.garage_door
