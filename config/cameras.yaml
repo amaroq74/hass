@@ -36,6 +36,6 @@
 
 -  platform: generic
    name: Chickens
-   still_image_url: "http://172.16.20.6/image/jpeg.cgi"
-   stream_source: "http://172.16.20.6/video.cgi"
+   still_image_url: "http://172.16.20.5/cgi-bin/api.cgi?cmd=Snap&channel=7&rs=xx11228899ddd&amp;user=view&;password=lolhak"
+   stream_source: "rtsp://view:lolhak@172.16.20.5:554/h264Preview_7_sub"
 

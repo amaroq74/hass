@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 
+WiconDir = "/amaroq/hass/clients/wicons"
+
 ferr = open("/amaroq/home/media-family/panel.log","a")
+#ferr = None
 
 def eprint(*args, **kwargs):
     global ferr
     print(*args, file=ferr, **kwargs)
-    ferr.flush()
+
+    if ferr is not None:
+        ferr.flush()
 
 import datetime
 now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -43,11 +48,12 @@ from websocket import create_connection
 import threading
 import zmq
 import base64
+import os
 
 
 # Display functions
 def disp_temp(val, box):
-    box.setText("%2.2F F" % ( float(val) )) 
+    box.setText("%2.2F F" % ( float(val) ))
 
 def disp_humid(val, box):
     box.setText("%i %%" % ( float(val) ))
@@ -202,7 +208,7 @@ class TempChart(QWidget):
         dataA_Y = [convert.tempCelToFar(val['current']) for val in inTemp]
         dataB_Y = [convert.tempCelToFar(val['current']) for val in outTemp]
 
-        self.axes.clear()        
+        self.axes.clear()
         self.axes.grid(True)
 
         self.axes.plot_date(dataA_X, dataA_Y, 'r-', label='In')
@@ -326,7 +332,7 @@ class ForecastWindow(QWidget):
 
         gl = QGridLayout()
 
-        for idx in range(0,8):
+        for idx in range(10):
             self.dayName[idx] = QLabel()
             self.dayName[idx].setAlignment(Qt.AlignCenter)
             self.dayName[idx].setFont(nfont)
@@ -360,28 +366,29 @@ class ForecastWindow(QWidget):
         try:
 
             # Get the forecast
-            url = "http://api.wunderground.com/api/" + secrets.wunder_api + "/forecast/q/94062.xml"
+            url = "https://api.weather.com/v3/wx/forecast/daily/5day?postalKey=94062:US&units=e&language=en-US&format=json&apiKey=" + secrets.wunder_api
 
             with urllib.request.urlopen(url) as fh:
                 ures = fh.read().rstrip()
 
-            root = ET.fromstring(ures)
+            res = json.loads(ures)
 
-            for day in root.findall('./forecast/txt_forecast/forecastdays/forecastday'):
-                per  = int(day.findall('./period')[0].text)
-                dow  = day.findall('./title')[0].text
-                cond = day.findall('./fcttext')[0].text 
-                iurl = day.findall('./icon_url')[0].text 
+            for i,day in enumerate(res['daypart'][0]['daypartName']):
+                if day is not None:
+                    cond = res['daypart'][0]['wxPhraseShort'][i]
+                    icon = res['daypart'][0]['iconCode'][i]
+                    ipath = os.path.join(WiconDir, f"{icon:02d}.png")
+                else:
+                    cond = ""
+                    ipath = os.path.join(WiconDir, "na.png")
 
-                if per < 10:
-                    with urllib.request.urlopen(iurl) as imgReq:
-                        icon = imgReq.read()
+                if i < 10:
+                    self.dayName[i].setText(day)
+                    self.dayInfo[i].setText(cond)
+                    self.dayPixmap[i].load(ipath)
+                    self.dayLabel[i].setPixmap(self.dayPixmap[i].scaled(50,50,Qt.KeepAspectRatio))
+                    self.dayLabel[i].update()
 
-                    self.dayName[per].setText(dow) 
-                    self.dayInfo[per].setText(cond)
-                    self.dayPixmap[per].loadFromData(icon) 
-                    self.dayLabel[per].setPixmap(self.dayPixmap[per])
-                    self.dayLabel[per].update()
 
         except Exception as e:
             eprint("go forecast exception: {}".format(e))
@@ -469,7 +476,7 @@ class HassListener(QThread):
         key = e['entity_id']
         #eprint("{} = {}".format(key,e))
 
-        if 'climate.' in key: 
+        if 'climate.' in key:
             val = e['attributes']['temperature']
         else:
             val = e['state']
@@ -490,7 +497,7 @@ class HassListener(QThread):
                         self._newValue(e)
 
             elif d['type'] == 'event':
-                e = d['event']['data']['new_state'] 
+                e = d['event']['data']['new_state']
                 self._newValue(e)
         except Exception as emsg:
             eprint("Got Read Exception: {}".format(emsg))

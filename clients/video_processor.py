@@ -61,7 +61,7 @@ def list_hits(classes, scores, category_index, i):
 
 
 def detect_objects(image_np, sess, detection_graph, i):
-    if True:
+    if False:
 
         # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
         image_np_expanded = np.expand_dims(image_np, axis=0)
@@ -155,7 +155,7 @@ pub = ctx.socket(zmq.PUB)
 pub.bind('tcp://*:9020')
 
 # Load detection graph
-if True:
+if False:
     detection_graph = tf.Graph()
     with detection_graph.as_default():
         od_graph_def = tf.compat.v1.GraphDef()

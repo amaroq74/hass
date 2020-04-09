@@ -11,7 +11,7 @@
   min_cycle_duration:
      minutes: 5
   keep_alive:
-     minutes: 3
+     minutes: 5
 
 - platform: generic_thermostat
   name: Chicken Coop
@@ -21,7 +21,7 @@
   ac_mode: false
   precision: 0.1
   keep_alive:
-     minutes: 3
+     minutes: 5
 
 - platform: generic_thermostat
   name: Camper
@@ -31,7 +31,7 @@
   ac_mode: false
   precision: 0.1
   keep_alive:
-     minutes: 3
+     minutes: 5
 
 - platform: generic_thermostat
   name: Pool
@@ -43,5 +43,5 @@
   ac_mode: false
   precision: 0.1
   keep_alive:
-     minutes: 3
+     minutes: 5
 
