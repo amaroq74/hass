@@ -15,7 +15,6 @@ views:
         title: Weather
         show_header_toggle: false
         entities:
-          - sensor.pws_weather
           - sensor.outdoor_temperature
           - sensor.outdoor_humidity
           - sensor.wind_compass
@@ -24,8 +23,8 @@ views:
           - sensor.indoor_pressure
           - sensor.indoor_trend
           - sensor.outdoor_dewpoint
-          - sensor.pws_uv
-          - sensor.pws_solarradiation
+          - sensor.wupws_uv
+          - sensor.wupws_solarradiation
           - sensor.rain_day
           - sensor.rain_hour
           - sensor.rain_24h
@@ -35,15 +34,14 @@ views:
         title: Forecast
         show_header_toggle: false
         entities:
-          - sensor.pws_alerts
-          - sensor.pws_weather_1d
-          - sensor.pws_weather_1n
-          - sensor.pws_weather_2d
-          - sensor.pws_weather_2n
-          - sensor.pws_weather_3d
-          - sensor.pws_weather_3n
-          - sensor.pws_weather_4d
-          - sensor.pws_weather_4n
+          - sensor.wupws_weather_1d
+          - sensor.wupws_weather_1n
+          - sensor.wupws_weather_2d
+          - sensor.wupws_weather_2n
+          - sensor.wupws_weather_3d
+          - sensor.wupws_weather_3n
+          - sensor.wupws_weather_4d
+          - sensor.wupws_weather_4n
 
       - type: entities
         title: Temperature
@@ -77,6 +75,7 @@ views:
         entities:
           - binary_sensor.sump_alarm
           - sensor.smartmeter_rate
+          - sensor.ups_input_voltage
           - sensor.ups_load
           - sensor.ups_time_left
           - sensor.camper_luminance
@@ -384,7 +383,6 @@ views:
         show_header_toggle: false
         entities:
           - scene.movie_lights
-          - switch.speakers
           - remote.family_room
 
       - type: custom:mini-media-player
@@ -397,7 +395,7 @@ views:
           source: false
           power_state: false
         shortcuts:
-          hide_when_off: false
+          hide_when_off: true
           list:
             !include media.yaml
 
@@ -411,7 +409,7 @@ views:
           source: false
           power_state: false
         shortcuts:
-          hide_when_off: false
+          hide_when_off: true
           list:
             !include media.yaml
 
@@ -425,7 +423,7 @@ views:
           source: false
           power_state: false
         shortcuts:
-          hide_when_off: false
+          hide_when_off: true
           list:
             !include media.yaml
 
@@ -439,10 +437,16 @@ views:
           source: false
           power_state: false
         shortcuts:
-          hide_when_off: false
+          hide_when_off: true
           list:
             !include media.yaml
 
+      - type: media-control
+        entity: media_player.back_yard_speakers
+      - type: media-control
+        entity: media_player.front_yard_speakers
+      - type: media-control
+        entity: media_player.living_room_speakers
       - type: media-control
         entity: media_player.kitchen_speaker
       - type: media-control
@@ -458,7 +462,7 @@ views:
       - type: media-control
         entity: media_player.rx_v677_b95979
       - type: media-control
-        entity: media_player.samsung_8_series_65_un65mu800d
+        entity: media_player.family_room_tv
 
   - title: Monitor
     cards:
@@ -487,15 +491,6 @@ views:
           - sensor.outdoor_battery
           - sensor.wind_battery
           - sensor.rain_battery
-
-      - type: entities
-        title: Groups
-        show_header_toggle: false
-        entities:
-          - group.all_automations
-          - group.all_scripts
-          - group.all_switches
-          - group.all_lights
 
       - type: entities
         title: IO Boards

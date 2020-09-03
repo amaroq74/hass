@@ -48,7 +48,7 @@ LogSensors = {  'sensor.rain_total'           : {'type':'count',         'device
                 'sensor.smartmeter_total'     : {'type':'total',         'device':'SmartMeter',     'units':'KW_Hours', 'conv':None},
                 'sensor.ups_input_voltage'    : {'type':'line_voltage',  'device':'UPS',            'units':'V',        'conv':None},
                 'sensor.ups_load'             : {'type':'load',          'device':'UPS',            'units':'%',        'conv':None} }
- 
+
 
 class SensorLog(hass.Hass):
 
@@ -90,7 +90,7 @@ class SensorLog(hass.Hass):
         for k,ent in LogSensors.items():
             new = self.get_state(k)
 
-            if new is not None and new != 'unknown':
+            if new is not None and new != 'unknown' and new != 'unavailable':
                 if ent['conv'] is not None:
                     val = ent['conv'](float(new))
                 else:

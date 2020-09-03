@@ -23,7 +23,7 @@ GateToggle = {'binary_sensor.car_gate_btn' : 'switch.car_gate'}
 ##################################
 Switches = [ 'dcare_bell', 'night_alarm', 'house_alarm', 'door_alarm']
 
-SoundDevices = [ 'media_player.kitchen_speaker', 
+SoundDevices = [ 'media_player.kitchen_speaker',
                  'media_player.shed_speaker',
                  'media_player.garage_speaker' ]
 
@@ -33,9 +33,9 @@ Sounds = { 'gate_bell':  'doorbell.wav',
            'door_bell':  'front_door_and_gate_bell.wav',
            'dcare_bell': 'short_beep.wav' }
 
-Lights = { 'auto_light' : ['light.gate_light', 
-                           'light.xmas_lights', 
-                           'light.entry_light', 
+Lights = { 'auto_light' : ['light.gate_light',
+                           'light.xmas_lights',
+                           'light.entry_light',
                            'light.yard_lights1',
                            'light.yard_lights2'] }
 
@@ -66,7 +66,7 @@ SecSensors = { 'binary_sensor.ped_gate'      : [ 'gate_bell',   'dcare_bell',  '
                'binary_sensor.garage_rdoor'  : [ 'night_alarm', 'door_alarm'   ],
                'binary_sensor.garbage_gate'  : [ 'dcare_bell'   ],
                'binary_sensor.patio_gate'    : [ 'dcare_bell'   ],
-               'binary_sensor.chickens_gate' : [ ],
+               'binary_sensor.chickens_gate' : [ 'dcare_bell'   ],
                'binary_sensor.office_door'   : [ 'dcare_bell'   ],
                'binary_sensor.ivy_gate'      : [ 'dcare_bell'   ],
                'binary_sensor.bedta_motion'  : [ 'house_alarm'  ],
@@ -174,7 +174,7 @@ class HouseSecurity(hass.Hass):
                                           media_content_type='music')
 
                 # Check for lights
-                if self.sun_down() and action in Lights:
+                if self.get_state('sun.sun') == 'below_horizon':
                     for light in Lights[action]:
                         self.turn_on(light)
 

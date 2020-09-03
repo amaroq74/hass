@@ -198,7 +198,7 @@
   action:
   - data:
       entity_id: climate.house
-      temperature: 67
+      temperature: 65
     service: climate.set_temperature
 
 - id: heater_weekend_timer
@@ -330,7 +330,7 @@
 - id: fountain_off
   alias: Fountain Off
   trigger:
-  - at: '23:00:00'
+  - at: '23:59:00'
     platform: time
   action:
   - data:

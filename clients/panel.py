@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
-WiconDir = "/amaroq/hass/clients/wicons"
+WiconDir = "/amaroq/hass/config/www/wupws_icons"
 
-ferr = open("/amaroq/home/media-family/panel.log","a")
-#ferr = None
+#ferr = open("/amaroq/home/media-family/panel.log","a")
+ferr = None
 
 def eprint(*args, **kwargs):
     global ferr
@@ -121,7 +121,7 @@ DoorList = [{'label':'Ped<br/>Gate',      'key':'binary_sensor.ped_gate',      '
             {'label':'Office<br/>Door',   'key':'binary_sensor.office_door',   'color':Qt.red,    'box':None },
             {'label':'Bath<br/>Door',     'key':'binary_sensor.pbath_door',    'color':Qt.red,    'box':None },
             {'label':'Kitchen<br/>Door',  'key':'binary_sensor.kitchen_door',  'color':Qt.red,    'box':None },
-            {'label':'Chicken<br/>Gate',  'key':'binary_sensor.chickens_gate', 'color':Qt.yellow, 'box':None },
+            {'label':'Chicken<br/>Gate',  'key':'binary_sensor.chickens_gate', 'color':Qt.red,    'box':None },
             {'label':'Shed<br/>Door',     'key':'binary_sensor.shed_door',     'color':Qt.yellow, 'box':None },
             {'label':'Garage<br/>R Door', 'key':'binary_sensor.garage_rdoor',  'color':Qt.yellow, 'box':None }]
 
@@ -366,7 +366,7 @@ class ForecastWindow(QWidget):
         try:
 
             # Get the forecast
-            url = "https://api.weather.com/v3/wx/forecast/daily/5day?postalKey=94062:US&units=e&language=en-US&format=json&apiKey=" + secrets.wunder_api
+            url = "https://api.weather.com/v3/wx/forecast/daily/5day?postalKey=94027:US&units=e&language=en-US&format=json&apiKey=" + secrets.wunder_api
 
             with urllib.request.urlopen(url) as fh:
                 ures = fh.read().rstrip()
@@ -375,7 +375,7 @@ class ForecastWindow(QWidget):
 
             for i,day in enumerate(res['daypart'][0]['daypartName']):
                 if day is not None:
-                    cond = res['daypart'][0]['wxPhraseShort'][i]
+                    cond = res['daypart'][0]['narrative'][i]
                     icon = res['daypart'][0]['iconCode'][i]
                     ipath = os.path.join(WiconDir, f"{icon:02d}.png")
                 else:

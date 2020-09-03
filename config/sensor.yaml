@@ -3,14 +3,12 @@
   name: Time Online
   unit_of_measurement: hours
 
-- platform: wunderground
+- platform: wundergroundpws
   api_key: !secret wunder_api
   pws_id: KCAREDWO4
   monitored_conditions:
-     - alerts
-     - weather
-     - solarradiation
-     - UV
+     - solarRadiation
+     - uv
      - weather_1d
      - weather_1n
      - weather_2d
@@ -19,6 +17,9 @@
      - weather_3n
      - weather_4d
      - weather_4n
+     - weather_5d
+     - weather_5n
+
 
 - platform: time_date
   display_options:

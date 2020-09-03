@@ -67,10 +67,10 @@ class HouseClimate(hass.Hass):
             self._db.setSensor('House', 'temp', newC, 'c')
             self.debug("New house temp = {}".format(newF))
 
-            self.set_state("sensor.house_temperature", 
-                           state=newF, 
-                           attributes={'friendly_name' : 'House Temp', 
-                                       'unit_of_measurement' : TEMP_FAHRENHEIT, 
+            self.set_state("sensor.house_temperature",
+                           state=newF,
+                           attributes={'friendly_name' : 'House Temp',
+                                       'unit_of_measurement' : TEMP_FAHRENHEIT,
                                        'device_class' : 'temperature',
                                        'icon' : 'mdi:thermometer'})
 
@@ -79,14 +79,14 @@ class HouseClimate(hass.Hass):
         temp  = self.get_state('sensor.outdoor_temperature')
         humid = self.get_state('sensor.outdoor_humidity')
 
-        if temp is not None and temp != 'unknown' and humid is not None and humid != 'unknown':
+        if temp is not None and temp != 'unknown' and temp != 'unavailable' and humid is not None and humid != 'unknown' and humid != 'unavailable':
             dewPt = weather_convert.compDewPtFar(float(temp), float(humid))
             self.debug("Comp dewpt temp = {} humid = {} dewPt = {}".format(temp,humid,dewPt))
 
-            self.set_state("sensor.outdoor_dewpoint", 
+            self.set_state("sensor.outdoor_dewpoint",
                            state=dewPt,
-                           attributes={'friendly_name' : 'Outdoor Dew Point', 
-                                       'unit_of_measurement' : TEMP_FAHRENHEIT, 
+                           attributes={'friendly_name' : 'Outdoor Dew Point',
+                                       'unit_of_measurement' : TEMP_FAHRENHEIT,
                                        'device_class' : 'temperature',
                                        'icon' : 'mdi:thermometer'})
 
@@ -122,8 +122,8 @@ class HouseClimate(hass.Hass):
                 calc = 0.0
 
             self.set_state("sensor.{}".format(k), state=calc,
-                           attributes={'friendly_name' : v['name'], 
-                                       'unit_of_measurement' : 
+                           attributes={'friendly_name' : v['name'],
+                                       'unit_of_measurement' :
                                        'IN', 'device_class' : '',
                                        'icon' : 'mdi:weather-rainy'})
 
@@ -136,8 +136,8 @@ class HouseClimate(hass.Hass):
 
             self.set_state("sensor.wind_compass",
                            state=new,
-                           attributes={'friendly_name' : 'Wind Compass', 
-                                       'unit_of_measurement' : '', 
+                           attributes={'friendly_name' : 'Wind Compass',
+                                       'unit_of_measurement' : '',
                                        'device_class' : '',
                                        'device_class' : '',
                                        'icon' : 'mdi:weather-windy'})
