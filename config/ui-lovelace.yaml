@@ -74,6 +74,8 @@ views:
         show_header_toggle: false
         entities:
           - binary_sensor.sump_alarm
+          - binary_sensor.camper_flood
+          - binary_sensor.camper_freeze
           - sensor.smartmeter_rate
           - sensor.ups_input_voltage
           - sensor.ups_load
@@ -240,7 +242,9 @@ views:
         title: Shed Lights
         show_header_toggle: false
         entities:
-          - light.shed_light
+          - light.shed_main_light
+          - light.shed_bed_light
+          - light.shed_kitchen_light
 
       - type: entities
         title: Yard

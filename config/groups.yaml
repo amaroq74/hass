@@ -75,7 +75,9 @@ lights_hall:
 lights_shed:
    name: Shed Lights
    entities:
-      - light.shed_light
+      - light.shed_main_light
+      - light.shed_kitchen_light
+      - light.shed_bed_light
 
 lights_garage:
    name: Garage Lights
