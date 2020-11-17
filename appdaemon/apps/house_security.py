@@ -18,6 +18,11 @@ from urllib.parse import urlencode, quote_plus
 ##################################
 GateToggle = {'binary_sensor.car_gate_btn' : 'switch.car_gate'}
 
+RadioBlockSwitch = 'input_boolean.radio_block'
+RadioBlockInputs = ['binary_sensor.car_gate_btn',
+                    'binary_sensor.gate_bell',
+                    'binary_sensor.door_bell' ]
+
 ##################################
 # Constants
 ##################################
@@ -64,6 +69,7 @@ SecSensors = { 'binary_sensor.ped_gate'      : [ 'gate_bell',   'dcare_bell',  '
                'binary_sensor.kitchen_door'  : [ 'night_alarm', 'door_alarm'   ],
                'binary_sensor.dining_door'   : [ 'night_alarm', 'door_alarm'   ],
                'binary_sensor.garage_rdoor'  : [ 'night_alarm', 'door_alarm'   ],
+               'binary_sensor.master_door'   : [ 'night_alarm', 'door_alarm'   ],
                'binary_sensor.garbage_gate'  : [ 'dcare_bell'   ],
                'binary_sensor.patio_gate'    : [ 'dcare_bell'   ],
                'binary_sensor.chickens_gate' : [ 'dcare_bell'   ],
@@ -117,6 +123,10 @@ class HouseSecurity(hass.Hass):
 
     # Gate toggle
     def gate_toggle(self, entity, attribute, old, new, *args, **kwargs):
+
+        if entity in RadioBlockInputs and self.get_state(RadioBlockSwitch) == 'on':
+            return
+
         if entity in GateToggle:
 
             self.log("Got gate toggle {} {} {} {}".format(entity,attribute,old,new))
@@ -156,13 +166,16 @@ class HouseSecurity(hass.Hass):
         if new == old or new == 'off' or old != 'off':
             return
 
+        if entity in RadioBlockInputs and self.get_state(RadioBlockSwitch) == 'on':
+            return
+
         # Procss each action
         for action in SecSensors[entity]:
 
             # Make sure action is enabled
             if action not in Switches or self.get_state('input_boolean.' + action) == 'on':
 
-                # Check for sound
+                # Check for sound without radio gate
                 if (time.time() - self._lastSound[entity]) > 15 and action in Sounds:
                     self._lastSound[entity] = time.time()
                     self.log("Playing sound for: {}".format(entity))

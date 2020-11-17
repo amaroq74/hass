@@ -29,6 +29,8 @@ views:
           - sensor.rain_hour
           - sensor.rain_24h
           - sensor.rain_72h
+          - sensor.rain_rate
+          - sensor.rain_total
 
       - type: entities
         title: Forecast
@@ -116,6 +118,7 @@ views:
           - binary_sensor.pbath_door
           - binary_sensor.shed_door
           - binary_sensor.garage_rdoor
+          - binary_sensor.master_door
 
       - type: entities
         title: Motion Sensors
@@ -139,6 +142,7 @@ views:
           - input_boolean.night_alarm
           - input_boolean.door_alarm
           - input_boolean.house_alarm
+          - input_boolean.radio_block
 
       - type: entities
         title: Cameras
@@ -240,7 +244,7 @@ views:
 
       - type: entities
         title: Shed Lights
-        show_header_toggle: false
+        show_header_toggle: true
         entities:
           - light.shed_main_light
           - light.shed_bed_light
@@ -271,6 +275,7 @@ views:
           - light.shed_flood
           - light.patio_sec1
           - light.patio_sec2
+          - light.patio_sec3
 
       - type: entities
         title: Fans

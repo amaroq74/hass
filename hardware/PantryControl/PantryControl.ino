@@ -20,17 +20,17 @@ const unsigned int LedPeriod = 100;
 
 // Outputs
 const unsigned int OutputCount = 2;
-const char * OutputCmndTopic[] = {"cmnd/pantry_control/house_heat", 
+const char * OutputCmndTopic[] = {"cmnd/pantry_control/house_heat",
                                   "cmnd/pantry_control/house_fan" };
-const char * OutputStatTopic[] = {"stat/pantry_control/house_heat", 
+const char * OutputStatTopic[] = {"stat/pantry_control/house_heat",
                                   "stat/pantry_control/house_fan" };
 unsigned int OutputPin[]       = {12, 5};
 unsigned int OutputMaxTime[]   = {2100000, 36000000}; // 35 Min, 10 Hours
 
 // Analog Inputs
 const unsigned int InputCount = 3;
-const char * InputStatTopic[] = {"stat/pantry_control/gate_bell", 
-                                 "stat/pantry_control/door_bell", 
+const char * InputStatTopic[] = {"stat/pantry_control/gate_bell",
+                                 "stat/pantry_control/door_bell",
                                  "stat/pantry_control/gate_toggle"};
 unsigned int InputPin[]       = {9, 10, 14};
 
@@ -81,7 +81,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
       // Topic match
       if ( strcmp(OutputCmndTopic[x],topic) == 0 ) {
 
-         // Turn On      
+         // Turn On
          if ( length == 2 && strncmp((char *)payload,"ON",2) == 0 ) {
             digitalWrite(OutputPin[x],HIGH);
             client.publish(OutputStatTopic[x],"ON");
@@ -167,7 +167,7 @@ void setup() {
 
    // Init inputs
    for (x=0; x < InputCount; x++) {
-      pinMode(InputPin[x],INPUT);
+      pinMode(InputPin[x],INPUT_PULLUP);
       inputLevel[x] = 0;
       inputRaw[x]   = 0;
       inputTime[x]  = millis();
@@ -248,7 +248,7 @@ void loop() {
             delay(10);
          }
       }
-   
+
       inputRaw[x] = tmp;
    }
 
@@ -257,7 +257,7 @@ void loop() {
       logPrintf("Updating digital values.");
 
       for (x=0; x < OutputCount; x++) {
-         if (outputLevel[x] == 1 ) 
+         if (outputLevel[x] == 1 )
             client.publish(OutputStatTopic[x],"ON");
          else
             client.publish(OutputStatTopic[x],"OFF");
@@ -265,7 +265,7 @@ void loop() {
       }
 
       for (x=0; x < InputCount; x++) {
-         if (inputLevel[x] == 1 ) 
+         if (inputLevel[x] == 1 )
             client.publish(InputStatTopic[x],"ON");
          else
             client.publish(InputStatTopic[x],"OFF");

@@ -85,10 +85,6 @@
   - data:
       entity_id: climate.pool
     service: climate.turn_off
-  - data:
-      entity_id: climate.pool
-      temperature: 32
-    service: climate.set_temperature
 
 - id: rear_patio_sprinklers
   alias: Rear Patio Sprinklers Timer
@@ -336,4 +332,15 @@
   - data:
       entity_id: switch.patio_fountain
     service: homeassistant.turn_off
+
+- id: radio_block
+  alias: Turn Off Radio Block
+  trigger:
+  - at: '03:00:00'
+    platform: time
+  action:
+  - data:
+      entity_id: input_boolean.radio_block
+    service: input_boolean.turn_off
+
 

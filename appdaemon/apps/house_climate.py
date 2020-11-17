@@ -101,9 +101,11 @@ class HouseClimate(hass.Hass):
                   'rain_24h'  : {'name' : 'Rain 24H',  'count' : None},
                   'rain_72h'  : {'name' : 'Rain 72H',  'count' : None} }
 
-        if count_now == 'uknown' or count_now == None:
+        if count_now == 'uknown' or count_now == None or count_now == 'unavailable' or count_now == 'NoneType':
             self.warning("Unable to get current rain count")
-            return
+            count_now = 0.0
+        else:
+            count_now = float(count_now)
 
         try:
             counts['rain_hour']['count'] = self._db.getSensorHour('rain','count')
@@ -114,9 +116,16 @@ class HouseClimate(hass.Hass):
             self.warning("Unable to get previous rain counts")
 
         for k,v in counts.items():
-            if v['count'] is not None:
-                calc = round(float(count_now) - weather_convert.rainMmToIn(v['count']),2)
-                if calc < 0.001: calc = 0.0
+            if v['count'] is not None and v['count'] != 'unavailable':
+                comp = weather_convert.rainMmToIn(v['count'])
+
+                # Detect counter reset
+                if comp > count_now and count_now < 10.0:
+                    comp = 0.0
+
+                calc = round(float(count_now) - comp,2)
+                if calc < 0.001:
+                    calc = 0.0
                 self.debug("Rain calc. count_now = {}, {} = {}".format(count_now,k,calc))
             else:
                 calc = 0.0
