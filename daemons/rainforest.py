@@ -6,6 +6,7 @@ import serial
 import xml.etree.ElementTree as ET
 import threading
 import logging
+import sys
 
 DEF_BAUD=115200
 DEF_TOUT=120
@@ -71,16 +72,16 @@ class Rainforest(threading.Thread):
                 try:
                     ser = serial.Serial(self._path, DEF_BAUD, timeout=DEF_TOUT)
                     ser.flushInput()
-                    print("Opened serial port")
+                    sys.stderr.write("Opened serial port\n")
                     last = time.time()
                 except Exception as msg:
-                    print("Got exception: {}".format(msg))
+                    sys.stderr.write(f"Got exception: {msg}\n")
                     time.sleep(1)
                     continue
 
             # No Data
             if (time.time() - last) > 600 :
-                print("Timeout closing")
+                sys.stderr.write("Timeout closing\n")
                 time.sleep(1)
                 ser = None
                 continue
@@ -90,7 +91,7 @@ class Rainforest(threading.Thread):
                 line = ser.readline().decode('utf-8')
                 last = time.time()
             except Exception as msg:
-                print("Got exception: {}".format(msg))
+                sys.stderr.write("Got exception: {msg}\n")
                 ser = None
                 time.sleep(1)
                 continue
@@ -128,7 +129,7 @@ class Rainforest(threading.Thread):
 
             except Exception as msg:
                 block = ''
-                print(f"Got exception: {msg}")
+                sys.stderr.write(f"Got exception: {msg}\n")
                 ser.flushInput()
 
 rf = Rainforest(DEF_DEVICE,'127.0.0.1')
