@@ -77,10 +77,6 @@ sun:
 # UPS
 apcupsd:
 
-rainforest_usb:
-  device: /dev/serial/by-id/usb-Rainforest_RFA-Z106-RA-PC_RAVEn_v2.3.21-if00-port0
-  name: smartmeter
-
 rfxcom_rx:
   device: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A6003Q5Y-if00-port0
 

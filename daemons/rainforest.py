@@ -1,10 +1,7 @@
+#!/usr/bin/env python3
 
-from homeassistant.const import (ATTR_STATE, CONF_DEVICE, CONF_NAME, EVENT_HOMEASSISTANT_STOP)
-import homeassistant.helpers.config_validation as cv
-
-import voluptuous as vol
-
-import time 
+import paho.mqtt.client as mqtt
+import time
 import serial
 import xml.etree.ElementTree as ET
 import threading
@@ -12,34 +9,7 @@ import logging
 
 DEF_BAUD=115200
 DEF_TOUT=120
-
-DOMAIN="rainforest_usb"
-_LOGGER = logging.getLogger(__name__)
-
-CONFIG_SCHEMA = vol.Schema({
-    DOMAIN: vol.Schema({
-        vol.Required(CONF_DEVICE): cv.string,
-        vol.Required(CONF_NAME):   cv.string,
-    }),
-}, extra=vol.ALLOW_EXTRA)
-
-
-async def async_setup(hass, config):
-    data = {}
-
-    def rx_data(channel, value):
-        if channel in data['channels']:
-            data['channels'][channel]._update(value)
-
-    data['name']     = config[DOMAIN].get(CONF_NAME)
-    data['channels'] = {}
-    data['dev']      = Rainforest(config[DOMAIN].get(CONF_DEVICE),rx_data)
-
-    hass.data[DOMAIN] = data
-    hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, data['dev'].stop)
-
-    return True
-
+DEF_DEVICE="/dev/serial/by-id/usb-Rainforest_RFA-Z106-RA-PC_RAVEn_v2.3.21-if00-port0"
 
 #########################################
 #          PULL FROM CURRENT COST       #
@@ -74,13 +44,16 @@ async def async_setup(hass, config):
 class Rainforest(threading.Thread):
     """Class to handle rainforest data reception."""
 
-    def __init__(self, path, callback):
+    def __init__(self, path, server):
         threading.Thread.__init__(self)
-        self._cb    = callback
-        self._path  = path
-        self._runEn = True
+        self._path   = path
+        self._runEn  = True
+        self._server = server
 
-        self.start() 
+        self._client = mqtt.Client("rainforest")
+        self._client.connect(server)
+
+        self.start()
 
     def stop(self, *args, **kwargs):
         self._runEn = False
@@ -98,16 +71,16 @@ class Rainforest(threading.Thread):
                 try:
                     ser = serial.Serial(self._path, DEF_BAUD, timeout=DEF_TOUT)
                     ser.flushInput()
-                    _LOGGER.info("Opened serial port")
+                    print("Opened serial port")
                     last = time.time()
                 except Exception as msg:
-                    _LOGGER.warning("Got exception: {}".format(msg))
+                    print("Got exception: {}".format(msg))
                     time.sleep(1)
                     continue
 
             # No Data
             if (time.time() - last) > 600 :
-                _LOGGER.warning("Timeout closing")
+                print("Timeout closing")
                 time.sleep(1)
                 ser = None
                 continue
@@ -117,7 +90,7 @@ class Rainforest(threading.Thread):
                 line = ser.readline().decode('utf-8')
                 last = time.time()
             except Exception as msg:
-                _LOGGER.error("Got exception: {}".format(msg))
+                print("Got exception: {}".format(msg))
                 ser = None
                 time.sleep(1)
                 continue
@@ -136,7 +109,8 @@ class Rainforest(threading.Thread):
                     div   = float(int(tree.findtext("Divisor"),0))
 
                     if div > 0 : value = (value * mult) / div
-                    self._cb('rate', value)
+
+                    self._client.publish('stat/rainforest/rate',value)
                     block = ''
 
                 elif line.find("</CurrentSummationDelivered>") == 0 :
@@ -146,7 +120,7 @@ class Rainforest(threading.Thread):
                     div   = float(int(tree.findtext("Divisor"),0))
 
                     if div > 0 : value = (value * mult) / div
-                    self._cb('total', value)
+                    self._client.publish('stat/rainforest/total',value)
                     block = ''
 
                 elif line.find("</ConnectionStatus>") == 0 or line.find("</TimeCluster>") == 0 :
@@ -154,5 +128,13 @@ class Rainforest(threading.Thread):
 
             except Exception as msg:
                 block = ''
+                print(f"Got exception: {msg}")
                 ser.flushInput()
+
+rf = Rainforest(DEF_DEVICE,'127.0.0.1')
+
+while True:
+    time.sleep(1)
+
+rf.stop()
 

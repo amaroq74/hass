@@ -37,11 +37,6 @@
     - loadpct
     - timeleft
 
-- platform: rainforest_usb
-  resources:
-    - rate
-    - total
-
 - platform: rfxcom_rx
   pressure_adjust: 6.0
 
@@ -117,6 +112,16 @@
   state_topic: "stat/pantry_control/wifi"
   name: Pantry Control Wifi
   unit_of_measurement: "%"
+
+- platform: mqtt
+  state_topic: "stat/rainforest/rate"
+  name: SmartMeter Rate
+  unit_of_measurement: "KW"
+
+- platform: mqtt
+  state_topic: "stat/rainforest/total"
+  name: SmartMeter Total
+  unit_of_measurement: "KWH"
 
 - platform: template    # determine if today is selected as a watering day for program 1
   sensors:
