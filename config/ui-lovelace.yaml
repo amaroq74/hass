@@ -480,6 +480,7 @@ views:
         show_header_toggle: false
         entities:
           - sensor.time_online
+          - sensor.rfxcom_receive
 
       - type: entities
         title: Roomba1

@@ -37,9 +37,6 @@
     - loadpct
     - timeleft
 
-- platform: rfxcom_rx
-  pressure_adjust: 6.0
-
 - platform: mqtt
   state_topic: "stat/pool_control/solar_in"
   name: Pool Solar In
@@ -128,7 +125,7 @@
 - platform: mqtt
   state_topic: "stat/rfxcom/outdoor/temp"
   name: Outdoor Temperature
-  unit_of_measurement: "°F"
+  unit_of_measurement: 'ºF'
   unique_id: outdoor_temperature
   device_class: temperature
   icon: 'mdi:thermometer'
@@ -151,7 +148,7 @@
 - platform: mqtt
   state_topic: "stat/rfxcom/bedr/temp"
   name: BedR Temperature
-  unit_of_measurement: "°F"
+  unit_of_measurement: 'ºF'
   unique_id: bedr_temperature
   device_class: temperature
   icon: 'mdi:thermometer'
@@ -174,7 +171,7 @@
 - platform: mqtt
   state_topic: "stat/rfxcom/garage/temp"
   name: Garage Temperature
-  unit_of_measurement: "°F"
+  unit_of_measurement: 'ºF'
   unique_id: garage_temperature
   device_class: temperature
   icon: 'mdi:thermometer'
@@ -197,7 +194,7 @@
 - platform: mqtt
   state_topic: "stat/rfxcom/chickens/temp"
   name: Chickens Temperature
-  unit_of_measurement: "°F"
+  unit_of_measurement: 'ºF'
   unique_id: chickens_temperature
   device_class: temperature
   icon: 'mdi:thermometer'
@@ -239,7 +236,7 @@
 - platform: mqtt
   state_topic: "stat/rfxcom/pool/temp"
   name: Pool Temperature
-  unit_of_measurement: "°F"
+  unit_of_measurement: 'ºF'
   unique_id: pool_temperature
   device_class: temperature
   icon: 'mdi:thermometer'
@@ -255,7 +252,7 @@
   state_topic: "stat/rfxcom/rain/total"
   name: Rain Total
   unit_of_measurement: "IN"
-  unique_id: rain_rate
+  unique_id: rain_total
   icon: 'mdi:speedometer'
 
 - platform: mqtt
@@ -268,7 +265,7 @@
 - platform: mqtt
   state_topic: "stat/rfxcom/bedta/temp"
   name: BedTA Temperature
-  unit_of_measurement: "°F"
+  unit_of_measurement: 'ºF'
   unique_id: bedta_temperature
   device_class: temperature
   icon: 'mdi:thermometer'
@@ -291,7 +288,7 @@
 - platform: mqtt
   state_topic: "stat/rfxcom/indoor/temp"
   name: Indoor Temperature
-  unit_of_measurement: "°F"
+  unit_of_measurement: 'ºF'
   unique_id: indoor_temperature
   device_class: temperature
   icon: 'mdi:thermometer'
@@ -327,7 +324,7 @@
 - platform: mqtt
   state_topic: "stat/rfxcom/master/temp"
   name: Master Temperature
-  unit_of_measurement: "°F"
+  unit_of_measurement: 'ºF'
   unique_id: master_temperature
   device_class: temperature
   icon: 'mdi:thermometer'
