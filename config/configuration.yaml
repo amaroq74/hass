@@ -1,4 +1,4 @@
-homeassistant:
+fomeassistant:
   name: Beresford
   latitude: !secret latitude
   longitude: !secret longitude
@@ -77,8 +77,8 @@ sun:
 # UPS
 apcupsd:
 
-rfxcom_rx:
-  device: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A6003Q5Y-if00-port0
+  #rfxcom_rx:
+  #device: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A6003Q5Y-if00-port0
 
 # Cloud
 cloud:

@@ -116,12 +116,241 @@
 - platform: mqtt
   state_topic: "stat/rainforest/rate"
   name: SmartMeter Rate
+  unique_id: smartmeter_rate
   unit_of_measurement: "KW"
 
 - platform: mqtt
   state_topic: "stat/rainforest/total"
   name: SmartMeter Total
+  unique_id: smartmeter_total
   unit_of_measurement: "KWH"
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/outdoor/temp"
+  name: Outdoor Temperature
+  unit_of_measurement: "°F"
+  unique_id: outdoor_temperature
+  device_class: temperature
+  icon: 'mdi:thermometer'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/outdoor/humidity"
+  name: Outdoor Humidity
+  unit_of_measurement: "%"
+  unique_id: outdoor_humidity
+  device_class: humidity
+  icon: 'mdi:water-percent'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/outdoor/battery"
+  name: Outdoor Battery
+  unit_of_measurement: "%"
+  unique_id: outdoor_battery
+  icon: 'mdi:battery'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/bedr/temp"
+  name: BedR Temperature
+  unit_of_measurement: "°F"
+  unique_id: bedr_temperature
+  device_class: temperature
+  icon: 'mdi:thermometer'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/bedr/humidity"
+  name: BedR Humidity
+  unit_of_measurement: "%"
+  unique_id: bedr_humidity
+  device_class: humidity
+  icon: 'mdi:water-percent'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/bedr/battery"
+  name: BedR Battery
+  unit_of_measurement: "%"
+  unique_id: bedr_battery
+  icon: 'mdi:battery'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/garage/temp"
+  name: Garage Temperature
+  unit_of_measurement: "°F"
+  unique_id: garage_temperature
+  device_class: temperature
+  icon: 'mdi:thermometer'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/garage/humidity"
+  name: Garage Humidity
+  unit_of_measurement: "%"
+  unique_id: garage_humidity
+  device_class: humidity
+  icon: 'mdi:water-percent'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/garage/battery"
+  name: Garage Battery
+  unit_of_measurement: "%"
+  unique_id: garage_battery
+  icon: 'mdi:battery'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/chickens/temp"
+  name: Chickens Temperature
+  unit_of_measurement: "°F"
+  unique_id: chickens_temperature
+  device_class: temperature
+  icon: 'mdi:thermometer'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/chickens/battery"
+  name: Chickens Battery
+  unit_of_measurement: "%"
+  unique_id: chickens_battery
+  icon: 'mdi:battery'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/wind/dir"
+  name: Wind Direction
+  unit_of_measurement: "Deg"
+  unique_id: wind_direction
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/wind/speed"
+  name: Wind Gust
+  unit_of_measurement: "MPH"
+  unique_id: wind_gust
+  icon: 'mdi:speedometer'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/wind/avgspeed"
+  name: Wind Average
+  unit_of_measurement: "MPH"
+  unique_id: wind_average
+  icon: 'mdi:speedometer'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/wind/battery"
+  name: Wind Battery
+  unit_of_measurement: "%"
+  unique_id: wind_battery
+  icon: 'mdi:battery'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/pool/temp"
+  name: Pool Temperature
+  unit_of_measurement: "°F"
+  unique_id: pool_temperature
+  device_class: temperature
+  icon: 'mdi:thermometer'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/rain/speed"
+  name: Rain Rate
+  unit_of_measurement: "INPH"
+  unique_id: rain_rate
+  icon: 'mdi:speedometer'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/rain/total"
+  name: Rain Total
+  unit_of_measurement: "IN"
+  unique_id: rain_rate
+  icon: 'mdi:speedometer'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/rain/battery"
+  name: Rain Battery
+  unit_of_measurement: "%"
+  unique_id: rain_battery
+  icon: 'mdi:battery'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/bedta/temp"
+  name: BedTA Temperature
+  unit_of_measurement: "°F"
+  unique_id: bedta_temperature
+  device_class: temperature
+  icon: 'mdi:thermometer'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/bedta/humidity"
+  name: BedTA Humidity
+  unit_of_measurement: "%"
+  unique_id: bedta_humidity
+  device_class: humidity
+  icon: 'mdi:water-percent'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/bedta/battery"
+  name: BedTA Battery
+  unit_of_measurement: "%"
+  unique_id: bedta_battery
+  icon: 'mdi:battery'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/indoor/temp"
+  name: Indoor Temperature
+  unit_of_measurement: "°F"
+  unique_id: indoor_temperature
+  device_class: temperature
+  icon: 'mdi:thermometer'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/indoor/humidity"
+  name: Indoor Humidity
+  unit_of_measurement: "%"
+  unique_id: indoor_humidity
+  device_class: humidity
+  icon: 'mdi:water-percent'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/indoor/battery"
+  name: Indoor Battery
+  unit_of_measurement: "%"
+  unique_id: indoor_battery
+  icon: 'mdi:battery'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/indoor/barometer"
+  name: Indoor Pressure
+  unit_of_measurement: "INHG"
+  unique_id: indoor_pressure
+  icon: 'mdi:speedometer'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/indoor/trend"
+  name: Indoor Trend
+  unique_id: indoor_trend
+  icon: 'mdi:weather-rainy'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/master/temp"
+  name: Master Temperature
+  unit_of_measurement: "°F"
+  unique_id: master_temperature
+  device_class: temperature
+  icon: 'mdi:thermometer'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/master/humidity"
+  name: Master Humidity
+  unit_of_measurement: "%"
+  unique_id: master_humidity
+  device_class: humidity
+  icon: 'mdi:water-percent'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/master/battery"
+  name: Master Battery
+  unit_of_measurement: "%"
+  unique_id: master_battery
+  icon: 'mdi:battery'
+
+- platform: mqtt
+  state_topic: "stat/rfxcom/lastrx"
+  name: Rfxcom Receive
+  unique_id: rfxcom_receive
 
 - platform: template    # determine if today is selected as a watering day for program 1
   sensors:
