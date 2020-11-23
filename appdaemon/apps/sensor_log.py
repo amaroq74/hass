@@ -78,12 +78,14 @@ class SensorLog(hass.Hass):
         self.debug("Got new value for {} = {}".format(entity,new))
         ent = LogSensors[entity]
 
-        if ent['conv'] is not None:
-            val = ent['conv'](float(new))
-        else:
-            val = float(new)
+        if new is not None and new != 'unknown' and new != 'unavailable':
 
-        self._db.setSensor(ent['device'], ent['type'], val, ent['units'])
+            if ent['conv'] is not None:
+                val = ent['conv'](float(new))
+            else:
+                val = float(new)
+
+            self._db.setSensor(ent['device'], ent['type'], val, ent['units'])
 
     def sensor_all(self, *args, **kwargs):
         self.debug("Logging all sensors")
