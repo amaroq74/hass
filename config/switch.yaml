@@ -113,3 +113,34 @@
   command_topic: cmnd/gate_control/car_gate
   icon: 'mdi:garage'
 
+- platform: template
+  switches:
+    movie_lights:
+      value_template: False
+      friendly_name: Movie Lights
+      turn_on:
+        service: scene.turn_on
+        entity_id: scene.movie_lights
+      turn_off:
+    house_lights_off:
+      value_template: False
+      friendly_name: House Lights Off
+      turn_on:
+        service: scene.turn_on
+        entity_id: scene.house_lights_off
+      turn_off:
+    welcome_lights:
+      value_template: False
+      friendly_name: Welcome Lights
+      turn_on:
+        service: scene.turn_on
+        entity_id: scene.welcome_lights
+      turn_off:
+    living_mood:
+      value_template: False
+      friendly_name: Living Mood
+      turn_on:
+        service: scene.turn_on
+        entity_id: scene.living_mood
+      turn_off:
+

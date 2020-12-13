@@ -481,6 +481,7 @@ views:
         entities:
           - sensor.time_online
           - sensor.rfxcom_receive
+          - sensor.rainforest_receive
 
       - type: entities
         title: Roomba1
@@ -511,6 +512,7 @@ views:
           - sensor.east_sprinklers_wifi
           - sensor.gate_control_wifi
           - sensor.pantry_control_wifi
+          - sensor.gate_button_wifi
           - sensor.pool_control_temp
           - sensor.garage_control_temp
           - sensor.east_sprinklers_temp

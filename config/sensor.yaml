@@ -86,6 +86,11 @@
   icon: 'mdi:thermometer'
 
 - platform: mqtt
+  state_topic: "stat/gate_button/wifi"
+  name: Gate Button Wifi
+  unit_of_measurement: "%"
+
+- platform: mqtt
   state_topic: "stat/pool_control/wifi"
   name: Pool Control Wifi
   unit_of_measurement: "%"
@@ -348,6 +353,11 @@
   state_topic: "stat/rfxcom/lastrx"
   name: Rfxcom Receive
   unique_id: rfxcom_receive
+
+- platform: mqtt
+  state_topic: "stat/rainforest/lastrx"
+  name: Rainforst Receive
+  unique_id: rainforest_receive
 
 - platform: template    # determine if today is selected as a watering day for program 1
   sensors:

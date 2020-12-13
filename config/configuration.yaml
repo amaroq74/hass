@@ -84,7 +84,6 @@ cloud:
       include_domains:
         - light
         - fan
-        - scene
       include_entities:
         - climate.house
         - switch.speakers
@@ -98,6 +97,10 @@ cloud:
         - input_boolean.dcare_bell
         - input_boolean.door_alarm
         - input_boolean.house_alarm
+        - switch.movie_lights
+        - switch.house_lights_off
+        - switch.welcome_lights
+        - switch.living_mood
       exclude_entities:
         - light.family_fan
         - light.shed_fan

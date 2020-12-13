@@ -112,6 +112,7 @@ class Rainforest(threading.Thread):
                     if div > 0 : value = (value * mult) / div
 
                     self._client.publish('stat/rainforest/rate',value)
+                    self._client.publish('stat/rainforest/lastrx',time.ctime())
                     block = ''
 
                 elif line.find("</CurrentSummationDelivered>") == 0 :
@@ -122,6 +123,7 @@ class Rainforest(threading.Thread):
 
                     if div > 0 : value = (value * mult) / div
                     self._client.publish('stat/rainforest/total',value)
+                    self._client.publish('stat/rainforest/lastrx',time.ctime())
                     block = ''
 
                 elif line.find("</ConnectionStatus>") == 0 or line.find("</TimeCluster>") == 0 :

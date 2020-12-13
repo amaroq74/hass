@@ -2594,19 +2594,6 @@
                 "device_class": null,
                 "device_id": null,
                 "disabled_by": null,
-                "entity_id": "media_player.whole_house_music_2",
-                "name": null,
-                "platform": "cast",
-                "supported_features": 21389,
-                "unique_id": "c209f4a7-029c-404c-9ee6-4bc8595bb86d",
-                "unit_of_measurement": null
-            },
-            {
-                "capabilities": {},
-                "config_entry_id": "9b37e96487ff474b9b6a428619a5aa4c",
-                "device_class": null,
-                "device_id": null,
-                "disabled_by": null,
                 "entity_id": "media_player.indoor_speakers",
                 "name": null,
                 "platform": "cast",
@@ -3394,7 +3381,7 @@
                 "unit_of_measurement": null
             },
             {
-                "capabilities": null,
+                "capabilities": {},
                 "config_entry_id": null,
                 "device_class": null,
                 "device_id": null,
@@ -3425,7 +3412,20 @@
                 "device_class": null,
                 "device_id": null,
                 "disabled_by": null,
-                "entity_id": "light.patio_sec_3",
+                "entity_id": "sensor.master_battery",
+                "name": null,
+                "platform": "mqtt",
+                "supported_features": 0,
+                "unique_id": "master_battery",
+                "unit_of_measurement": "%"
+            },
+            {
+                "capabilities": {},
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "light.patio_sec3",
                 "name": null,
                 "platform": "vera",
                 "supported_features": 1,
@@ -3438,12 +3438,12 @@
                 "device_class": null,
                 "device_id": null,
                 "disabled_by": null,
-                "entity_id": "sensor.master_battery",
-                "name": null,
+                "entity_id": "sensor.rainforest_receive",
+                "name": "Rainforest Receive",
                 "platform": "mqtt",
                 "supported_features": 0,
-                "unique_id": "master_battery",
-                "unit_of_measurement": "%"
+                "unique_id": "rainforest_receive",
+                "unit_of_measurement": null
             }
         ]
     },

@@ -90,7 +90,7 @@ class RfxCom(object):
                     path = f'stat/rfxcom/{SourceMap[source]}/{key}'
 
                     #print(f"Publishing {path} = {value}")
-                    self._known[path] = { 'time' : time.ctime(), 'value' : value }
+                    self._known[path] = { 'time' : time.time(), 'ctime' : time.ctime(), 'value' : value }
                     self._client.publish(path,value)
 
                 # Unknown value
@@ -98,7 +98,7 @@ class RfxCom(object):
                     path = f'stat/rfxcom/{source}/{key}'
 
                     #print(f"Unknown {path} = {value}")
-                    self._unknown[path] = { 'time' : time.ctime(), 'value' : value }
+                    self._unknown[path] = { 'time' : time.time(), 'ctime' : time.ctime(), 'value' : value }
 
                 self._client.publish('stat/rfxcom/lastrx',time.ctime())
 
@@ -106,12 +106,14 @@ class RfxCom(object):
         if (time.time() - self._last) > 60.0:
 
             with open(KNOWN_LOG,'w') as f:
-                for k,v in self._known.items():
-                    f.write(f"{k} - {v['time']} - {v['value']}\n")
+                srt = sorted(self._known.items(), key=lambda x: x[1]['time'])
+                for k,v in srt:
+                    f.write(f"{v['ctime']} - {k} - {v['value']}\n")
 
             with open(UNKNOWN_LOG,'w') as f:
-                for k,v in self._unknown.items():
-                    f.write(f"{k} - {v['time']} - {v['value']}\n")
+                srt = sorted(self._unknown.items(), key=lambda x: x[1]['time'])
+                for k,v in srt:
+                    f.write(f"{v['ctime']} - {k} - {v['value']}\n")
 
 rx = RfxCom('/dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A6003Q5Y-if00-port0', '127.0.0.1')
 rx.run()

@@ -8,7 +8,7 @@
 
 - platform: mqtt
   name: "Car Gate Btn"
-  state_topic: stat/pantry_control/gate_toggle
+  state_topic: stat/gate_button/gate_toggle
 
 - platform: template
   sensors:
