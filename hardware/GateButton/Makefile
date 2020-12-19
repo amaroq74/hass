@@ -1,0 +1,13 @@
+BOARD=generic
+UPLOAD_PORT=/dev/ttyACM0
+FLASH_DEF=1M0
+OTA_ADDR=172.16.20.64
+
+LIBS += $(ESP_LIBS)/ESP8266WiFi
+LIBS += $(ESP_LIBS)/ArduinoOTA
+LIBS += $(ESP_LIBS)/ESP8266mDNS
+LIBS += $(USER_LIB_PATH)/pubsubclient
+
+include $(USER_LIB_PATH)/../makeEspArduino.mk
+
+

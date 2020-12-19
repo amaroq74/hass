@@ -19,8 +19,7 @@ from urllib.parse import urlencode, quote_plus
 GateToggle = {'binary_sensor.car_gate_btn' : 'switch.car_gate'}
 
 RadioBlockSwitch = 'input_boolean.radio_block'
-RadioBlockInputs = ['binary_sensor.gate_bell',
-                    'binary_sensor.door_bell' ]
+RadioBlockInputs = ['binary_sensor.door_bell' ]
 
 ##################################
 # Constants

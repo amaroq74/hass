@@ -1396,19 +1396,6 @@
                 "capabilities": {},
                 "config_entry_id": "9b37e96487ff474b9b6a428619a5aa4c",
                 "device_class": null,
-                "device_id": "0e4f987c972c412788c392fe8a6075e3",
-                "disabled_by": null,
-                "entity_id": "media_player.master_tv",
-                "name": "Master TV",
-                "platform": "cast",
-                "supported_features": 21389,
-                "unique_id": "42ff2a2f-89bf-aac7-a30e-eea16ce4bc66",
-                "unit_of_measurement": null
-            },
-            {
-                "capabilities": {},
-                "config_entry_id": "9b37e96487ff474b9b6a428619a5aa4c",
-                "device_class": null,
                 "device_id": "0d8aa7d22fe1463b96f36df716da46f6",
                 "disabled_by": null,
                 "entity_id": "media_player.garage_tv",
@@ -2616,19 +2603,6 @@
             },
             {
                 "capabilities": {},
-                "config_entry_id": "9b37e96487ff474b9b6a428619a5aa4c",
-                "device_class": null,
-                "device_id": "776429acaa2d420f953e5c3d25fac7a7",
-                "disabled_by": null,
-                "entity_id": "media_player.back_yard_speakers",
-                "name": null,
-                "platform": "cast",
-                "supported_features": 21389,
-                "unique_id": "ec7f40b5-1e1d-9ee9-60d1-74833c8fd6da",
-                "unit_of_measurement": null
-            },
-            {
-                "capabilities": {},
                 "config_entry_id": null,
                 "device_class": null,
                 "device_id": null,
@@ -2642,19 +2616,6 @@
             },
             {
                 "capabilities": {},
-                "config_entry_id": "9b37e96487ff474b9b6a428619a5aa4c",
-                "device_class": null,
-                "device_id": "d059b89ba08e495da900101d95359392",
-                "disabled_by": null,
-                "entity_id": "media_player.chromecast9934",
-                "name": null,
-                "platform": "cast",
-                "supported_features": 21389,
-                "unique_id": "3ffea04e-de4a-1fee-e964-c16ed47fa7ec",
-                "unit_of_measurement": null
-            },
-            {
-                "capabilities": {},
                 "config_entry_id": null,
                 "device_class": null,
                 "device_id": null,
@@ -2663,31 +2624,6 @@
                 "name": null,
                 "platform": "roku",
                 "supported_features": 0,
-                "unique_id": "YK00GY348844",
-                "unit_of_measurement": null
-            },
-            {
-                "capabilities": {
-                    "source_list": [
-                        "Home",
-                        "Disney Plus",
-                        "FandangoNOW Movies & TV",
-                        "Google Play Movies & TV",
-                        "HBO",
-                        "Prime Video",
-                        "YouTube",
-                        "YouTube TV",
-                        "chrome"
-                    ]
-                },
-                "config_entry_id": null,
-                "device_class": null,
-                "device_id": null,
-                "disabled_by": null,
-                "entity_id": "media_player.roku_yk00gy348844",
-                "name": null,
-                "platform": "roku",
-                "supported_features": 19388,
                 "unique_id": "YK00GY348844",
                 "unit_of_measurement": null
             },
@@ -3443,6 +3379,70 @@
                 "platform": "mqtt",
                 "supported_features": 0,
                 "unique_id": "rainforest_receive",
+                "unit_of_measurement": null
+            },
+            {
+                "capabilities": {},
+                "config_entry_id": "9b37e96487ff474b9b6a428619a5aa4c",
+                "device_class": null,
+                "device_id": "d059b89ba08e495da900101d95359392",
+                "disabled_by": null,
+                "entity_id": "media_player.front_yard_speakers",
+                "name": null,
+                "platform": "cast",
+                "supported_features": 21389,
+                "unique_id": "3ffea04e-de4a-1fee-e964-c16ed47fa7ec",
+                "unit_of_measurement": null
+            },
+            {
+                "capabilities": {},
+                "config_entry_id": "9b37e96487ff474b9b6a428619a5aa4c",
+                "device_class": null,
+                "device_id": "776429acaa2d420f953e5c3d25fac7a7",
+                "disabled_by": null,
+                "entity_id": "media_player.back_yard_tv",
+                "name": null,
+                "platform": "cast",
+                "supported_features": 21389,
+                "unique_id": "ec7f40b5-1e1d-9ee9-60d1-74833c8fd6da",
+                "unit_of_measurement": null
+            },
+            {
+                "capabilities": {},
+                "config_entry_id": "9b37e96487ff474b9b6a428619a5aa4c",
+                "device_class": null,
+                "device_id": "0e4f987c972c412788c392fe8a6075e3",
+                "disabled_by": null,
+                "entity_id": "media_player.master_tv_chrome",
+                "name": "Master TV Chrome",
+                "platform": "cast",
+                "supported_features": 21389,
+                "unique_id": "42ff2a2f-89bf-aac7-a30e-eea16ce4bc66",
+                "unit_of_measurement": null
+            },
+            {
+                "capabilities": {
+                    "source_list": [
+                        "Home",
+                        "Disney Plus",
+                        "FandangoNOW Movies & TV",
+                        "Google Play Movies & TV",
+                        "HBO",
+                        "Prime Video",
+                        "YouTube",
+                        "YouTube TV",
+                        "chrome"
+                    ]
+                },
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "media_player.master_tv",
+                "name": null,
+                "platform": "roku",
+                "supported_features": 19388,
+                "unique_id": "YK00GY348844",
                 "unit_of_measurement": null
             }
         ]

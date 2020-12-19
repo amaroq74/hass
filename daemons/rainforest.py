@@ -60,6 +60,9 @@ class Rainforest(threading.Thread):
         self._runEn = False
         self.join()
 
+    def running(self):
+        return self._runEn
+
     def run(self):
         ser   = None
         last  = time.time()
@@ -132,11 +135,13 @@ class Rainforest(threading.Thread):
             except Exception as msg:
                 block = ''
                 sys.stderr.write(f"Got exception: {msg}\n")
-                ser.flushInput()
+                self._runEn = False
+                #ser.flushInput()
 
 rf = Rainforest(DEF_DEVICE,'127.0.0.1')
+time.sleep(5)
 
-while True:
+while rf.running():
     time.sleep(1)
 
 rf.stop()

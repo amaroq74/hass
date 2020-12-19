@@ -409,7 +409,7 @@ views:
             !include media.yaml
 
       - type: custom:mini-media-player
-        entity: media_player.master_tv
+        entity: media_player.master_tv_chrome
         artwork: cover
         source: full
         info: short
@@ -450,8 +450,22 @@ views:
           list:
             !include media.yaml
 
+      - type: custom:mini-media-player
+        entity: media_player.back_yard_tv
+        artwork: cover
+        source: full
+        info: short
+        hide:
+          volume: true
+          source: false
+          power_state: false
+        shortcuts:
+          hide_when_off: true
+          list:
+            !include media.yaml
+
       - type: media-control
-        entity: media_player.back_yard_speakers
+        entity: media_player.master_tv
       - type: media-control
         entity: media_player.front_yard_speakers
       - type: media-control
@@ -513,8 +527,16 @@ views:
           - sensor.gate_control_wifi
           - sensor.pantry_control_wifi
           - sensor.gate_button_wifi
+          - sensor.gate_bell_wifi
           - sensor.pool_control_temp
           - sensor.garage_control_temp
           - sensor.east_sprinklers_temp
           - sensor.gate_control_temp
 
+      - type: entities
+        title: Buttons
+        show_header_toggle: false
+        entities:
+          - binary_sensor.car_gate_btn
+          - binary_sensor.gate_bell
+          - binary_sensor.door_bell

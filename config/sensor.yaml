@@ -91,6 +91,11 @@
   unit_of_measurement: "%"
 
 - platform: mqtt
+  state_topic: "stat/gate_bell/wifi"
+  name: Gate Bell Wifi
+  unit_of_measurement: "%"
+
+- platform: mqtt
   state_topic: "stat/pool_control/wifi"
   name: Pool Control Wifi
   unit_of_measurement: "%"

@@ -1,6 +1,6 @@
 - platform: mqtt
   name: "Gate Bell"
-  state_topic: stat/pantry_control/gate_bell
+  state_topic: stat/gate_bell/gate_bell
 
 - platform: mqtt
   name: "Door Bell"
