@@ -18,9 +18,6 @@ from urllib.parse import urlencode, quote_plus
 ##################################
 GateToggle = {'binary_sensor.car_gate_btn' : 'switch.car_gate'}
 
-RadioBlockSwitch = 'input_boolean.radio_block'
-RadioBlockInputs = ['binary_sensor.door_bell' ]
-
 ##################################
 # Constants
 ##################################
@@ -122,9 +119,6 @@ class HouseSecurity(hass.Hass):
     # Gate toggle
     def gate_toggle(self, entity, attribute, old, new, *args, **kwargs):
 
-        if entity in RadioBlockInputs and self.get_state(RadioBlockSwitch) == 'on':
-            return
-
         if entity in GateToggle:
 
             self.log("Got gate toggle {} {} {} {}".format(entity,attribute,old,new))
@@ -162,9 +156,6 @@ class HouseSecurity(hass.Hass):
         emailActions = []
 
         if new == old or new == 'off' or old != 'off':
-            return
-
-        if entity in RadioBlockInputs and self.get_state(RadioBlockSwitch) == 'on':
             return
 
         # Procss each action

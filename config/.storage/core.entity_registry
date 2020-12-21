@@ -306,19 +306,6 @@
                 "device_class": null,
                 "device_id": null,
                 "disabled_by": null,
-                "entity_id": "binary_sensor.ped_gate_raw",
-                "name": "Ped Gate Raw",
-                "platform": "vera",
-                "supported_features": 0,
-                "unique_id": "65",
-                "unit_of_measurement": null
-            },
-            {
-                "capabilities": {},
-                "config_entry_id": null,
-                "device_class": null,
-                "device_id": null,
-                "disabled_by": null,
                 "entity_id": "binary_sensor.shed_door",
                 "name": "Shed Door",
                 "platform": "vera",
@@ -922,19 +909,6 @@
                 "platform": "vera",
                 "supported_features": 0,
                 "unique_id": "44",
-                "unit_of_measurement": null
-            },
-            {
-                "capabilities": {},
-                "config_entry_id": null,
-                "device_class": null,
-                "device_id": null,
-                "disabled_by": null,
-                "entity_id": "switch.ped_gate_alarm",
-                "name": "Ped Gate Alarm",
-                "platform": "vera",
-                "supported_features": 0,
-                "unique_id": "65",
                 "unit_of_measurement": null
             },
             {
@@ -3443,6 +3417,32 @@
                 "platform": "roku",
                 "supported_features": 19388,
                 "unique_id": "YK00GY348844",
+                "unit_of_measurement": null
+            },
+            {
+                "capabilities": null,
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "switch.ped_gate_113",
+                "name": null,
+                "platform": "vera",
+                "supported_features": 0,
+                "unique_id": "113",
+                "unit_of_measurement": null
+            },
+            {
+                "capabilities": null,
+                "config_entry_id": null,
+                "device_class": null,
+                "device_id": null,
+                "disabled_by": null,
+                "entity_id": "binary_sensor.ped_gate",
+                "name": null,
+                "platform": "vera",
+                "supported_features": 0,
+                "unique_id": "113",
                 "unit_of_measurement": null
             }
         ]

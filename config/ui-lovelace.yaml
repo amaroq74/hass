@@ -142,7 +142,6 @@ views:
           - input_boolean.night_alarm
           - input_boolean.door_alarm
           - input_boolean.house_alarm
-          - input_boolean.radio_block
 
       - type: entities
         title: Cameras
@@ -528,6 +527,7 @@ views:
           - sensor.pantry_control_wifi
           - sensor.gate_button_wifi
           - sensor.gate_bell_wifi
+          - sensor.door_bell_wifi
           - sensor.pool_control_temp
           - sensor.garage_control_temp
           - sensor.east_sprinklers_temp
